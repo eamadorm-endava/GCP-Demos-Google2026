@@ -23,7 +23,7 @@ steps:
       - -c
       - |
         set -e
-        IMAGE="${_REGION}-docker.pkg.dev/${PROJECT_ID}/${_AR_REPO}/${_SERVICE}:${SHORT_SHA}"
+        IMAGE="${_REGION}-docker.pkg.dev/${_PROJECT_ID}/${_AR_REPO}/${_SERVICE}:${SHORT_SHA}"
         echo "Building image ${IMAGE} with build-arg from secret"
         docker build --build-arg "GEMINI_API_KEY=$GEMINI_API_KEY" -f ${_DEMO_DIR}/Dockerfile -t "${IMAGE}" ${_DEMO_DIR}
         echo "Pushing ${IMAGE} ..."
