@@ -1,13 +1,13 @@
 substitutions:
   _REGION: us-west4
   _AR_REPO: GCP-DEMOS-GOOGLE2026
-  _SERVICE: demo-showcase-platform
-  _DEMO_DIR: demo-showcase-platform
+  _SERVICE: agentic-vendor-governance-platform
+  _DEMO_DIR: agentic-vendor-governance-platform
   _PROJECT_ID: p-dev-stemilt-0sjp-1
 
 availableSecrets:
   secretManager:
-    - versionName: projects/${_PROJECT_ID}/secrets/gemini-api-key/versions/latest
+    - versionName: projects/${_PROJECT_ID}/secrets/GEMINI_API_KEY/versions/latest
       env: GEMINI_API_KEY
 
 options:
@@ -33,3 +33,15 @@ steps:
     args:
       - push
       - ${_REGION}-docker.pkg.dev/${_PROJECT_ID}/${_AR_REPO}/${_SERVICE}:${SHORT_SHA}
+
+  # Deploy to Cloud Run
+  - name: gcr.io/cloud-builders/gcloud
+    entrypoint: bash
+    args:
+      - -c
+      - |
+        gcloud run deploy ${_SERVICE} \
+          --image=${_REGION}-docker.pkg.dev/${_PROJECT_ID}/${_AR_REPO}/${_SERVICE}:${SHORT_SHA} \
+          --region=${_REGION} \
+          --platform=managed \
+          --allow-unauthenticated
