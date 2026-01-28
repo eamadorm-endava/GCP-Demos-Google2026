@@ -7,7 +7,7 @@ substitutions:
 
 availableSecrets:
   secretManager:
-    - versionName: projects/${_PROJECT_ID}/secrets/GEMINI_API_KEY/versions/latest
+    - versionName: projects/${_PROJECT_ID}/secrets/GEMINI-API-KEY/versions/latest
       env: GEMINI_API_KEY
 
 options:
