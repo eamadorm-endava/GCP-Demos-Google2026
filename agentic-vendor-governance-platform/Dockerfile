@@ -9,7 +9,7 @@ RUN npm install
 # Copy source and build
 COPY . .
 
-ARG GEMINI_API_KEY=AIzaSyAeM7DbZDLHG35rofLaSK5ETpvd3scBhfw
+ARG GEMINI_API_KEY=""
 ENV GEMINI_API_KEY=${GEMINI_API_KEY}
 
 
