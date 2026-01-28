@@ -1,0 +1,8 @@
+{
+  "name": "Demo Showcase Platform",
+  "description": "A bulletproof, kiosk-ready showcase platform for Google Cloud booth demos, featuring high-energy micro-apps, instant state resetting, and offline-first performance.",
+  "requestFramePermissions": [
+    "camera",
+    "microphone"
+  ]
+}
