@@ -21,7 +21,7 @@ steps:
     args:
       - build
       - --build-arg
-      - GEMINI_API_KEY=$$GEMINI_API_KEY
+      - GEMINI_API_KEY=$GEMINI_API_KEY
       - -f
       - ${_DEMO_DIR}/Dockerfile
       - -t
