@@ -9,7 +9,6 @@ availableSecrets:
   secretManager:
     - versionName: projects/${_PROJECT_ID}/secrets/GEMINI-API-KEY/versions/latest
       env: GEMINI-API-KEY
-
 options:
   logging: CLOUD_LOGGING_ONLY
 
