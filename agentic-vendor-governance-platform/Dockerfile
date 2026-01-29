@@ -1,25 +1,29 @@
-# ---- build ----
+# ---------- Build stage ----------
 FROM node:20-alpine AS build
 WORKDIR /app
 
+# Install dependencies
 COPY package*.json ./
 RUN npm install
 
+# Copy source and build
 COPY . .
 
-# Injected at BUILD time (will be embedded into JS if used)
 ARG GEMINI_API_KEY=""
 ENV GEMINI_API_KEY=${GEMINI_API_KEY}
 
+
 RUN npm run build
 
-# ---- run ----
+
+# ---------- Runtime stage ----------
 FROM nginx:alpine
 
-# Nginx must listen on 8080 for Cloud Run
+# Cloud Run expects the container to listen on $PORT (usually 8080)
 RUN sed -i 's/listen\s\+80;/listen 8080;/' /etc/nginx/conf.d/default.conf
 
+# Copy the built static files
 COPY --from=build /app/dist /usr/share/nginx/html
 
 EXPOSE 8080
-CMD ["nginx", "-g", "daemon off;"]
+CMD ["nginx", "-g", "daemon off;"] 
