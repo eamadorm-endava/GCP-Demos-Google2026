@@ -1,6 +1,6 @@
 substitutions:
   _REGION: us-west4
-  _AR_REPO: gcp-demos
+  _AR_REPO: GCP-DEMOS-GOOGLE2026
   _SERVICE: agentic-vendor-governance-platform
   _DEMO_DIR: agentic-vendor-governance-platform
   _PROJECT_ID: p-dev-stemilt-0sjp-1
@@ -9,21 +9,30 @@ availableSecrets:
   secretManager:
     - versionName: projects/${_PROJECT_ID}/secrets/GEMINI_API_KEY/versions/latest
       env: GEMINI_API_KEY
+
 options:
   logging: CLOUD_LOGGING_ONLY
 
 steps:
-  # Build + Push using bash so $GEMINI_API_KEY is expanded at runtime.
-  - name: gcr.io/cloud-builders/docker
-    entrypoint: bash
-    # IMPORTANT: env must be KEY=VALUE. Use $$ to escape Cloud Build substitution.
-    secretEnv: [GEMINI_API_KEY]
+  # Build image
+  - name: 'gcr.io/cloud-builders/docker'
+    entrypoint: 'bash'
     args:
-      - -c
+      - '-c'
       - |
-        set -e
-        IMAGE="${_REGION}-docker.pkg.dev/${_PROJECT_ID}/${_AR_REPO}/${_SERVICE}:${SHORT_SHA}"
-        echo "Building image $${IMAGE} with build-arg from secret"
-        docker build --build-arg "GEMINI_API_KEY=$$GEMINI_API_KEY" -f ${_DEMO_DIR}/Dockerfile -t "$${IMAGE}" ${_DEMO_DIR}
-        echo "Pushing $${IMAGE} ..."
-        docker push "$${IMAGE}"
+        docker build \
+          --build-arg "GEMINI_API_KEY=$$GEMINI_API_KEY" \
+          -f ${_DEMO_DIR}/Dockerfile \
+          -t ${_REGION}-docker.pkg.dev/${_PROJECT_ID}/${_AR_REPO}/${_SERVICE}:${SHORT_SHA} \
+          ${_DEMO_DIR}
+    secretEnv: ['GEMINI_API_KEY']
+
+  # Push image
+  - name: 'gcr.io/cloud-builders/docker'
+    args:
+      - 'push'
+      - '${_REGION}-docker.pkg.dev/${_PROJECT_ID}/${_AR_REPO}/${_SERVICE}:${SHORT_SHA}'
+
+# Define la imagen aquí para que Cloud Build la rastree automáticamente
+images:
+  - '${_REGION}-docker.pkg.dev/${_PROJECT_ID}/${_AR_REPO}/${_SERVICE}:${SHORT_SHA}'
