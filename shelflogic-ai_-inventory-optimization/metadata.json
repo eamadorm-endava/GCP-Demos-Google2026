@@ -1,0 +1,5 @@
+{
+  "name": "ShelfLogic AI: Inventory Optimization",
+  "description": "An autonomous store assortment agent that optimizes retail shelf inventory by identifying dead stock and prescribing high-potential replacements based on lookalike store analysis.",
+  "requestFramePermissions": []
+}

@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 200 200" fill="none">
+  <rect width="200" height="200" fill="#1e293b"/>
+  <path d="M75 170 C 75 160, 65 150, 65 140 L 65 40 C 65 30, 75 20, 85 20 L 115 20 C 125 20, 135 30, 135 40 L 135 140 C 135 150, 125 160, 125 170 Z" fill="#334155"/>
+  <rect x="60" y="70" width="80" height="40" fill="#cbd5e1"/>
+  <text x="100" y="95" font-family="Inter, sans-serif" font-size="14" fill="#1e293b" text-anchor="middle" font-weight="bold">VODKA</text>
+</svg>
