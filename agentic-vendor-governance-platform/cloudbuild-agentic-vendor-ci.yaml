@@ -1,6 +1,6 @@
 substitutions:
   _REGION: us-west4
-  _AR_REPO: GCP-DEMOS-GOOGLE2026
+  _AR_REPO: gcp-demos
   _SERVICE: agentic-vendor-governance-platform
   _DEMO_DIR: agentic-vendor-governance-platform
   _PROJECT_ID: p-dev-stemilt-0sjp-1
