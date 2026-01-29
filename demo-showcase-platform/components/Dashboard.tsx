@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { useStore } from '../store/useStore';
-import { ShoppingCart, Stethoscope, Landmark, Factory, Globe, ScrollText, Play, Sparkles } from 'lucide-react';
+import { ShoppingCart, Stethoscope, Landmark, Factory, Globe, ScrollText, Play, Sparkles, ShieldCheck, Layers, FileText, ShieldAlert, Truck } from 'lucide-react';
 
 const IconMap: Record<string, React.ElementType> = {
   'shopping-cart': ShoppingCart,
@@ -9,6 +9,11 @@ const IconMap: Record<string, React.ElementType> = {
   'landmark': Landmark,
   'factory': Factory,
   'globe': Globe,
+  'shield-check': ShieldCheck,
+  'shield-alert': ShieldAlert,
+  'file-text': FileText,
+  'layers': Layers,
+  'truck': Truck,
 };
 
 const Dashboard: React.FC = () => {
