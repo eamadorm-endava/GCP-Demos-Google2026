@@ -47,6 +47,7 @@ steps:
           --region=${_REGION} \
           --platform=managed \
           --no-allow-unauthenticated \
+          --port=80 \
           --set-env-vars="GEMINI_API_KEY=$$GEMINI_API_KEY"
     secretEnv: ['GEMINI_API_KEY']
 
