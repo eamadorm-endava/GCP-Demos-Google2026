@@ -82,7 +82,87 @@ export const VERTICALS: VerticalConfig[] = [
         'Direct integration with existing GCP datasets.'
       ]
     }
-  }
+  },
+  {
+    id: 'agentic-governance',
+    title: 'Agentic Governance',
+    icon: 'shield-check',
+    color: 'bg-indigo-600',
+    externalUrl: 'https://agentic-vendor-gobernance-platform-32424718016.us-west4.run.app',
+    pitch: {
+      problem: 'Enterprises lack real-time oversight and control over autonomous AI agents.',
+      solution: 'Policy-aware agent orchestration with continuous compliance and auditability.',
+      talkingPoints: [
+        'Real-time policy enforcement across AI agents.',
+        'Explainable decision trails for governance and audits.',
+        'Centralized control for multi-agent ecosystems.'
+      ]
+    }
+  },
+  {
+    id: 'shelflogic-autonomous-merchandising',
+    title: 'ShelfLogic AI',
+    icon: 'layers',
+    color: 'bg-emerald-600',
+    externalUrl: 'https://shelflogic-ai-inventory-optimization-32424718016.us-west4.run.app',
+    pitch: {
+      problem: 'Merchandising decisions are slow, manual, and disconnected from real-time demand.',
+      solution: 'Autonomous AI agents continuously optimize assortment, pricing, and placement.',
+      talkingPoints: [
+        'Self-optimizing assortments driven by demand signals.',
+        'Autonomous price and promotion adjustments.',
+        'Closed-loop execution from insight to shelf.'
+      ]
+    }
+  },
+  {
+    id: 'contract-intelligence',
+    title: 'Contract Intelligence',
+    icon: 'file-text',
+    color: 'bg-sky-600',
+    externalUrl: 'https://contract-intelligence-platform-32424718016.us-west4.run.app',
+    pitch: {
+      problem: 'Critical contract risks and obligations are hidden in unstructured documents.',
+      solution: 'AI-powered contract analysis with risk scoring and obligation tracking.',
+      talkingPoints: [
+        'Automated clause extraction and classification.',
+        'Early detection of financial and compliance risks.',
+        'Natural language contract search and summarization.'
+      ]
+    }
+  },
+  {
+    id: 'sentinel-ai',
+    title: 'Sentinel AI',
+    icon: 'shield-alert',
+    color: 'bg-red-700',
+    externalUrl: 'https://sentinel-ai-autonomous-risk-assurance-32424718016.us-west4.run.app',
+    pitch: {
+      problem: 'Traditional controls fail to detect complex, fast-moving enterprise risks.',
+      solution: 'Autonomous AI agents monitor, detect, and respond to risk in real time.',
+      talkingPoints: [
+        'Continuous risk monitoring across systems.',
+        'Autonomous incident triage and escalation.',
+        'Explainable AI-driven assurance decisions.'
+      ]
+    }
+  },
+  {
+    id: 'supply-chain-logistics',
+    title: 'Supply Chain and Logistics',
+    icon: 'truck',
+    color: 'bg-orange-500',
+    externalUrl: 'https://supply-chain-and-logistics-32424718016.us-west4.run.app',
+    pitch: {
+      problem: 'Global supply chains suffer from poor visibility and slow response to disruptions.',
+      solution: 'AI-driven logistics orchestration with predictive and prescriptive insights.',
+      talkingPoints: [
+        'End-to-end shipment visibility in real time.',
+        'Predictive disruption detection and mitigation.',
+        'Optimized routing, inventory, and fulfillment.'
+      ]
+    }
+  },
 ];
 
 export const MOCK_DATA = {
