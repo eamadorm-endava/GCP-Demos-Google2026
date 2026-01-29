@@ -88,7 +88,7 @@ export const VERTICALS: VerticalConfig[] = [
     title: 'Agentic Governance',
     icon: 'shield-check',
     color: 'bg-indigo-600',
-    externalUrl: 'https://agentic-vendor-gobernance-platform-32424718016.us-west4.run.app',
+    externalUrl: 'https://agentic-vendor-governance-platform-32424718016.us-west4.run.app',
     pitch: {
       problem: 'Enterprises lack real-time oversight and control over autonomous AI agents.',
       solution: 'Policy-aware agent orchestration with continuous compliance and auditability.',
