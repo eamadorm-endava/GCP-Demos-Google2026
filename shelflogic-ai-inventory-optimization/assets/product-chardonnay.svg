@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 200 200" fill="none">
+  <rect width="200" height="200" fill="#1e293b"/>
+  <path d="M90 20 L 110 20 L 110 50 L 130 120 C 135 140, 120 170, 100 170 C 80 170, 65 140, 70 120 L 90 50 Z" fill="#334155"/>
+  <rect x="85" y="60" width="30" height="60" fill="#f0e9d2"/>
+  <text x="100" y="95" font-family="Inter, sans-serif" font-size="9" fill="#1e293b" text-anchor="middle" font-weight="bold">CHARD</text>
+</svg>

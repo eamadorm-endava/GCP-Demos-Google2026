@@ -1,0 +1,5 @@
+{
+  "name": "Supply Chain And Logistics Demo",
+  "description": "A demo application showcasing the management of shipments, milestone tracking, documentation handling, and stakeholder collaboration within a supply chain. It uses AI to suggest required documents based on shipment origin.",
+  "requestFramePermissions": []
+}
