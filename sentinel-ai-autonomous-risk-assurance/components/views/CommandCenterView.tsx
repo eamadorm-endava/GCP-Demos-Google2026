@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Risk, Control, ActiveSession, AuditResult, AgentStatus } from '../../types';
 import { Plus, Shield, Lock, Eye, CheckCircle2, AlertOctagon, Loader2, Zap, Network, Square } from 'lucide-react';
@@ -67,8 +66,8 @@ const CommandCenterView: React.FC<CommandCenterViewProps> = ({
           <div className="flex flex-col">
             <span className="text-[10px] text-slate-500 uppercase font-bold tracking-wider">Active Agents</span>
             <div className="flex items-baseline space-x-2">
-              <span className="text-xl font-bold text-blue-400">{Object.keys(activeSessions).filter(k => activeSessions[k].status === AgentStatus.EXECUTING).length}</span>
-              <span className="text-xs text-blue-500/50 animate-pulse">● Live</span>
+              <span className="text-xl font-bold text-brand-primary">{Object.keys(activeSessions).filter(k => activeSessions[k].status === AgentStatus.EXECUTING).length}</span>
+              <span className="text-xs text-brand-primary/50 animate-pulse">● Live</span>
             </div>
           </div>
         </div>
@@ -82,7 +81,7 @@ const CommandCenterView: React.FC<CommandCenterViewProps> = ({
               <h2 className="text-xs font-semibold text-slate-500 uppercase tracking-wider">Identified Risks</h2>
               <button 
                 onClick={onAddRisk}
-                className="p-1 rounded bg-blue-600/20 text-blue-400 hover:bg-blue-600 hover:text-white transition-colors"
+                className="p-1 rounded bg-brand-primary/20 text-brand-primary hover:bg-brand-primary hover:text-white transition-colors"
               >
                 <Plus className="w-4 h-4" />
               </button>
@@ -95,7 +94,7 @@ const CommandCenterView: React.FC<CommandCenterViewProps> = ({
                    onClick={() => setSelectedRiskId(risk.id)}
                    className={`w-full text-left p-3 rounded-lg border transition-all ${
                      selectedRiskId === risk.id 
-                       ? 'bg-blue-600/10 border-blue-500/50 shadow-[0_0_15px_rgba(37,99,235,0.1)]' 
+                       ? 'bg-brand-primary/10 border-brand-primary/50 shadow-[0_0_15px_rgba(255,85,64,0.1)]' 
                        : 'bg-slate-800/50 border-slate-700/50 hover:bg-slate-800 hover:border-slate-600'
                    }`}
                  >
@@ -167,7 +166,7 @@ const CommandCenterView: React.FC<CommandCenterViewProps> = ({
                                       <span>{control.type} Control</span>
                                       <span>•</span>
                                       <div className="flex items-center space-x-1">
-                                         <span className="font-mono text-blue-400">{controlAgent?.name || control.agentCapability}</span>
+                                         <span className="font-mono text-brand-primary">{controlAgent?.name || control.agentCapability}</span>
                                       </div>
                                    </div>
                                    
@@ -218,7 +217,7 @@ const CommandCenterView: React.FC<CommandCenterViewProps> = ({
                                       </div>
                                       <button 
                                          onClick={() => onOpenReport(control.id)}
-                                         className="text-sm text-blue-400 hover:text-blue-300 underline"
+                                         className="text-sm text-brand-primary hover:text-orange-300 underline"
                                       >
                                          View Report
                                       </button>
@@ -240,7 +239,7 @@ const CommandCenterView: React.FC<CommandCenterViewProps> = ({
                                         className={`flex items-center space-x-2 px-4 py-2 rounded-lg text-sm font-bold transition-all ${
                                            isRunning 
                                            ? 'bg-slate-800 text-slate-500 cursor-not-allowed opacity-50'
-                                           : 'bg-blue-600 hover:bg-blue-500 text-white shadow-[0_0_15px_rgba(37,99,235,0.3)]'
+                                           : 'bg-brand-primary hover:bg-orange-600 text-white shadow-[0_0_15px_rgba(255,85,64,0.3)]'
                                         }`}
                                       >
                                         {isRunning ? (
