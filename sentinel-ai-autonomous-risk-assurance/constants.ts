@@ -1,11 +1,16 @@
 import { RiskSeverity, CapabilityDefinition, CIAMApplication } from './types';
-import { Shield, FileSearch, Zap, Lock, Search, Cloud, FileText, Database, UserCheck, Server, Code, GitBranch } from 'lucide-react';
+import { Shield, FileSearch, Zap, Lock, Search, Cloud, Code, GitBranch } from 'lucide-react';
 
 // Colores alineados a la identidad Endava
+// LOW: Gris corporativo
+// MEDIUM: Amarillo de alerta (mantenemos por semántica)
+// HIGH: Naranja Endava (Brand Primary)
+// CRITICAL: Rojo de error
 export const SEVERITY_COLORS = {
   [RiskSeverity.LOW]: 'bg-brand-charcoal text-brand-gray border-brand-gray/30',
   [RiskSeverity.MEDIUM]: 'bg-yellow-500/10 text-yellow-500 border-yellow-500/30',
-  [RiskSeverity.HIGH]: 'bg-[#FF5540]/10 text-[#FF5540] border-[#FF5540]/30', // Naranja Endava
+  // CORREGIDO: Usar variables de marca en lugar de hex arbitrario
+  [RiskSeverity.HIGH]: 'bg-brand-primary/10 text-brand-primary border-brand-primary/30', 
   [RiskSeverity.CRITICAL]: 'bg-red-600/10 text-red-500 border-red-500/30',
 };
 
@@ -23,7 +28,7 @@ export const INITIAL_AGENT_CATALOG = [
     name: 'CIAM Compliance Scout',
     description: 'Autonomous agent using RAG to reverse-engineer source code.',
     icon: Code,
-    color: 'text-brand-primary', // Usando el naranja
+    color: 'text-brand-primary', 
     bg: 'bg-brand-primary/10',
     border: 'border-brand-primary/20',
     model: 'Gemini 1.5 Pro',
@@ -46,10 +51,9 @@ export const INITIAL_AGENT_CATALOG = [
     useCases: ['Detect SOD conflicts', 'Identify orphaned accounts'],
     config: { temperature: 0.0, maxTokens: 4096, systemInstruction: "Strict IAM Auditor." }
   },
-  // ... (puedes añadir más agentes siguiendo este patrón)
 ];
 
-// Integraciones con colores neutros y acentos de marca
+// Integraciones: Eliminados azules, usando blanco o brand-primary
 export const INTEGRATIONS = [
   { id: 'github', name: 'GitHub Enterprise', category: 'Source Control', status: 'connected', lastSync: '1 min ago', icon: GitBranch, color: 'text-white' },
   { id: 'okta', name: 'Okta Identity Cloud', category: 'IAM & Security', status: 'connected', lastSync: '2 mins ago', icon: Lock, color: 'text-brand-primary' },
