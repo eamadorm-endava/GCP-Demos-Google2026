@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Risk, Control, AgentStatus, ActiveSession, AuditResult, AgentCapability, CapabilityDefinition } from '../types';
 import { X, Code2, Terminal as TerminalIcon, Settings, Thermometer, BoxSelect } from 'lucide-react';
@@ -201,7 +200,7 @@ const RiskDashboard: React.FC<RiskDashboardProps> = ({ risks, activeSessions, on
                         <div className="text-xs text-slate-400 font-mono flex items-center space-x-2">
                            <span>AGENT_ID: {selectedAgent.id}</span>
                            <span>•</span>
-                           <span className="text-blue-400">v2.4.0-STABLE</span>
+                           <span className="text-brand-primary">v2.4.0-STABLE</span>
                         </div>
                      </div>
                   </div>
@@ -218,7 +217,7 @@ const RiskDashboard: React.FC<RiskDashboardProps> = ({ risks, activeSessions, on
                         <ul className="space-y-2">
                            {selectedAgent.capabilities.map((cap: string) => (
                               <li key={cap} className="text-sm text-slate-300 flex items-start">
-                                 <div className="w-1.5 h-1.5 rounded-full bg-blue-500 mt-1.5 mr-2 shrink-0"></div>
+                                 <div className="w-1.5 h-1.5 rounded-full bg-brand-primary mt-1.5 mr-2 shrink-0"></div>
                                  {cap}
                               </li>
                            ))}
@@ -292,7 +291,7 @@ const RiskDashboard: React.FC<RiskDashboardProps> = ({ risks, activeSessions, on
                           onClick={() => setActiveTab('logic')}
                           className={`px-4 py-2 flex items-center space-x-2 border-t-2 transition-colors ${
                             activeTab === 'logic' 
-                              ? 'bg-[#1e1e1e] text-blue-400 border-blue-500' 
+                              ? 'bg-[#1e1e1e] text-brand-primary border-brand-primary' 
                               : 'hover:bg-[#2a2d2e] border-transparent'
                           }`}
                         >
@@ -303,7 +302,7 @@ const RiskDashboard: React.FC<RiskDashboardProps> = ({ risks, activeSessions, on
                           onClick={() => setActiveTab('prompt')}
                           className={`px-4 py-2 flex items-center space-x-2 border-t-2 transition-colors ${
                             activeTab === 'prompt' 
-                              ? 'bg-[#1e1e1e] text-blue-400 border-blue-500' 
+                              ? 'bg-[#1e1e1e] text-brand-primary border-brand-primary' 
                               : 'hover:bg-[#2a2d2e] border-transparent'
                           }`}
                         >
@@ -338,7 +337,7 @@ const RiskDashboard: React.FC<RiskDashboardProps> = ({ risks, activeSessions, on
                         setSelectedAgentId(null);
                         setViewMode('ops');
                      }} 
-                     className="px-4 py-2 rounded-lg text-sm bg-blue-600 hover:bg-blue-500 text-white font-medium shadow-lg shadow-blue-900/20"
+                     className="px-4 py-2 rounded-lg text-sm bg-brand-primary hover:bg-orange-600 text-white font-medium shadow-lg shadow-orange-900/20"
                   >
                      Deploy Agent
                   </button>
