@@ -104,7 +104,7 @@ const RiskDashboard: React.FC<RiskDashboardProps> = ({ risks, activeSessions, on
             <div className="w-10 h-10 rounded-xl overflow-hidden border border-slate-700/50 shadow-lg">
               <img
                 src="https://cdn.brandfetch.io/id4YZ7PWEj/w/200/h/200/theme/dark/icon.jpeg?c=1bxid64Mup7aczewSAYMX&t=1761617484712"
-                alt="Endava Agentic Vendor Governance"
+                alt="Endava Sentinel AI Autonomous Risk Assurance"
                 className="w-full h-full object-cover"
               />
             </div>
@@ -112,10 +112,10 @@ const RiskDashboard: React.FC<RiskDashboardProps> = ({ risks, activeSessions, on
             {/* Title */}
             <div className="flex flex-col leading-tight">
               <span className="text-xl font-black tracking-tight text-white">
-                Agentic Vendor
+                Sentinel AI
               </span>
               <span className="text-[10px] font-bold tracking-wide text-brand-primary uppercase">
-                Governance Platform
+                Autonomous Risk Assurance
               </span>
             </div>
         </div>
