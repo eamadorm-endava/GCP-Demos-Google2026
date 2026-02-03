@@ -17,9 +17,9 @@ const ActivityVisualizer: React.FC<ActivityVisualizerProps> = ({ status, logsCou
         case 'IAM_ASSURANCE':
             return [
                 { id: 0, x: 50, y: 50, icon: Lock, label: 'Okta Identity Cloud', color: 'text-brand-primary', border: 'border-brand-primary' },
-                { id: 1, x: 20, y: 20, icon: User, label: 'Workday HRIS', color: 'text-orange-400', border: 'border-orange-500' },
+                { id: 1, x: 20, y: 20, icon: User, label: 'Workday HRIS', color: 'text-brand-primary', border: 'border-brand-primary' },
                 { id: 2, x: 80, y: 20, icon: Server, label: 'Active Directory', color: 'text-slate-400', border: 'border-slate-500' },
-                { id: 3, x: 20, y: 80, icon: Key, label: 'PAM Vault', color: 'text-amber-500', border: 'border-amber-600' },
+                { id: 3, x: 20, y: 80, icon: Key, label: 'PAM Vault', color: 'text-brand-gray', border: 'border-brand-gray' },
                 { id: 4, x: 80, y: 80, icon: Cloud, label: 'Salesforce CRM', color: 'text-slate-300', border: 'border-slate-400' },
                 { id: 5, x: 50, y: 15, icon: ShieldCheck, label: 'Governance Engine', color: 'text-emerald-400', border: 'border-emerald-500' },
             ];
@@ -28,7 +28,7 @@ const ActivityVisualizer: React.FC<ActivityVisualizerProps> = ({ status, logsCou
                 { id: 0, x: 50, y: 50, icon: Database, label: 'Evidence Lake', color: 'text-brand-primary', border: 'border-brand-primary' },
                 { id: 1, x: 20, y: 30, icon: Server, label: 'Prod Cluster A', color: 'text-slate-400', border: 'border-slate-500' },
                 { id: 2, x: 20, y: 70, icon: Server, label: 'Prod Cluster B', color: 'text-slate-400', border: 'border-slate-500' },
-                { id: 3, x: 80, y: 30, icon: FileText, label: 'Jira Ticketing', color: 'text-orange-400', border: 'border-orange-500' },
+                { id: 3, x: 80, y: 30, icon: FileText, label: 'Jira Ticketing', color: 'text-brand-primary', border: 'border-brand-primary' },
                 { id: 4, x: 80, y: 70, icon: FileSearch, label: 'Splunk Logs', color: 'text-emerald-400', border: 'border-emerald-500' },
                 { id: 5, x: 50, y: 85, icon: Scale, label: 'Blockchain Ledger', color: 'text-slate-200', border: 'border-slate-400' },
             ];
@@ -36,16 +36,16 @@ const ActivityVisualizer: React.FC<ActivityVisualizerProps> = ({ status, logsCou
             return [
                  { id: 0, x: 50, y: 50, icon: Activity, label: 'Inference Engine', color: 'text-red-500', border: 'border-red-600' },
                  { id: 1, x: 20, y: 50, icon: Database, label: 'ERP Ledger', color: 'text-brand-primary', border: 'border-brand-primary' },
-                 { id: 2, x: 80, y: 50, icon: Globe, label: 'Vendor Portal', color: 'text-orange-300', border: 'border-orange-400' },
+                 { id: 2, x: 80, y: 50, icon: Globe, label: 'Vendor Portal', color: 'text-brand-gray', border: 'border-brand-gray' },
                  { id: 3, x: 50, y: 20, icon: CreditCard, label: 'Swift Gateway', color: 'text-emerald-400', border: 'border-emerald-500' },
                  { id: 4, x: 30, y: 80, icon: User, label: 'Payroll Data', color: 'text-slate-400', border: 'border-slate-500' },
-                 { id: 5, x: 70, y: 80, icon: FileSearch, label: 'Sanctions List', color: 'text-amber-500', border: 'border-amber-600' },
+                 { id: 5, x: 70, y: 80, icon: FileSearch, label: 'Sanctions List', color: 'text-brand-gray', border: 'border-brand-gray' },
             ];
         case 'CIAM_ATTESTATION':
             return [
                  { id: 0, x: 50, y: 50, icon: Globe, label: 'API Gateway', color: 'text-brand-primary', border: 'border-brand-primary' },
                  { id: 1, x: 20, y: 30, icon: Smartphone, label: 'Client App', color: 'text-slate-300', border: 'border-slate-400' },
-                 { id: 2, x: 80, y: 30, icon: ShieldCheck, label: 'Auth Service', color: 'text-orange-500', border: 'border-orange-600' },
+                 { id: 2, x: 80, y: 30, icon: ShieldCheck, label: 'Auth Service', color: 'text-brand-primary', border: 'border-brand-primary' },
                  { id: 3, x: 50, y: 80, icon: Server, label: 'Legacy Core', color: 'text-slate-500', border: 'border-slate-600' },
                  { id: 4, x: 20, y: 80, icon: Code, label: 'Source Repo', color: 'text-emerald-400', border: 'border-emerald-500' },
                  { id: 5, x: 80, y: 80, icon: Database, label: 'User Store', color: 'text-slate-400', border: 'border-slate-500' },
@@ -53,7 +53,7 @@ const ActivityVisualizer: React.FC<ActivityVisualizerProps> = ({ status, logsCou
         default:
              return [
                 { id: 0, x: 50, y: 50, icon: Server, label: 'Target System', color: 'text-slate-400', border: 'border-slate-500' },
-                { id: 1, x: 20, y: 20, icon: FileText, label: 'Policy Doc', color: 'text-orange-400', border: 'border-orange-500' },
+                { id: 1, x: 20, y: 20, icon: FileText, label: 'Policy Doc', color: 'text-brand-primary', border: 'border-brand-primary' },
                 { id: 2, x: 80, y: 20, icon: Database, label: 'Audit Store', color: 'text-emerald-400', border: 'border-emerald-500' },
                 { id: 3, x: 20, y: 80, icon: User, label: 'Process Owner', color: 'text-slate-300', border: 'border-slate-400' },
                 { id: 4, x: 80, y: 80, icon: ShieldCheck, label: 'Control Framework', color: 'text-brand-primary', border: 'border-brand-primary' },
@@ -80,9 +80,10 @@ const ActivityVisualizer: React.FC<ActivityVisualizerProps> = ({ status, logsCou
       <svg className="absolute inset-0 w-full h-full pointer-events-none overflow-visible">
         <defs>
           <linearGradient id="lineGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stopColor="rgba(255, 85, 64, 0.1)" />
-            <stop offset="50%" stopColor="rgba(255, 85, 64, 0.5)" />
-            <stop offset="100%" stopColor="rgba(255, 85, 64, 0.1)" />
+            {/* CORREGIDO: Usar var() para parametrización real */}
+            <stop offset="0%" stopColor="var(--color-brand-primary)" stopOpacity="0.1" />
+            <stop offset="50%" stopColor="var(--color-brand-primary)" stopOpacity="0.5" />
+            <stop offset="100%" stopColor="var(--color-brand-primary)" stopOpacity="0.1" />
           </linearGradient>
         </defs>
         
