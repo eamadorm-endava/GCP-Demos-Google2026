@@ -66,7 +66,9 @@ const CommandCenterView: React.FC<CommandCenterViewProps> = ({
           <div className="flex flex-col">
             <span className="text-[10px] text-slate-500 uppercase font-bold tracking-wider">Active Agents</span>
             <div className="flex items-baseline space-x-2">
+              {/* CHANGED: text-blue-400 -> text-brand-primary */}
               <span className="text-xl font-bold text-brand-primary">{Object.keys(activeSessions).filter(k => activeSessions[k].status === AgentStatus.EXECUTING).length}</span>
+              {/* CHANGED: text-blue-500/50 -> text-brand-primary/50 */}
               <span className="text-xs text-brand-primary/50 animate-pulse">● Live</span>
             </div>
           </div>
@@ -79,6 +81,7 @@ const CommandCenterView: React.FC<CommandCenterViewProps> = ({
         <div className="w-80 bg-slate-900/50 border-r border-slate-800 overflow-y-auto flex flex-col">
            <div className="p-4 flex items-center justify-between border-b border-slate-800">
               <h2 className="text-xs font-semibold text-slate-500 uppercase tracking-wider">Identified Risks</h2>
+              {/* CHANGED: bg-blue-600 -> bg-brand-primary */}
               <button 
                 onClick={onAddRisk}
                 className="p-1 rounded bg-brand-primary/20 text-brand-primary hover:bg-brand-primary hover:text-white transition-colors"
@@ -94,6 +97,7 @@ const CommandCenterView: React.FC<CommandCenterViewProps> = ({
                    onClick={() => setSelectedRiskId(risk.id)}
                    className={`w-full text-left p-3 rounded-lg border transition-all ${
                      selectedRiskId === risk.id 
+                       /* CHANGED: bg-blue-600/10 -> bg-brand-primary/10 */
                        ? 'bg-brand-primary/10 border-brand-primary/50 shadow-[0_0_15px_rgba(255,85,64,0.1)]' 
                        : 'bg-slate-800/50 border-slate-700/50 hover:bg-slate-800 hover:border-slate-600'
                    }`}
@@ -166,6 +170,7 @@ const CommandCenterView: React.FC<CommandCenterViewProps> = ({
                                       <span>{control.type} Control</span>
                                       <span>•</span>
                                       <div className="flex items-center space-x-1">
+                                         {/* CHANGED: text-blue-400 -> text-brand-primary */}
                                          <span className="font-mono text-brand-primary">{controlAgent?.name || control.agentCapability}</span>
                                       </div>
                                    </div>
@@ -215,6 +220,7 @@ const CommandCenterView: React.FC<CommandCenterViewProps> = ({
                                          {result.effective ? <CheckCircle2 size={14} /> : <AlertOctagon size={14} />}
                                          <span className="text-sm font-medium">{result.effective ? 'Effective' : 'Deficiency'}</span>
                                       </div>
+                                      {/* CHANGED: text-blue-400 -> text-brand-primary */}
                                       <button 
                                          onClick={() => onOpenReport(control.id)}
                                          className="text-sm text-brand-primary hover:text-orange-300 underline"
@@ -236,6 +242,7 @@ const CommandCenterView: React.FC<CommandCenterViewProps> = ({
                                       <button 
                                         onClick={() => onDeployAgent(selectedRisk, control)}
                                         disabled={isRunning}
+                                        /* CHANGED: bg-blue-600 -> bg-brand-primary */
                                         className={`flex items-center space-x-2 px-4 py-2 rounded-lg text-sm font-bold transition-all ${
                                            isRunning 
                                            ? 'bg-slate-800 text-slate-500 cursor-not-allowed opacity-50'

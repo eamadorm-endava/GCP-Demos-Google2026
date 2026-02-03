@@ -200,6 +200,7 @@ const RiskDashboard: React.FC<RiskDashboardProps> = ({ risks, activeSessions, on
                         <div className="text-xs text-slate-400 font-mono flex items-center space-x-2">
                            <span>AGENT_ID: {selectedAgent.id}</span>
                            <span>•</span>
+                           {/* CHANGED: text-blue-400 -> text-brand-primary */}
                            <span className="text-brand-primary">v2.4.0-STABLE</span>
                         </div>
                      </div>
@@ -217,6 +218,7 @@ const RiskDashboard: React.FC<RiskDashboardProps> = ({ risks, activeSessions, on
                         <ul className="space-y-2">
                            {selectedAgent.capabilities.map((cap: string) => (
                               <li key={cap} className="text-sm text-slate-300 flex items-start">
+                                 {/* CHANGED: bg-blue-500 -> bg-brand-primary */}
                                  <div className="w-1.5 h-1.5 rounded-full bg-brand-primary mt-1.5 mr-2 shrink-0"></div>
                                  {cap}
                               </li>
@@ -291,6 +293,7 @@ const RiskDashboard: React.FC<RiskDashboardProps> = ({ risks, activeSessions, on
                           onClick={() => setActiveTab('logic')}
                           className={`px-4 py-2 flex items-center space-x-2 border-t-2 transition-colors ${
                             activeTab === 'logic' 
+                              /* CHANGED: text-blue-400/border-blue-500 -> text-brand-primary/border-brand-primary */
                               ? 'bg-[#1e1e1e] text-brand-primary border-brand-primary' 
                               : 'hover:bg-[#2a2d2e] border-transparent'
                           }`}
@@ -302,6 +305,7 @@ const RiskDashboard: React.FC<RiskDashboardProps> = ({ risks, activeSessions, on
                           onClick={() => setActiveTab('prompt')}
                           className={`px-4 py-2 flex items-center space-x-2 border-t-2 transition-colors ${
                             activeTab === 'prompt' 
+                              /* CHANGED: text-blue-400/border-blue-500 -> text-brand-primary/border-brand-primary */
                               ? 'bg-[#1e1e1e] text-brand-primary border-brand-primary' 
                               : 'hover:bg-[#2a2d2e] border-transparent'
                           }`}
@@ -332,6 +336,7 @@ const RiskDashboard: React.FC<RiskDashboardProps> = ({ risks, activeSessions, on
                
                <div className="p-4 border-t border-slate-800 bg-slate-900 flex justify-end space-x-3 shrink-0">
                   <button onClick={() => setSelectedAgentId(null)} className="px-4 py-2 rounded-lg text-sm text-slate-400 hover:text-white hover:bg-slate-800 transition-colors">Close</button>
+                  {/* CHANGED: bg-blue-600 -> bg-brand-primary */}
                   <button 
                      onClick={() => {
                         setSelectedAgentId(null);
