@@ -53,7 +53,8 @@ const AnalyticsView: React.FC<AnalyticsViewProps> = ({ risks, completedAudits, t
          <div className="bg-slate-900 p-5 rounded-xl border border-slate-800">
             <div className="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-2">Agent Fleet Size</div>
             <div className="flex items-end space-x-2">
-               <span className="text-3xl font-bold text-orange-400">{agentsCount}</span>
+               {/* CORREGIDO: text-orange-400 -> text-brand-primary */}
+               <span className="text-3xl font-bold text-brand-primary">{agentsCount}</span>
                <span className="text-sm text-slate-500 mb-1">active agents</span>
             </div>
          </div>
@@ -80,6 +81,7 @@ const AnalyticsView: React.FC<AnalyticsViewProps> = ({ risks, completedAudits, t
                   <AreaChart data={riskTrendData}>
                      <defs>
                         <linearGradient id="colorScore" x1="0" y1="0" x2="0" y2="1">
+                           {/* NOTE: Recharts requires Hex. Using Endava Brand Primary #FF5540 */}
                            <stop offset="5%" stopColor="#FF5540" stopOpacity={0.3}/>
                            <stop offset="95%" stopColor="#FF5540" stopOpacity={0}/>
                         </linearGradient>
