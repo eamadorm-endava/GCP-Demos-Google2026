@@ -103,7 +103,7 @@ const MeetingHub: React.FC = () => {
       </Modal>
 
       {isScribing && (
-        <div className="bg-gradient-to-br from-[color:var(--color-brand-700)] to-[color:var(--color-brand-900)] rounded-[2.5rem] p-10 text-white shadow-2xl animate-in slide-in-from-top-12 duration-700 overflow-hidden relative border border-white/10">
+        <div className="bg-brand-600 rounded-[2.5rem] p-10 text-white shadow-2xl animate-in slide-in-from-top-12 duration-700 overflow-hidden relative border border-white/10">
           <div className="flex flex-col md:flex-row items-center justify-between gap-12 relative z-10">
             <div className="flex-1 text-center md:text-left">
               <div className="flex items-center gap-4 mb-6 justify-center md:justify-start">
@@ -120,10 +120,7 @@ const MeetingHub: React.FC = () => {
             </div>
           </div>
           <div className="absolute -bottom-24 -left-24 w-80 h-80 bg-brand-200/20 rounded-full blur-3xl"></div>
-          <div className="absolute -top-24 -right-24 w-80 h-80 bg-purple-500/20 rounded-full blur-3xl"></div>
-           <div style={{ background: 'var(--color-brand-900)', color: 'white', padding: 16 }}>
-              brand-900 test
-           </div>
+          <div className="absolute -top-24 -right-24 w-80 h-80 bg-brand-100/20 rounded-full blur-3xl"></div>
         </div>
       )}
 

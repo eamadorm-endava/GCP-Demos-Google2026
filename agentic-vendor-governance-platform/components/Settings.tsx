@@ -58,7 +58,7 @@ const Settings: React.FC = () => {
           onClick={handleSave}
           disabled={loading}
           className={`px-8 py-3 rounded-2xl font-black text-sm shadow-xl transition-all flex items-center gap-2 active:scale-95 ${
-            success ? 'bg-green-500 text-white' : 'bg-indigo-600 text-white hover:bg-indigo-700 hover:shadow-indigo-200'
+            success ? 'bg-green-500 text-white' : 'bg-[color:var(--color-brand-600)] text-white hover:bg-[color:var(--color-brand-700)] hover:shadow-[color:var(--color-brand-200)]'
           }`}
         >
           {loading ? (
@@ -85,7 +85,7 @@ const Settings: React.FC = () => {
           {/* Agent Configuration Card */}
           <div className="bg-white p-8 rounded-[2.5rem] shadow-sm border border-slate-200 relative overflow-hidden">
             <div className="flex items-center gap-4 mb-8">
-              <div className="p-3 bg-indigo-50 text-indigo-600 rounded-2xl">
+              <div className="p-3 bg-[color:var(--color-brand-50)] text-[color:var(--color-brand-600)] rounded-2xl">
                 <Cpu size={24} />
               </div>
               <div>
@@ -113,7 +113,7 @@ const Settings: React.FC = () => {
                   step="10"
                   value={agentConfig.auditTolerance}
                   onChange={(e) => setAgentConfig({...agentConfig, auditTolerance: parseInt(e.target.value)})}
-                  className="w-full h-2 bg-slate-100 rounded-lg appearance-none cursor-pointer accent-indigo-600"
+                  className="w-full h-2 bg-slate-100 rounded-lg appearance-none cursor-pointer accent-[color:var(--color-brand-600)]"
                 />
                 <p className="text-xs text-slate-400 font-medium">
                   Invoices with discrepancies below <strong>${agentConfig.auditTolerance}</strong> will be flagged as "Low Risk" instead of "Critical".
@@ -129,7 +129,7 @@ const Settings: React.FC = () => {
                   <select 
                     value={agentConfig.scribeModel}
                     onChange={(e) => setAgentConfig({...agentConfig, scribeModel: e.target.value})}
-                    className="w-full p-3 bg-slate-50 border border-slate-200 rounded-xl text-sm font-bold text-slate-700 focus:outline-none focus:ring-2 focus:ring-indigo-500/20"
+                    className="w-full p-3 bg-slate-50 border border-slate-200 rounded-xl text-sm font-bold text-slate-700 focus:outline-none focus:ring-2 focus:ring-[color:var(--color-brand-50)]0/20"
                   >
                     {/* FIX: Use correct model names and update labels. */}
                     <option value="gemini-3-flash-preview">Gemini 3 Flash (Fastest)</option>
@@ -141,7 +141,7 @@ const Settings: React.FC = () => {
                   <select 
                     value={agentConfig.tone}
                     onChange={(e) => setAgentConfig({...agentConfig, tone: e.target.value})}
-                    className="w-full p-3 bg-slate-50 border border-slate-200 rounded-xl text-sm font-bold text-slate-700 focus:outline-none focus:ring-2 focus:ring-indigo-500/20"
+                    className="w-full p-3 bg-slate-50 border border-slate-200 rounded-xl text-sm font-bold text-slate-700 focus:outline-none focus:ring-2 focus:ring-[color:var(--color-brand-50)]0/20"
                   >
                     <option value="professional">Executive / Professional</option>
                     <option value="concise">Concise / Bulleted</option>
@@ -163,7 +163,7 @@ const Settings: React.FC = () => {
                 </div>
                 <button 
                   onClick={() => setAgentConfig({...agentConfig, autoApprove: !agentConfig.autoApprove})}
-                  className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${agentConfig.autoApprove ? 'bg-indigo-600' : 'bg-slate-300'}`}
+                  className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${agentConfig.autoApprove ? 'bg-[color:var(--color-brand-600)]' : 'bg-slate-300'}`}
                 >
                   <span className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${agentConfig.autoApprove ? 'translate-x-6' : 'translate-x-1'}`} />
                 </button>
@@ -208,7 +208,7 @@ const Settings: React.FC = () => {
                     className={`px-4 py-2 rounded-xl text-xs font-bold transition-all ${
                       integrations[tool.id as keyof typeof integrations] 
                         ? 'bg-red-50 text-red-600 hover:bg-red-100' 
-                        : 'bg-indigo-50 text-indigo-600 hover:bg-indigo-100'
+                        : 'bg-[color:var(--color-brand-connect-50)] text-[color:var(--color-brand-connect-200)] hover:bg-[color:var(--color-brand-connect-300)]'
                     }`}
                   >
                     {integrations[tool.id as keyof typeof integrations] ? 'Disconnect' : 'Connect'}
@@ -229,7 +229,7 @@ const Settings: React.FC = () => {
                   <img src="https://picsum.photos/seed/vignesh/200/200" alt="Profile" className="w-full h-full object-cover" />
                 </div>
                 <h3 className="text-xl font-black text-slate-800">Vignesh S.</h3>
-                <p className="text-xs font-bold text-indigo-600 bg-indigo-50 px-3 py-1 rounded-full uppercase tracking-widest mt-2">Admin Access</p>
+                <p className="text-xs font-bold text-[color:var(--color-brand-600)] bg-[color:var(--color-brand-50)] px-3 py-1 rounded-full uppercase tracking-widest mt-2">Admin Access</p>
                 <div className="w-full mt-6 space-y-4 text-left">
                   <div>
                     <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest block mb-1">Role</label>
@@ -257,7 +257,7 @@ const Settings: React.FC = () => {
                   <span className="text-sm font-medium text-slate-600 group-hover:text-slate-900">{item.label}</span>
                   <div 
                     onClick={() => toggleNotification(i)}
-                    className={`w-5 h-5 rounded-md border-2 flex items-center justify-center transition-all ${item.checked ? 'bg-indigo-600 border-indigo-600' : 'border-slate-300'}`}
+                    className={`w-5 h-5 rounded-md border-2 flex items-center justify-center transition-all ${item.checked ? 'bg-[color:var(--color-brand-600)] border-[color:var(--color-brand-600)]' : 'border-slate-300'}`}
                   >
                     {item.checked && <CheckCircle2 size={14} className="text-white" />}
                   </div>
