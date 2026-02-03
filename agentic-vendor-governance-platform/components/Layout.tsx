@@ -107,11 +107,32 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
               <span className="text-xs font-black text-[color:var(--color-brand-600)] bg-brand-50 px-2 py-1 rounded uppercase tracking-widest">Enterprise</span>
             </div>
           </div>
+
+          <div className="flex items-center gap-4">
+            {/* Logo */}
+            <div className="w-10 h-10 rounded-xl overflow-hidden">
+              <img
+                src="https://cdn.brandfetch.io/id4YZ7PWEj/w/200/h/200/theme/dark/icon.jpeg?c=1bxid64Mup7aczewSAYMX&t=1761617484712"
+                alt="Agentic Vendor Governance"
+                className="w-full h-full object-cover"
+              />
+            </div>
+
+            {/* Title */}
+            <div className="flex flex-col leading-tight">
+              <span className="text-xl font-black tracking-tight text-slate-900">
+                Agentic Vendor
+              </span>
+              <span className="text-sm font-bold tracking-wide text-slate-500 uppercase">
+                Governance Platform
+              </span>
+            </div>
+          </div>
           
           <div className="flex items-center gap-3 lg:gap-6">
             <button className="relative p-2.5 text-slate-500 hover:bg-slate-100 rounded-full transition-all group">
               <Bell size={20} />
-              <span className="absolute top-2.5 right-2.5 w-2 h-2 bg-brand-600 rounded-full border-2 border-[color:var(--color-brand-50)] group-hover:scale-125 transition-transform"></span>
+              <span className="absolute top-2.5 right-2.5 w-2 h-2 bg-brand-600 rounded-full border-2 border-[color:var(--color-brand-60)] group-hover:scale-125 transition-transform"></span>
             </button>
             <div className="flex items-center gap-3 pl-2 border-l border-slate-100">
               <div className="hidden sm:block text-right">
