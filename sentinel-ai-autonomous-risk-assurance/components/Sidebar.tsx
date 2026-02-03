@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Shield, LayoutDashboard, LineChart, Briefcase, Network, Activity, Code, ChevronDown, ChevronRight, Settings, Layers, Cpu, Globe } from 'lucide-react';
+import { LayoutDashboard, LineChart, Briefcase, Network, Activity, Code, ChevronDown, ChevronRight, Settings, Layers, Cpu, Globe } from 'lucide-react';
 
 interface SidebarProps {
   viewMode: 'ops' | 'analytics' | 'portfolio' | 'integrations' | 'ciam' | 'capabilities' | 'swarm';
@@ -34,19 +34,9 @@ const Sidebar: React.FC<SidebarProps> = ({ viewMode, setViewMode, onReset }) => 
 
   return (
     <aside className="w-64 bg-brand-dark border-r border-slate-800 flex flex-col shrink-0 z-20">
-      {/* Brand Header */}
-      <div className="p-6 border-b border-slate-800 flex items-center space-x-3 bg-slate-900/50">
-        {/* Logo Icon con Gradiente Naranja */}
-        <div className="bg-gradient-to-br from-brand-primary to-orange-600 p-2 rounded-lg shadow-lg shadow-orange-900/20">
-          <Shield className="w-5 h-5 text-white" />
-        </div>
-        <div>
-           <h1 className="font-bold text-white tracking-wide text-lg">SENTINEL</h1>
-           <div className="text-[10px] text-brand-primary font-mono tracking-widest uppercase opacity-80">AI Assurance</div>
-        </div>
-      </div>
-
-      <nav className="flex-1 p-4 space-y-2 overflow-y-auto">
+      {/* Brand Header REMOVED - Moved to Main Layout */}
+      
+      <nav className="flex-1 p-4 space-y-2 overflow-y-auto pt-6">
         
         {/* Operations Section */}
         <div className="mb-2">
