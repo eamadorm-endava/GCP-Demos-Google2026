@@ -81,9 +81,9 @@ const AnalyticsView: React.FC<AnalyticsViewProps> = ({ risks, completedAudits, t
                   <AreaChart data={riskTrendData}>
                      <defs>
                         <linearGradient id="colorScore" x1="0" y1="0" x2="0" y2="1">
-                           {/* NOTE: Recharts requires Hex. Using Endava Brand Primary #FF5540 */}
-                           <stop offset="5%" stopColor="#FF5540" stopOpacity={0.3}/>
-                           <stop offset="95%" stopColor="#FF5540" stopOpacity={0}/>
+                           {/* CORREGIDO: Usando variables CSS en lugar de Hex duro */}
+                           <stop offset="5%" stopColor="var(--color-brand-primary)" stopOpacity={0.3}/>
+                           <stop offset="95%" stopColor="var(--color-brand-primary)" stopOpacity={0}/>
                         </linearGradient>
                      </defs>
                      <CartesianGrid strokeDasharray="3 3" stroke="#1e293b" />
@@ -93,7 +93,7 @@ const AnalyticsView: React.FC<AnalyticsViewProps> = ({ risks, completedAudits, t
                         contentStyle={{backgroundColor: '#0f172a', borderColor: '#334155', borderRadius: '8px'}} 
                         itemStyle={{color: '#e2e8f0'}}
                      />
-                     <Area type="monotone" dataKey="score" stroke="#FF5540" strokeWidth={2} fillOpacity={1} fill="url(#colorScore)" />
+                     <Area type="monotone" dataKey="score" stroke="var(--color-brand-primary)" strokeWidth={2} fillOpacity={1} fill="url(#colorScore)" />
                   </AreaChart>
                </ResponsiveContainer>
             </div>
@@ -114,6 +114,7 @@ const AnalyticsView: React.FC<AnalyticsViewProps> = ({ risks, completedAudits, t
                         contentStyle={{backgroundColor: '#0f172a', borderColor: '#334155', borderRadius: '8px'}} 
                      />
                      <Legend />
+                     {/* Functional colors kept as-is (Green/Red) */}
                      <Bar dataKey="effective" name="Effective" fill="#10b981" radius={[4, 4, 0, 0]} barSize={30} />
                      <Bar dataKey="ineffective" name="Deficient" fill="#ef4444" radius={[4, 4, 0, 0]} barSize={30} />
                   </BarChart>
