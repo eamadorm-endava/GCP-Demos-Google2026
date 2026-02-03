@@ -1,0 +1,15 @@
+@import "tailwindcss";
+
+@theme {
+  /* Define the exact scale steps you will use in classes */
+  --color-brand-50:  #FFF1EE;
+  --color-brand-200: #FFD6CF;
+  --color-brand-600: #D93A28;
+  --color-brand-100: #FFE4E0;
+  --color-brand-300: #FFB3A8;
+  --color-brand-500: #FF5640;
+  --color-brand-700: #B52D1D;
+  --color-brand-400: #FF8775;
+  --color-brand-800: #912418;
+  --color-brand-900: #731D14;
+}

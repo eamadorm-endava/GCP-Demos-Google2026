@@ -301,7 +301,7 @@ const FinanceHub: React.FC = () => {
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
         <div>
           <h2 className="text-3xl font-black text-slate-800 flex items-center gap-3">
-            <ShieldCheck className="text-indigo-600" size={32} />
+            <ShieldCheck className="text-[color:var(--color-brand-600)]" size={32} />
             Financial Hub
           </h2>
           <p className="text-slate-400 text-sm mt-1">Agentic auditing for multi-vendor invoice reconciliation.</p>
@@ -309,13 +309,13 @@ const FinanceHub: React.FC = () => {
         
         <div className="flex gap-3">
           <div className="relative group">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-indigo-500 transition-colors" size={18} />
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-[color:var(--color-brand-600)] transition-colors" size={18} />
             <input 
               type="text" 
               placeholder="Search by invoice, vendor, rate..."
               value={searchTerm}
               onChange={e => setSearchTerm(e.target.value)}
-              className="pl-10 pr-4 py-3 bg-white border border-slate-200 rounded-2xl text-sm font-medium focus:outline-none focus:ring-4 focus:ring-indigo-500/10 transition-all w-72"
+              className="pl-10 pr-4 py-3 bg-white border border-slate-200 rounded-2xl text-sm font-medium focus:outline-none focus:ring-4 focus:ring-[color:var(--color-brand-600)]/10 transition-all w-72"
             />
           </div>
           <button 
@@ -347,7 +347,7 @@ const FinanceHub: React.FC = () => {
             onClick={() => setActiveTab(tab.id as Tab)}
             className={`flex items-center gap-2 px-5 py-2.5 rounded-xl text-xs font-black uppercase tracking-wider transition-all ${
               activeTab === tab.id 
-                ? 'bg-indigo-600 text-white shadow-md' 
+                ? 'bg-[color:var(--color-brand-600)] text-white shadow-md' 
                 : 'text-slate-500 hover:bg-slate-50 hover:text-slate-900'
             }`}
           >
@@ -362,7 +362,7 @@ const FinanceHub: React.FC = () => {
         <div className="fixed bottom-8 left-1/2 -translate-x-1/2 z-50 animate-in slide-in-from-bottom-8 duration-500">
           <div className="bg-slate-900 text-white p-4 px-6 rounded-3xl flex items-center gap-8 shadow-2xl border border-white/10 backdrop-blur-xl">
             <div className="flex items-center gap-4">
-              <span className="bg-indigo-500 text-white px-3 py-1 rounded-full text-xs font-black">
+              <span className="bg-[color:var(--color-brand-600)] text-white px-3 py-1 rounded-full text-xs font-black">
                 {selectedIds.size} SELECTED
               </span>
             </div>
@@ -401,31 +401,31 @@ const FinanceHub: React.FC = () => {
           onDrop={onDrop}
           className={`relative border-4 border-dashed rounded-[2.5rem] p-12 transition-all duration-500 flex flex-col items-center justify-center text-center overflow-hidden group ${
             dragActive 
-              ? 'border-indigo-500 bg-indigo-50 scale-[1.02] shadow-2xl shadow-indigo-100' 
-              : 'border-slate-200 bg-white hover:border-indigo-300 hover:bg-slate-50/50'
+              ? 'border-[color:var(--color-brand-600)] bg-[color:var(--color-brand-50)] scale-[1.02] shadow-2xl shadow-[color:var(--color-brand-100)]' 
+              : 'border-slate-200 bg-white hover:border-[color:var(--color-brand-300)] hover:bg-slate-50/50'
           }`}
         >
           {isAuditing ? (
             <div className="flex flex-col items-center gap-8 py-4 w-full max-w-lg animate-in fade-in zoom-in-95">
               <div className="relative">
-                <div className="w-24 h-24 border-8 border-indigo-100 border-t-indigo-600 rounded-full animate-spin"></div>
-                <ShieldCheck className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-indigo-600 animate-pulse" size={32} />
+                <div className="w-24 h-24 border-8 border-[color:var(--color-brand-100)] border-t-[color:var(--color-brand-600)] rounded-full animate-spin"></div>
+                <ShieldCheck className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[color:var(--color-brand-600)] animate-pulse" size={32} />
               </div>
               <div className="space-y-4 w-full">
                 <div className="flex flex-col gap-2">
                   <p className="font-black text-2xl text-slate-800">Agentic Audit in Progress</p>
-                  <p className="text-slate-400 font-medium text-sm">Processing: <span className="text-indigo-600 font-bold">{processingFile}</span></p>
+                  <p className="text-slate-400 font-medium text-sm">Processing: <span className="text-[color:var(--color-brand-600)] font-bold">{processingFile}</span></p>
                 </div>
                 
                 <div className="space-y-3 pt-4">
                   <div className="w-full bg-slate-100 h-3 rounded-full overflow-hidden">
                     <div 
-                      className="bg-indigo-600 h-full transition-all duration-1000 ease-out shadow-[0_0_12px_rgba(79,70,229,0.5)]" 
+                      className="bg-[color:var(--color-brand-600)] h-full transition-all duration-1000 ease-out shadow-[0_0_12px_rgba(79,70,229,0.5)]" 
                       style={{ width: `${(auditStep + 1) * 25}%` }}
                     ></div>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-xs font-black text-indigo-600 uppercase tracking-widest flex items-center gap-2">
+                    <span className="text-xs font-black text-[color:var(--color-brand-600)] uppercase tracking-widest flex items-center gap-2">
                       <Loader2 size={12} className="animate-spin" />
                       {auditSteps[auditStep]}
                     </span>
@@ -474,17 +474,17 @@ const FinanceHub: React.FC = () => {
             </div>
           ) : (
             <>
-              <div className="w-24 h-24 bg-indigo-50 rounded-[2rem] flex items-center justify-center mb-6 group-hover:scale-110 group-hover:rotate-3 transition-all duration-500">
-                <Upload className="text-indigo-600 group-hover:animate-bounce" size={48} />
+              <div className="w-24 h-24 bg-[color:var(--color-brand-50)] rounded-[2rem] flex items-center justify-center mb-6 group-hover:scale-110 group-hover:rotate-3 transition-all duration-500">
+                <Upload className="text-[color:var(--color-brand-600)] group-hover:animate-bounce" size={48} />
               </div>
               <h3 className="font-black text-3xl text-slate-800 tracking-tight">Drop Invoice to Start Audit</h3>
               <p className="text-slate-400 text-lg mt-3 max-w-md font-medium">
-                Drag your vendor PDF here for real-time <span className="text-indigo-600 font-black">MSA Rate Card</span> validation.
+                Drag your vendor PDF here for real-time <span className="text-[color:var(--color-brand-600)] font-black">MSA Rate Card</span> validation.
               </p>
               <div className="flex gap-4 mt-10">
                 <button 
                   onClick={() => fileInputRef.current?.click()}
-                  className="px-8 py-4 bg-indigo-600 text-white rounded-2xl font-black text-sm shadow-xl shadow-indigo-200 hover:bg-indigo-700 hover:scale-105 transition-all active:scale-95"
+                  className="px-8 py-4 bg-[color:var(--color-brand-600)] text-white rounded-2xl font-black text-sm shadow-xl shadow-[color:var(--color-brand-200)] hover:bg-[color:var(--color-brand-600)] hover:scale-105 transition-all active:scale-95"
                 >
                   Select File
                 </button>
@@ -497,7 +497,7 @@ const FinanceHub: React.FC = () => {
           )}
           
           {/* Background Gradients */}
-          <div className="absolute top-0 right-0 w-64 h-64 bg-indigo-500/5 rounded-full blur-[80px] -translate-y-1/2 translate-x-1/2"></div>
+          <div className="absolute top-0 right-0 w-64 h-64 bg-[color:var(--color-brand-600)]/5 rounded-full blur-[80px] -translate-y-1/2 translate-x-1/2"></div>
           <div className="absolute bottom-0 left-0 w-64 h-64 bg-purple-500/5 rounded-full blur-[80px] translate-y-1/2 -translate-x-1/2"></div>
         </div>
       )}
@@ -529,7 +529,7 @@ const FinanceHub: React.FC = () => {
                     <button 
                         key={opt.value} 
                         onClick={() => setStatusFilter(opt.value as any)}
-                        className={`px-3 py-1.5 rounded-lg text-[10px] font-black uppercase tracking-wider transition-all ${statusFilter === opt.value ? 'bg-indigo-600 text-white shadow' : 'bg-white text-slate-500 hover:bg-slate-50 border border-slate-200'}`}
+                        className={`px-3 py-1.5 rounded-lg text-[10px] font-black uppercase tracking-wider transition-all ${statusFilter === opt.value ? 'bg-[color:var(--color-brand-600)] text-white shadow' : 'bg-white text-slate-500 hover:bg-slate-50 border border-slate-200'}`}
                     >
                         {opt.label}
                     </button>
@@ -544,12 +544,12 @@ const FinanceHub: React.FC = () => {
                       <th className="py-5 px-8 text-left w-12">
                         <button 
                           onClick={toggleSelectAll}
-                          className="w-5 h-5 rounded-lg border-2 border-slate-300 flex items-center justify-center hover:border-indigo-500 transition-all"
+                          className="w-5 h-5 rounded-lg border-2 border-slate-300 flex items-center justify-center hover:border-[color:var(--color-brand-600)] transition-all"
                         >
                           {selectedIds.size === filteredInvoices.length && filteredInvoices.length > 0 ? (
-                            <CheckSquare className="text-indigo-600" size={16} />
+                            <CheckSquare className="text-[color:var(--color-brand-600)]" size={16} />
                           ) : selectedIds.size > 0 ? (
-                            <div className="w-2.5 h-0.5 bg-indigo-600 rounded-full"></div>
+                            <div className="w-2.5 h-0.5 bg-[color:var(--color-brand-600)] rounded-full"></div>
                           ) : null}
                         </button>
                       </th>
@@ -564,20 +564,20 @@ const FinanceHub: React.FC = () => {
                     {paginatedInvoices.map((inv) => (
                       <tr 
                         key={inv.id} 
-                        className={`hover:bg-slate-50/80 transition-all cursor-pointer group ${selectedInvoice?.id === inv.id ? 'bg-indigo-50/50' : ''} ${selectedIds.has(inv.id) ? 'bg-indigo-50/30' : ''}`}
+                        className={`hover:bg-slate-50/80 transition-all cursor-pointer group ${selectedInvoice?.id === inv.id ? 'bg-[color:var(--color-brand-50)]/50' : ''} ${selectedIds.has(inv.id) ? 'bg-[color:var(--color-brand-50)]/30' : ''}`}
                         onClick={() => setSelectedInvoice(inv)}
                       >
                         <td className="py-5 px-8">
                           <button 
                             onClick={(e) => toggleSelectOne(e, inv.id)}
-                            className={`w-5 h-5 rounded-lg border-2 transition-all flex items-center justify-center ${selectedIds.has(inv.id) ? 'border-indigo-600 bg-white' : 'border-slate-300 hover:border-indigo-500'}`}
+                            className={`w-5 h-5 rounded-lg border-2 transition-all flex items-center justify-center ${selectedIds.has(inv.id) ? 'border-[color:var(--color-brand-600)] bg-white' : 'border-slate-300 hover:border-[color:var(--color-brand-600)]'}`}
                           >
-                            {selectedIds.has(inv.id) && <CheckSquare className="text-indigo-600" size={16} />}
+                            {selectedIds.has(inv.id) && <CheckSquare className="text-[color:var(--color-brand-600)]" size={16} />}
                           </button>
                         </td>
                         <td className="py-5 px-4">
                           <div className="flex items-center gap-4">
-                            <div className={`p-2 rounded-xl transition-colors ${selectedInvoice?.id === inv.id ? 'bg-indigo-600 text-white shadow-lg' : 'bg-slate-100 text-slate-500'}`}>
+                            <div className={`p-2 rounded-xl transition-colors ${selectedInvoice?.id === inv.id ? 'bg-[color:var(--color-brand-600)] text-white shadow-lg' : 'bg-slate-100 text-slate-500'}`}>
                               <FileText size={18} />
                             </div>
                             <div className="flex flex-col">
@@ -590,7 +590,7 @@ const FinanceHub: React.FC = () => {
                           <Link 
                             to={`/vendor/${inv.vendorId}`} 
                             onClick={(e) => e.stopPropagation()} 
-                            className="text-sm font-semibold text-indigo-600 hover:underline hover:text-indigo-700 flex items-center gap-1"
+                            className="text-sm font-semibold text-[color:var(--color-brand-600)] hover:underline hover:text-[color:var(--color-brand-300)] flex items-center gap-1"
                           >
                             {VENDORS.find(v => v.id === inv.vendorId)?.name || 'Generic'}
                             <ArrowUpRight size={12} className="opacity-50" />
@@ -606,7 +606,7 @@ const FinanceHub: React.FC = () => {
                           </span>
                         </td>
                         <td className="py-5 px-8 text-right">
-                          <ChevronRight size={18} className="text-slate-300 ml-auto group-hover:text-indigo-600 transition-all transform group-hover:translate-x-1" />
+                          <ChevronRight size={18} className="text-slate-300 ml-auto group-hover:text-[color:var(--color-brand-600)] transition-all transform group-hover:translate-x-1" />
                         </td>
                       </tr>
                     ))}
@@ -662,10 +662,10 @@ const FinanceHub: React.FC = () => {
                   <div className="space-y-8">
                     <div className="p-6 bg-slate-50 rounded-2xl border-2 border-slate-100 relative overflow-hidden group">
                       <div className="absolute top-0 right-0 p-2 opacity-10 group-hover:opacity-20 transition-opacity">
-                        <Zap size={48} className="text-indigo-600" />
+                        <Zap size={48} className="text-[color:var(--color-brand-600)]" />
                       </div>
                       <p className="text-[10px] font-black text-slate-400 uppercase mb-3 tracking-widest flex items-center gap-2">
-                        <FileSearch size={14} className="text-indigo-500" />
+                        <FileSearch size={14} className="text-[color:var(--color-brand-600)]" />
                         Agent Reasoning
                       </p>
                       <p className="text-sm text-slate-700 leading-relaxed font-medium italic">
@@ -733,7 +733,7 @@ const FinanceHub: React.FC = () => {
                           setInvoices(prev => prev.map(inv => inv.id === selectedInvoice.id ? { ...inv, status: AuditStatus.Passed } : inv));
                           setSelectedInvoice({ ...selectedInvoice, status: AuditStatus.Passed });
                         }}
-                        className="flex-1 px-6 py-4 bg-indigo-600 text-white text-xs font-black rounded-2xl hover:bg-indigo-700 shadow-xl shadow-indigo-100 transition-all active:scale-95 uppercase tracking-widest"
+                        className="flex-1 px-6 py-4 bg-[color:var(--color-brand-600)] text-white text-xs font-black rounded-2xl hover:bg-[color:var(--color-brand-300)] shadow-xl shadow-[color:var(--color-brand-100)] transition-all active:scale-95 uppercase tracking-widest"
                       >
                         Approve Invoice
                       </button>
@@ -751,14 +751,14 @@ const FinanceHub: React.FC = () => {
                 </div>
                 
                 <div className="bg-slate-900 p-8 rounded-3xl shadow-2xl border border-slate-800 relative group overflow-hidden">
-                  <div className="absolute -right-12 -top-12 w-48 h-48 bg-indigo-500/20 rounded-full blur-[60px] group-hover:bg-indigo-500/30 transition-all duration-700"></div>
+                  <div className="absolute -right-12 -top-12 w-48 h-48 bg-[color:var(--color-brand-600)]/20 rounded-full blur-[60px] group-hover:bg-[color:var(--color-brand-600)]/30 transition-all duration-700"></div>
                   <div className="flex items-center gap-3 mb-5">
-                    <div className="w-10 h-10 bg-indigo-500 rounded-2xl flex items-center justify-center text-white shadow-lg shadow-indigo-500/50">
+                    <div className="w-10 h-10 bg-[color:var(--color-brand-600)] rounded-2xl flex items-center justify-center text-white shadow-lg shadow-[color:var(--color-brand-600)]/50">
                       <Zap size={20} />
                     </div>
                     <div>
                       <h4 className="text-white font-black text-sm uppercase tracking-widest leading-none">Smart Forecaster</h4>
-                      <p className="text-indigo-400 text-[10px] font-bold mt-1">AI-POWERED INSIGHT</p>
+                      <p className="text-[color:var(--color-brand-400)] text-[10px] font-bold mt-1">AI-POWERED INSIGHT</p>
                     </div>
                   </div>
                   <p className="text-slate-300 text-xs leading-relaxed mb-6 font-medium">
@@ -767,10 +767,10 @@ const FinanceHub: React.FC = () => {
                   <div className="space-y-2">
                     <div className="flex justify-between text-[10px] font-black uppercase tracking-widest mb-1">
                       <span className="text-slate-400">Budget Consumed</span>
-                      <span className="text-indigo-400">82%</span>
+                      <span className="text-[color:var(--color-brand-400)]">82%</span>
                     </div>
                     <div className="w-full bg-slate-800 rounded-full h-2.5 overflow-hidden">
-                      <div className="bg-indigo-500 h-full w-[82%] shadow-[0_0_15px_rgba(99,102,241,0.6)] animate-pulse"></div>
+                      <div className="bg-[color:var(--color-brand-600)] h-full w-[82%] shadow-[0_0_15px_rgba(99,102,241,0.6)] animate-pulse"></div>
                     </div>
                   </div>
                 </div>
@@ -783,7 +783,7 @@ const FinanceHub: React.FC = () => {
       {activeTab === 'rates' && (
         <div className="bg-white rounded-[2.5rem] shadow-sm border border-slate-200 overflow-hidden animate-in fade-in zoom-in-95">
              <div className="p-8 border-b border-slate-100 flex items-center gap-4 bg-slate-50/50">
-                <div className="p-3 bg-indigo-50 text-indigo-600 rounded-2xl">
+                <div className="p-3 bg-[color:var(--color-brand-50)] text-[color:var(--color-brand-600)] rounded-2xl">
                     <ArrowRightLeft size={24} />
                 </div>
                 <div>
@@ -820,7 +820,7 @@ const FinanceHub: React.FC = () => {
                     </thead>
                     <tbody className="divide-y divide-slate-100">
                         {uniqueRoles.map((role) => (
-                            <tr key={role} className="hover:bg-indigo-50/20 transition-colors">
+                            <tr key={role} className="hover:bg-[color:var(--color-brand-50)]/20 transition-colors">
                                 <td className="px-8 py-5 text-sm font-black text-slate-800 sticky left-0 bg-white z-10 border-r border-slate-100">
                                     {role}
                                 </td>
@@ -864,7 +864,7 @@ const FinanceHub: React.FC = () => {
                 </div>
                 <div className="flex items-center gap-2">
                    <span className="flex items-center gap-1 text-[10px] font-black text-slate-500 uppercase tracking-widest">
-                      <div className="w-3 h-3 bg-indigo-500 rounded-full"></div> Actual
+                      <div className="w-3 h-3 bg-[color:var(--color-brand-600)] rounded-full"></div> Actual
                    </span>
                    <span className="flex items-center gap-1 text-[10px] font-black text-slate-500 uppercase tracking-widest ml-2">
                       <div className="w-3 h-3 bg-slate-300 rounded-full"></div> Budget
@@ -876,8 +876,8 @@ const FinanceHub: React.FC = () => {
                   <AreaChart data={spendData} margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
                     <defs>
                       <linearGradient id="colorSpend" x1="0" y1="0" x2="0" y2="1">
-                        <stop offset="5%" stopColor="#6366f1" stopOpacity={0.3}/>
-                        <stop offset="95%" stopColor="#6366f1" stopOpacity={0}/>
+                        <stop offset="5%" stopColor="#D93A28" stopOpacity={0.3}/>
+                        <stop offset="95%" stopColor="#D93A28" stopOpacity={0}/>
                       </linearGradient>
                     </defs>
                     <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#f1f5f9" />
@@ -887,7 +887,7 @@ const FinanceHub: React.FC = () => {
                       contentStyle={{ borderRadius: '12px', border: 'none', boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.1)' }}
                       labelStyle={{ fontWeight: 'bold', color: '#64748b' }}
                     />
-                    <Area type="monotone" dataKey="spend" stroke="#6366f1" strokeWidth={3} fillOpacity={1} fill="url(#colorSpend)" />
+                    <Area type="monotone" dataKey="spend" stroke="#D93A28" strokeWidth={3} fillOpacity={1} fill="url(#colorSpend)" />
                     <Area type="monotone" dataKey="budget" stroke="#cbd5e1" strokeWidth={2} strokeDasharray="5 5" fillOpacity={0} />
                   </AreaChart>
                 </ResponsiveContainer>
@@ -923,13 +923,13 @@ const FinanceHub: React.FC = () => {
               <div className="bg-slate-900 p-8 rounded-[2.5rem] shadow-2xl relative overflow-hidden text-white">
                  <div className="relative z-10">
                    <div className="flex items-center gap-3 mb-4">
-                     <div className="p-2 bg-indigo-500 rounded-lg"><DollarSign size={20} /></div>
+                     <div className="p-2 bg-[color:var(--color-brand-600)] rounded-lg"><DollarSign size={20} /></div>
                      <h4 className="font-black text-sm uppercase tracking-widest">Savings Forecast</h4>
                    </div>
                    <p className="text-3xl font-black mb-2">$84,500</p>
-                   <p className="text-indigo-200 text-xs font-medium">Projected Q2 savings via automated rate card enforcement.</p>
+                   <p className="text-[color:var(--color-brand-200)] text-xs font-medium">Projected Q2 savings via automated rate card enforcement.</p>
                  </div>
-                 <div className="absolute top-0 right-0 w-32 h-32 bg-indigo-500/20 rounded-full blur-3xl"></div>
+                 <div className="absolute top-0 right-0 w-32 h-32 bg-[color:var(--color-brand-600)]/20 rounded-full blur-3xl"></div>
               </div>
            </div>
         </div>
