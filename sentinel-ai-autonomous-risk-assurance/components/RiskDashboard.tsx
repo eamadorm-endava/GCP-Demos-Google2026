@@ -97,8 +97,8 @@ const RiskDashboard: React.FC<RiskDashboardProps> = ({ risks, activeSessions, on
   return (
     <div className="flex flex-col h-screen bg-slate-950 text-slate-200 font-sans overflow-hidden">
       
-      {/* GLOBAL HEADER (Full Width) */}
-      <header className="h-18 bg-brand-dark border-b border-slate-800 flex items-center px-6 py-4 shrink-0 z-50">
+      {/* GLOBAL HEADER (Full Width) - Centrado agregado aquí */}
+      <header className="h-18 bg-brand-dark border-b border-slate-800 flex items-center justify-center px-6 py-4 shrink-0 z-50">
         <div className="flex items-center gap-4">
             {/* Logo */}
             <div className="w-10 h-10 rounded-xl overflow-hidden border border-slate-700/50 shadow-lg">
@@ -218,114 +218,114 @@ const RiskDashboard: React.FC<RiskDashboardProps> = ({ risks, activeSessions, on
             <div className="bg-slate-900 border border-slate-700 rounded-xl max-w-5xl w-full shadow-2xl overflow-hidden flex flex-col h-[90vh]">
                <div className="p-6 border-b border-slate-800 flex items-center justify-between bg-slate-800/50 shrink-0">
                   <div className="flex items-center space-x-3">
-                     <div className={`p-2 rounded-lg ${selectedAgent.bg} ${selectedAgent.color}`}>
-                        <selectedAgent.icon className="w-6 h-6" />
-                     </div>
-                     <div>
-                        <h2 className="text-xl font-bold text-white">{selectedAgent.name}</h2>
-                        <div className="text-xs text-slate-400 font-mono flex items-center space-x-2">
-                           <span>AGENT_ID: {selectedAgent.id}</span>
-                           <span>•</span>
-                           <span className="text-brand-primary">v2.4.0-STABLE</span>
-                        </div>
-                     </div>
+                      <div className={`p-2 rounded-lg ${selectedAgent.bg} ${selectedAgent.color}`}>
+                         <selectedAgent.icon className="w-6 h-6" />
+                      </div>
+                      <div>
+                         <h2 className="text-xl font-bold text-white">{selectedAgent.name}</h2>
+                         <div className="text-xs text-slate-400 font-mono flex items-center space-x-2">
+                            <span>AGENT_ID: {selectedAgent.id}</span>
+                            <span>•</span>
+                            <span className="text-brand-primary">v2.4.0-STABLE</span>
+                         </div>
+                      </div>
                   </div>
                   <button onClick={() => setSelectedAgentId(null)} className="text-slate-500 hover:text-white transition-colors">
-                     <X className="w-6 h-6" />
+                      <X className="w-6 h-6" />
                   </button>
                </div>
                
                <div className="flex-1 min-h-0 flex flex-col md:flex-row">
                   <div className="w-full md:w-64 border-b md:border-b-0 md:border-r border-slate-800 p-6 bg-slate-900/50 order-2 md:order-1 overflow-y-auto">
-                     <div className="mb-6">
-                        <div className="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-2">Capabilities</div>
-                        <ul className="space-y-2">
-                           {selectedAgent.capabilities.map((cap: string) => (
-                              <li key={cap} className="text-sm text-slate-300 flex items-start">
-                                 <div className="w-1.5 h-1.5 rounded-full bg-brand-primary mt-1.5 mr-2 shrink-0"></div>
-                                 {cap}
-                              </li>
-                           ))}
-                        </ul>
-                     </div>
-                     <div className="mb-6">
-                        <div className="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-2">Connected Systems</div>
-                        <div className="flex flex-col space-y-2">
-                             {selectedAgent.requiredIntegrations?.map((intId: string) => {
-                               const integration = INTEGRATIONS.find(i => i.id === intId);
-                               if (!integration) return null;
-                               const statusBg = integration.status === 'connected' ? 'bg-emerald-500/10 text-emerald-400 border-emerald-500/20' : 
-                                                integration.status === 'error' ? 'bg-red-500/10 text-red-400 border-red-500/20' : 
-                                                'bg-yellow-500/10 text-yellow-400 border-yellow-500/20';
-                               const dotColor = integration.status === 'connected' ? 'bg-emerald-400' : 
-                                                integration.status === 'error' ? 'bg-red-400' : 'bg-yellow-400';
-                               return (
-                                <div key={intId} className="flex items-center justify-between px-3 py-2 rounded bg-slate-950 border border-slate-800 text-xs text-slate-300 w-full">
-                                   <div className="flex items-center space-x-2">
-                                      <integration.icon className={`w-4 h-4 ${integration.color}`} />
-                                      <span className="font-medium">{integration.name}</span>
-                                   </div>
-                                   <div className={`flex items-center space-x-1.5 px-2 py-0.5 rounded-full border text-[10px] uppercase font-bold tracking-wider ${statusBg}`}>
-                                      <div className={`w-1.5 h-1.5 rounded-full ${dotColor}`}></div>
-                                      <span>{integration.status}</span>
-                                   </div>
-                                </div>
-                               )
-                             })}
-                        </div>
-                     </div>
-                     <div className="mb-6">
-                        <div className="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-2">Model Spec</div>
-                        <div className="p-3 bg-slate-950 rounded border border-slate-800 text-xs font-mono text-slate-400 space-y-2">
-                           <div className="flex justify-between">
-                              <span>Base:</span> <span className="text-slate-200">{selectedAgent.model}</span>
-                           </div>
-                           {selectedAgent.config ? (
-                              <>
-                                 <div className="flex justify-between items-center pt-2 border-t border-slate-800/50">
-                                    <span className="flex items-center"><Thermometer className="w-3 h-3 mr-1"/> Temp:</span> 
-                                    <span className="text-brand-primary">{selectedAgent.config.temperature}</span>
+                      <div className="mb-6">
+                         <div className="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-2">Capabilities</div>
+                         <ul className="space-y-2">
+                            {selectedAgent.capabilities.map((cap: string) => (
+                               <li key={cap} className="text-sm text-slate-300 flex items-start">
+                                   <div className="w-1.5 h-1.5 rounded-full bg-brand-primary mt-1.5 mr-2 shrink-0"></div>
+                                   {cap}
+                               </li>
+                            ))}
+                         </ul>
+                      </div>
+                      <div className="mb-6">
+                         <div className="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-2">Connected Systems</div>
+                         <div className="flex flex-col space-y-2">
+                              {selectedAgent.requiredIntegrations?.map((intId: string) => {
+                                const integration = INTEGRATIONS.find(i => i.id === intId);
+                                if (!integration) return null;
+                                const statusBg = integration.status === 'connected' ? 'bg-emerald-500/10 text-emerald-400 border-emerald-500/20' : 
+                                                 integration.status === 'error' ? 'bg-red-500/10 text-red-400 border-red-500/20' : 
+                                                 'bg-yellow-500/10 text-yellow-400 border-yellow-500/20';
+                                const dotColor = integration.status === 'connected' ? 'bg-emerald-400' : 
+                                                 integration.status === 'error' ? 'bg-red-400' : 'bg-yellow-400';
+                                return (
+                                 <div key={intId} className="flex items-center justify-between px-3 py-2 rounded bg-slate-950 border border-slate-800 text-xs text-slate-300 w-full">
+                                      <div className="flex items-center space-x-2">
+                                         <integration.icon className={`w-4 h-4 ${integration.color}`} />
+                                         <span className="font-medium">{integration.name}</span>
+                                      </div>
+                                      <div className={`flex items-center space-x-1.5 px-2 py-0.5 rounded-full border text-[10px] uppercase font-bold tracking-wider ${statusBg}`}>
+                                         <div className={`w-1.5 h-1.5 rounded-full ${dotColor}`}></div>
+                                         <span>{integration.status}</span>
+                                      </div>
                                  </div>
-                                 <div className="flex justify-between items-center">
-                                    <span className="flex items-center"><BoxSelect className="w-3 h-3 mr-1"/> Tokens:</span> 
-                                    <span className="text-brand-primary">{selectedAgent.config.maxTokens}</span>
-                                 </div>
-                              </>
-                           ) : (
-                              <>
-                                 <div className="flex justify-between"><span>Temp:</span> <span className="text-slate-200">0.2</span></div>
-                                 <div className="flex justify-between"><span>Context:</span> <span className="text-slate-200">1M</span></div>
-                              </>
-                           )}
-                        </div>
-                     </div>
+                                )
+                              })}
+                         </div>
+                      </div>
+                      <div className="mb-6">
+                         <div className="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-2">Model Spec</div>
+                         <div className="p-3 bg-slate-950 rounded border border-slate-800 text-xs font-mono text-slate-400 space-y-2">
+                            <div className="flex justify-between">
+                               <span>Base:</span> <span className="text-slate-200">{selectedAgent.model}</span>
+                            </div>
+                            {selectedAgent.config ? (
+                               <>
+                                   <div className="flex justify-between items-center pt-2 border-t border-slate-800/50">
+                                      <span className="flex items-center"><Thermometer className="w-3 h-3 mr-1"/> Temp:</span> 
+                                      <span className="text-brand-primary">{selectedAgent.config.temperature}</span>
+                                   </div>
+                                   <div className="flex justify-between items-center">
+                                      <span className="flex items-center"><BoxSelect className="w-3 h-3 mr-1"/> Tokens:</span> 
+                                      <span className="text-brand-primary">{selectedAgent.config.maxTokens}</span>
+                                   </div>
+                               </>
+                            ) : (
+                               <>
+                                   <div className="flex justify-between"><span>Temp:</span> <span className="text-slate-200">0.2</span></div>
+                                   <div className="flex justify-between"><span>Context:</span> <span className="text-slate-200">1M</span></div>
+                               </>
+                            )}
+                         </div>
+                      </div>
                   </div>
 
                   <div className="flex-1 bg-[#1e1e1e] flex flex-col min-h-0 order-1 md:order-2 overflow-hidden">
-                     <div className="flex items-center bg-[#252526] text-xs text-slate-400 border-b border-slate-700 select-none shrink-0">
-                        <button 
-                          onClick={() => setActiveTab('logic')}
-                          className={`px-4 py-2 flex items-center space-x-2 border-t-2 transition-colors ${activeTab === 'logic' ? 'bg-[#1e1e1e] text-brand-primary border-brand-primary' : 'hover:bg-[#2a2d2e] border-transparent'}`}
-                        >
-                           <Code2 size={12} className={activeTab === 'logic' ? 'text-yellow-400' : ''} />
-                           <span>agent_logic.ts</span>
-                        </button>
-                        <button 
-                          onClick={() => setActiveTab('prompt')}
-                          className={`px-4 py-2 flex items-center space-x-2 border-t-2 transition-colors ${activeTab === 'prompt' ? 'bg-[#1e1e1e] text-brand-primary border-brand-primary' : 'hover:bg-[#2a2d2e] border-transparent'}`}
-                        >
-                           <TerminalIcon size={12} className={activeTab === 'prompt' ? 'text-emerald-400' : ''} />
-                           <span>system_prompt.md</span>
-                        </button>
-                     </div>
-                     <div className="flex-1 flex overflow-hidden font-mono text-sm leading-6">
-                        <div className="w-12 bg-[#1e1e1e] text-slate-600 text-right pr-3 pt-4 select-none border-r border-slate-800 shrink-0 overflow-hidden">
-                           {getCodeContent().split('\n').map((_, i) => (<div key={i}>{i + 1}</div>))}
-                        </div>
-                        <div className="flex-1 overflow-auto p-4 pt-4 text-slate-300">
-                           <pre className="whitespace-pre"><code>{getCodeContent()}</code></pre>
-                        </div>
-                     </div>
+                      <div className="flex items-center bg-[#252526] text-xs text-slate-400 border-b border-slate-700 select-none shrink-0">
+                         <button 
+                           onClick={() => setActiveTab('logic')}
+                           className={`px-4 py-2 flex items-center space-x-2 border-t-2 transition-colors ${activeTab === 'logic' ? 'bg-[#1e1e1e] text-brand-primary border-brand-primary' : 'hover:bg-[#2a2d2e] border-transparent'}`}
+                         >
+                            <Code2 size={12} className={activeTab === 'logic' ? 'text-yellow-400' : ''} />
+                            <span>agent_logic.ts</span>
+                         </button>
+                         <button 
+                           onClick={() => setActiveTab('prompt')}
+                           className={`px-4 py-2 flex items-center space-x-2 border-t-2 transition-colors ${activeTab === 'prompt' ? 'bg-[#1e1e1e] text-brand-primary border-brand-primary' : 'hover:bg-[#2a2d2e] border-transparent'}`}
+                         >
+                            <TerminalIcon size={12} className={activeTab === 'prompt' ? 'text-emerald-400' : ''} />
+                            <span>system_prompt.md</span>
+                         </button>
+                      </div>
+                      <div className="flex-1 flex overflow-hidden font-mono text-sm leading-6">
+                         <div className="w-12 bg-[#1e1e1e] text-slate-600 text-right pr-3 pt-4 select-none border-r border-slate-800 shrink-0 overflow-hidden">
+                            {getCodeContent().split('\n').map((_, i) => (<div key={i}>{i + 1}</div>))}
+                         </div>
+                         <div className="flex-1 overflow-auto p-4 pt-4 text-slate-300">
+                            <pre className="whitespace-pre"><code>{getCodeContent()}</code></pre>
+                         </div>
+                      </div>
                   </div>
                </div>
                
