@@ -1,0 +1,50 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
+
+:root {
+  /* --- Primary Colours --- */
+  --endava-orange: #FF5640;
+  --endava-dark-blue: #192B37;
+  --endava-white: #FFFFFF;
+
+  /* --- Solid Blue Shades (Neutrals) --- */
+  --solid-blue-90: #30404B; /* Usado para Secondary BG (Cards) */
+  --solid-blue-80: #47555F;
+  --solid-blue-60: #758087; /* Usado para Accent (Borders) */
+  --solid-blue-40: #A3AAAF; /* Usado para textos secundarios */
+  --solid-blue-10: #E8EAEB; /* Usado para textos claros/fondos claros */
+
+  /* --- Signal Colours (For Dark Backgrounds) --- */
+  --signal-positive: #3DD17B;
+  --signal-warning: #F99C11;
+  --signal-negative: #E84641;
+
+  /* --- Data Visualisation --- */
+  --data-blue: #5899C4;
+  --data-orange: #FF5641;
+  --data-yellow: #CF820E;
+  --data-green: #30A661;
+  --data-violet: #8684BF;
+  --data-grass: #7B9922;
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
+  background-color: var(--endava-dark-blue);
+  color: var(--endava-white);
+}
+
+/* Scrollbar personalizada para que combine con el tema oscuro */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--endava-dark-blue); 
+}
+::-webkit-scrollbar-thumb {
+  background: var(--solid-blue-60); 
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--endava-orange); 
+}
