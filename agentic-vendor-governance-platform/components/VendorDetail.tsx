@@ -94,7 +94,7 @@ const VendorDetail: React.FC = () => {
     return (
       <div className="flex flex-col items-center justify-center h-96 text-center">
         <h2 className="text-2xl font-black text-slate-800">Vendor Not Found</h2>
-        <Link to="/" className="text-indigo-600 font-bold mt-4 flex items-center gap-2 hover:underline">
+        <Link to="/" className="text-[color:var(--color-brand-600)] font-bold mt-4 flex items-center gap-2 hover:underline">
           <ArrowLeft size={16} /> Return to Dashboard
         </Link>
       </div>
@@ -245,9 +245,9 @@ const VendorDetail: React.FC = () => {
                         <span className="block text-2xl font-black text-emerald-600">{Math.round(slaAvg)}%</span>
                         <span className="text-[10px] font-bold text-emerald-800 uppercase">SLA Score</span>
                     </div>
-                    <div className="p-4 bg-indigo-50 rounded-xl border border-indigo-100 text-center">
-                        <span className="block text-2xl font-black text-indigo-600">{vendorInvoices.length}</span>
-                        <span className="text-[10px] font-bold text-indigo-800 uppercase">Audits Passed</span>
+                    <div className="p-4 bg-[color:var(--color-brand-50)] rounded-xl border border-[color:var(--color-brand-100)] text-center">
+                        <span className="block text-2xl font-black text-[color:var(--color-brand-600)]">{vendorInvoices.length}</span>
+                        <span className="text-[10px] font-bold text-[color:var(--color-brand-800)] uppercase">Audits Passed</span>
                     </div>
                     <div className="p-4 bg-amber-50 rounded-xl border border-amber-100 text-center">
                         <span className="block text-2xl font-black text-amber-600">{kpiTrends.totalBugs}</span>
@@ -264,24 +264,24 @@ const VendorDetail: React.FC = () => {
     <div className="space-y-8 animate-in fade-in duration-700 pb-20 max-w-7xl mx-auto">
       <Modal isOpen={isCreatingVendor} onClose={() => setIsCreatingVendor(false)} title="Onboard New Vendor">
           <div className="space-y-5">
-            <div><label className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-2 block">Vendor Name</label><input type="text" placeholder="e.g. Acme Innovations Ltd." value={newVendorData.name} onChange={(e) => setNewVendorData({...newVendorData, name: e.target.value})} className="w-full p-4 bg-slate-50 rounded-2xl font-bold text-slate-700 focus:outline-none focus:ring-4 focus:ring-indigo-500/10 border-2 border-transparent focus:border-indigo-500 transition-all"/></div>
+            <div><label className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-2 block">Vendor Name</label><input type="text" placeholder="e.g. Acme Innovations Ltd." value={newVendorData.name} onChange={(e) => setNewVendorData({...newVendorData, name: e.target.value})} className="w-full p-4 bg-slate-50 rounded-2xl font-bold text-slate-700 focus:outline-none focus:ring-4 focus:ring-[color:var(--color-brand-50)]0/10 border-2 border-transparent focus:border-[color:var(--color-brand-50)]0 transition-all"/></div>
             <div className="grid grid-cols-2 gap-5">
-              <div><label className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-2 block">MSA Contract ID</label><input type="text" placeholder="MSA-2024-..." value={newVendorData.msaId} onChange={(e) => setNewVendorData({...newVendorData, msaId: e.target.value})} className="w-full p-4 bg-slate-50 rounded-2xl font-bold text-slate-700 focus:outline-none focus:ring-4 focus:ring-indigo-500/10 border-2 border-transparent focus:border-indigo-500 transition-all"/></div>
-              <div><label className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-2 block">Brand Color</label><select value={newVendorData.color} onChange={(e) => setNewVendorData({...newVendorData, color: e.target.value})} className="w-full p-4 bg-slate-50 rounded-2xl font-bold text-slate-700 focus:outline-none focus:ring-4 focus:ring-indigo-500/10 border-2 border-transparent focus:border-indigo-500 transition-all appearance-none cursor-pointer"><option value="indigo">Indigo</option><option value="teal">Teal</option><option value="orange">Orange</option><option value="purple">Purple</option><option value="rose">Rose</option><option value="blue">Blue</option></select></div>
+              <div><label className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-2 block">MSA Contract ID</label><input type="text" placeholder="MSA-2024-..." value={newVendorData.msaId} onChange={(e) => setNewVendorData({...newVendorData, msaId: e.target.value})} className="w-full p-4 bg-slate-50 rounded-2xl font-bold text-slate-700 focus:outline-none focus:ring-4 focus:ring-[color:var(--color-brand-50)]0/10 border-2 border-transparent focus:border-[color:var(--color-brand-50)]0 transition-all"/></div>
+              <div><label className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-2 block">Brand Color</label><select value={newVendorData.color} onChange={(e) => setNewVendorData({...newVendorData, color: e.target.value})} className="w-full p-4 bg-slate-50 rounded-2xl font-bold text-slate-700 focus:outline-none focus:ring-4 focus:ring-[color:var(--color-brand-50)]0/10 border-2 border-transparent focus:border-[color:var(--color-brand-50)]0 transition-all appearance-none cursor-pointer"><option value="indigo">Indigo</option><option value="teal">Teal</option><option value="orange">Orange</option><option value="purple">Purple</option><option value="rose">Rose</option><option value="blue">Blue</option></select></div>
             </div>
-            <div><label className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-2 block">Description</label><textarea rows={3} placeholder="Brief summary of services..." value={newVendorData.description} onChange={(e) => setNewVendorData({...newVendorData, description: e.target.value})} className="w-full p-4 bg-slate-50 rounded-2xl font-medium text-slate-700 focus:outline-none focus:ring-4 focus:ring-indigo-500/10 border-2 border-transparent focus:border-indigo-500 transition-all resize-none"/></div>
+            <div><label className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-2 block">Description</label><textarea rows={3} placeholder="Brief summary of services..." value={newVendorData.description} onChange={(e) => setNewVendorData({...newVendorData, description: e.target.value})} className="w-full p-4 bg-slate-50 rounded-2xl font-medium text-slate-700 focus:outline-none focus:ring-4 focus:ring-[color:var(--color-brand-50)]0/10 border-2 border-transparent focus:border-[color:var(--color-brand-50)]0 transition-all resize-none"/></div>
             <div className="grid grid-cols-2 gap-5">
-              <div><label className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-2 block">Contact Name</label><input type="text" placeholder="Full Name" value={newVendorData.contactName} onChange={(e) => setNewVendorData({...newVendorData, contactName: e.target.value})} className="w-full p-4 bg-slate-50 rounded-2xl font-bold text-slate-700 focus:outline-none focus:ring-4 focus:ring-indigo-500/10 border-2 border-transparent focus:border-indigo-500 transition-all"/></div>
-              <div><label className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-2 block">Contact Email</label><input type="email" placeholder="email@vendor.com" value={newVendorData.contactEmail} onChange={(e) => setNewVendorData({...newVendorData, contactEmail: e.target.value})} className="w-full p-4 bg-slate-50 rounded-2xl font-bold text-slate-700 focus:outline-none focus:ring-4 focus:ring-indigo-500/10 border-2 border-transparent focus:border-indigo-500 transition-all"/></div>
+              <div><label className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-2 block">Contact Name</label><input type="text" placeholder="Full Name" value={newVendorData.contactName} onChange={(e) => setNewVendorData({...newVendorData, contactName: e.target.value})} className="w-full p-4 bg-slate-50 rounded-2xl font-bold text-slate-700 focus:outline-none focus:ring-4 focus:ring-[color:var(--color-brand-50)]0/10 border-2 border-transparent focus:border-[color:var(--color-brand-50)]0 transition-all"/></div>
+              <div><label className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-2 block">Contact Email</label><input type="email" placeholder="email@vendor.com" value={newVendorData.contactEmail} onChange={(e) => setNewVendorData({...newVendorData, contactEmail: e.target.value})} className="w-full p-4 bg-slate-50 rounded-2xl font-bold text-slate-700 focus:outline-none focus:ring-4 focus:ring-[color:var(--color-brand-50)]0/10 border-2 border-transparent focus:border-[color:var(--color-brand-50)]0 transition-all"/></div>
             </div>
-            <button onClick={handleCreateVendor} className="w-full py-5 bg-indigo-600 text-white rounded-2xl font-black text-sm hover:bg-indigo-700 shadow-xl shadow-indigo-200 transition-all active:scale-95 mt-4 flex items-center justify-center gap-2"><CheckCircle2 size={18} />Create Vendor Profile</button>
+            <button onClick={handleCreateVendor} className="w-full py-5 bg-[color:var(--color-brand-600)] text-white rounded-2xl font-black text-sm hover:bg-[color:var(--color-brand-700)] shadow-xl shadow-[color:var(--color-brand-200)] transition-all active:scale-95 mt-4 flex items-center justify-center gap-2"><CheckCircle2 size={18} />Create Vendor Profile</button>
           </div>
       </Modal>
 
       {/* Header Navigation */}
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
-        <div className="flex items-center gap-4"><Link to="/" className="group flex items-center gap-2 text-sm font-bold text-slate-400 hover:text-slate-800 transition-colors"><div className="p-2 bg-white border border-slate-200 rounded-xl group-hover:border-indigo-300 transition-colors"><ArrowLeft size={16} /></div></Link><div className="relative group"><select value={vendor.id} onChange={(e) => navigate(`/vendor/${e.target.value}`)} className="appearance-none bg-white pl-4 pr-10 py-3 rounded-2xl font-black text-slate-800 text-lg border border-transparent hover:border-slate-200 focus:outline-none cursor-pointer min-w-[240px] shadow-sm">{vendorsList.map(v => (<option key={v.id} value={v.id}>{v.name}</option>))}</select><ChevronDown className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none group-hover:text-indigo-600 transition-colors" size={20} /></div></div>
-        <div className="flex gap-3"><button onClick={() => setIsCreatingVendor(true)} className="px-5 py-3 bg-white border-2 border-slate-200 rounded-2xl text-xs font-black text-slate-700 hover:border-indigo-200 hover:bg-indigo-50 hover:text-indigo-700 transition-all flex items-center gap-2"><Plus size={16} />Create Vendor</button><button className="p-3 text-slate-400 hover:bg-slate-100 rounded-xl transition-colors"><MoreHorizontal size={20} /></button></div>
+        <div className="flex items-center gap-4"><Link to="/" className="group flex items-center gap-2 text-sm font-bold text-slate-400 hover:text-slate-800 transition-colors"><div className="p-2 bg-white border border-slate-200 rounded-xl group-hover:border-[color:var(--color-brand-300)] transition-colors"><ArrowLeft size={16} /></div></Link><div className="relative group"><select value={vendor.id} onChange={(e) => navigate(`/vendor/${e.target.value}`)} className="appearance-none bg-white pl-4 pr-10 py-3 rounded-2xl font-black text-slate-800 text-lg border border-transparent hover:border-slate-200 focus:outline-none cursor-pointer min-w-[240px] shadow-sm">{vendorsList.map(v => (<option key={v.id} value={v.id}>{v.name}</option>))}</select><ChevronDown className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none group-hover:text-[color:var(--color-brand-600)] transition-colors" size={20} /></div></div>
+        <div className="flex gap-3"><button onClick={() => setIsCreatingVendor(true)} className="px-5 py-3 bg-white border-2 border-slate-200 rounded-2xl text-xs font-black text-slate-700 hover:border-[color:var(--color-brand-200)] hover:bg-[color:var(--color-brand-50)] hover:text-[color:var(--color-brand-700)] transition-all flex items-center gap-2"><Plus size={16} />Create Vendor</button><button className="p-3 text-slate-400 hover:bg-slate-100 rounded-xl transition-colors"><MoreHorizontal size={20} /></button></div>
       </div>
 
       {/* Vendor Profile Header */}
@@ -299,20 +299,20 @@ const VendorDetail: React.FC = () => {
           </div>
           <div className="flex flex-col sm:flex-row gap-3">
              <div className="flex flex-col items-end mr-4 px-6 border-r border-slate-100 hidden xl:flex"><span className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1">Health Score</span><span className={`text-3xl font-black ${slaAvg > 98 ? 'text-emerald-500' : 'text-amber-500'}`}>{Math.round(slaAvg)}/100</span></div>
-             <div className="flex gap-3"><button className="px-6 py-4 bg-white border-2 border-slate-200 rounded-2xl text-sm font-black text-slate-700 hover:border-indigo-200 hover:bg-indigo-50 hover:text-indigo-700 transition-all flex items-center gap-2 group"><ExternalLink size={18} className="group-hover:scale-110 transition-transform" />Contract</button><button onClick={() => setIsQbrModalOpen(true)} className="px-8 py-4 bg-slate-900 text-white rounded-2xl text-sm font-black hover:bg-slate-800 hover:scale-105 transition-all shadow-xl shadow-slate-200 flex items-center gap-2"><Zap size={18} className="fill-yellow-400 text-yellow-400" />Run QBR</button></div>
+             <div className="flex gap-3"><button className="px-6 py-4 bg-white border-2 border-slate-200 rounded-2xl text-sm font-black text-slate-700 hover:border-[color:var(--color-brand-200)] hover:bg-[color:var(--color-brand-50)] hover:text-[color:var(--color-brand-700)] transition-all flex items-center gap-2 group"><ExternalLink size={18} className="group-hover:scale-110 transition-transform" />Contract</button><button onClick={() => setIsQbrModalOpen(true)} className="px-8 py-4 bg-slate-900 text-white rounded-2xl text-sm font-black hover:bg-slate-800 hover:scale-105 transition-all shadow-xl shadow-slate-200 flex items-center gap-2"><Zap size={18} className="fill-yellow-400 text-yellow-400" />Run QBR</button></div>
           </div>
         </div>
       </div>
 
        {/* Tabs */}
        <div className="flex items-center gap-1 bg-white p-1.5 rounded-2xl border border-slate-200 w-fit">
-        {[{ id: 'overview', label: 'Overview', icon: <LayoutDashboard size={16} /> }, { id: 'rates', label: 'MSA Rate Card', icon: <CreditCard size={16} /> }, { id: 'analytics', label: 'Spend Analytics', icon: <BarChart3 size={16} /> }].map(tab => (<button key={tab.id} onClick={() => setActiveTab(tab.id as 'overview' | 'rates' | 'analytics')} className={`flex items-center gap-2 px-5 py-2.5 rounded-xl text-xs font-black uppercase tracking-wider transition-all ${activeTab === tab.id ? 'bg-indigo-600 text-white shadow-md' : 'text-slate-500 hover:bg-slate-50 hover:text-slate-900'}`}>{tab.icon}{tab.label}</button>))}
+        {[{ id: 'overview', label: 'Overview', icon: <LayoutDashboard size={16} /> }, { id: 'rates', label: 'MSA Rate Card', icon: <CreditCard size={16} /> }, { id: 'analytics', label: 'Spend Analytics', icon: <BarChart3 size={16} /> }].map(tab => (<button key={tab.id} onClick={() => setActiveTab(tab.id as 'overview' | 'rates' | 'analytics')} className={`flex items-center gap-2 px-5 py-2.5 rounded-xl text-xs font-black uppercase tracking-wider transition-all ${activeTab === tab.id ? 'bg-[color:var(--color-brand-600)] text-white shadow-md' : 'text-slate-500 hover:bg-slate-50 hover:text-slate-900'}`}>{tab.icon}{tab.label}</button>))}
       </div>
 
       {activeTab === 'overview' && (
         <div className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
             <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
-                <StatCard icon={<DollarSign size={24} />} iconBgColor="bg-indigo-50 text-indigo-600" title="Total Spend (YTD)" value={`$${(totalSpend / 1000).toFixed(1)}k`} trend={{text: "+12%", color: "green"}} />
+                <StatCard icon={<DollarSign size={24} />} iconBgColor="bg-[color:var(--color-brand-50)] text-[color:var(--color-brand-600)]" title="Total Spend (YTD)" value={`$${(totalSpend / 1000).toFixed(1)}k`} trend={{text: "+12%", color: "green"}} />
                 <StatCard icon={<ShieldCheck size={24} />} iconBgColor="bg-teal-50 text-teal-600" title="Avg SLA Adherence" value={`${slaAvg.toFixed(1)}%`} trend={{text: slaAvg >= 99 ? "Stable" : "At Risk", color: slaAvg >= 99 ? "green" : "amber"}} />
                 <StatCard icon={<Target size={24} />} iconBgColor="bg-rose-50 text-rose-600" title="Open Action Items" value={openActionItems.toString()} trend={{text: "Active", color: "blue"}} />
                 <StatCard icon={<FileCheck size={24} />} iconBgColor="bg-blue-50 text-blue-600" title="Invoices Processed" value={vendorInvoices.length.toString()} trend={{text: "90 Days", color: "amber"}} />
@@ -323,7 +323,7 @@ const VendorDetail: React.FC = () => {
               <div className="bg-white p-8 rounded-[2.5rem] shadow-sm border border-slate-200">
                 <div className="flex items-center justify-between mb-8">
                   <div className="flex items-center gap-3">
-                    <div className="w-1.5 h-8 bg-indigo-600 rounded-full"></div>
+                    <div className="w-1.5 h-8 bg-[color:var(--color-brand-600)] rounded-full"></div>
                     <div>
                       <h3 className="text-xl font-black text-slate-800">Performance Trends</h3>
                       <p className="text-xs font-bold text-slate-400 uppercase tracking-widest mt-1">Velocity vs. Bugs</p>
@@ -392,7 +392,7 @@ const VendorDetail: React.FC = () => {
                             <div>
                                 <h4 className="font-bold text-slate-800">{event.summary}</h4>
                                 <div className="flex gap-2 mt-2">
-                                    <span className="text-[10px] font-black bg-indigo-50 text-indigo-600 px-2 py-1 rounded-md uppercase tracking-wider">{event.type}</span>
+                                    <span className="text-[10px] font-black bg-[color:var(--color-brand-50)] text-[color:var(--color-brand-600)] px-2 py-1 rounded-md uppercase tracking-wider">{event.type}</span>
                                     <span className="text-[10px] font-bold text-slate-400 px-2 py-1 flex items-center gap-1"><CheckCircle2 size={12} /> {event.actionItems.length} Actions</span>
                                 </div>
                             </div>
@@ -410,7 +410,7 @@ const VendorDetail: React.FC = () => {
             <div className="bg-white p-8 rounded-[2.5rem] shadow-sm border border-slate-200">
                 <div className="flex items-center justify-between mb-8">
                     <div className="flex items-center gap-4">
-                        <div className="p-3 bg-indigo-50 text-indigo-600 rounded-2xl"><CreditCard size={24} /></div>
+                        <div className="p-3 bg-[color:var(--color-brand-50)] text-[color:var(--color-brand-600)] rounded-2xl"><CreditCard size={24} /></div>
                         <div>
                             <h3 className="font-black text-slate-800 text-lg">MSA Rate Card</h3>
                             <p className="text-xs font-bold text-slate-400 uppercase tracking-widest mt-1">
@@ -425,7 +425,7 @@ const VendorDetail: React.FC = () => {
                         {rateCard.roles.map((role, idx) => (
                             <div key={idx} className="p-6 bg-slate-50/70 rounded-2xl border border-slate-200/50 hover:bg-white hover:border-slate-200 transition-all group">
                                 <div className="flex items-center gap-3 mb-3">
-                                    <Briefcase size={16} className="text-slate-400 group-hover:text-indigo-500 transition-colors" />
+                                    <Briefcase size={16} className="text-slate-400 group-hover:text-[color:var(--color-brand-50)]0 transition-colors" />
                                     <h4 className="font-bold text-slate-800">{role.role}</h4>
                                 </div>
                                 <div className="text-3xl font-black text-slate-900 flex items-baseline">
@@ -451,7 +451,7 @@ const VendorDetail: React.FC = () => {
                 <div className="bg-white p-8 rounded-[2.5rem] shadow-sm border border-slate-200">
                     <div className="flex items-center justify-between mb-8">
                         <div className="flex items-center gap-3">
-                            <div className="w-1.5 h-8 bg-indigo-600 rounded-full"></div>
+                            <div className="w-1.5 h-8 bg-[color:var(--color-brand-600)] rounded-full"></div>
                             <div>
                                 <h3 className="text-xl font-black text-slate-800">Monthly Spend</h3>
                                 <p className="text-xs font-bold text-slate-400 uppercase tracking-widest mt-1">Last 6 Months</p>
@@ -472,7 +472,7 @@ const VendorDetail: React.FC = () => {
                                 <XAxis dataKey="month" axisLine={false} tickLine={false} tick={{ fontSize: 10, fontWeight: 700, fill: '#94a3b8' }} />
                                 <YAxis axisLine={false} tickLine={false} tick={{ fontSize: 10, fontWeight: 700, fill: '#94a3b8' }} tickFormatter={(val) => `$${val/1000}k`} />
                                 <Tooltip content={<CustomTooltip />} />
-                                <Area type="monotone" dataKey="amount" name="Spend" stroke="#4f46e5" strokeWidth={3} fillOpacity={1} fill="url(#colorSpendDetail)" />
+                                <Area type="monotone" dataKey="amount" name="Spend" stroke="#D93A28" strokeWidth={3} fillOpacity={1} fill="url(#colorSpendDetail)" />
                             </ReAreaChart>
                         </ResponsiveContainer>
                     </div>
@@ -496,7 +496,7 @@ const VendorDetail: React.FC = () => {
                                 <XAxis type="number" hide />
                                 <YAxis dataKey="name" type="category" width={120} tickLine={false} axisLine={false} tick={{ fontSize: 10, fontWeight: 700, fill: '#94a3b8' }} />
                                 <Tooltip content={<CustomTooltip />} />
-                                <Bar dataKey="value" name="Spend" radius={[0, 6, 6, 0]} barSize={20} fill="#8b5cf6" />
+                                <Bar dataKey="value" name="Spend" radius={[0, 6, 6, 0]} barSize={20} fill="#D93A28" />
                             </ReBarChart>
                         </ResponsiveContainer>
                     </div>
@@ -531,7 +531,7 @@ const VendorDetail: React.FC = () => {
                                         </span>
                                     </td>
                                     <td className="py-4 px-8">
-                                        <Link to={`/finance`} className="text-xs font-bold text-indigo-600 hover:underline">View Audit</Link>
+                                        <Link to={`/finance`} className="text-xs font-bold text-[color:var(--color-brand-600)] hover:underline">View Audit</Link>
                                     </td>
                                 </tr>
                             ))}
@@ -547,7 +547,7 @@ const VendorDetail: React.FC = () => {
         <div className="min-h-[60vh] flex flex-col justify-center">
             {!qbrResult && !isGenerating && (
               <div className="text-center p-8 animate-in fade-in zoom-in-95">
-                <div className="w-24 h-24 bg-indigo-50 rounded-full flex items-center justify-center mx-auto mb-6 ring-8 ring-indigo-100/50"><FileOutput size={40} className="text-indigo-600" /></div>
+                <div className="w-24 h-24 bg-[color:var(--color-brand-50)] rounded-full flex items-center justify-center mx-auto mb-6 ring-8 ring-[color:var(--color-brand-100)]/50"><FileOutput size={40} className="text-[color:var(--color-brand-600)]" /></div>
                 <h3 className="text-3xl font-black text-slate-800 tracking-tight">Ready to Run QBR Analysis</h3>
                 <p className="text-slate-500 font-medium mt-3 max-w-2xl mx-auto">The Agentic Layer will analyze historical performance and governance data to generate a strategic QBR. Please confirm the data context below.</p>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-3xl mx-auto mt-10 text-left">
@@ -555,16 +555,16 @@ const VendorDetail: React.FC = () => {
                     <div className="bg-slate-50 p-6 rounded-2xl border border-slate-200 flex items-center gap-4"><HardDrive size={24} className="text-slate-400" /><div className="flex-1"><p className="font-black text-slate-800 text-3xl">{vendorInvoices.length}</p><p className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Financial Audits</p></div></div>
                     <div className="bg-slate-50 p-6 rounded-2xl border border-slate-200 flex items-center gap-4"><MessageSquare size={24} className="text-slate-400" /><div className="flex-1"><p className="font-black text-slate-800 text-3xl">{vendorEvents.length}</p><p className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Governance Syncs</p></div></div>
                 </div>
-                <button onClick={handleGenerateQBR} className="mt-12 px-12 py-5 bg-indigo-600 text-white rounded-2xl font-black text-sm shadow-xl shadow-indigo-200 hover:bg-indigo-700 hover:scale-105 transition-all flex items-center gap-3 mx-auto"><Sparkles size={18} />Confirm & Generate</button>
+                <button onClick={handleGenerateQBR} className="mt-12 px-12 py-5 bg-[color:var(--color-brand-600)] text-white rounded-2xl font-black text-sm shadow-xl shadow-[color:var(--color-brand-200)] hover:bg-[color:var(--color-brand-700)] hover:scale-105 transition-all flex items-center gap-3 mx-auto"><Sparkles size={18} />Confirm & Generate</button>
               </div>
             )}
 
             {isGenerating && (
               <div className="text-center p-8 space-y-8 animate-in fade-in">
                 <div className="relative w-32 h-32 mx-auto">
-                    <div className="w-full h-full border-8 border-indigo-100 rounded-full"></div>
-                    <div className="absolute inset-0 border-8 border-transparent border-t-indigo-600 rounded-full animate-spin"></div>
-                    <Zap size={40} className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-indigo-500 animate-pulse" />
+                    <div className="w-full h-full border-8 border-[color:var(--color-brand-100)] rounded-full"></div>
+                    <div className="absolute inset-0 border-8 border-transparent border-t-[color:var(--color-brand-600)] rounded-full animate-spin"></div>
+                    <Zap size={40} className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[color:var(--color-brand-50)]0 animate-pulse" />
                 </div>
                 <h3 className="text-2xl font-black text-slate-800 tracking-tight">Agent is Thinking...</h3>
                 <div className="flex justify-center items-center gap-4 text-sm font-bold text-slate-500"><BarChart size={16} className="animate-pulse" />Analyzing Metrics... <HardDrive size={16} className="animate-pulse delay-200" />Auditing Financials... <MessageSquare size={16} className="animate-pulse delay-500" />Synthesizing Meetings...</div>
@@ -573,16 +573,16 @@ const VendorDetail: React.FC = () => {
             
             {qbrResult && !isExporting && !exportSuccess && (
                 <div className="p-4 animate-in fade-in zoom-in-95 space-y-6">
-                    <div className="p-6 bg-slate-900 rounded-2xl text-white shadow-2xl relative overflow-hidden group"><div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity"><FileText size={64} /></div><h4 className="text-[10px] font-black text-indigo-400 uppercase mb-4 tracking-widest flex items-center gap-2"><Target size={14} />Agentic Analysis</h4><p className="text-sm text-indigo-50 leading-relaxed font-bold italic">"{qbrResult.executiveSummary}"</p></div>
-                    <div className="space-y-4"><h4 className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Strategic Recommendations</h4><div className="space-y-3">{qbrResult.recommendations.map((r: string, i: number) => (<div key={i} className="flex gap-3 text-sm text-slate-700 font-bold p-4 bg-slate-50 rounded-2xl border border-slate-100"><span className="w-2 h-2 bg-indigo-500 rounded-full mt-1.5 shrink-0 shadow-[0_0_8px_rgba(79,70,229,0.5)]"></span>{r}</div>))}</div></div>
-                    <div className="pt-6 border-t border-slate-100 flex justify-end"><button onClick={handlePrepareSlides} className="px-8 py-4 bg-white border-2 border-indigo-100 text-indigo-700 rounded-2xl font-black text-sm hover:bg-indigo-50 transition-all flex items-center justify-center gap-2 group"><Presentation size={18} />Preview & Export to Slides</button></div>
+                    <div className="p-6 bg-slate-900 rounded-2xl text-white shadow-2xl relative overflow-hidden group"><div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity"><FileText size={64} /></div><h4 className="text-[10px] font-black text-[color:var(--color-brand-400)] uppercase mb-4 tracking-widest flex items-center gap-2"><Target size={14} />Agentic Analysis</h4><p className="text-sm text-[color:var(--color-brand-50)] leading-relaxed font-bold italic">"{qbrResult.executiveSummary}"</p></div>
+                    <div className="space-y-4"><h4 className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Strategic Recommendations</h4><div className="space-y-3">{qbrResult.recommendations.map((r: string, i: number) => (<div key={i} className="flex gap-3 text-sm text-slate-700 font-bold p-4 bg-slate-50 rounded-2xl border border-slate-100"><span className="w-2 h-2 bg-[color:var(--color-brand-50)]0 rounded-full mt-1.5 shrink-0 shadow-[0_0_8px_rgba(79,70,229,0.5)]"></span>{r}</div>))}</div></div>
+                    <div className="pt-6 border-t border-slate-100 flex justify-end"><button onClick={handlePrepareSlides} className="px-8 py-4 bg-white border-2 border-[color:var(--color-brand-100)] text-[color:var(--color-brand-700)] rounded-2xl font-black text-sm hover:bg-[color:var(--color-brand-50)] transition-all flex items-center justify-center gap-2 group"><Presentation size={18} />Preview & Export to Slides</button></div>
                 </div>
             )}
 
             {(isExporting && !showSlidePreview) && (
               <div className="p-6 bg-slate-50 rounded-2xl border border-slate-200 space-y-4 animate-in fade-in w-full max-w-lg mx-auto my-auto">
-                <div className="flex items-center justify-between"><span className="text-sm font-black text-indigo-600 uppercase tracking-widest flex items-center gap-2"><Loader2 size={16} className="animate-spin" />Workspace Integration Active</span><span className="text-xs font-bold text-slate-400">Step {exportStep + 1}/4</span></div>
-                <div className="w-full bg-slate-200 h-2 rounded-full overflow-hidden"><div className="bg-indigo-600 h-full transition-all duration-500 ease-out" style={{ width: `${(exportStep + 1) * 25}%` }}></div></div>
+                <div className="flex items-center justify-between"><span className="text-sm font-black text-[color:var(--color-brand-600)] uppercase tracking-widest flex items-center gap-2"><Loader2 size={16} className="animate-spin" />Workspace Integration Active</span><span className="text-xs font-bold text-slate-400">Step {exportStep + 1}/4</span></div>
+                <div className="w-full bg-slate-200 h-2 rounded-full overflow-hidden"><div className="bg-[color:var(--color-brand-600)] h-full transition-all duration-500 ease-out" style={{ width: `${(exportStep + 1) * 25}%` }}></div></div>
                 <p className="text-sm text-slate-500 font-medium text-center">{exportSteps[exportStep]}</p>
               </div>
             )}
@@ -601,12 +601,12 @@ const VendorDetail: React.FC = () => {
       {showSlidePreview && slidesData && (
         <Modal isOpen={showSlidePreview} onClose={() => setShowSlidePreview(false)} title="Slide Deck Preview" maxWidth="max-w-4xl">
           <div className="w-full max-w-3xl aspect-video bg-white shadow-xl rounded-xl border border-slate-200 relative overflow-hidden flex flex-col mx-auto">
-            <div className="h-16 bg-gradient-to-r from-slate-900 to-slate-800 flex items-center px-8 shrink-0"><div className="flex items-center gap-3"><div className="w-8 h-8 bg-indigo-600 rounded-lg flex items-center justify-center text-white font-black text-xs">A</div><span className="text-white/80 font-bold text-sm uppercase tracking-wider">Agentic Governance</span></div></div>
+            <div className="h-16 bg-gradient-to-r from-slate-900 to-slate-800 flex items-center px-8 shrink-0"><div className="flex items-center gap-3"><div className="w-8 h-8 bg-[color:var(--color-brand-600)] rounded-lg flex items-center justify-center text-white font-black text-xs">A</div><span className="text-white/80 font-bold text-sm uppercase tracking-wider">Agentic Governance</span></div></div>
             <div className="flex-1 p-12 flex flex-col justify-center">
                 <h2 className="text-3xl font-black text-slate-800 mb-8 leading-tight">{slidesData[currentSlideIndex].title}</h2>
                 <div className="space-y-4">
                     {slidesData[currentSlideIndex].content.map((point: string, i: number) => (
-                        <div key={i} className="flex gap-4"><span className="w-2 h-2 bg-indigo-500 rounded-full mt-2.5 shrink-0"></span><p className="text-lg text-slate-600 font-medium leading-relaxed">{point}</p></div>
+                        <div key={i} className="flex gap-4"><span className="w-2 h-2 bg-[color:var(--color-brand-50)]0 rounded-full mt-2.5 shrink-0"></span><p className="text-lg text-slate-600 font-medium leading-relaxed">{point}</p></div>
                     ))}
                 </div>
                 {/* Dynamic Visual Injection */}
@@ -616,7 +616,7 @@ const VendorDetail: React.FC = () => {
           </div>
           <div className="mt-8 pt-6 border-t border-slate-100 bg-white shrink-0 flex items-center justify-between">
             <div className="flex items-center gap-4"><button onClick={prevSlide} disabled={currentSlideIndex === 0} className="p-3 rounded-xl border border-slate-200 hover:bg-slate-50 disabled:opacity-30 disabled:hover:bg-transparent transition-all"><ChevronLeft size={20} /></button><span className="text-sm font-black text-slate-600 w-16 text-center">{currentSlideIndex + 1} of {slidesData.length}</span><button onClick={nextSlide} disabled={currentSlideIndex === slidesData.length - 1} className="p-3 rounded-xl border border-slate-200 hover:bg-slate-50 disabled:opacity-30 disabled:hover:bg-transparent transition-all"><ChevronRight size={20} /></button></div>
-            <div className="flex gap-3"><button onClick={() => setShowSlidePreview(false)} className="px-6 py-3 rounded-xl font-bold text-slate-500 hover:bg-slate-100 transition-all">Cancel</button><button onClick={handleFinalizeExport} className="px-8 py-3 bg-indigo-600 text-white rounded-xl font-black shadow-lg shadow-indigo-200 hover:bg-indigo-700 hover:scale-105 transition-all flex items-center gap-2"><LayoutTemplate size={18} />Export Deck (Slides / PPTX)</button></div>
+            <div className="flex gap-3"><button onClick={() => setShowSlidePreview(false)} className="px-6 py-3 rounded-xl font-bold text-slate-500 hover:bg-slate-100 transition-all">Cancel</button><button onClick={handleFinalizeExport} className="px-8 py-3 bg-[color:var(--color-brand-600)] text-white rounded-xl font-black shadow-lg shadow-[color:var(--color-brand-200)] hover:bg-[color:var(--color-brand-700)] hover:scale-105 transition-all flex items-center gap-2"><LayoutTemplate size={18} />Export Deck (Slides / PPTX)</button></div>
           </div>
         </Modal>
       )}
