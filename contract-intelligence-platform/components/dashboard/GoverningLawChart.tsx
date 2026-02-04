@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer, Legend } from 'recharts';
 import { Card } from '../ui/Card';
@@ -13,14 +12,22 @@ interface GoverningLawChartProps {
   data: ChartData[];
 }
 
-const COLORS = ['#38BDF8', '#818CF8', '#A78BFA', '#F472B6', '#FB923C', '#A3E635'];
+// Endava Data Visualisation Palette
+const COLORS = [
+    '#5899C4', // Data Blue
+    '#FF5641', // Data Orange
+    '#CF820E', // Data Yellow
+    '#30A661', // Data Green
+    '#8684BF', // Data Violet
+    '#7B9922'  // Data Grass Green
+];
 
 const CustomTooltip = ({ active, payload }: any) => {
   if (active && payload && payload.length) {
     const data = payload[0].payload;
     const color = payload[0].payload.fill || COLORS[0];
     return (
-      <div className="bg-brand-secondary/95 backdrop-blur-md border border-brand-highlight/30 p-2.5 rounded-lg shadow-2xl text-sm animate-fade-in ring-1 ring-white/10">
+      <div className="bg-brand-secondary/95 backdrop-blur-md border border-brand-accent p-2.5 rounded-lg shadow-xl text-sm animate-fade-in">
         <div className="flex items-center gap-2 mb-1">
           <span className="w-2 h-2 rounded-full" style={{ backgroundColor: color }}></span>
           <span className="font-bold text-brand-text text-xs uppercase tracking-tight">{data.name}</span>
@@ -38,7 +45,7 @@ const CustomTooltip = ({ active, payload }: any) => {
 export const GoverningLawChart: React.FC<GoverningLawChartProps> = ({ data }) => {
   const hasData = data.some(item => item.value > 0);
   return (
-    <Card className="col-span-1 border border-brand-accent/20 hover:border-brand-highlight/20 transition-colors">
+    <Card className="col-span-1 border border-brand-accent/30 hover:border-brand-highlight/30 transition-colors">
       <h3 className="text-sm font-bold uppercase tracking-widest text-brand-light mb-6 flex items-center gap-2">
         <span className="w-1 h-4 bg-brand-highlight rounded-full"></span>
         Legal Jurisdiction
@@ -59,7 +66,8 @@ export const GoverningLawChart: React.FC<GoverningLawChartProps> = ({ data }) =>
                 animationBegin={400}
                 animationDuration={1500}
                 animationEasing="ease-in-out"
-                stroke="rgba(0,0,0,0.1)"
+                stroke="var(--color-brand-primary)" 
+                strokeWidth={3}
               >
                 {data.map((entry, index) => (
                   <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
@@ -76,9 +84,6 @@ export const GoverningLawChart: React.FC<GoverningLawChartProps> = ({ data }) =>
             </PieChart>
           ) : (
             <div className="flex flex-col items-center justify-center h-full text-brand-light/40 italic">
-               <svg className="w-8 h-8 mb-2 opacity-20" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3" />
-               </svg>
                <span className="text-xs">No jurisdiction data</span>
              </div>
           )}
