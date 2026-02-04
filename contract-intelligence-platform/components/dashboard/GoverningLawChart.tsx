@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer, Legend } from 'recharts';
 import { Card } from '../ui/Card';
@@ -13,7 +12,15 @@ interface GoverningLawChartProps {
   data: ChartData[];
 }
 
-const COLORS = ['#38BDF8', '#818CF8', '#A78BFA', '#F472B6', '#FB923C', '#A3E635'];
+// ENDAVA DATA VISUALISATION COLOURS
+const COLORS = [
+    '#5899C4', // Data Blue
+    '#FF5641', // Data Orange
+    '#CF820E', // Data Yellow
+    '#30A661', // Data Green
+    '#8684BF', // Data Violet
+    '#7B9922'  // Data Grass Green
+];
 
 const CustomTooltip = ({ active, payload }: any) => {
   if (active && payload && payload.length) {
@@ -59,7 +66,8 @@ export const GoverningLawChart: React.FC<GoverningLawChartProps> = ({ data }) =>
                 animationBegin={400}
                 animationDuration={1500}
                 animationEasing="ease-in-out"
-                stroke="rgba(0,0,0,0.1)"
+                stroke="var(--endava-dark-blue)" 
+                strokeWidth={2}
               >
                 {data.map((entry, index) => (
                   <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
