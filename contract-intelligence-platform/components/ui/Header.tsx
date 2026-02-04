@@ -1,19 +1,33 @@
-
 import React from 'react';
 
 export const Header: React.FC = () => {
-    return (
-        <header className="bg-brand-secondary shadow-md sticky top-0 z-10">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div className="flex items-center justify-between h-16">
-                    <div className="flex items-center">
-                        <svg className="h-8 w-8 text-brand-highlight" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                        </svg>
-                        <h1 className="text-xl font-bold ml-3 text-brand-text">Contract Intelligence Platform</h1>
-                    </div>
-                </div>
+  return (
+    <header className="sticky top-0 z-50 w-full border-b border-brand-accent/20 bg-brand-dark/80 backdrop-blur-xl supports-[backdrop-filter]:bg-brand-dark/60">
+      <div className="container mx-auto px-4 h-20 flex items-center">
+        
+        {/* Logo & Title Block - Aligned Left */}
+        <div className="flex items-center gap-4">
+            {/* Logo */}
+            <div className="w-10 h-10 rounded-xl overflow-hidden shadow-lg shadow-brand-primary/20 ring-1 ring-white/10">
+              <img
+                src="https://cdn.brandfetch.io/id4YZ7PWEj/w/200/h/200/theme/dark/icon.jpeg?c=1bxid64Mup7aczewSAYMX&t=1761617484712"
+                alt="Agentic Vendor Governance"
+                className="w-full h-full object-cover"
+              />
             </div>
-        </header>
-    )
-}
+
+            {/* Title */}
+            <div className="flex flex-col leading-tight">
+              <span className="text-xl font-black tracking-tight text-brand-text">
+                Contract Intelligence
+              </span>
+              <span className="text-sm font-bold tracking-wide text-brand-light uppercase">
+                Platform
+              </span>
+            </div>
+        </div>
+
+      </div>
+    </header>
+  );
+};
