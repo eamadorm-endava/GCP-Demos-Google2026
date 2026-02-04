@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Cell } from 'recharts';
 import { Card } from '../ui/Card';
@@ -13,10 +12,11 @@ interface RiskByTypeChartProps {
   data: ChartData[];
 }
 
+// ENDAVA SIGNAL COLOURS (Dark Mode)
 const getRiskColor = (risk: number) => {
-    if (risk <= 3) return '#10B981'; // green
-    if (risk <= 6) return '#F59E0B'; // yellow
-    return '#EF4444'; // red
+    if (risk <= 3) return '#3DD17B'; // Signal Positive
+    if (risk <= 6) return '#F99C11'; // Signal Warning
+    return '#E84641'; // Signal Negative
 };
 
 const CustomTooltip = ({ active, payload, label }: any) => {
@@ -28,7 +28,7 @@ const CustomTooltip = ({ active, payload, label }: any) => {
         <div className="space-y-1.5 min-w-[140px]">
             <div className="flex justify-between items-center gap-4">
                 <span className="text-brand-light text-xs uppercase tracking-wider">Avg. Risk</span>
-                <span className={`font-mono font-bold px-1.5 py-0.5 rounded bg-black/20 ${getRiskColor(data.avgRisk)}`}>
+                <span className="font-mono font-bold px-1.5 py-0.5 rounded bg-black/20" style={{ color: getRiskColor(data.avgRisk) }}>
                     {data.avgRisk.toFixed(1)}
                 </span>
             </div>
@@ -54,12 +54,12 @@ export const RiskByTypeChart: React.FC<RiskByTypeChartProps> = ({ data }) => {
         <ResponsiveContainer>
           {data.length > 0 ? (
             <BarChart data={data} layout="vertical" margin={{ top: 5, right: 30, left: 10, bottom: 5 }}>
-              <CartesianGrid strokeDasharray="3 3" stroke="#415A77" horizontal={false} opacity={0.3} />
-              <XAxis type="number" stroke="#E0E1DD" domain={[0, 10]} hide />
+              <CartesianGrid strokeDasharray="3 3" stroke="#758087" horizontal={false} opacity={0.3} />
+              <XAxis type="number" stroke="#E8EAEB" domain={[0, 10]} hide />
               <YAxis 
                 type="category" 
                 dataKey="name" 
-                stroke="#778DA9" 
+                stroke="#A3AAAF" 
                 width={90} 
                 tick={{ fontSize: 10, fontWeight: 500 }}
                 axisLine={false}
@@ -67,7 +67,7 @@ export const RiskByTypeChart: React.FC<RiskByTypeChartProps> = ({ data }) => {
               />
               <Tooltip 
                 content={<CustomTooltip />} 
-                cursor={{ fill: 'rgba(56, 189, 248, 0.05)' }} 
+                cursor={{ fill: 'rgba(255, 86, 64, 0.05)' }} 
                 animationDuration={200}
               />
               <Bar 
@@ -78,7 +78,7 @@ export const RiskByTypeChart: React.FC<RiskByTypeChartProps> = ({ data }) => {
                 animationEasing="ease-out"
               >
                   {data.map((entry, index) => (
-                      <Cell key={`cell-${index}`} fill={getRiskColor(entry.avgRisk)} fillOpacity={0.8} />
+                      <Cell key={`cell-${index}`} fill={getRiskColor(entry.avgRisk)} fillOpacity={0.9} />
                   ))}
               </Bar>
             </BarChart>
