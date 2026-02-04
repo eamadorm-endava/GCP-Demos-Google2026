@@ -62,7 +62,7 @@ steps:
       - |
         gcloud beta iap web add-iam-policy-binding \
           --member=group:${_AIP_GROUP} \
-          --role=roles/iap.hesottpsRurceAccessor \
+          --role=roles/iap.httpsResourceAccessor \
           --region=${_REGION} \
           --resource-type=cloud-run \
           --service=${_SERVICE}
