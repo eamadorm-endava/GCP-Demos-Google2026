@@ -4,6 +4,7 @@ substitutions:
   _SERVICE: sentinel-ai-autonomous-risk-assurance
   _DEMO_DIR: sentinel-ai-autonomous-risk-assurance
   _PROJECT_ID: p-dev-stemilt-0sjp-1
+  _AIP_GROUP: gcu_demos_temp_group@endava.com
 
 availableSecrets:
   secretManager:
@@ -60,7 +61,7 @@ steps:
       - '-c'
       - |
         gcloud beta iap web add-iam-policy-binding \
-          --member=group:gcu_demos_temp_group@endava.com \
+          --member=group:${_AIP_GROUP} \
           --role=roles/iap.hesottpsRurceAccessor \
           --region=${_REGION} \
           --resource-type=cloud-run \
