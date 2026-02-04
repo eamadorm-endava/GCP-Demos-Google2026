@@ -44,9 +44,25 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
         ${isMobileMenuOpen ? 'translate-x-0' : '-translate-x-full'}
       `}>
         <div className="p-6 flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <div className="w-9 h-9 bg-brand-600 rounded-xl flex items-center justify-center text-white font-black shadow-lg shadow-[color:var(--color-brand-600)] ring-2 ring-[color:var(--color-brand-200)]">A</div>
-            <span className="font-black text-slate-800 text-lg leading-tight tracking-tight">Agentic Governance</span>
+          <div className="flex items-center gap-4">
+            {/* Logo */}
+            <div className="w-10 h-10 rounded-xl overflow-hidden">
+              <img
+                src="https://cdn.brandfetch.io/id4YZ7PWEj/w/200/h/200/theme/dark/icon.jpeg?c=1bxid64Mup7aczewSAYMX&t=1761617484712"
+                alt="Agentic Vendor Governance"
+                className="w-full h-full object-cover"
+              />
+            </div>
+
+            {/* Title */}
+            <div className="flex flex-col leading-tight">
+              <span className="text-xl font-black tracking-tight text-slate-900">
+                Agentic Vendor
+              </span>
+              <span className="text-sm font-bold tracking-wide text-slate-500 uppercase">
+                Governance Platform
+              </span>
+            </div>
           </div>
           <button onClick={() => setIsMobileMenuOpen(false)} className="lg:hidden p-2 text-slate-400 hover:bg-slate-50 rounded-lg">
             <X size={20} />
@@ -105,27 +121,6 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
             </button>
             <div className="hidden md:flex items-center gap-4 text-slate-600">
               <span className="text-xs font-black text-[color:var(--color-brand-600)] bg-brand-50 px-2 py-1 rounded uppercase tracking-widest">Enterprise</span>
-            </div>
-          </div>
-
-          <div className="flex items-center gap-4">
-            {/* Logo */}
-            <div className="w-10 h-10 rounded-xl overflow-hidden">
-              <img
-                src="https://cdn.brandfetch.io/id4YZ7PWEj/w/200/h/200/theme/dark/icon.jpeg?c=1bxid64Mup7aczewSAYMX&t=1761617484712"
-                alt="Agentic Vendor Governance"
-                className="w-full h-full object-cover"
-              />
-            </div>
-
-            {/* Title */}
-            <div className="flex flex-col leading-tight">
-              <span className="text-xl font-black tracking-tight text-slate-900">
-                Agentic Vendor
-              </span>
-              <span className="text-sm font-bold tracking-wide text-slate-500 uppercase">
-                Governance Platform
-              </span>
             </div>
           </div>
           

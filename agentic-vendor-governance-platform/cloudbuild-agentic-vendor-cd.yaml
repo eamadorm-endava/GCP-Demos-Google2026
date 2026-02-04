@@ -4,6 +4,7 @@ substitutions:
   _SERVICE: agentic-vendor-governance-platform
   _DEMO_DIR: agentic-vendor-governance-platform
   _PROJECT_ID: p-dev-stemilt-0sjp-1
+  _IAP_GROUP: gcu_demos_temp_group@endava.com
 
 availableSecrets:
   secretManager:
@@ -47,8 +48,23 @@ steps:
           --region=${_REGION} \
           --platform=managed \
           --no-allow-unauthenticated \
+          --iap \
           --set-env-vars="GEMINI_API_KEY=$$GEMINI_API_KEY"
     secretEnv: ['GEMINI_API_KEY']
 
 images:
   - '${_REGION}-docker.pkg.dev/${_PROJECT_ID}/${_AR_REPO}/${_SERVICE}:${SHORT_SHA}'
+
+  # 4. Allow access to the IAP group
+  - name: 'gcr.io/cloud-builders/gcloud'
+    id: 'IAP-Access'
+    entrypoint: 'bash'
+    args:
+      - '-c'
+      - |
+        gcloud beta iap web add-iam-policy-binding \
+          --member=user:%{IAP_GROUP} \
+          --role=roles/iap.httpsResourceAccessor \
+          --region=${_REGION} \
+          --resource-type=cloud-run \
+          --service=${_SERVICE}
