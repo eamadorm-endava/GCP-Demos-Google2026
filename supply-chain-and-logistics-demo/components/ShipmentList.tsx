@@ -39,11 +39,11 @@ const ShipmentListItem: React.FC<{ shipment: Shipment; isSelected: boolean; onSe
     return (
         <li 
             onClick={onSelect}
-            className={`cursor-pointer p-4 border-b border-slate-200 hover:bg-slate-100 transition-colors duration-150 ${isSelected ? 'bg-rose-50 border-l-4 border-rose-500' : ''}`}
+            className={`cursor-pointer p-4 border-b border-brand-primary-50 hover:bg-slate-100 transition-colors duration-150 ${isSelected ? 'bg-rose-50 border-l-4 border-brand-primary-50' : ''}`}
         >
             <div className="flex justify-between items-start">
                 <div>
-                    <p className={`text-sm font-bold ${isSelected ? 'text-rose-600' : 'text-slate-800'}`}>{shipment.id}</p>
+                    <p className={`text-sm font-bold ${isSelected ? 'text-brand-primary-50' : 'text-slate-800'}`}>{shipment.id}</p>
                     <p className="text-xs text-slate-500">{shipment.customer}</p>
                 </div>
                 <span className={`px-2 py-0.5 text-xs font-medium rounded-full ${statusColors[shipment.status] || 'bg-slate-100 text-slate-800'}`}>
@@ -75,9 +75,9 @@ export const ShipmentList: React.FC<ShipmentListProps> = ({ shipments, selectedS
   
   return (
     <div>
-        <div className="p-4 border-b border-slate-200 sticky top-0 bg-slate-50/80 backdrop-blur-sm z-10">
-            <h2 className="text-lg font-bold text-slate-800">{t('allShipments')}</h2>
-            <p className="text-sm text-slate-500">
+        <div className="p-4 border-b border-brand-sb-shade-80 sticky top-0 bg-brand-primary-200 backdrop-blur-sm z-10">
+            <h2 className="text-lg font-bold text-brand-primary-300">{t('allShipments')}</h2>
+            <p className="text-sm text-brand-sb-shade-30">
               {shipments.length > 0 
                 ? t('shipmentsFound', { count: shipments.length })
                 : t('noShipmentsMatch')}
