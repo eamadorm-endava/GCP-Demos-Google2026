@@ -2,17 +2,18 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
 
-/* --- Definición de Variables (Theme Configuration) --- */
 @theme {
-  /* Mapeo de colores Endava para Tailwind v4 */
+  /* --- Semantic endava mapping --- */
   --color-brand-primary: var(--endava-dark-blue);
+  --color-brand-dark: var(--endava-dark-blue); 
+  
   --color-brand-secondary: var(--solid-blue-90);
   --color-brand-accent: var(--solid-blue-60);
   --color-brand-light: var(--solid-blue-40);
   --color-brand-text: var(--endava-white);
   --color-brand-highlight: var(--endava-orange);
 
-  /* Sobrescribir paletas estándar */
+  /* Overwrite color palletes */
   --color-green-400: var(--signal-positive);
   --color-green-500: var(--signal-positive);
   --color-green-600: var(--signal-positive);
@@ -33,25 +34,17 @@
   --endava-dark-blue: #192B37;
   --endava-white: #FFFFFF;
 
-  /* --- Solid Blue Shades (Neutrals) --- */
-  --solid-blue-90: #30404B; /* Usado para Secondary BG (Cards) */
+  /* --- Solid Blue Shades --- */
+  --solid-blue-90: #30404B; 
   --solid-blue-80: #47555F;
-  --solid-blue-60: #758087; /* Usado para Accent (Borders) */
-  --solid-blue-40: #A3AAAF; /* Usado para textos secundarios */
-  --solid-blue-10: #E8EAEB; /* Usado para textos claros/fondos claros */
+  --solid-blue-60: #758087; 
+  --solid-blue-40: #A3AAAF; 
+  --solid-blue-10: #E8EAEB; 
 
-  /* --- Signal Colours (For Dark Backgrounds) --- */
+  /* --- Signal Colours (Dark Background) --- */
   --signal-positive: #3DD17B;
   --signal-warning: #F99C11;
   --signal-negative: #E84641;
-
-  /* --- Data Visualisation --- */
-  --data-blue: #5899C4;
-  --data-orange: #FF5641;
-  --data-yellow: #CF820E;
-  --data-green: #30A661;
-  --data-violet: #8684BF;
-  --data-grass: #7B9922;
 }
 
 body {
@@ -60,7 +53,7 @@ body {
   color: var(--endava-white);
 }
 
-/* Scrollbar personalizada */
+/* Scrollbar */
 ::-webkit-scrollbar {
   width: 8px;
   height: 8px;
