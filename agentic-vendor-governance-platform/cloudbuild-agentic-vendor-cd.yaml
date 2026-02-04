@@ -43,7 +43,7 @@ steps:
     args:
       - '-c'
       - |
-        gcloud run deploy ${_SERVICE} \
+        gcloud beta run deploy ${_SERVICE} \
           --image=${_REGION}-docker.pkg.dev/${_PROJECT_ID}/${_AR_REPO}/${_SERVICE}:${SHORT_SHA} \
           --region=${_REGION} \
           --platform=managed \
@@ -51,9 +51,6 @@ steps:
           --iap \
           --set-env-vars="GEMINI_API_KEY=$$GEMINI_API_KEY"
     secretEnv: ['GEMINI_API_KEY']
-
-images:
-  - '${_REGION}-docker.pkg.dev/${_PROJECT_ID}/${_AR_REPO}/${_SERVICE}:${SHORT_SHA}'
 
   # 4. Allow access to the IAP group
   - name: 'gcr.io/cloud-builders/gcloud'
@@ -63,8 +60,11 @@ images:
       - '-c'
       - |
         gcloud beta iap web add-iam-policy-binding \
-          --member=user:%{IAP_GROUP} \
+          --member=group:${_IAP_GROUP} \
           --role=roles/iap.httpsResourceAccessor \
           --region=${_REGION} \
           --resource-type=cloud-run \
           --service=${_SERVICE}
+
+images:
+  - '${_REGION}-docker.pkg.dev/${_PROJECT_ID}/${_AR_REPO}/${_SERVICE}:${SHORT_SHA}'
