@@ -43,7 +43,7 @@ steps:
     args:
       - '-c'
       - |
-        gcloud run deploy ${_SERVICE} \
+        gcloud beta run deploy ${_SERVICE} \
           --image=${_REGION}-docker.pkg.dev/${_PROJECT_ID}/${_AR_REPO}/${_SERVICE}:${SHORT_SHA} \
           --region=${_REGION} \
           --platform=managed \
