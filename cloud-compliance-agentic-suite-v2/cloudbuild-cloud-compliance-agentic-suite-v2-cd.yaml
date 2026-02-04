@@ -4,6 +4,7 @@ substitutions:
   _SERVICE: cloud-compliance-agentic-suite-v2
   _DEMO_DIR: cloud-compliance-agentic-suite-v2
   _PROJECT_ID: p-dev-stemilt-0sjp-1
+  _AIP_GROUP: gcu_demos_temp_group@endava.com
 
 availableSecrets:
   secretManager:
@@ -60,7 +61,7 @@ steps:
       - '-c'
       - |
         gcloud beta iap web add-iam-policy-binding \
-          --member=user:USER_EMAIL \
+          --member=group:${_AIP_GROUP} \
           --role=roles/iap.httpsResourceAccessor \
           --region=${_REGION} \
           --resource-type=cloud-run \
