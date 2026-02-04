@@ -1,4 +1,31 @@
+@import "tailwindcss";
+
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
+
+/* --- Definición de Variables (Theme Configuration) --- */
+@theme {
+  /* Mapeo de colores Endava para Tailwind v4 */
+  --color-brand-primary: var(--endava-dark-blue);
+  --color-brand-secondary: var(--solid-blue-90);
+  --color-brand-accent: var(--solid-blue-60);
+  --color-brand-light: var(--solid-blue-40);
+  --color-brand-text: var(--endava-white);
+  --color-brand-highlight: var(--endava-orange);
+
+  /* Sobrescribir paletas estándar */
+  --color-green-400: var(--signal-positive);
+  --color-green-500: var(--signal-positive);
+  --color-green-600: var(--signal-positive);
+
+  --color-yellow-400: var(--signal-warning);
+  --color-yellow-500: var(--signal-warning);
+  --color-yellow-600: var(--signal-warning);
+  --color-amber-400: var(--signal-warning);
+
+  --color-red-400: var(--signal-negative);
+  --color-red-500: var(--signal-negative);
+  --color-red-600: var(--signal-negative);
+}
 
 :root {
   /* --- Primary Colours --- */
@@ -33,7 +60,7 @@ body {
   color: var(--endava-white);
 }
 
-/* Scrollbar personalizada para que combine con el tema oscuro */
+/* Scrollbar personalizada */
 ::-webkit-scrollbar {
   width: 8px;
   height: 8px;

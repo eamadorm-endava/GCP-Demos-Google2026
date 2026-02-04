@@ -12,23 +12,23 @@ interface RiskByTypeChartProps {
   data: ChartData[];
 }
 
-// ENDAVA SIGNAL COLOURS (Dark Mode)
+// COLORES DE RIESGO
 const getRiskColor = (risk: number) => {
-    if (risk <= 3) return '#3DD17B'; // Signal Positive
-    if (risk <= 6) return '#F99C11'; // Signal Warning
-    return '#E84641'; // Signal Negative
+    if (risk <= 3) return '#3DD17B'; // Positive
+    if (risk <= 6) return '#F99C11'; // Warning
+    return '#E84641'; // Negative
 };
 
 const CustomTooltip = ({ active, payload, label }: any) => {
   if (active && payload && payload.length) {
     const data = payload[0].payload as ChartData;
     return (
-      <div className="bg-brand-secondary/95 backdrop-blur-md border border-brand-highlight/30 p-3 rounded-lg shadow-2xl text-sm animate-fade-in ring-1 ring-white/10">
-        <p className="font-bold text-brand-highlight mb-2 border-b border-brand-accent/30 pb-1">{label}</p>
+      <div className="bg-brand-secondary/95 backdrop-blur-md border border-brand-accent p-3 rounded-lg shadow-xl text-sm animate-fade-in">
+        <p className="font-bold text-brand-primary mb-2 border-b border-brand-accent/50 pb-1">{label}</p>
         <div className="space-y-1.5 min-w-[140px]">
             <div className="flex justify-between items-center gap-4">
                 <span className="text-brand-light text-xs uppercase tracking-wider">Avg. Risk</span>
-                <span className="font-mono font-bold px-1.5 py-0.5 rounded bg-black/20" style={{ color: getRiskColor(data.avgRisk) }}>
+                <span className="font-mono font-bold px-1.5 py-0.5 rounded bg-black/40" style={{ color: getRiskColor(data.avgRisk) }}>
                     {data.avgRisk.toFixed(1)}
                 </span>
             </div>
@@ -45,21 +45,21 @@ const CustomTooltip = ({ active, payload, label }: any) => {
 
 export const RiskByTypeChart: React.FC<RiskByTypeChartProps> = ({ data }) => {
   return (
-    <Card className="col-span-1 border border-brand-accent/20 hover:border-brand-highlight/20 transition-colors">
+    <Card className="col-span-1 border border-brand-accent/30 hover:border-brand-primary/30 transition-colors">
       <h3 className="text-sm font-bold uppercase tracking-widest text-brand-light mb-6 flex items-center gap-2">
-        <span className="w-1 h-4 bg-brand-highlight rounded-full"></span>
+        <span className="w-1 h-4 bg-brand-primary rounded-full"></span>
         Risk Index by Category
       </h3>
       <div style={{ width: '100%', height: 300 }}>
         <ResponsiveContainer>
           {data.length > 0 ? (
             <BarChart data={data} layout="vertical" margin={{ top: 5, right: 30, left: 10, bottom: 5 }}>
-              <CartesianGrid strokeDasharray="3 3" stroke="#758087" horizontal={false} opacity={0.3} />
-              <XAxis type="number" stroke="#E8EAEB" domain={[0, 10]} hide />
+              <CartesianGrid strokeDasharray="3 3" stroke="#334155" horizontal={false} opacity={0.3} />
+              <XAxis type="number" stroke="#94a3b8" domain={[0, 10]} hide />
               <YAxis 
                 type="category" 
                 dataKey="name" 
-                stroke="#A3AAAF" 
+                stroke="#94a3b8" 
                 width={90} 
                 tick={{ fontSize: 10, fontWeight: 500 }}
                 axisLine={false}
@@ -67,13 +67,13 @@ export const RiskByTypeChart: React.FC<RiskByTypeChartProps> = ({ data }) => {
               />
               <Tooltip 
                 content={<CustomTooltip />} 
-                cursor={{ fill: 'rgba(255, 86, 64, 0.05)' }} 
+                cursor={{ fill: 'rgba(255, 85, 64, 0.05)' }} 
                 animationDuration={200}
               />
               <Bar 
                 dataKey="avgRisk" 
                 barSize={12} 
-                radius={[0, 10, 10, 0]}
+                radius={[0, 4, 4, 0]}
                 animationDuration={1000}
                 animationEasing="ease-out"
               >

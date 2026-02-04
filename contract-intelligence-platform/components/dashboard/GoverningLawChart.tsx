@@ -12,14 +12,14 @@ interface GoverningLawChartProps {
   data: ChartData[];
 }
 
-// ENDAVA DATA VISUALISATION COLOURS
+// NUEVA PALETA DE DATOS (Alineada a Endava Moderno)
 const COLORS = [
-    '#5899C4', // Data Blue
-    '#FF5641', // Data Orange
-    '#CF820E', // Data Yellow
-    '#30A661', // Data Green
-    '#8684BF', // Data Violet
-    '#7B9922'  // Data Grass Green
+    '#38BDF8', // Sky Blue (Data Blue moderno)
+    '#FF5540', // Brand Primary (Orange)
+    '#F59E0B', // Amber (Yellow)
+    '#22C55E', // Green
+    '#818CF8', // Indigo
+    '#A3E635'  // Lime
 ];
 
 const CustomTooltip = ({ active, payload }: any) => {
@@ -27,14 +27,14 @@ const CustomTooltip = ({ active, payload }: any) => {
     const data = payload[0].payload;
     const color = payload[0].payload.fill || COLORS[0];
     return (
-      <div className="bg-brand-secondary/95 backdrop-blur-md border border-brand-highlight/30 p-2.5 rounded-lg shadow-2xl text-sm animate-fade-in ring-1 ring-white/10">
+      <div className="bg-brand-secondary/95 backdrop-blur-md border border-brand-accent p-2.5 rounded-lg shadow-xl text-sm animate-fade-in">
         <div className="flex items-center gap-2 mb-1">
           <span className="w-2 h-2 rounded-full" style={{ backgroundColor: color }}></span>
           <span className="font-bold text-brand-text text-xs uppercase tracking-tight">{data.name}</span>
         </div>
         <div className="flex justify-between items-center gap-6">
           <span className="text-brand-light text-[10px] uppercase">Jurisdiction</span>
-          <span className="text-brand-highlight font-mono font-bold">{data.value} {data.value === 1 ? 'Contract' : 'Contracts'}</span>
+          <span className="text-brand-primary font-mono font-bold">{data.value} {data.value === 1 ? 'Contract' : 'Contracts'}</span>
         </div>
       </div>
     );
@@ -45,9 +45,9 @@ const CustomTooltip = ({ active, payload }: any) => {
 export const GoverningLawChart: React.FC<GoverningLawChartProps> = ({ data }) => {
   const hasData = data.some(item => item.value > 0);
   return (
-    <Card className="col-span-1 border border-brand-accent/20 hover:border-brand-highlight/20 transition-colors">
+    <Card className="col-span-1 border border-brand-accent/30 hover:border-brand-primary/30 transition-colors">
       <h3 className="text-sm font-bold uppercase tracking-widest text-brand-light mb-6 flex items-center gap-2">
-        <span className="w-1 h-4 bg-brand-highlight rounded-full"></span>
+        <span className="w-1 h-4 bg-brand-primary rounded-full"></span>
         Legal Jurisdiction
       </h3>
       <div style={{ width: '100%', height: 300 }}>
@@ -66,8 +66,8 @@ export const GoverningLawChart: React.FC<GoverningLawChartProps> = ({ data }) =>
                 animationBegin={400}
                 animationDuration={1500}
                 animationEasing="ease-in-out"
-                stroke="var(--endava-dark-blue)" 
-                strokeWidth={2}
+                stroke="var(--color-brand-dark)" 
+                strokeWidth={3}
               >
                 {data.map((entry, index) => (
                   <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
