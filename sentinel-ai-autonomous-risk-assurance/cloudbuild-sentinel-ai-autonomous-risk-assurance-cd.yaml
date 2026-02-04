@@ -60,8 +60,8 @@ steps:
       - '-c'
       - |
         gcloud beta iap web add-iam-policy-binding \
-          --member=user:USER_EMAIL \
-          --role=roles/iap.httpsResourceAccessor \
+          --member=group:gcu_demos_temp_group@endava.com \
+          --role=roles/iap.hesottpsRurceAccessor \
           --region=${_REGION} \
           --resource-type=cloud-run \
           --service=${_SERVICE}
