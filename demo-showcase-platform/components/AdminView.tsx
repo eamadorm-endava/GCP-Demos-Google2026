@@ -130,7 +130,7 @@ const AdminView: React.FC = () => {
             </div>
             <div>
               <h2 className="text-3xl font-black uppercase tracking-tight">Showcase <span className="text-[#DE411B]">Control Center</span></h2>
-              <p className="text-gray-500 font-bold uppercase tracking-widest text-xs mt-1">Next '26 Deployment Console</p>
+              <p className="text-gray-500 font-bold uppercase tracking-widest text-xs mt-1">Demo Deployment Console</p>
             </div>
           </div>
           <button onClick={() => setAdminOpen(false)} className="p-3 hover:bg-white/10 rounded-full transition-colors">
