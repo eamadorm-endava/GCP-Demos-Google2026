@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { CapabilityDefinition } from '../../types';
 import { Plus, Shield, FileSearch, Zap, Code, Network, Database, Lock, Activity, Cpu, Globe, Trash2 } from 'lucide-react';
@@ -47,7 +46,7 @@ const CapabilitiesView: React.FC<CapabilitiesViewProps> = ({ capabilities, onAdd
         </div>
         <button 
            onClick={() => setIsCreating(true)}
-           className="flex items-center space-x-2 px-4 py-2 bg-blue-600 hover:bg-blue-500 text-white rounded-lg text-sm font-medium transition-colors shadow-lg shadow-blue-900/20"
+           className="flex items-center space-x-2 px-4 py-2 bg-brand-primary hover:bg-orange-600 text-white rounded-lg text-sm font-medium transition-colors shadow-lg shadow-orange-900/20"
         >
           <Plus className="w-4 h-4" />
           <span>New Capability</span>
@@ -57,10 +56,10 @@ const CapabilitiesView: React.FC<CapabilitiesViewProps> = ({ capabilities, onAdd
       {/* Creation Drawer / Card */}
       {isCreating && (
         <div className="mb-8 animate-in slide-in-from-top-4 fade-in duration-300">
-           <div className="bg-slate-900 border border-blue-500/30 rounded-xl p-6 shadow-xl relative overflow-hidden">
-              <div className="absolute top-0 left-0 w-1 h-full bg-blue-500"></div>
+           <div className="bg-slate-900 border border-brand-primary/30 rounded-xl p-6 shadow-xl relative overflow-hidden">
+              <div className="absolute top-0 left-0 w-1 h-full bg-brand-primary"></div>
               <h3 className="text-lg font-bold text-white mb-4 flex items-center">
-                 <Cpu className="w-5 h-5 mr-2 text-blue-400" /> Define New Capability
+                 <Cpu className="w-5 h-5 mr-2 text-brand-primary" /> Define New Capability
               </h3>
               
               <form onSubmit={handleCreate} className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -73,7 +72,7 @@ const CapabilitiesView: React.FC<CapabilitiesViewProps> = ({ capabilities, onAdd
                          value={newName}
                          onChange={(e) => setNewName(e.target.value)}
                          placeholder="e.g. Network Penetration"
-                         className="w-full bg-slate-950 border border-slate-800 rounded-lg px-4 py-2.5 text-slate-200 focus:outline-none focus:border-blue-500 transition-colors"
+                         className="w-full bg-slate-950 border border-slate-800 rounded-lg px-4 py-2.5 text-slate-200 focus:outline-none focus:border-brand-primary transition-colors"
                        />
                     </div>
                     <div>
@@ -83,7 +82,7 @@ const CapabilitiesView: React.FC<CapabilitiesViewProps> = ({ capabilities, onAdd
                          onChange={(e) => setNewDesc(e.target.value)}
                          placeholder="Describe the specialized logic this capability provides..."
                          rows={3}
-                         className="w-full bg-slate-950 border border-slate-800 rounded-lg px-4 py-2.5 text-slate-200 focus:outline-none focus:border-blue-500 transition-colors"
+                         className="w-full bg-slate-950 border border-slate-800 rounded-lg px-4 py-2.5 text-slate-200 focus:outline-none focus:border-brand-primary transition-colors"
                        />
                     </div>
                  </div>
@@ -99,7 +98,7 @@ const CapabilitiesView: React.FC<CapabilitiesViewProps> = ({ capabilities, onAdd
                                    key={iconKey}
                                    type="button"
                                    onClick={() => setNewIcon(iconKey as keyof typeof ICONS)}
-                                   className={`p-2 rounded flex items-center justify-center transition-all ${newIcon === iconKey ? 'bg-blue-600 text-white shadow-lg' : 'text-slate-500 hover:bg-slate-800 hover:text-slate-300'}`}
+                                   className={`p-2 rounded flex items-center justify-center transition-all ${newIcon === iconKey ? 'bg-brand-primary text-white shadow-lg' : 'text-slate-500 hover:bg-slate-800 hover:text-slate-300'}`}
                                 >
                                    <Icon className="w-5 h-5" />
                                 </button>
@@ -118,7 +117,7 @@ const CapabilitiesView: React.FC<CapabilitiesViewProps> = ({ capabilities, onAdd
                        </button>
                        <button 
                          type="submit" 
-                         className="px-6 py-2 bg-blue-600 hover:bg-blue-500 text-white rounded-lg text-sm font-bold shadow-lg shadow-blue-900/20 transition-transform hover:scale-105"
+                         className="px-6 py-2 bg-brand-primary hover:bg-orange-600 text-white rounded-lg text-sm font-bold shadow-lg shadow-orange-900/20 transition-transform hover:scale-105"
                        >
                          Create Definition
                        </button>
@@ -137,7 +136,7 @@ const CapabilitiesView: React.FC<CapabilitiesViewProps> = ({ capabilities, onAdd
             <div key={cap.id} className="group bg-slate-900 border border-slate-800 hover:border-slate-600 rounded-xl p-6 transition-all duration-300 hover:shadow-2xl relative overflow-hidden">
                <div className="flex items-start justify-between mb-4">
                   <div className="p-3 bg-slate-950 rounded-xl border border-slate-800 group-hover:border-slate-600 transition-colors">
-                     <Icon className="w-6 h-6 text-slate-400 group-hover:text-blue-400 transition-colors" />
+                     <Icon className="w-6 h-6 text-slate-400 group-hover:text-brand-primary transition-colors" />
                   </div>
                   <div className="px-2 py-1 rounded bg-slate-950 border border-slate-800 text-[10px] font-mono text-slate-500">
                      {cap.id}

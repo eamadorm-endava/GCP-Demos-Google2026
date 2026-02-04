@@ -1,17 +1,16 @@
-
 import React from 'react';
 import { Link as LinkIcon, RefreshCw, Settings, Lock, Search, Cloud, FileText, Database, UserCheck, MessageSquare, Server } from 'lucide-react';
 import { INTEGRATIONS } from '../../constants';
 
 const IntegrationsView: React.FC = () => {
   return (
-    <div className="flex-1 overflow-y-auto p-8 bg-slate-950">
+    <div className="flex-1 overflow-y-auto p-8 bg-brand-dark">
       <header className="mb-8 flex items-center justify-between">
         <div>
           <h2 className="text-2xl font-bold text-white mb-2">System Integrations</h2>
           <p className="text-slate-400">Manage connections to enterprise data sources, security platforms, and control planes.</p>
         </div>
-        <button className="flex items-center space-x-2 px-4 py-2 bg-blue-600 hover:bg-blue-500 text-white rounded-lg text-sm font-medium transition-colors">
+        <button className="flex items-center space-x-2 px-4 py-2 bg-brand-primary hover:bg-orange-600 text-white rounded-lg text-sm font-medium transition-colors shadow-lg shadow-orange-900/20">
           <LinkIcon className="w-4 h-4" />
           <span>New Connection</span>
         </button>

@@ -1,10 +1,13 @@
-import { GoogleGenAI, Type } from "@google/genai";
+import { GoogleGenAI } from "@google/genai";
 import { Risk, RiskSeverity, AgentCapability } from '../types';
 import { getAgentSystemInstruction } from './prompts';
 
 const getAiClient = () => {
-  const apiKey = process.env.API_KEY;
+  // TypeScript ahora reconocerá esto gracias al cambio en tsconfig.json
+  const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
+  
   if (!apiKey) {
+    console.error("⚠️ API Key missing. Ensure VITE_GEMINI_API_KEY is set in .env or Dockerfile.");
     throw new Error("API Key not found");
   }
   return new GoogleGenAI({ apiKey });
@@ -12,13 +15,10 @@ const getAiClient = () => {
 
 // --- Mock Data Generator ---
 export const generateInitialRisks = async (domain: string): Promise<Risk[]> => {
-  const ai = getAiClient();
-  
-  // We explicitly guide the model to generate risks that align with our realistic agent portfolio
-  // Removed strict responseSchema to prevent XHR errors with complex nested types in preview models
-  const prompt = `
+  try {
+    const ai = getAiClient();
+    const prompt = `
     Generate 3 high-fidelity organizational risks for a Modern Enterprise (${domain}).
-    
     Output a strictly valid JSON array of objects. Do not wrap in markdown code blocks.
     Structure:
     [
@@ -40,17 +40,8 @@ export const generateInitialRisks = async (domain: string): Promise<Risk[]> => {
           }
         ]
       }
-    ]
+    ]`;
 
-    Required Risks:
-    1. Security Risk related to 'Excessive Privileged Access' or 'Toxic Combinations' (mapped to IAM_ASSURANCE agent).
-    2. Compliance Risk related to 'Missing Audit Evidence' or 'Regulatory Reporting' (mapped to EVIDENCE_COLLECTION agent).
-    3. Financial Risk related to 'Fraudulent Disbursements' or 'General Ledger Anomalies' (mapped to ANOMALY_DETECTION agent).
-
-    For each risk, provide a specific control and mapping to frameworks (SOX, ISO 27001, COSO).
-  `;
-
-  try {
     const response = await ai.models.generateContent({
       model: 'gemini-3-flash-preview',
       contents: prompt,
@@ -59,10 +50,14 @@ export const generateInitialRisks = async (domain: string): Promise<Risk[]> => {
       }
     });
 
-    return JSON.parse(response.text || '[]') as Risk[];
+    // CORRECCIÓN 1: TypeScript dice que .text es una propiedad getter, no una función.
+    // Usamos 'response.text' sin paréntesis, o una cadena vacía si es null.
+    const jsonText = response.text || '[]'; 
+    
+    return JSON.parse(jsonText) as Risk[];
   } catch (e) {
-    console.error("Failed to generate risks", e);
-    // Fallback Data tailored to the requested agents
+    console.error("Failed to generate risks, using fallback.", e);
+    // Fallback Data
     return [
       {
         id: 'r-1',
@@ -125,29 +120,40 @@ export const generateInitialRisks = async (domain: string): Promise<Risk[]> => {
 // --- Streaming Agent Simulation ---
 export async function* streamAuditSimulation(risk: Risk, controlName: string, agentCapability: AgentCapability) {
   let useFallback = false;
-  let responseStream;
+  // Usamos 'any' temporalmente aquí porque el tipo AsyncGenerator inferido es complejo
+  let resultStream: any;
 
   try {
     const ai = getAiClient();
-    // Use the refined, centralized prompt templates
     const systemInstruction = getAgentSystemInstruction(risk, controlName, agentCapability);
 
-    responseStream = await ai.models.generateContentStream({
-      model: 'gemini-3-flash-preview',
+    // En la versión @google/genai ^1.x, generateContentStream devuelve un objeto iterable directamente
+    // o un wrapper dependiendo de la sub-versión.
+    const result = await ai.models.generateContentStream({
+      model: 'gemini-1.5-pro',
       contents: `Initialize Agent: ${agentCapability}. Target Control: ${controlName}. Begin autonomous verification sequence.`,
       config: {
         systemInstruction: systemInstruction,
       }
     });
+    
+    // CORRECCIÓN 2: TypeScript dice que 'result' ya es el AsyncGenerator.
+    // No existe la propiedad .stream en este objeto result según el error TS2339.
+    resultStream = result; 
+
   } catch (e) {
-    console.warn("Gemini API unavailable, using high-fidelity simulation fallback.", e);
+    console.warn("Gemini API unavailable or key invalid, using simulation fallback.", e);
     useFallback = true;
   }
 
-  if (!useFallback && responseStream) {
+  if (!useFallback && resultStream) {
     try {
-      for await (const chunk of responseStream) {
-        const text = chunk.text;
+      // Iteramos directamente sobre el resultado
+      for await (const chunk of resultStream) {
+        // CORRECCIÓN 3: Igual que arriba, tratamos .text como propiedad si es necesario
+        // @ts-ignore: Manejo defensivo por diferencias de versión
+        const text = typeof chunk.text === 'function' ? chunk.text() : chunk.text;
+        
         if (text) {
             yield text;
         }
@@ -159,35 +165,32 @@ export async function* streamAuditSimulation(risk: Risk, controlName: string, ag
   }
 
   if (useFallback) {
-    // High-fidelity fallback scenarios for demo purposes
-    const delay = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
-    
-    const mockLogs = [
-      JSON.stringify({ type: "log", action: "INIT_CONNECTION", detail: `Establishing secure mTLS connection to ${agentCapability === 'CIAM_ATTESTATION' ? 'GitHub Enterprise & SonarQube' : 'Enterprise Data Lake'}...`, status: "info" }),
-      JSON.stringify({ type: "log", action: "CONTEXT_LOAD", detail: "Retrieving architecture maps and security policies from VectorDB...", status: "info" }),
-      JSON.stringify({ type: "log", action: "DISCOVERY_SCAN", detail: `Scanning target scope for control: ${controlName}. Found 14 active endpoints.`, status: "success" }),
-      JSON.stringify({ type: "log", action: "AST_ANALYSIS", detail: "Parsing Abstract Syntax Tree (AST) to identify authentication gates in legacy code modules...", status: "info" }),
-      JSON.stringify({ type: "log", action: "MCP_QUERY", detail: "Querying Model Context Protocol (MCP) server for business logic constraints...", status: "info" }),
-      JSON.stringify({ type: "log", action: "TRACE_EXECUTION", detail: "Stitched execution path: Mobile_App -> API_Gateway -> Auth_Service -> Core_Banking.", status: "success" }),
-      JSON.stringify({ type: "log", action: "VULNERABILITY_CHECK", detail: "Analyzing 'StepUpAuth' logic in TransactionController.java against policy threshold ($10,000).", status: "warning" }),
-      JSON.stringify({ type: "log", action: "COMPLIANCE_FAIL", detail: "Detected logic gap: High-value transactions bypass MFA if originating from trusted subnets.", status: "error" }),
-      JSON.stringify({ type: "log", action: "REPORT_GEN", detail: "Compiling deficiency report and generating sequence diagram...", status: "success" }),
-      JSON.stringify({ 
-        type: "result", 
-        data: { 
-          score: 45, 
-          effective: false, 
-          summary: "The CIAM agent detected a critical logic flaw where step-up authentication is bypassed for internal subnets, violating Zero Trust policies for high-value transfers.", 
-          gaps: ["MFA Bypass on Internal Subnets", "Hardcoded Trusted IP List"], 
-          recommendations: ["Remove IP-based trust", "Enforce adaptive MFA globally"], 
-          scenario: "CIAM_LOGIC_GAP" 
-        } 
-      })
-    ];
+     const delay = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
+     
+     const mockLogs = [
+       JSON.stringify({ type: "log", action: "INIT_CONNECTION", detail: `Establishing secure mTLS connection to ${agentCapability === 'CIAM_ATTESTATION' ? 'GitHub Enterprise & SonarQube' : 'Enterprise Data Lake'}...`, status: "info" }),
+       JSON.stringify({ type: "log", action: "CONTEXT_LOAD", detail: "Retrieving architecture maps and security policies from VectorDB...", status: "info" }),
+       JSON.stringify({ type: "log", action: "DISCOVERY_SCAN", detail: `Scanning target scope for control: ${controlName}. Found 14 active endpoints.`, status: "success" }),
+       JSON.stringify({ type: "log", action: "AST_ANALYSIS", detail: "Parsing Abstract Syntax Tree (AST) to identify authentication gates in legacy code modules...", status: "info" }),
+       JSON.stringify({ type: "log", action: "TRACE_EXECUTION", detail: "Stitched execution path: Mobile_App -> API_Gateway -> Auth_Service -> Core_Banking.", status: "success" }),
+       JSON.stringify({ type: "log", action: "VULNERABILITY_CHECK", detail: "Analyzing 'StepUpAuth' logic in TransactionController.java against policy threshold ($10,000).", status: "warning" }),
+       JSON.stringify({ type: "log", action: "REPORT_GEN", detail: "Compiling deficiency report and generating sequence diagram...", status: "success" }),
+       JSON.stringify({ 
+         type: "result", 
+         data: { 
+           score: 45, 
+           effective: false, 
+           summary: "The agent detected a logic flaw where step-up authentication is bypassed.", 
+           gaps: ["MFA Bypass on Internal Subnets"], 
+           recommendations: ["Enforce adaptive MFA globally"], 
+           scenario: "CIAM_LOGIC_GAP" 
+         } 
+       })
+     ];
 
-    for (const log of mockLogs) {
-      await delay(800 + Math.random() * 500); // Realistic typing delay
-      yield log + "\n";
-    }
+     for (const log of mockLogs) {
+       await delay(500);
+       yield log + "\n";
+     }
   }
 }
