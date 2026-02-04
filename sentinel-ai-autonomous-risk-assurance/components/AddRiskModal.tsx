@@ -56,7 +56,8 @@ const AddRiskModal: React.FC<AddRiskModalProps> = ({ isOpen, onClose, onAdd, exi
       <div className="bg-slate-900 border border-slate-700 rounded-xl max-w-lg w-full shadow-2xl overflow-hidden">
         <div className="p-6 border-b border-slate-800 flex items-center justify-between bg-slate-800/50">
           <div className="flex items-center space-x-3">
-            <div className="p-2 bg-blue-500/10 rounded-lg border border-blue-500/20 text-blue-400">
+            {/* CHANGED: bg-blue-500 -> bg-brand-primary */}
+            <div className="p-2 bg-brand-primary/10 rounded-lg border border-brand-primary/20 text-brand-primary">
               <Shield className="w-5 h-5" />
             </div>
             <h2 className="text-xl font-bold text-white">Define New Risk</h2>
@@ -74,7 +75,8 @@ const AddRiskModal: React.FC<AddRiskModalProps> = ({ isOpen, onClose, onAdd, exi
               required
               value={title}
               onChange={(e) => setTitle(e.target.value)}
-              className="w-full bg-slate-950 border border-slate-800 rounded-lg px-4 py-2.5 text-slate-200 focus:outline-none focus:border-blue-500 transition-colors"
+              /* CHANGED: focus:border-blue-500 -> focus:border-brand-primary */
+              className="w-full bg-slate-950 border border-slate-800 rounded-lg px-4 py-2.5 text-slate-200 focus:outline-none focus:border-brand-primary transition-colors"
               placeholder="e.g. Unencrypted Data Transmission"
             />
           </div>
@@ -86,7 +88,8 @@ const AddRiskModal: React.FC<AddRiskModalProps> = ({ isOpen, onClose, onAdd, exi
               value={description}
               onChange={(e) => setDescription(e.target.value)}
               rows={3}
-              className="w-full bg-slate-950 border border-slate-800 rounded-lg px-4 py-2.5 text-slate-200 focus:outline-none focus:border-blue-500 transition-colors"
+              /* CHANGED: focus:border-blue-500 -> focus:border-brand-primary */
+              className="w-full bg-slate-950 border border-slate-800 rounded-lg px-4 py-2.5 text-slate-200 focus:outline-none focus:border-brand-primary transition-colors"
               placeholder="Describe the potential impact and context..."
             />
           </div>
@@ -97,7 +100,8 @@ const AddRiskModal: React.FC<AddRiskModalProps> = ({ isOpen, onClose, onAdd, exi
               <select 
                 value={severity}
                 onChange={(e) => setSeverity(e.target.value as RiskSeverity)}
-                className="w-full bg-slate-950 border border-slate-800 rounded-lg px-4 py-2.5 text-slate-200 focus:outline-none focus:border-blue-500 transition-colors appearance-none"
+                /* CHANGED: focus:border-blue-500 -> focus:border-brand-primary */
+                className="w-full bg-slate-950 border border-slate-800 rounded-lg px-4 py-2.5 text-slate-200 focus:outline-none focus:border-brand-primary transition-colors appearance-none"
               >
                 {Object.values(RiskSeverity).map(s => (
                   <option key={s} value={s}>{s}</option>
@@ -110,7 +114,8 @@ const AddRiskModal: React.FC<AddRiskModalProps> = ({ isOpen, onClose, onAdd, exi
                 type="text" 
                 value={category}
                 onChange={(e) => setCategory(e.target.value)}
-                className="w-full bg-slate-950 border border-slate-800 rounded-lg px-4 py-2.5 text-slate-200 focus:outline-none focus:border-blue-500 transition-colors"
+                /* CHANGED: focus:border-blue-500 -> focus:border-brand-primary */
+                className="w-full bg-slate-950 border border-slate-800 rounded-lg px-4 py-2.5 text-slate-200 focus:outline-none focus:border-brand-primary transition-colors"
                 placeholder="e.g. Compliance"
               />
             </div>
@@ -126,7 +131,8 @@ const AddRiskModal: React.FC<AddRiskModalProps> = ({ isOpen, onClose, onAdd, exi
                 type="text" 
                 value={controlName}
                 onChange={(e) => setControlName(e.target.value)}
-                className="w-full bg-slate-950 border border-slate-800 rounded-lg px-4 py-2.5 text-slate-200 focus:outline-none focus:border-blue-500 transition-colors"
+                /* CHANGED: focus:border-blue-500 -> focus:border-brand-primary */
+                className="w-full bg-slate-950 border border-slate-800 rounded-lg px-4 py-2.5 text-slate-200 focus:outline-none focus:border-brand-primary transition-colors"
                 placeholder="e.g. TLS Verification Agent"
               />
             </div>
@@ -142,7 +148,8 @@ const AddRiskModal: React.FC<AddRiskModalProps> = ({ isOpen, onClose, onAdd, exi
             </button>
             <button 
               type="submit"
-              className="px-4 py-2 rounded-lg text-sm bg-blue-600 hover:bg-blue-500 text-white font-medium shadow-lg shadow-blue-900/20"
+              /* CHANGED: bg-blue-600 -> bg-brand-primary */
+              className="px-4 py-2 rounded-lg text-sm bg-brand-primary hover:bg-orange-600 text-white font-medium shadow-lg shadow-orange-900/20"
             >
               Add Risk Scenario
             </button>

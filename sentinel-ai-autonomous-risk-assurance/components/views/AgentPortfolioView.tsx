@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Plus, Cpu, Clock, Link as LinkIcon, Layers, Code2, Network, GitMerge, UserCheck, Database, Hash, BarChart3, Activity, Scan, FileText, CheckCircle2, PenTool, Zap, Settings2 } from 'lucide-react';
 import { INTEGRATIONS } from '../../constants';
@@ -9,7 +8,7 @@ interface AgentPortfolioViewProps {
   onSelectAgent: (agentId: string) => void;
 }
 
-// Helper to map capabilities to icons (duplicate from main file, good to keep close to usage)
+// Helper to map capabilities to icons
 const getCapabilityIcon = (cap: string) => {
   const c = cap.toLowerCase();
   if (c.includes('graph')) return <Network className="w-3.5 h-3.5 mr-2 opacity-70" />;
@@ -37,7 +36,7 @@ const AgentPortfolioView: React.FC<AgentPortfolioViewProps> = ({ agents, onAddAg
          </div>
          <button 
             onClick={onAddAgent}
-            className="flex items-center space-x-2 px-4 py-2 bg-blue-600 hover:bg-blue-500 text-white rounded-lg text-sm font-medium transition-colors shadow-lg shadow-blue-900/20"
+            className="flex items-center space-x-2 px-4 py-2 bg-brand-primary hover:bg-orange-600 text-white rounded-lg text-sm font-medium transition-colors shadow-lg shadow-orange-900/20"
          >
             <Plus className="w-4 h-4" />
             <span>Create New Agent</span>
@@ -90,7 +89,6 @@ const AgentPortfolioView: React.FC<AgentPortfolioViewProps> = ({ agents, onAddAg
                        const integration = INTEGRATIONS.find(i => i.id === intId);
                        if (!integration) return null;
                        
-                       // Status dot color
                        const statusColor = integration.status === 'connected' ? 'bg-emerald-500' : 
                                            integration.status === 'error' ? 'bg-red-500' : 'bg-yellow-500';
 

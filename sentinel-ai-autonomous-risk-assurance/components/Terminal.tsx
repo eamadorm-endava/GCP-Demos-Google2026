@@ -15,7 +15,6 @@ const Terminal: React.FC<TerminalProps> = ({ logs, status, controlName }) => {
   useEffect(() => {
     if (scrollContainerRef.current) {
       const { scrollHeight, clientHeight } = scrollContainerRef.current;
-      // Using scrollTo with behavior smooth for independent container scrolling
       scrollContainerRef.current.scrollTo({
         top: scrollHeight - clientHeight,
         behavior: 'smooth'
@@ -58,7 +57,8 @@ const Terminal: React.FC<TerminalProps> = ({ logs, status, controlName }) => {
                 {log.status === 'success' && <CheckCircle className="w-4 h-4 text-emerald-500" />}
                 {log.status === 'warning' && <AlertTriangle className="w-4 h-4 text-yellow-500" />}
                 {log.status === 'error' && <AlertTriangle className="w-4 h-4 text-red-500" />}
-                {log.status === 'info' && <Activity className="w-4 h-4 text-blue-500" />}
+                {/* Fixed: Use brand-primary instead of blue-500 for info logs */}
+                {log.status === 'info' && <Activity className="w-4 h-4 text-brand-primary" />}
               </div>
               <div>
                 <div className="flex items-center space-x-2">

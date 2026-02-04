@@ -1,0 +1,70 @@
+@import "tailwindcss";
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
+
+@theme {
+  /* --- Semantic endava mapping --- */
+  --color-brand-primary: var(--endava-dark-blue);
+  --color-brand-dark: var(--endava-dark-blue); 
+  
+  --color-brand-secondary: var(--solid-blue-90);
+  --color-brand-accent: var(--solid-blue-60);
+  --color-brand-light: var(--solid-blue-40);
+  --color-brand-text: var(--endava-white);
+  --color-brand-highlight: var(--endava-orange);
+
+  /* Overwrite color palletes */
+  --color-green-400: var(--signal-positive);
+  --color-green-500: var(--signal-positive);
+  --color-green-600: var(--signal-positive);
+
+  --color-yellow-400: var(--signal-warning);
+  --color-yellow-500: var(--signal-warning);
+  --color-yellow-600: var(--signal-warning);
+  --color-amber-400: var(--signal-warning);
+
+  --color-red-400: var(--signal-negative);
+  --color-red-500: var(--signal-negative);
+  --color-red-600: var(--signal-negative);
+}
+
+:root {
+  /* --- Primary Colours --- */
+  --endava-orange: #FF5640;
+  --endava-dark-blue: #192B37;
+  --endava-white: #FFFFFF;
+
+  /* --- Solid Blue Shades --- */
+  --solid-blue-90: #30404B; 
+  --solid-blue-80: #47555F;
+  --solid-blue-60: #758087; 
+  --solid-blue-40: #A3AAAF; 
+  --solid-blue-10: #E8EAEB; 
+
+  /* --- Signal Colours (Dark Background) --- */
+  --signal-positive: #3DD17B;
+  --signal-warning: #F99C11;
+  --signal-negative: #E84641;
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
+  background-color: var(--endava-dark-blue);
+  color: var(--endava-white);
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--endava-dark-blue); 
+}
+::-webkit-scrollbar-thumb {
+  background: var(--solid-blue-60); 
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--endava-orange); 
+}

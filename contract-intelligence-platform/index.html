@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Contract Intelligence Platform</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="/index.css">
     <style>
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(5px); }
@@ -23,12 +24,33 @@
         theme: {
           extend: {
             colors: {
-              'brand-primary': '#0D1B2A',
-              'brand-secondary': '#1B263B',
-              'brand-accent': '#415A77',
-              'brand-light': '#778DA9',
-              'brand-text': '#E0E1DD',
-              'brand-highlight': '#38BDF8',
+              // Mapeo semántico a la paleta de Endava
+              'brand-primary': 'var(--endava-dark-blue)',
+              'brand-secondary': 'var(--solid-blue-90)',
+              'brand-accent': 'var(--solid-blue-60)',
+              'brand-light': 'var(--solid-blue-40)',
+              'brand-text': 'var(--endava-white)',
+              'brand-highlight': 'var(--endava-orange)',
+              
+              // Sobrescribir colores estándar para alertas (Signal Colours)
+              green: {
+                400: 'var(--signal-positive)',
+                500: 'var(--signal-positive)',
+                600: 'var(--signal-positive)', 
+              },
+              yellow: {
+                400: 'var(--signal-warning)',
+                500: 'var(--signal-warning)',
+                600: 'var(--signal-warning)',
+              },
+              amber: {
+                400: 'var(--signal-warning)',
+              },
+              red: {
+                400: 'var(--signal-negative)',
+                500: 'var(--signal-negative)',
+                600: 'var(--signal-negative)',
+              }
             },
           },
         },
@@ -47,7 +69,6 @@
   }
 }
 </script>
-<link rel="stylesheet" href="/index.css">
 </head>
   <body class="bg-brand-primary text-brand-text scroll-smooth">
     <div id="root"></div>

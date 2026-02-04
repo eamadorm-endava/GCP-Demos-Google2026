@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { SequenceStep } from '../types';
 import { Server, Smartphone, Globe, Database, ShieldCheck, ArrowDown } from 'lucide-react';
@@ -18,7 +17,6 @@ const SequenceDiagram: React.FC<SequenceDiagramProps> = ({ steps }) => {
 
   const getSystemX = (systemId: string) => {
     const idx = systems.findIndex(s => s.id === systemId);
-    // Dynamic spacing based on count to fit better, but fixed for predictability
     return 80 + (idx * 200); 
   };
 
@@ -41,7 +39,7 @@ const SequenceDiagram: React.FC<SequenceDiagramProps> = ({ steps }) => {
             <div key={sys.id} className="absolute top-0 bottom-0 flex flex-col items-center" style={{ left: x - 40, width: 80 }}>
                {/* Header Icon */}
                <div className="p-3 bg-slate-800 rounded-xl border border-slate-700 flex flex-col items-center z-10 mb-4 shadow-xl ring-1 ring-slate-700/50">
-                 <sys.icon className="w-6 h-6 text-sky-400 mb-1.5" />
+                 <sys.icon className="w-6 h-6 text-brand-primary mb-1.5" />
                  <span className="text-[10px] font-bold text-slate-300 uppercase whitespace-nowrap tracking-wide">{sys.label}</span>
                </div>
                {/* Vertical Lifeline */}
@@ -60,10 +58,10 @@ const SequenceDiagram: React.FC<SequenceDiagramProps> = ({ steps }) => {
              const y = index * 70; // Increased spacing for clarity
              const isRight = x2 > x1;
              
-             // Define styles based on status
-             let statusColor = 'text-blue-400 border-blue-500/30 bg-blue-500/10';
-             let lineColor = 'bg-blue-500';
-             let arrowColor = 'border-blue-500';
+             // Define styles based on status - Default is now Brand Orange
+             let statusColor = 'text-brand-primary border-brand-primary/30 bg-brand-primary/10';
+             let lineColor = 'bg-brand-primary';
+             let arrowColor = 'border-brand-primary';
 
              if (step.status === 'success') {
                 statusColor = 'text-emerald-400 border-emerald-500/30 bg-emerald-500/10';

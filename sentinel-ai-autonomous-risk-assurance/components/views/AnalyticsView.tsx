@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { ResponsiveContainer, PieChart, Pie, Cell, Tooltip, Legend, AreaChart, CartesianGrid, XAxis, YAxis, Area, BarChart, Bar } from 'recharts';
 import { Risk, AuditResult } from '../../types';
@@ -14,7 +13,6 @@ const AnalyticsView: React.FC<AnalyticsViewProps> = ({ risks, completedAudits, t
   const completedCount = Object.keys(completedAudits).length;
   const passedCount = Object.values(completedAudits).filter((a: AuditResult) => a.effective).length;
   
-  // --- Mock Data for Analytics ---
   const riskTrendData = [
     { month: 'Jan', score: 88 },
     { month: 'Feb', score: 85 },
@@ -32,7 +30,7 @@ const AnalyticsView: React.FC<AnalyticsViewProps> = ({ risks, completedAudits, t
   ];
 
   return (
-    <div className="flex-1 overflow-y-auto p-8">
+    <div className="flex-1 overflow-y-auto p-8 bg-brand-dark">
       <h1 className="text-3xl font-bold text-white mb-2">Operational Analytics</h1>
       <p className="text-slate-400 mb-8">Real-time insights into risk exposure and agent performance.</p>
       
@@ -48,14 +46,15 @@ const AnalyticsView: React.FC<AnalyticsViewProps> = ({ risks, completedAudits, t
          <div className="bg-slate-900 p-5 rounded-xl border border-slate-800">
             <div className="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-2">Active Controls</div>
             <div className="flex items-end space-x-2">
-               <span className="text-3xl font-bold text-blue-400">{totalControls}</span>
+               <span className="text-3xl font-bold text-brand-primary">{totalControls}</span>
                <span className="text-sm text-slate-500 mb-1">controls defined</span>
             </div>
          </div>
          <div className="bg-slate-900 p-5 rounded-xl border border-slate-800">
             <div className="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-2">Agent Fleet Size</div>
             <div className="flex items-end space-x-2">
-               <span className="text-3xl font-bold text-purple-400">{agentsCount}</span>
+               {/* CORREGIDO: text-orange-400 -> text-brand-primary */}
+               <span className="text-3xl font-bold text-brand-primary">{agentsCount}</span>
                <span className="text-sm text-slate-500 mb-1">active agents</span>
             </div>
          </div>
@@ -82,8 +81,9 @@ const AnalyticsView: React.FC<AnalyticsViewProps> = ({ risks, completedAudits, t
                   <AreaChart data={riskTrendData}>
                      <defs>
                         <linearGradient id="colorScore" x1="0" y1="0" x2="0" y2="1">
-                           <stop offset="5%" stopColor="#3b82f6" stopOpacity={0.3}/>
-                           <stop offset="95%" stopColor="#3b82f6" stopOpacity={0}/>
+                           {/* CORREGIDO: Usando variables CSS en lugar de Hex duro */}
+                           <stop offset="5%" stopColor="var(--color-brand-primary)" stopOpacity={0.3}/>
+                           <stop offset="95%" stopColor="var(--color-brand-primary)" stopOpacity={0}/>
                         </linearGradient>
                      </defs>
                      <CartesianGrid strokeDasharray="3 3" stroke="#1e293b" />
@@ -93,7 +93,7 @@ const AnalyticsView: React.FC<AnalyticsViewProps> = ({ risks, completedAudits, t
                         contentStyle={{backgroundColor: '#0f172a', borderColor: '#334155', borderRadius: '8px'}} 
                         itemStyle={{color: '#e2e8f0'}}
                      />
-                     <Area type="monotone" dataKey="score" stroke="#3b82f6" strokeWidth={2} fillOpacity={1} fill="url(#colorScore)" />
+                     <Area type="monotone" dataKey="score" stroke="var(--color-brand-primary)" strokeWidth={2} fillOpacity={1} fill="url(#colorScore)" />
                   </AreaChart>
                </ResponsiveContainer>
             </div>
@@ -114,6 +114,7 @@ const AnalyticsView: React.FC<AnalyticsViewProps> = ({ risks, completedAudits, t
                         contentStyle={{backgroundColor: '#0f172a', borderColor: '#334155', borderRadius: '8px'}} 
                      />
                      <Legend />
+                     {/* Functional colors kept as-is (Green/Red) */}
                      <Bar dataKey="effective" name="Effective" fill="#10b981" radius={[4, 4, 0, 0]} barSize={30} />
                      <Bar dataKey="ineffective" name="Deficient" fill="#ef4444" radius={[4, 4, 0, 0]} barSize={30} />
                   </BarChart>

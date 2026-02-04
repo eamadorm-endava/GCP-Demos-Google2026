@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { MOCK_CIAM_APPS } from '../../constants';
 import { AgentStatus, SequenceStep, Risk, CIAMApplication } from '../../types';
@@ -95,7 +94,7 @@ EXECUTION STEPS:
 4. If a check fails, log a 'CRITICAL' deficiency.
 `;
 
-  // Mock Sequence Data Generation - Helper to create consistent visualization
+  // Mock Sequence Data Generation
   const generateMockSequence = (isCompliant: boolean) => {
     return [
       { id: '1', from: 'Mobile App', to: 'API Gateway', label: 'POST /transfer', timestamp: Date.now(), status: 'success' },
@@ -118,7 +117,6 @@ EXECUTION STEPS:
 
     let resultReceived = false;
 
-    // Mock Risk/Control for the simulation service
     const mockRisk: Risk = {
       id: 'CIAM-RISK-1',
       title: 'Missing Step-Up Authentication',
@@ -129,12 +127,10 @@ EXECUTION STEPS:
       controls: []
     };
     
-    // Simulate streaming
     try {
       const stream = streamAuditSimulation(mockRisk, 'Step-Up Auth Validation', 'CIAM_ATTESTATION');
       
       for await (const chunk of stream) {
-         // Clean up chunk: remove markdown code blocks if present
          const cleanChunk = chunk.replace(/```json/g, '').replace(/```/g, '');
          const lines = cleanChunk.split('\n');
          
@@ -142,14 +138,12 @@ EXECUTION STEPS:
             const trimmed = line.trim();
             if (!trimmed) continue;
             try {
-               // Attempt to parse JSON line
                if (trimmed.startsWith('{')) {
                   const data = JSON.parse(trimmed);
                   
                   if (data.type === 'log') {
                      setLogs(prev => [...prev, { ...data, timestamp: new Date().toLocaleTimeString() }]);
                      
-                     // Heuristic stage advancement based on log content
                      const content = (data.action + ' ' + data.detail).toLowerCase();
                      if (content.includes('connect') || content.includes('init')) setCurrentStage(1);
                      else if (content.includes('scan') || content.includes('ast') || content.includes('discovery')) setCurrentStage(2);
@@ -159,13 +153,12 @@ EXECUTION STEPS:
 
                   } else if (data.type === 'result') {
                      resultReceived = true;
-                     setCurrentStage(5); // Complete
+                     setCurrentStage(5);
                      setAuditResult(data.data);
                      setSequence(generateMockSequence(data.data.effective));
                   }
                }
             } catch (e) {
-                // Keep terminal alive even if parse fails
                 if (trimmed.length > 5) {
                     setLogs(prev => [...prev, { 
                         timestamp: new Date().toLocaleTimeString(),
@@ -188,8 +181,6 @@ EXECUTION STEPS:
     } finally {
        setIsAnalyzing(false);
        
-       // FAILSAFE: If the stream finished but no result was parsed (e.g. network glitch or parse error),
-       // force the simulation to complete so the user sees the output.
        if (!resultReceived) {
            const fallbackResult = { 
               score: 45, 
@@ -244,7 +235,6 @@ EXECUTION STEPS:
         }
         return a;
     }));
-    // Also trigger visualization
     if (selectedApp.id === appId) {
         handleRunAttestation();
     }
@@ -261,7 +251,7 @@ EXECUTION STEPS:
       <header className="mb-8 border-b border-slate-800 pb-6">
         <div className="flex items-center justify-between">
             <div className="flex items-center space-x-3 mb-2">
-            <div className="p-2 bg-sky-500/10 rounded-lg border border-sky-500/20 text-sky-400">
+            <div className="p-2 bg-brand-primary/10 rounded-lg border border-brand-primary/20 text-brand-primary">
                 <Code className="w-6 h-6" />
             </div>
             <h1 className="text-2xl font-bold text-white">CIAM Attestation Lab</h1>
@@ -271,13 +261,13 @@ EXECUTION STEPS:
             <div className="bg-slate-900 p-1 rounded-lg border border-slate-800 flex space-x-1">
                 <button 
                   onClick={() => setViewMode('config')}
-                  className={`px-3 py-1.5 rounded text-xs font-medium transition-all ${viewMode === 'config' ? 'bg-sky-600 text-white shadow-lg' : 'text-slate-400 hover:text-white'}`}
+                  className={`px-3 py-1.5 rounded text-xs font-medium transition-all ${viewMode === 'config' ? 'bg-brand-primary text-white shadow-lg' : 'text-slate-400 hover:text-white'}`}
                 >
                    Config & Run
                 </button>
                 <button 
                   onClick={() => setViewMode('monitoring')}
-                  className={`px-3 py-1.5 rounded text-xs font-medium transition-all ${viewMode === 'monitoring' ? 'bg-sky-600 text-white shadow-lg' : 'text-slate-400 hover:text-white'}`}
+                  className={`px-3 py-1.5 rounded text-xs font-medium transition-all ${viewMode === 'monitoring' ? 'bg-brand-primary text-white shadow-lg' : 'text-slate-400 hover:text-white'}`}
                 >
                    Monitored Fleet
                 </button>
@@ -307,7 +297,7 @@ EXECUTION STEPS:
                             <span className="text-xs text-slate-500 font-semibold">Target Repository</span>
                             <button 
                             onClick={() => setIsAddAppModalOpen(true)}
-                            className="p-1.5 rounded bg-sky-500/10 text-sky-400 hover:bg-sky-500 hover:text-white transition-colors flex items-center space-x-1 text-[10px] font-medium"
+                            className="p-1.5 rounded bg-brand-primary/10 text-brand-primary hover:bg-brand-primary hover:text-white transition-colors flex items-center space-x-1 text-[10px] font-medium"
                             >
                             <Plus className="w-3 h-3" />
                             <span>NEW APP</span>
@@ -321,7 +311,7 @@ EXECUTION STEPS:
                                     onClick={() => setSelectedApp(app)}
                                     className={`w-full text-left p-3 rounded-lg border transition-all flex items-center justify-between group ${
                                     selectedApp.id === app.id 
-                                    ? 'bg-sky-500/10 border-sky-500/50 shadow-[0_0_10px_rgba(14,165,233,0.1)]' 
+                                    ? 'bg-brand-primary/10 border-brand-primary/50 shadow-[0_0_10px_rgba(255,85,64,0.1)]' 
                                     : 'bg-slate-950 border-slate-800 hover:border-slate-700'
                                     }`}
                                 >
@@ -329,10 +319,10 @@ EXECUTION STEPS:
                                         <div className={`font-semibold text-sm ${selectedApp.id === app.id ? 'text-white' : 'text-slate-400 group-hover:text-slate-200'}`}>{app.name}</div>
                                         <div className="flex items-center space-x-2 text-[10px] text-slate-600 font-mono">
                                         <span className="truncate max-w-[120px]">{app.repo}</span>
-                                        {app.framework && <span className="text-sky-600/70 border border-sky-900/30 px-1 rounded">{app.framework}</span>}
+                                        {app.framework && <span className="text-brand-primary/70 border border-brand-primary/30 px-1 rounded">{app.framework}</span>}
                                         </div>
                                     </div>
-                                    {selectedApp.id === app.id && <CheckCircle2 className="w-4 h-4 text-sky-400" />}
+                                    {selectedApp.id === app.id && <CheckCircle2 className="w-4 h-4 text-brand-primary" />}
                                 </button>
                             ))}
                         </div>
@@ -356,7 +346,7 @@ EXECUTION STEPS:
                             type="text" 
                             value={transaction.split(' ').slice(1).join(' ')} 
                             onChange={(e) => setTransaction(`POST ${e.target.value}`)}
-                            className="flex-1 bg-slate-950 border border-slate-800 text-slate-300 text-xs rounded-lg px-3 py-2 outline-none focus:border-sky-500 transition-colors font-mono"
+                            className="flex-1 bg-slate-950 border border-slate-800 text-slate-300 text-xs rounded-lg px-3 py-2 outline-none focus:border-brand-primary transition-colors font-mono"
                             />
                         </div>
                     </div>
@@ -371,7 +361,7 @@ EXECUTION STEPS:
                     </div>
                     <button 
                         onClick={() => setIsLogicModalOpen(true)}
-                        className="text-[10px] flex items-center space-x-1 text-sky-400 hover:text-sky-300 transition-colors"
+                        className="text-[10px] flex items-center space-x-1 text-brand-primary hover:text-orange-300 transition-colors"
                     >
                         <Eye className="w-3 h-3" />
                         <span>Inspect Logic</span>
@@ -383,7 +373,7 @@ EXECUTION STEPS:
                         <span className="text-xs text-slate-400">Enforce MFA</span>
                         <div 
                             onClick={() => setAttestationParams(p => ({...p, checkMFA: !p.checkMFA}))}
-                            className={`w-9 h-5 rounded-full cursor-pointer relative transition-colors ${attestationParams.checkMFA ? 'bg-sky-600' : 'bg-slate-700'}`}
+                            className={`w-9 h-5 rounded-full cursor-pointer relative transition-colors ${attestationParams.checkMFA ? 'bg-brand-primary' : 'bg-slate-700'}`}
                         >
                             <div className={`absolute top-1 w-3 h-3 bg-white rounded-full transition-all ${attestationParams.checkMFA ? 'left-5' : 'left-1'}`}></div>
                         </div>
@@ -392,7 +382,7 @@ EXECUTION STEPS:
                         <span className="text-xs text-slate-400">Validate IP Allow-list</span>
                         <div 
                             onClick={() => setAttestationParams(p => ({...p, checkIP: !p.checkIP}))}
-                            className={`w-9 h-5 rounded-full cursor-pointer relative transition-colors ${attestationParams.checkIP ? 'bg-sky-600' : 'bg-slate-700'}`}
+                            className={`w-9 h-5 rounded-full cursor-pointer relative transition-colors ${attestationParams.checkIP ? 'bg-brand-primary' : 'bg-slate-700'}`}
                         >
                             <div className={`absolute top-1 w-3 h-3 bg-white rounded-full transition-all ${attestationParams.checkIP ? 'left-5' : 'left-1'}`}></div>
                         </div>
@@ -400,14 +390,14 @@ EXECUTION STEPS:
                     <div className="pt-2 border-t border-slate-800">
                         <div className="flex justify-between text-xs mb-1">
                             <span className="text-slate-400">Risk Threshold</span>
-                            <span className="text-sky-400 font-mono">${attestationParams.riskThreshold.toLocaleString()}</span>
+                            <span className="text-brand-primary font-mono">${attestationParams.riskThreshold.toLocaleString()}</span>
                         </div>
                         <input 
                             type="range" 
                             min="1000" max="50000" step="1000"
                             value={attestationParams.riskThreshold}
                             onChange={(e) => setAttestationParams(p => ({...p, riskThreshold: parseInt(e.target.value)}))}
-                            className="w-full h-1 bg-slate-700 rounded-lg appearance-none cursor-pointer [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-3 [&::-webkit-slider-thumb]:h-3 [&::-webkit-slider-thumb]:bg-sky-500 [&::-webkit-slider-thumb]:rounded-full"
+                            className="w-full h-1 bg-slate-700 rounded-lg appearance-none cursor-pointer [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-3 [&::-webkit-slider-thumb]:h-3 [&::-webkit-slider-thumb]:bg-brand-primary [&::-webkit-slider-thumb]:rounded-full"
                         />
                     </div>
                 </div>
@@ -416,8 +406,8 @@ EXECUTION STEPS:
                 {/* Step 4: Execution */}
                 <div>
                     <div className="flex items-center space-x-2 mb-3 mt-2">
-                        <div className={`w-6 h-6 rounded-full border flex items-center justify-center text-xs font-bold transition-colors ${isAnalyzing ? 'bg-sky-500 border-sky-400 text-white animate-pulse' : 'bg-slate-800 border-slate-700 text-slate-300'}`}>4</div>
-                        <h3 className={`text-sm font-bold uppercase tracking-wide ${isAnalyzing ? 'text-sky-400' : 'text-slate-200'}`}>Start Simulation</h3>
+                        <div className={`w-6 h-6 rounded-full border flex items-center justify-center text-xs font-bold transition-colors ${isAnalyzing ? 'bg-brand-primary border-brand-primary text-white animate-pulse' : 'bg-slate-800 border-slate-700 text-slate-300'}`}>4</div>
+                        <h3 className={`text-sm font-bold uppercase tracking-wide ${isAnalyzing ? 'text-brand-primary' : 'text-slate-200'}`}>Start Simulation</h3>
                     </div>
 
                     <div className="bg-slate-900 border border-slate-800 rounded-xl p-4 space-y-4">
@@ -427,7 +417,7 @@ EXECUTION STEPS:
                             className={`w-full py-4 rounded-xl font-bold text-sm flex items-center justify-center space-x-2 transition-all shadow-xl ${
                             isAnalyzing 
                             ? 'bg-slate-800 text-slate-500 cursor-not-allowed border border-slate-700' 
-                            : 'bg-gradient-to-r from-sky-600 to-blue-700 hover:from-sky-500 hover:to-blue-600 text-white shadow-sky-900/20 border border-transparent transform hover:scale-[1.02]'
+                            : 'bg-gradient-to-r from-brand-primary to-orange-600 hover:from-orange-500 hover:to-red-500 text-white shadow-orange-900/20 border border-transparent transform hover:scale-[1.02]'
                             }`}
                         >
                             {isAnalyzing ? <Loader2 className="w-5 h-5 animate-spin" /> : <Play className="w-5 h-5 fill-current" />}
@@ -439,7 +429,7 @@ EXECUTION STEPS:
                             <div className="space-y-3 pt-2 animate-in fade-in slide-in-from-top-2">
                             <div className="h-1 w-full bg-slate-800 rounded-full overflow-hidden">
                                 <div 
-                                    className="h-full bg-sky-500 transition-all duration-500 ease-out"
+                                    className="h-full bg-brand-primary transition-all duration-500 ease-out"
                                     style={{ width: `${(currentStage / SIMULATION_STAGES.length) * 100}%` }}
                                 ></div>
                             </div>
@@ -450,14 +440,14 @@ EXECUTION STEPS:
                                     return (
                                         <div key={stage.id} className="flex flex-col items-center">
                                         <div className={`mb-1 p-1.5 rounded-full border ${
-                                            isActive ? 'bg-sky-500/20 border-sky-500 text-sky-400 scale-110' : 
+                                            isActive ? 'bg-brand-primary/20 border-brand-primary text-brand-primary scale-110' : 
                                             isCompleted ? 'bg-emerald-500/10 border-emerald-500/30 text-emerald-500' : 
                                             'bg-slate-800 border-slate-700 text-slate-600'
                                         } transition-all duration-300`}>
                                             <stage.icon className="w-3 h-3" />
                                         </div>
                                         <span className={`text-[9px] font-medium text-center leading-tight ${
-                                            isActive ? 'text-sky-400' : 
+                                            isActive ? 'text-brand-primary' : 
                                             isCompleted ? 'text-emerald-500' : 
                                             'text-slate-600'
                                         }`}>{stage.label}</span>
@@ -484,7 +474,7 @@ EXECUTION STEPS:
                 <div className="bg-slate-900 border border-slate-800 rounded-xl p-1 flex-1 min-h-[400px] flex flex-col relative overflow-hidden shadow-2xl">
                 <div className="absolute top-4 left-4 z-10 flex space-x-2">
                     <div className="bg-slate-950/80 backdrop-blur px-3 py-1 rounded border border-slate-800 text-xs text-slate-400 font-mono flex items-center">
-                        <span className={`w-2 h-2 rounded-full mr-2 ${isAnalyzing ? 'bg-sky-500 animate-pulse' : 'bg-emerald-500'}`}></span>
+                        <span className={`w-2 h-2 rounded-full mr-2 ${isAnalyzing ? 'bg-brand-primary animate-pulse' : 'bg-emerald-500'}`}></span>
                         Live Context: {selectedApp.name}
                     </div>
                 </div>
@@ -495,7 +485,7 @@ EXECUTION STEPS:
                         <div className="w-20 h-20 border-2 border-slate-800 rounded-full flex items-center justify-center mb-6 relative">
                             <ArrowRight className="w-8 h-8 opacity-50" />
                             {isAnalyzing && (
-                            <div className="absolute inset-0 border-t-2 border-sky-500 rounded-full animate-spin"></div>
+                            <div className="absolute inset-0 border-t-2 border-brand-primary rounded-full animate-spin"></div>
                             )}
                         </div>
                         <p className="text-sm font-medium text-slate-500">
@@ -592,7 +582,7 @@ EXECUTION STEPS:
                           {isDrifted ? (
                              <button 
                                 onClick={() => reauthorizeApp(app.id)}
-                                className="w-full py-2 bg-blue-600 hover:bg-blue-500 text-white rounded-lg text-xs font-bold uppercase tracking-wider transition-colors shadow-lg shadow-blue-900/20 flex items-center justify-center space-x-2"
+                                className="w-full py-2 bg-brand-primary hover:bg-orange-600 text-white rounded-lg text-xs font-bold uppercase tracking-wider transition-colors shadow-lg shadow-orange-900/20 flex items-center justify-center space-x-2"
                              >
                                 <Play className="w-3 h-3 fill-current" />
                                 <span>Re-Run Attestation</span>
@@ -619,7 +609,7 @@ EXECUTION STEPS:
             <div className="bg-slate-900 border border-slate-700 rounded-xl w-full max-w-4xl h-[80vh] flex flex-col shadow-2xl overflow-hidden">
                <div className="p-4 border-b border-slate-800 flex items-center justify-between bg-slate-800/50">
                   <div className="flex items-center space-x-3">
-                     <div className="p-2 bg-purple-500/10 rounded-lg border border-purple-500/20 text-purple-400">
+                     <div className="p-2 bg-brand-primary/10 rounded-lg border border-brand-primary/20 text-brand-primary">
                         <Cpu className="w-5 h-5" />
                      </div>
                      <div>
@@ -635,7 +625,7 @@ EXECUTION STEPS:
                <div className="flex border-b border-slate-800 bg-slate-950/50">
                    <button 
                      onClick={() => setLogicTab('blueprint')}
-                     className={`px-6 py-3 text-sm font-medium flex items-center space-x-2 border-b-2 transition-colors ${logicTab === 'blueprint' ? 'text-blue-400 border-blue-500' : 'text-slate-400 border-transparent hover:text-white'}`}
+                     className={`px-6 py-3 text-sm font-medium flex items-center space-x-2 border-b-2 transition-colors ${logicTab === 'blueprint' ? 'text-brand-primary border-brand-primary' : 'text-slate-400 border-transparent hover:text-white'}`}
                    >
                      <FileCode className="w-4 h-4" /> <span>Agent Blueprint (Logic)</span>
                    </button>
@@ -658,7 +648,7 @@ EXECUTION STEPS:
                   {/* Code Content */}
                   <div className="flex-1 overflow-auto p-6 bg-[#1e1e1e]">
                      <pre className="font-mono text-sm leading-relaxed">
-                        <code className={logicTab === 'blueprint' ? 'text-blue-300' : 'text-emerald-300'}>
+                        <code className={logicTab === 'blueprint' ? 'text-orange-300' : 'text-emerald-300'}>
                            {getActiveContent()}
                         </code>
                      </pre>

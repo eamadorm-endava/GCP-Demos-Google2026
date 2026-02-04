@@ -21,7 +21,8 @@ const ReportModal: React.FC<ReportModalProps> = ({ isOpen, onClose, result, risk
         <div className="bg-slate-50 border-b border-slate-200 p-6 flex items-start justify-between">
           <div>
             <div className="flex items-center space-x-2 text-slate-900 mb-2">
-              <ShieldCheck className="w-6 h-6 text-blue-700" />
+              {/* Changed from text-blue-700 to text-brand-primary */}
+              <ShieldCheck className="w-6 h-6 text-brand-primary" />
               <span className="font-serif font-bold text-xl tracking-tight">SENTINEL ASSURANCE</span>
             </div>
             <h2 className="text-sm font-semibold text-slate-500 uppercase tracking-widest">Internal Audit Memorandum</h2>
@@ -50,6 +51,7 @@ const ReportModal: React.FC<ReportModalProps> = ({ isOpen, onClose, result, risk
             </div>
             <div className="p-3 bg-slate-50 rounded border border-slate-100">
               <div className="text-slate-500 text-xs uppercase mb-1">Verification Status</div>
+              {/* Status colors (Red/Green) are kept as functional colors */}
               <div className={`font-bold ${result.effective ? 'text-emerald-700' : 'text-red-700'}`}>
                 {result.effective ? 'EFFECTIVE' : 'INEFFECTIVE / DEFICIENCY'}
               </div>
@@ -144,7 +146,8 @@ const ReportModal: React.FC<ReportModalProps> = ({ isOpen, onClose, result, risk
                 <Printer className="w-4 h-4" />
                 <span>Print</span>
              </button>
-             <button className="flex items-center space-x-2 px-4 py-2 bg-blue-900 hover:bg-blue-800 text-white rounded-lg transition-colors text-sm font-medium shadow-lg">
+             {/* Changed from bg-blue-900 to bg-brand-primary */}
+             <button className="flex items-center space-x-2 px-4 py-2 bg-brand-primary hover:bg-orange-700 text-white rounded-lg transition-colors text-sm font-medium shadow-lg">
                 <Download className="w-4 h-4" />
                 <span>Export PDF</span>
              </button>

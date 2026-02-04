@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { X, GitBranch, Code, Globe, FileCode, Shield } from 'lucide-react';
 import { CIAMApplication } from '../types';
@@ -40,7 +39,7 @@ const AddAppModal: React.FC<AddAppModalProps> = ({ isOpen, onClose, onAdd }) => 
       <div className="bg-slate-900 border border-slate-700 rounded-xl max-w-md w-full shadow-2xl overflow-hidden">
         <div className="p-6 border-b border-slate-800 flex items-center justify-between bg-slate-800/50">
           <div className="flex items-center space-x-3">
-            <div className="p-2 bg-sky-500/10 rounded-lg border border-sky-500/20 text-sky-400">
+            <div className="p-2 bg-brand-primary/10 rounded-lg border border-brand-primary/20 text-brand-primary">
               <GitBranch className="w-5 h-5" />
             </div>
             <h2 className="text-xl font-bold text-white">Onboard Application</h2>
@@ -60,7 +59,7 @@ const AddAppModal: React.FC<AddAppModalProps> = ({ isOpen, onClose, onAdd }) => 
                  required
                  value={name}
                  onChange={(e) => setName(e.target.value)}
-                 className="w-full bg-slate-950 border border-slate-800 rounded-lg pl-10 pr-4 py-2.5 text-slate-200 focus:outline-none focus:border-sky-500 transition-colors placeholder:text-slate-600"
+                 className="w-full bg-slate-950 border border-slate-800 rounded-lg pl-10 pr-4 py-2.5 text-slate-200 focus:outline-none focus:border-brand-primary transition-colors placeholder:text-slate-600"
                  placeholder="e.g. Corporate Treasury Portal"
                />
             </div>
@@ -75,7 +74,7 @@ const AddAppModal: React.FC<AddAppModalProps> = ({ isOpen, onClose, onAdd }) => 
                  required
                  value={language}
                  onChange={(e) => setLanguage(e.target.value)}
-                 className="w-full bg-slate-950 border border-slate-800 rounded-lg pl-10 pr-4 py-2.5 text-slate-200 focus:outline-none focus:border-sky-500 transition-colors placeholder:text-slate-600"
+                 className="w-full bg-slate-950 border border-slate-800 rounded-lg pl-10 pr-4 py-2.5 text-slate-200 focus:outline-none focus:border-brand-primary transition-colors placeholder:text-slate-600"
                  placeholder="e.g. Java Spring Boot / Angular"
                />
             </div>
@@ -90,7 +89,7 @@ const AddAppModal: React.FC<AddAppModalProps> = ({ isOpen, onClose, onAdd }) => 
                  required
                  value={repo}
                  onChange={(e) => setRepo(e.target.value)}
-                 className="w-full bg-slate-950 border border-slate-800 rounded-lg pl-10 pr-4 py-2.5 text-slate-200 focus:outline-none focus:border-sky-500 transition-colors placeholder:text-slate-600"
+                 className="w-full bg-slate-950 border border-slate-800 rounded-lg pl-10 pr-4 py-2.5 text-slate-200 focus:outline-none focus:border-brand-primary transition-colors placeholder:text-slate-600"
                  placeholder="e.g. github.com/fintech/treasury-core"
                />
             </div>
@@ -103,7 +102,7 @@ const AddAppModal: React.FC<AddAppModalProps> = ({ isOpen, onClose, onAdd }) => 
                <select 
                  value={framework}
                  onChange={(e) => setFramework(e.target.value)}
-                 className="w-full bg-slate-950 border border-slate-800 rounded-lg pl-10 pr-4 py-2.5 text-slate-200 focus:outline-none focus:border-sky-500 transition-colors appearance-none"
+                 className="w-full bg-slate-950 border border-slate-800 rounded-lg pl-10 pr-4 py-2.5 text-slate-200 focus:outline-none focus:border-brand-primary transition-colors appearance-none"
                >
                  <option value="NIST 800-63B">NIST 800-63B (Identity Assurance)</option>
                  <option value="PCI-DSS 4.0">PCI-DSS 4.0 (Payments)</option>
@@ -123,7 +122,7 @@ const AddAppModal: React.FC<AddAppModalProps> = ({ isOpen, onClose, onAdd }) => 
             </button>
             <button 
               type="submit"
-              className="px-4 py-2 rounded-lg text-sm bg-sky-600 hover:bg-sky-500 text-white font-medium shadow-lg shadow-sky-900/20"
+              className="px-4 py-2 rounded-lg text-sm bg-brand-primary hover:bg-orange-600 text-white font-medium shadow-lg shadow-orange-900/20"
             >
               Onboard App
             </button>
