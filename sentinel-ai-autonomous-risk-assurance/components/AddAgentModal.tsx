@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { X, Bot, BrainCircuit, Cpu, Zap, PenTool, Sliders, FileText } from 'lucide-react';
 import { AgentCapability, CapabilityDefinition } from '../types';
@@ -35,12 +34,12 @@ const AddAgentModal: React.FC<AddAgentModalProps> = ({ isOpen, onClose, onAdd, a
       name,
       description,
       icon: Bot, 
-      color: 'text-purple-400',
-      bg: 'bg-purple-500/10',
-      border: 'border-purple-500/20',
+      color: 'text-brand-primary',
+      bg: 'bg-brand-primary/10',
+      border: 'border-brand-primary/20',
       model: baseModel,
       capabilities: [primaryCapability],
-      requiredIntegrations: [], // Simplification for MVP
+      requiredIntegrations: [], 
       useCases: ['Custom defined use case'],
       config: {
         temperature,
@@ -66,7 +65,7 @@ const AddAgentModal: React.FC<AddAgentModalProps> = ({ isOpen, onClose, onAdd, a
       <div className="bg-slate-900 border border-slate-700 rounded-xl max-w-2xl w-full shadow-2xl overflow-hidden flex flex-col max-h-[90vh]">
         <div className="p-6 border-b border-slate-800 flex items-center justify-between bg-slate-800/50">
           <div className="flex items-center space-x-3">
-            <div className="p-2 bg-purple-500/10 rounded-lg border border-purple-500/20 text-purple-400">
+            <div className="p-2 bg-brand-primary/10 rounded-lg border border-brand-primary/20 text-brand-primary">
               <BrainCircuit className="w-5 h-5" />
             </div>
             <h2 className="text-xl font-bold text-white">Provision New Agent</h2>
@@ -79,14 +78,14 @@ const AddAgentModal: React.FC<AddAgentModalProps> = ({ isOpen, onClose, onAdd, a
         <div className="flex border-b border-slate-800 bg-slate-950/50">
             <button 
               onClick={() => setActiveTab('basics')}
-              className={`flex-1 py-3 text-sm font-medium border-b-2 transition-colors flex items-center justify-center space-x-2 ${activeTab === 'basics' ? 'border-purple-500 text-purple-400' : 'border-transparent text-slate-400 hover:text-slate-200'}`}
+              className={`flex-1 py-3 text-sm font-medium border-b-2 transition-colors flex items-center justify-center space-x-2 ${activeTab === 'basics' ? 'border-brand-primary text-brand-primary' : 'border-transparent text-slate-400 hover:text-slate-200'}`}
             >
               <Bot className="w-4 h-4" />
               <span>Identity & Role</span>
             </button>
             <button 
               onClick={() => setActiveTab('config')}
-              className={`flex-1 py-3 text-sm font-medium border-b-2 transition-colors flex items-center justify-center space-x-2 ${activeTab === 'config' ? 'border-purple-500 text-purple-400' : 'border-transparent text-slate-400 hover:text-slate-200'}`}
+              className={`flex-1 py-3 text-sm font-medium border-b-2 transition-colors flex items-center justify-center space-x-2 ${activeTab === 'config' ? 'border-brand-primary text-brand-primary' : 'border-transparent text-slate-400 hover:text-slate-200'}`}
             >
               <Sliders className="w-4 h-4" />
               <span>Model Configuration</span>
@@ -103,7 +102,7 @@ const AddAgentModal: React.FC<AddAgentModalProps> = ({ isOpen, onClose, onAdd, a
                   required
                   value={name}
                   onChange={(e) => setName(e.target.value)}
-                  className="w-full bg-slate-950 border border-slate-800 rounded-lg px-4 py-2.5 text-slate-200 focus:outline-none focus:border-purple-500 transition-colors placeholder:text-slate-600"
+                  className="w-full bg-slate-950 border border-slate-800 rounded-lg px-4 py-2.5 text-slate-200 focus:outline-none focus:border-brand-primary transition-colors placeholder:text-slate-600"
                   placeholder="e.g. Compliance Sentinel V2"
                 />
               </div>
@@ -115,7 +114,7 @@ const AddAgentModal: React.FC<AddAgentModalProps> = ({ isOpen, onClose, onAdd, a
                   value={description}
                   onChange={(e) => setDescription(e.target.value)}
                   rows={3}
-                  className="w-full bg-slate-950 border border-slate-800 rounded-lg px-4 py-2.5 text-slate-200 focus:outline-none focus:border-purple-500 transition-colors placeholder:text-slate-600"
+                  className="w-full bg-slate-950 border border-slate-800 rounded-lg px-4 py-2.5 text-slate-200 focus:outline-none focus:border-brand-primary transition-colors placeholder:text-slate-600"
                   placeholder="Define the role and tone of the agent..."
                 />
               </div>
@@ -126,7 +125,7 @@ const AddAgentModal: React.FC<AddAgentModalProps> = ({ isOpen, onClose, onAdd, a
                   <select 
                     value={baseModel}
                     onChange={(e) => setBaseModel(e.target.value)}
-                    className="w-full bg-slate-950 border border-slate-800 rounded-lg px-4 py-2.5 text-slate-200 focus:outline-none focus:border-purple-500 transition-colors"
+                    className="w-full bg-slate-950 border border-slate-800 rounded-lg px-4 py-2.5 text-slate-200 focus:outline-none focus:border-brand-primary transition-colors"
                   >
                     <option value="Gemini 1.5 Pro">Gemini 1.5 Pro</option>
                     <option value="Gemini 1.5 Flash">Gemini 1.5 Flash</option>
@@ -141,7 +140,7 @@ const AddAgentModal: React.FC<AddAgentModalProps> = ({ isOpen, onClose, onAdd, a
                   <select 
                     value={primaryCapability}
                     onChange={(e) => setPrimaryCapability(e.target.value)}
-                    className="w-full bg-slate-950 border border-slate-800 rounded-lg px-4 py-2.5 text-slate-200 focus:outline-none focus:border-purple-500 transition-colors"
+                    className="w-full bg-slate-950 border border-slate-800 rounded-lg px-4 py-2.5 text-slate-200 focus:outline-none focus:border-brand-primary transition-colors"
                   >
                     {availableCapabilities.map(cap => (
                       <option key={cap.id} value={cap.id}>{cap.name}</option>
@@ -156,28 +155,28 @@ const AddAgentModal: React.FC<AddAgentModalProps> = ({ isOpen, onClose, onAdd, a
                    <div>
                       <div className="flex justify-between mb-2">
                         <label className="block text-xs font-semibold text-slate-500 uppercase tracking-wider">Temperature</label>
-                        <span className="text-xs font-mono text-purple-400">{temperature}</span>
+                        <span className="text-xs font-mono text-brand-primary">{temperature}</span>
                       </div>
                       <input 
                         type="range" 
                         min="0" max="1" step="0.1"
                         value={temperature}
                         onChange={(e) => setTemperature(parseFloat(e.target.value))}
-                        className="w-full h-2 bg-slate-800 rounded-lg appearance-none cursor-pointer [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-4 [&::-webkit-slider-thumb]:h-4 [&::-webkit-slider-thumb]:bg-purple-500 [&::-webkit-slider-thumb]:rounded-full hover:[&::-webkit-slider-thumb]:scale-110 transition-all"
+                        className="w-full h-2 bg-slate-800 rounded-lg appearance-none cursor-pointer [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-4 [&::-webkit-slider-thumb]:h-4 [&::-webkit-slider-thumb]:bg-brand-primary [&::-webkit-slider-thumb]:rounded-full hover:[&::-webkit-slider-thumb]:scale-110 transition-all"
                       />
                       <p className="text-[10px] text-slate-500 mt-2">Lower values are more deterministic and focused. Higher values are more creative.</p>
                    </div>
                    <div>
                       <div className="flex justify-between mb-2">
                         <label className="block text-xs font-semibold text-slate-500 uppercase tracking-wider">Max Output Tokens</label>
-                        <span className="text-xs font-mono text-purple-400">{maxTokens}</span>
+                        <span className="text-xs font-mono text-brand-primary">{maxTokens}</span>
                       </div>
                       <input 
                         type="number" 
                         min="1024" max="32768" step="1024"
                         value={maxTokens}
                         onChange={(e) => setMaxTokens(parseInt(e.target.value))}
-                        className="w-full bg-slate-950 border border-slate-800 rounded-lg px-3 py-1.5 text-slate-200 text-sm focus:outline-none focus:border-purple-500 transition-colors"
+                        className="w-full bg-slate-950 border border-slate-800 rounded-lg px-3 py-1.5 text-slate-200 text-sm focus:outline-none focus:border-brand-primary transition-colors"
                       />
                       <p className="text-[10px] text-slate-500 mt-2">Maximum length of the agent's response stream per turn.</p>
                    </div>
@@ -191,7 +190,7 @@ const AddAgentModal: React.FC<AddAgentModalProps> = ({ isOpen, onClose, onAdd, a
                       value={systemInstruction}
                       onChange={(e) => setSystemInstruction(e.target.value)}
                       rows={6}
-                      className="w-full bg-[#1e1e1e] border border-slate-800 rounded-lg px-4 py-3 text-slate-300 font-mono text-xs focus:outline-none focus:border-purple-500 transition-colors leading-relaxed"
+                      className="w-full bg-[#1e1e1e] border border-slate-800 rounded-lg px-4 py-3 text-slate-300 font-mono text-xs focus:outline-none focus:border-brand-primary transition-colors leading-relaxed"
                       placeholder="Enter system prompt instructions..."
                    />
                    <p className="text-[10px] text-slate-500 mt-2">
@@ -211,7 +210,7 @@ const AddAgentModal: React.FC<AddAgentModalProps> = ({ isOpen, onClose, onAdd, a
             </button>
             <button 
               type="submit"
-              className="px-4 py-2 rounded-lg text-sm bg-purple-600 hover:bg-purple-500 text-white font-medium shadow-lg shadow-purple-900/20 mt-4"
+              className="px-4 py-2 rounded-lg text-sm bg-brand-primary hover:bg-orange-600 text-white font-medium shadow-lg shadow-orange-900/20 mt-4"
             >
               Deploy Agent
             </button>

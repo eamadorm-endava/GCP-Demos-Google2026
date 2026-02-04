@@ -4,6 +4,7 @@ substitutions:
   _SERVICE: sentinel-ai-autonomous-risk-assurance
   _DEMO_DIR: sentinel-ai-autonomous-risk-assurance
   _PROJECT_ID: p-dev-stemilt-0sjp-1
+  _AIP_GROUP: gcu_demos_temp_group@endava.com
 
 availableSecrets:
   secretManager:
@@ -22,7 +23,7 @@ steps:
       - '-c'
       - |
         docker build \
-          --build-arg "GEMINI_API_KEY=$$GEMINI_API_KEY" \
+          --build-arg "VITE_GEMINI_API_KEY=$$GEMINI_API_KEY" \
           -f ${_DEMO_DIR}/Dockerfile \
           -t ${_REGION}-docker.pkg.dev/${_PROJECT_ID}/${_AR_REPO}/${_SERVICE}:${SHORT_SHA} \
           ${_DEMO_DIR}
@@ -42,14 +43,29 @@ steps:
     args:
       - '-c'
       - |
-        gcloud run deploy ${_SERVICE} \
+        gcloud beta run deploy ${_SERVICE} \
           --image=${_REGION}-docker.pkg.dev/${_PROJECT_ID}/${_AR_REPO}/${_SERVICE}:${SHORT_SHA} \
           --region=${_REGION} \
           --platform=managed \
           --no-allow-unauthenticated \
+          --iap \
           --port=80 \
           --set-env-vars="GEMINI_API_KEY=$$GEMINI_API_KEY"
     secretEnv: ['GEMINI_API_KEY']
+
+  # 4. Allow access to the IAP group
+  - name: 'gcr.io/cloud-builders/gcloud'
+    id: 'IAP-Access'
+    entrypoint: 'bash'
+    args:
+      - '-c'
+      - |
+        gcloud beta iap web add-iam-policy-binding \
+          --member=group:${_AIP_GROUP} \
+          --role=roles/iap.hesottpsRurceAccessor \
+          --region=${_REGION} \
+          --resource-type=cloud-run \
+          --service=${_SERVICE}
 
 images:
   - '${_REGION}-docker.pkg.dev/${_PROJECT_ID}/${_AR_REPO}/${_SERVICE}:${SHORT_SHA}'
