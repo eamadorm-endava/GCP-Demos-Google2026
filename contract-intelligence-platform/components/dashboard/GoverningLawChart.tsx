@@ -12,7 +12,7 @@ interface GoverningLawChartProps {
   data: ChartData[];
 }
 
-// CORRECTED: Endava Data Visualisation Palette (from image_7a8745.png)
+// Endava Data Visualisation Palette
 const COLORS = [
     '#5899C4', // Data Blue
     '#FF5641', // Data Orange
@@ -25,7 +25,7 @@ const COLORS = [
 const CustomTooltip = ({ active, payload }: any) => {
   if (active && payload && payload.length) {
     const data = payload[0].payload;
-    const color = payload[0].payload.fill ||HZORS[0];
+    const color = payload[0].payload.fill || COLORS[0];
     return (
       <div className="bg-brand-secondary/95 backdrop-blur-md border border-brand-accent p-2.5 rounded-lg shadow-xl text-sm animate-fade-in">
         <div className="flex items-center gap-2 mb-1">
