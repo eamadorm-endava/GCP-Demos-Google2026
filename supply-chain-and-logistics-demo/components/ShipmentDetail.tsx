@@ -187,8 +187,8 @@ const TabButton: React.FC<{icon: React.ReactNode, label: string, isActive: boole
             onClick={onClick}
             className={`
                 ${isActive
-                    ? 'border-rose-500 text-rose-600'
-                    : 'border-transparent text-slate-500 hover:text-slate-700 hover:border-slate-300'
+                    ? 'border-rose-500 text-brand-primary-50'
+                    : 'border-transparent text-brand-sb-shade-50 hover:text-brand-sb-shade-60 hover:border-slate-300'
                 }
                 whitespace-nowrap py-4 px-1 sm:px-2 border-b-2 font-medium text-sm transition-colors duration-150 inline-flex items-center gap-2
             `}
