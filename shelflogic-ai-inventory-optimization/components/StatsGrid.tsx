@@ -24,7 +24,7 @@ export const StatsGrid: React.FC<StatsGridProps> = ({ opportunities }) => {
     return (
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 mb-12">
             {stats.map((stat: any, i: number) => (
-                <div key={i} className={`${theme.components.card} p-4 md:p-6 relative overflow-hidden group hover:border-cyan-500/30 transition-all glass-panel`}>
+                <div key={i} className={`${theme.components.card} p-4 md:p-6 relative overflow-hidden group hover:border-[var(--color-brand-primary-500)] transition-all glass-panel`}>
                     <div className={`absolute top-0 right-0 p-4 opacity-5 group-hover:scale-110 transition-transform duration-500`}>
                         <Activity className="w-16 h-16" />
                     </div>

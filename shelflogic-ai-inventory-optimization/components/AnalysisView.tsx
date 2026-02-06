@@ -91,7 +91,7 @@ export const AnalysisView: React.FC<AnalysisViewProps> = ({ opportunity }) => {
         </div>
         <div className="flex space-x-3">
             {!executed ? (
-                <button onClick={handleExecute} disabled={executing} className={`px-6 py-2.5 bg-gradient-to-r ${theme.semantic.primary.gradient} text-white rounded-lg shadow-md font-medium hover:shadow-cyan-900/30 transition-all`}>
+                <button onClick={handleExecute} disabled={executing} className={`px-6 py-2.5 bg-gradient-to-r ${theme.semantic.primary.gradient} text-white rounded-lg shadow-md font-medium hover:shadow-[var(--color-brand-primary-500)] transition-all`}>
                     {executing ? 'Processing...' : getActionText()}
                 </button>
             ) : (

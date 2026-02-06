@@ -72,7 +72,7 @@ export const HQDashboard: React.FC = () => {
         <div>
               <div className="flex flex-col md:flex-row md:items-center justify-between mb-6 gap-4">
                 <div className="flex items-center">
-                <div className="w-1.5 h-6 bg-cyan-500 rounded-full mr-3"></div>
+                <div className="w-1.5 h-6 bg-[var(--color-brand-primary-500)] rounded-full mr-3"></div>
                 <h2 className={`text-xl font-bold ${theme.colors.text.primary}`}>
                     Optimization Pipeline
                 </h2>

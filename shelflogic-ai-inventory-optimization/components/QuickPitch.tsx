@@ -9,7 +9,7 @@ const DEFAULT_PITCH: VerticalConfig = {
     id: 'retail',
     title: 'ShelfLogic AI',
     icon: 'shopping-cart',
-    color: 'bg-cyan-600',
+    color: 'bg-[var(--color-brand-primary-500)]',
     pitch: {
         problem: "Retailers lose billions to inventory distortion.",
         solution: "Autonomous agents optimize stock levels in real-time.",

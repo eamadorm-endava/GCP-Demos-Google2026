@@ -79,12 +79,12 @@ export const InventoryForecastDetails: React.FC<InventoryForecastDetailsProps> =
             <div className={`${theme.components.card} p-6`}>
                 <div className="flex flex-col md:flex-row justify-between md:items-center mb-6">
                     <h3 className={`font-bold ${theme.colors.text.primary} flex items-center`}>
-                        <TrendingUp className="w-5 h-5 mr-2 text-indigo-400" />
+                        <TrendingUp className="w-5 h-5 mr-2 text-[var(--color-brand-secondary-100)]" />
                         Demand Forecast & Inventory Burndown
                     </h3>
                     <div className="flex items-center space-x-4 text-xs font-medium mt-3 md:mt-0">
                         <div className="flex items-center"><span className="w-2.5 h-2.5 bg-slate-500 rounded-sm mr-2"></span><span className={`${theme.colors.text.secondary}`}>History</span></div>
-                        <div className="flex items-center"><span className="w-2.5 h-2.5 bg-indigo-500 rounded-sm mr-2"></span><span className={`${theme.colors.text.secondary}`}>Forecast</span></div>
+                        <div className="flex items-center"><span className="w-2.5 h-2.5 bg-[var(--color-brand-secondary-200)]rounded-sm mr-2"></span><span className={`${theme.colors.text.secondary}`}>Forecast</span></div>
                         <div className="flex items-center"><span className="w-2.5 h-2.5 bg-rose-500/50 rounded-sm mr-2"></span><span className={`${theme.colors.text.secondary}`}>Inventory</span></div>
                     </div>
                 </div>

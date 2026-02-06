@@ -1,3 +1,4 @@
+import "./index.css";
 import React, { useState, useMemo, useCallback, useEffect } from 'react';
 // FIX: Update import paths for consistency and add missing imports.
 import { Header } from './components/Header';

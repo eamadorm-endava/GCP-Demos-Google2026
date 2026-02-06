@@ -45,7 +45,7 @@ export const FarmDetail: React.FC<FarmDetailProps> = ({ farm, user, onUpdateStat
                         >
                             <ArrowLeftIcon className="w-6 h-6" />
                         </button>
-                        <h2 className="text-2xl font-bold text-slate-800">{farm.name}</h2>
+                        <h2 className="text-2xl font-bold text-brand-primary-300">{farm.name}</h2>
                     </div>
                     <span className={`inline-flex items-center gap-2 px-3 py-1 text-sm font-medium rounded-full ${config.color}`}>
                         {config.icon}
@@ -68,25 +68,25 @@ export const FarmDetail: React.FC<FarmDetailProps> = ({ farm, user, onUpdateStat
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 <div className="space-y-6">
-                    <InfoSection icon={<UserCircleIcon className="w-5 h-5 text-slate-500"/>} title={t('contactInfo')}>
+                    <InfoSection icon={<UserCircleIcon className="w-5 h-5 text-brand-primary-300"/>} title={t('contactInfo')}>
                         <p><span className="font-semibold">{t('name')}:</span> {farm.contact.name}</p>
-                        <p><span className="font-semibold">{t('email')}:</span> <a href={`mailto:${farm.contact.email}`} className="text-rose-600 hover:underline">{farm.contact.email}</a></p>
+                        <p><span className="font-semibold">{t('email')}:</span> <a href={`mailto:${farm.contact.email}`} className="text-brand-primary-50 hover:underline">{farm.contact.email}</a></p>
                     </InfoSection>
-                     <InfoSection icon={<BuildingOfficeIcon className="w-5 h-5 text-slate-500"/>} title={t('address')}>
+                     <InfoSection icon={<BuildingOfficeIcon className="w-5 h-5 text-brand-primary-300"/>} title={t('address')}>
                         <p>{farm.address.line1}</p>
                         <p>{farm.address.municipality}, {farm.originCountry}</p>
                         {farm.address.postalCode && <p>{t('postalCode')}: {farm.address.postalCode}</p>}
                     </InfoSection>
                 </div>
                 <div>
-                     <InfoSection icon={<DocumentCheckIcon className="w-5 h-5 text-slate-500"/>} title={t('requiredDocs', { country: farm.originCountry })}>
-                         <ul className="divide-y divide-slate-200 border border-slate-200 rounded-md mt-2">
+                     <InfoSection icon={<DocumentCheckIcon className="w-5 h-5 text-brand-primary-300"/>} title={t('requiredDocs', { country: farm.originCountry })}>
+                         <ul className="divide-y divide-slate-200 border border-brand-sb-shade-80 rounded-md mt-2">
                             {/* FIX: Explicitly type docInfo to resolve property access errors on type 'unknown'. */}
                             {Object.entries(farm.registrationDocs).map(([docName, docInfo]: [string, { required: boolean; uploaded: boolean }]) => (
                                 <li key={docName} className="flex items-center justify-between p-3">
-                                    <p className={`text-sm font-medium ${docInfo.required ? 'text-slate-800' : 'text-slate-500'}`}>
+                                    <p className={`text-sm font-medium ${docInfo.required ? 'text-brand-sb-shade-20' : 'text-brand-sb-shade-60'}`}>
                                         {docName}
-                                        {!docInfo.required && <span className="text-xs text-slate-400"> (Optional)</span>}
+                                        {!docInfo.required && <span className="text-xs text-brand-sb-shade-60"> (Optional)</span>}
                                     </p>
                                     <div className="flex items-center gap-2">
                                         {docInfo.uploaded ? (
@@ -119,11 +119,11 @@ export const FarmDetail: React.FC<FarmDetailProps> = ({ farm, user, onUpdateStat
 
 const InfoSection: React.FC<{icon: React.ReactNode, title: string, children: React.ReactNode}> = ({ icon, title, children }) => (
     <div>
-        <h3 className="text-lg font-bold text-slate-800 flex items-center gap-2 mb-2">
+        <h3 className="text-lg font-bold text-brand-primary-300 flex items-center gap-2 mb-2">
            {icon}
            {title}
         </h3>
-        <div className="text-sm text-slate-600 pl-7 space-y-1">
+        <div className="text-sm text-brand-sb-shade-20 pl-7 space-y-1">
             {children}
         </div>
     </div>

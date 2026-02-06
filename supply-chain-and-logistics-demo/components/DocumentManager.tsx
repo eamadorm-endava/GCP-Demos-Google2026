@@ -52,7 +52,7 @@ export const DocumentManager: React.FC<DocumentManagerProps> = ({ shipmentId, do
   return (
     <div>
         <div className="flex justify-between items-center mb-4">
-            <h3 className="text-lg font-bold text-slate-800">{t('shipmentDocuments')}</h3>
+            <h3 className="text-lg font-bold text-brand-primary-300">{t('shipmentDocuments')}</h3>
             <button
                 onClick={handleUploadClick}
                 disabled={isUploading}
@@ -88,19 +88,19 @@ export const DocumentManager: React.FC<DocumentManagerProps> = ({ shipmentId, do
 
       {documents.length === 0 ? (
         <div className="text-center py-10 border-2 border-dashed border-slate-200 rounded-lg">
-          <DocumentIcon className="mx-auto h-12 w-12 text-slate-400" />
-          <h3 className="mt-2 text-sm font-semibold text-slate-900">{t('noDocuments')}</h3>
-          <p className="mt-1 text-sm text-slate-500">{t('getStartedUploading')}</p>
+          <DocumentIcon className="mx-auto h-12 w-12 text-brand-sb-shade-30" />
+          <h3 className="mt-2 text-sm font-semibold text-brand-sb-shade-30">{t('noDocuments')}</h3>
+          <p className="mt-1 text-sm text-brand-sb-shade-60">{t('getStartedUploading')}</p>
         </div>
       ) : (
         <ul className="divide-y divide-slate-200 border border-slate-200 rounded-md">
           {documents.map((doc) => (
             <li key={doc.id} className="flex items-center justify-between p-3">
               <div className="flex items-center">
-                <DocumentIcon className="h-6 w-6 text-slate-500 mr-3" />
+                <DocumentIcon className="h-6 w-6 text-brand-sb-shade-30 mr-3" />
                 <div>
-                  <p className="text-sm font-medium text-slate-800">{doc.name}</p>
-                  <p className="text-xs text-slate-500">{t('uploadedOn', { date: doc.uploadedAt })}</p>
+                  <p className="text-sm font-medium text-brand-sb-shade-30">{doc.name}</p>
+                  <p className="text-xs text-brand-sb-shade-60">{t('uploadedOn', { date: doc.uploadedAt })}</p>
                 </div>
               </div>
               <a href={doc.url} target="_blank" rel="noopener noreferrer" className="text-sm font-semibold text-rose-600 hover:text-rose-500">

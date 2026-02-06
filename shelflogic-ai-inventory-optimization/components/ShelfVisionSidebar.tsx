@@ -23,7 +23,7 @@ const NodeSidebarItem: React.FC<NodeSidebarItemProps> = ({ node, isActive, onCli
         title={`Select camera feed for ${node.name}`}
         className={`w-full text-left p-3 rounded-xl border transition-all flex items-center justify-between group
             ${isActive
-                ? 'bg-slate-800 border-indigo-500 shadow-lg ring-1 ring-indigo-500/30'
+                ? 'bg-slate-800 border-[var(--color-brand-secondary-100)] shadow-lg ring-1 ring-[var(--color-brand-secondary-100)]'
                 : 'bg-transparent border-slate-800/50 hover:border-slate-700 hover:bg-slate-800/30'}
         `}
     >
@@ -36,7 +36,7 @@ const NodeSidebarItem: React.FC<NodeSidebarItemProps> = ({ node, isActive, onCli
                 <p className="text-[10px] text-slate-500 font-medium font-mono">{node.id}</p>
             </div>
         </div>
-        <ChevronRight className={`w-4 h-4 ${isActive ? 'text-indigo-400' : 'text-slate-700 opacity-0 group-hover:opacity-100 transition-opacity'}`} />
+        <ChevronRight className={`w-4 h-4 ${isActive ? 'text-[var(--color-brand-secondary-100)]' : 'text-slate-700 opacity-0 group-hover:opacity-100 transition-opacity'}`} />
     </button>
 );
 
@@ -69,7 +69,7 @@ export const ShelfVisionSidebar: React.FC<ShelfVisionSidebarProps> = ({ nodesByS
                         <div key={storeId} className="animate-in slide-in-from-left-2 duration-300">
                             <div className="px-1 mb-2 flex items-center justify-between group cursor-default">
                                 <div className="flex items-center text-slate-400">
-                                    <StoreIcon className="w-3 h-3 mr-2 text-indigo-500" />
+                                    <StoreIcon className="w-3 h-3 mr-2 text-[var(--color-brand-secondary-100)]" />
                                     <span className="text-xs font-bold uppercase tracking-wider group-hover:text-slate-200 transition-colors">{getStoreName(storeId)}</span>
                                 </div>
                                 <span className="text-[9px] bg-slate-800 text-slate-500 px-1.5 py-0.5 rounded border border-slate-700">{nodes.length}</span>
@@ -91,7 +91,7 @@ export const ShelfVisionSidebar: React.FC<ShelfVisionSidebarProps> = ({ nodesByS
             
             <div className="p-4 md:p-6 flex-1 bg-slate-900/20 hidden md:block">
                 <div className="flex items-center space-x-2 mb-4">
-                    <Sparkles className="w-4 h-4 text-indigo-400" />
+                    <Sparkles className="w-4 h-4 text-[var(--color-brand-secondary-100)]" />
                     <h4 className="text-[10px] font-bold text-white uppercase tracking-widest">Global Compliance</h4>
                 </div>
                 <div className="space-y-4">

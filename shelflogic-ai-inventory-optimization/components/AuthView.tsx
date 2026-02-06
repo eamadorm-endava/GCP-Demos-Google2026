@@ -16,28 +16,28 @@ export const AuthView: React.FC<AuthViewProps> = ({ onLogin, className = '' }) =
         <div className={`w-full md:w-2/5 bg-gradient-to-br ${theme.semantic.primary.gradient} p-12 flex flex-col justify-between text-white relative overflow-hidden`}>
           <div className="z-10">
             <div className="w-12 h-12 bg-white/10 backdrop-blur-md rounded-xl flex items-center justify-center mb-6 border border-white/20">
-               <Sparkles className="w-6 h-6 text-cyan-50" />
+               <Sparkles className="w-6 h-6 text-[var(--color-brand-primary-500)]" />
             </div>
             <h1 className="text-4xl font-bold tracking-tight mb-2">ShelfLogic AI</h1>
-            <p className="text-cyan-100 text-lg opacity-90">Autonomous Merchandising</p>
+            <p className="text-[var(--color-brand-primary-50)] text-lg opacity-90">Autonomous Merchandising</p>
           </div>
-          <div className="z-10 text-xs text-cyan-200/50">SECURE ENTERPRISE NODE v2.5</div>
+          <div className="z-10 text-xs text-[var(--color-brand-primary-50)]">SECURE ENTERPRISE NODE v2.5</div>
         </div>
 
         <div className={`w-full md:w-3/5 p-12 flex flex-col justify-center ${theme.colors.background.main}`}>
            <h2 className={`text-2xl font-bold ${theme.colors.text.primary} mb-8`}>Access Control</h2>
            
            <div className="grid grid-cols-1 gap-4">
-             <button onClick={() => onLogin('HQ')} className={`${theme.components.card} p-5 hover:border-cyan-500 flex items-center group`}>
-                <Shield className="w-8 h-8 text-cyan-400 mr-4" />
+             <button onClick={() => onLogin('HQ')} className={`${theme.components.card} p-5 hover:border-[var(--color-brand-primary-500)] flex items-center group`}>
+                <Shield className="w-8 h-8 text-[var(--color-brand-primary-500)] mr-4" />
                 <div className="text-left">
                    <h3 className="font-bold text-white">Network Admin</h3>
                    <p className="text-xs text-slate-500">Full visibility & Strategy Lab</p>
                 </div>
              </button>
 
-             <button onClick={() => onLogin('CATEGORY_MGR')} className={`${theme.components.card} p-5 hover:border-indigo-500 flex items-center group`}>
-                <Briefcase className="w-8 h-8 text-indigo-400 mr-4" />
+             <button onClick={() => onLogin('CATEGORY_MGR')} className={`${theme.components.card} p-5 hover:border-[var(--color-brand-secondary-200)] flex items-center group`}>
+                <Briefcase className="w-8 h-8 text-[var(--color-brand-secondary-100)] mr-4" />
                 <div className="text-left">
                    <h3 className="font-bold text-white">Category Manager</h3>
                    <p className="text-xs text-slate-500">Spirits / Beer / Wine Specialization</p>

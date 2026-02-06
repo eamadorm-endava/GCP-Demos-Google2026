@@ -71,7 +71,7 @@ export const MLSimulationView = () => {
                 <div className="absolute inset-0 bg-grid-slate-900/[0.04] bg-[bottom_left_-1px] pointer-events-none"></div>
                 <div className="flex items-center justify-between relative z-10">
                     <div className="flex items-center">
-                        <div className="p-3 bg-indigo-600 rounded-xl mr-4 shadow-lg shadow-indigo-900/40">
+                        <div className="p-3 bg-[var(--color-brand-secondary-200)] rounded-xl mr-4 shadow-lg shadow-[var(--color-brand-secondary-100)]">
                             <BrainCircuit className="w-8 h-8 text-white" />
                         </div>
                         <div>
@@ -84,7 +84,7 @@ export const MLSimulationView = () => {
                             <button
                                 key={tab}
                                 onClick={() => setActiveTab(tab as any)}
-                                className={`px-4 py-2 rounded-lg text-xs font-bold uppercase tracking-widest transition-all ${activeTab === tab ? 'bg-indigo-600 text-white shadow-lg' : 'text-slate-500 hover:text-slate-300'}`}
+                                className={`px-4 py-2 rounded-lg text-xs font-bold uppercase tracking-widest transition-all ${activeTab === tab ? 'bg-[var(--color-brand-secondary-200)] text-white shadow-lg' : 'text-slate-500 hover:text-slate-300'}`}
                             >
                                 {tab}
                             </button>
@@ -98,8 +98,8 @@ export const MLSimulationView = () => {
                     
                     {/* LEFT PANEL: Interactive Controls */}
                     <div className="lg:col-span-1 space-y-6">
-                        <div className={`${theme.components.card} p-6 border-indigo-500/20 bg-slate-900/50`}>
-                            <h3 className="text-xs font-bold text-indigo-400 uppercase tracking-widest mb-6 flex items-center">
+                        <div className={`${theme.components.card} p-6 border-[var(--color-brand-secondary-100)] bg-slate-900/50`}>
+                            <h3 className="text-xs font-bold text-[var(--color-brand-secondary-100)] uppercase tracking-widest mb-6 flex items-center">
                                 <Activity className="w-4 h-4 mr-2" />
                                 Model Parameters
                             </h3>
@@ -109,17 +109,17 @@ export const MLSimulationView = () => {
                                     <div>
                                         <div className="flex justify-between mb-2">
                                             <label className="text-xs text-slate-300 font-bold">Elasticity (Beta)</label>
-                                            <span className="text-xs font-mono text-indigo-400">{sensitivity.toFixed(2)}</span>
+                                            <span className="text-xs font-mono text-[var(--color-brand-secondary-100)]">{sensitivity.toFixed(2)}</span>
                                         </div>
                                         <input 
                                             type="range" min="0.5" max="3.0" step="0.1" 
                                             value={sensitivity} onChange={(e) => setSensitivity(parseFloat(e.target.value))}
-                                            className="w-full h-1.5 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-indigo-500"
+                                            className="w-full h-1.5 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-[var(--color-brand-secondary-200)]"
                                         />
                                         <p className="text-[10px] text-slate-500 mt-2">Higher = More price sensitive consumers.</p>
                                     </div>
-                                    <div className="p-4 bg-indigo-950/20 rounded-lg border border-indigo-900/50">
-                                        <p className="text-[10px] text-indigo-300 uppercase font-bold mb-1">Target Strategy</p>
+                                    <div className="p-4 bg-[var(--color-brand-secondary-100)] rounded-lg border border-[var(--color-brand-secondary-100)]">
+                                        <p className="text-[10px] text-[var(--color-brand-secondary-100)] uppercase font-bold mb-1">Target Strategy</p>
                                         <p className="text-white text-sm font-bold">{sensitivity > 1.2 ? 'MARKDOWN TO VOLUME' : 'MARKUP TO MARGIN'}</p>
                                     </div>
                                 </div>
@@ -156,18 +156,18 @@ export const MLSimulationView = () => {
                         </div>
 
                         {/* AGENT COMMENTARY BOX */}
-                        <div className={`${theme.components.card} p-6 bg-slate-900/80 border-cyan-500/20 relative overflow-hidden`}>
+                        <div className={`${theme.components.card} p-6 bg-slate-900/80 border-[var(--color-brand-primary-500)] relative overflow-hidden`}>
                              <div className="absolute top-0 right-0 p-2">
-                                 <Sparkles className={`w-5 h-5 text-cyan-500 ${loadingExpert ? 'animate-pulse' : ''}`} />
+                                 <Sparkles className={`w-5 h-5 text-[var(--color-brand-primary-50)] ${loadingExpert ? 'animate-pulse' : ''}`} />
                              </div>
-                             <h4 className="text-[10px] font-bold text-cyan-400 uppercase tracking-widest mb-3">Agent Diagnostic</h4>
+                             <h4 className="text-[10px] font-bold text-[var(--color-brand-primary-50)] uppercase tracking-widest mb-3">Agent Diagnostic</h4>
                              {loadingExpert ? (
                                  <div className="space-y-2 animate-pulse">
                                      <div className="h-2 bg-slate-800 rounded w-full"></div>
                                      <div className="h-2 bg-slate-800 rounded w-4/5"></div>
                                  </div>
                              ) : (
-                                 <p className="text-xs text-slate-300 leading-relaxed italic border-l-2 border-cyan-500/50 pl-3">
+                                 <p className="text-xs text-slate-300 leading-relaxed italic border-l-2 border-[var(--color-brand-primary-500)] pl-3">
                                      "{expertCommentary}"
                                  </p>
                              )}
@@ -200,7 +200,7 @@ export const MLSimulationView = () => {
                                                     return (
                                                         <div className="bg-slate-900 border border-slate-700 p-3 rounded-xl shadow-2xl">
                                                             <p className="text-white font-bold text-xs">{d.name}</p>
-                                                            <p className="text-indigo-400 text-[10px] font-bold uppercase">{d.cluster}</p>
+                                                            <p className="text-[var(--color-brand-secondary-100)] text-[10px] font-bold uppercase">{d.cluster}</p>
                                                         </div>
                                                     )
                                                 }
@@ -224,7 +224,7 @@ export const MLSimulationView = () => {
                                         </div>
                                         <div className="flex gap-4">
                                             <div className="flex items-center text-[10px] text-slate-400">
-                                                <div className="w-2 h-2 bg-cyan-400 rounded-full mr-2"></div> Lookalike Pairs
+                                                <div className="w-2 h-2 bg-[var(--color-brand-primary-500)] rounded-full mr-2"></div> Lookalike Pairs
                                             </div>
                                             <div className="flex items-center text-[10px] text-slate-400">
                                                 <div className="w-2 h-2 bg-slate-700 rounded-full mr-2"></div> Global Network
@@ -271,7 +271,7 @@ export const MLSimulationView = () => {
                                         </div>
                                         <div className="text-center">
                                             <p className="text-[10px] text-slate-500 uppercase font-bold mb-1">Optimal Price</p>
-                                            <p className="text-lg font-bold text-indigo-400">${optimalPoint.price}</p>
+                                            <p className="text-lg font-bold text-[var(--color-brand-secondary-100)]">${optimalPoint.price}</p>
                                         </div>
                                         <div className="text-center">
                                             <p className="text-[10px] text-slate-500 uppercase font-bold mb-1">Efficiency</p>
@@ -316,8 +316,8 @@ export const MLSimulationView = () => {
                         {/* BOTTOM STATS */}
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                             <div className={`${theme.components.card} p-5 flex items-center gap-4`}>
-                                <div className="p-2 bg-indigo-900/30 rounded-lg">
-                                    <Database className="w-5 h-5 text-indigo-400" />
+                                <div className="p-2 bg-[var(--color-brand-secondary-100)] rounded-lg">
+                                    <Database className="w-5 h-5 text-[var(--color-brand-secondary-100)]" />
                                 </div>
                                 <div>
                                     <p className="text-[10px] text-slate-500 font-bold uppercase tracking-widest">Training Set</p>

@@ -118,7 +118,7 @@ const NodeSidebarItem = ({ node, isActive, onClick }: { node: ShelfNode, isActiv
         title={`Select camera feed for ${node.name}`}
         className={`w-full text-left p-3 rounded-xl border transition-all flex items-center justify-between group
             ${isActive 
-                ? 'bg-slate-800 border-indigo-500 shadow-lg ring-1 ring-indigo-500/30' 
+                ? 'bg-slate-800 border-[var(--color-brand-secondary-200)] shadow-lg ring-1 ring-[var(--color-brand-secondary-100)]' 
                 : 'bg-transparent border-slate-800/50 hover:border-slate-700 hover:bg-slate-800/30'}
         `}
     >
@@ -131,7 +131,7 @@ const NodeSidebarItem = ({ node, isActive, onClick }: { node: ShelfNode, isActiv
                 <p className="text-[10px] text-slate-500 font-medium font-mono">{node.id}</p>
             </div>
         </div>
-        <ChevronRight className={`w-4 h-4 ${isActive ? 'text-indigo-400' : 'text-slate-700 opacity-0 group-hover:opacity-100 transition-opacity'}`} />
+        <ChevronRight className={`w-4 h-4 ${isActive ? 'text-[var(--color-brand-secondary-100)]' : 'text-slate-700 opacity-0 group-hover:opacity-100 transition-opacity'}`} />
     </button>
 );
 
@@ -243,7 +243,7 @@ export const ShelfVisionView: React.FC = () => {
                             <div key={storeId} className="animate-in slide-in-from-left-2 duration-300">
                                 <div className="px-1 mb-2 flex items-center justify-between group cursor-default">
                                     <div className="flex items-center text-slate-400">
-                                        <StoreIcon className="w-3 h-3 mr-2 text-indigo-500" />
+                                        <StoreIcon className="w-3 h-3 mr-2 text-[var(--color-brand-secondary-200)]" />
                                         <span className="text-xs font-bold uppercase tracking-wider group-hover:text-slate-200 transition-colors">{getStoreName(storeId)}</span>
                                     </div>
                                     <span className="text-[9px] bg-slate-800 text-slate-500 px-1.5 py-0.5 rounded border border-slate-700">{nodes.length}</span>
@@ -265,7 +265,7 @@ export const ShelfVisionView: React.FC = () => {
                 
                 <div className="p-4 md:p-6 flex-1 bg-slate-900/20 hidden md:block">
                     <div className="flex items-center space-x-2 mb-4">
-                        <Sparkles className="w-4 h-4 text-indigo-400" />
+                        <Sparkles className="w-4 h-4 text-[var(--color-brand-secondary-100)]" />
                         <h4 className="text-[10px] font-bold text-white uppercase tracking-widest">Global Compliance</h4>
                     </div>
                     <div className="space-y-4">
@@ -294,7 +294,7 @@ export const ShelfVisionView: React.FC = () => {
                                 {activeStore?.name}
                             </div>
                             <span className="text-slate-600">/</span>
-                            <span className="text-indigo-400 text-xs font-bold uppercase tracking-wide">{activeNode.category}</span>
+                            <span className="text-[var(--color-brand-secondary-100)] text-xs font-bold uppercase tracking-wide">{activeNode.category}</span>
                         </div>
                         <div className="flex items-center space-x-3">
                             <h1 className="text-2xl md:text-3xl font-bold text-white tracking-tight">{activeNode.name}</h1>
@@ -312,7 +312,7 @@ export const ShelfVisionView: React.FC = () => {
                              <span className="text-xs text-slate-400 font-bold uppercase hidden md:inline">Gaze Tracking</span>
                              <button 
                                 onClick={() => setShowHeatmap(!showHeatmap)}
-                                className={`w-12 h-6 rounded-full p-1 transition-colors ${showHeatmap ? 'bg-indigo-600' : 'bg-slate-700'}`}
+                                className={`w-12 h-6 rounded-full p-1 transition-colors ${showHeatmap ? 'bg-[var(--color-brand-secondary-200)]' : 'bg-slate-700'}`}
                                 aria-label="Toggle Heatmap"
                              >
                                  <div className={`w-4 h-4 bg-white rounded-full shadow-md transform transition-transform ${showHeatmap ? 'translate-x-6' : 'translate-x-0'}`}></div>
@@ -326,7 +326,7 @@ export const ShelfVisionView: React.FC = () => {
                                 className={`flex items-center px-4 md:px-6 py-2 md:py-3 rounded-xl shadow-lg transition-all font-bold tracking-wide text-sm
                                     ${activeNode.status === 'VIOLATION' 
                                         ? 'bg-rose-600 hover:bg-rose-500 text-white shadow-rose-900/20' 
-                                        : 'bg-indigo-600 hover:bg-indigo-500 text-white shadow-indigo-900/20'}
+                                        : 'bg-[var(--color-brand-secondary-200)] hover:bg-[var(--color-brand-secondary-100)] text-white shadow-[var(--color-brand-secondary-100)]'}
                                 `}
                             >
                                 {scanning ? <RefreshCw className="w-5 h-5 mr-2 animate-spin" /> : <Camera className="w-5 h-5 mr-2" />}
@@ -340,12 +340,12 @@ export const ShelfVisionView: React.FC = () => {
                     {/* Reference (Left) */}
                     <div className="space-y-4">
                         <div className="flex items-center justify-between">
-                            <h2 className="text-xs font-bold text-indigo-400 uppercase tracking-widest flex items-center">
+                            <h2 className="text-xs font-bold text-[var(--color-brand-secondary-100)] uppercase tracking-widest flex items-center">
                                 <LayoutGrid className="w-4 h-4 mr-2" />
                                 Master Reference Model
                             </h2>
                         </div>
-                        <div className={`${theme.components.card} p-1 overflow-hidden relative min-h-[300px] md:min-h-[450px] bg-slate-900 border-dashed border-2 border-indigo-500/20 flex items-center justify-center`}>
+                        <div className={`${theme.components.card} p-1 overflow-hidden relative min-h-[300px] md:min-h-[450px] bg-slate-900 border-dashed border-2 border-[var(--color-brand-secondary-100)] flex items-center justify-center`}>
                             <div className="relative w-full h-full">
                                 {isPlanogramLoading ? <ImageSkeleton /> : <img src={planogramSrc} className="w-full h-full object-cover rounded-lg opacity-80" alt="Ref" />}
                                 
@@ -418,9 +418,9 @@ export const ShelfVisionView: React.FC = () => {
                             </div>
 
                             {scanning && (
-                                <div className="absolute inset-0 bg-indigo-500/10 flex items-center justify-center backdrop-blur-sm z-20">
-                                    <div className="w-full h-1 bg-cyan-400 absolute animate-[scan_2s_ease-in-out_infinite] shadow-[0_0_15px_rgba(34,211,238,1)]"></div>
-                                    <div className="bg-black/80 px-6 py-3 rounded-2xl border border-cyan-500/30 text-cyan-400 font-mono text-xs flex flex-col items-center">
+                                <div className="absolute inset-0 bg-[var(--color-brand-secondary-100)] flex items-center justify-center backdrop-blur-sm z-20">
+                                    <div className="w-full h-1 bg-[var(--color-brand-primary-500)] absolute animate-[scan_2s_ease-in-out_infinite] shadow-[0_0_15px_rgba(34,211,238,1)]"></div>
+                                    <div className="bg-black/80 px-6 py-3 rounded-2xl border border-[var(--color-brand-primary-500)] text-[var(--color-brand-primary-50)] font-mono text-xs flex flex-col items-center">
                                         <RefreshCw className="w-4 h-4 mb-2 animate-spin" />
                                         <span>CROSS-REFERENCING PIXELS...</span>
                                     </div>
@@ -502,18 +502,18 @@ export const ShelfVisionView: React.FC = () => {
                         )}
                     </div>
 
-                    <div className={`${theme.components.card} p-6 bg-indigo-950/20 border-indigo-900/50 flex flex-col justify-between`}>
+                    <div className={`${theme.components.card} p-6 bg-[var(--color-brand-secondary-100)] border-[var(--color-brand-secondary-100)] flex flex-col justify-between`}>
                         <div>
-                            <Sparkles className="w-6 h-6 text-indigo-400 mb-3" />
+                            <Sparkles className="w-6 h-6 text-[var(--color-brand-secondary-100)] mb-3" />
                             <h4 className="font-bold text-white text-sm mb-1">Neural Vision Engine</h4>
                             <p className="text-[11px] text-slate-400 leading-relaxed">
                                 System uses generative AI to compare real-world pixel streams against synthetic ground-truth models.
                             </p>
                         </div>
-                        <div className="pt-4 mt-4 border-t border-indigo-900/50 flex justify-between items-center text-[10px] font-mono text-indigo-300">
+                        <div className="pt-4 mt-4 border-t border-[var(--color-brand-secondary-100)] flex justify-between items-center text-[10px] font-mono text-[var(--color-brand-secondary-100)]">
                             <span>LATENCY: 450MS</span>
                             <span className="flex items-center">
-                                <div className="w-1.5 h-1.5 bg-indigo-500 rounded-full mr-2 animate-pulse"></div>
+                                <div className="w-1.5 h-1.5 bg-[var(--color-brand-secondary-200)] rounded-full mr-2 animate-pulse"></div>
                                 AI ACTIVE
                             </span>
                         </div>

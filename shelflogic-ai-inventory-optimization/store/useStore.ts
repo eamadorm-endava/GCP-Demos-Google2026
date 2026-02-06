@@ -8,7 +8,7 @@ const DEFAULT_VERTICAL: VerticalConfig = {
   id: 'retail-liquor',
   title: 'Retail Intelligence',
   icon: 'shopping-cart',
-  color: 'bg-cyan-600',
+  color: 'bg-[var(--color-brand-primary-500)]',
   pitch: {
     problem: "Inventory distortion costs retailers $1.1T annually due to overstocks and out-of-stocks.",
     solution: "ShelfLogic acts as an autonomous agent, proactively balancing inventory and optimizing assortment.",

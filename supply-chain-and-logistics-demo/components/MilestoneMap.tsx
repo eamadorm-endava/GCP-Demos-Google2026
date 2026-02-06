@@ -82,9 +82,9 @@ export const MilestoneMap: React.FC<MilestoneMapProps> = ({ shipment }) => {
     const pathD = "M 60 80 Q 400 20 740 80";
 
     return (
-        <div className="bg-slate-50 border border-slate-200 rounded-lg p-6">
-            <h3 className="text-lg font-bold text-slate-800 flex items-center gap-2 mb-4">
-                <MapIcon className="w-6 h-6 text-slate-500" />
+        <div className="bg-brand-sb-shade-90 border border-brand-sb-shade-80 rounded-lg p-6">
+            <h3 className="text-lg font-bold text-brand-primary-300 flex items-center gap-2 mb-4">
+                <MapIcon className="w-6 h-6 text-brand-primary-300" />
                 {t('shipmentJourney')}
             </h3>
             <div className="relative w-full">
@@ -170,12 +170,12 @@ export const MilestoneMap: React.FC<MilestoneMapProps> = ({ shipment }) => {
                 </svg>
 
                 <div className="absolute -bottom-4 left-0 text-center w-28">
-                    <p className="text-sm font-bold text-slate-700 truncate">{shipment.origin.city}</p>
-                    <p className="text-xs text-slate-500 truncate">{shipment.origin.country}</p>
+                    <p className="text-sm font-bold text-brand-primary-300 truncate">{shipment.origin.city}</p>
+                    <p className="text-xs text-brand-sb-shade-50 truncate">{shipment.origin.country}</p>
                 </div>
                 <div className="absolute -bottom-4 right-0 text-center w-28">
-                    <p className="text-sm font-bold text-slate-700 truncate">{shipment.destination.city}</p>
-                    <p className="text-xs text-slate-500 truncate">{shipment.destination.country}</p>
+                    <p className="text-sm font-bold text-brand-primary-300 truncate">{shipment.destination.city}</p>
+                    <p className="text-xs text-brand-sb-shade-50 truncate">{shipment.destination.country}</p>
                 </div>
             </div>
         </div>
