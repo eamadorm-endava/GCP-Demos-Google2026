@@ -80,7 +80,7 @@ export const AssortmentSwapDetails: React.FC<AssortmentSwapDetailsProps> = ({ op
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
         <div className={`${theme.components.card} p-6`}>
           <h3 className={`font-bold ${theme.colors.text.primary} mb-6 flex items-center`}>
-            <Activity className="w-5 h-5 mr-2 text-indigo-400" />
+            <Activity className="w-5 h-5 mr-2 text-[var(--color-brand-secondary-100)]" />
             Performance Evidence
           </h3>
           <div className="h-[250px]">
@@ -99,7 +99,7 @@ export const AssortmentSwapDetails: React.FC<AssortmentSwapDetailsProps> = ({ op
 
         <div className={`${theme.components.card} p-6`}>
           <h3 className={`font-bold ${theme.colors.text.primary} mb-4 flex items-center`}>
-            <Target className="w-5 h-5 mr-2 text-cyan-400" />
+            <Target className="w-5 h-5 mr-2 text-[var(--color-brand-primary-500)]" />
             Digital Twin Justification
           </h3>
           <p className={`text-xs ${theme.colors.text.secondary} mb-4`}>

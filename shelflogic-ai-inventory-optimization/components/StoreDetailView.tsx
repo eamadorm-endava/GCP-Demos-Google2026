@@ -329,10 +329,10 @@ export const StoreDetailView: React.FC<StoreDetailViewProps> = ({ store }) => {
         {activeTab === 'inventory' && (
             <div className="space-y-6 animate-in">
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                    <div className={`${theme.components.card} p-5 border-l-4 border-indigo-500`}>
+                    <div className={`${theme.components.card} p-5 border-l-4 border-[var(--color-brand-secondary-200)]`}>
                         <p className="text-[10px] text-slate-500 font-bold uppercase tracking-widest mb-1">Stock Turnover (Annual)</p>
                         <p className="text-2xl font-bold text-white">8.4x</p>
-                        <p className="text-xs text-indigo-400 mt-1">Top 10% of Network</p>
+                        <p className="text-xs text-[var(--color-brand-secondary-100)] mt-1">Top 10% of Network</p>
                     </div>
                     <div className={`${theme.components.card} p-5 border-l-4 border-rose-500`}>
                         <p className="text-[10px] text-slate-500 font-bold uppercase tracking-widest mb-1">Dead Stock Valuation</p>
@@ -349,7 +349,7 @@ export const StoreDetailView: React.FC<StoreDetailViewProps> = ({ store }) => {
                 <div className={`${theme.components.card} p-8`}>
                     <h3 className={`font-bold ${theme.colors.text.primary} mb-6 flex items-center`}>
                         <SimpleTooltip content="Supply Chain Velocity Analysis">
-                            <Truck className={`w-5 h-5 mr-2 text-indigo-400`} />
+                            <Truck className={`w-5 h-5 mr-2 text-[var(--color-brand-secondary-100)]`} />
                         </SimpleTooltip>
                         Inventory Health vs Sales Velocity
                     </h3>
@@ -397,7 +397,7 @@ export const StoreDetailView: React.FC<StoreDetailViewProps> = ({ store }) => {
                                             <div className="bg-slate-900 border border-slate-700 p-3 rounded-lg shadow-xl text-xs">
                                                 <p className="font-bold text-white mb-1">{d.name}</p>
                                                 <p className="text-emerald-400">Margin: {d.y}%</p>
-                                                <p className="text-indigo-400">Volume: {d.x}th percentile</p>
+                                                <p className="text-[var(--color-brand-secondary-200)]">Volume: {d.x}th percentile</p>
                                                 <p className="text-slate-400 italic mt-1">{d.type}</p>
                                             </div>
                                         );

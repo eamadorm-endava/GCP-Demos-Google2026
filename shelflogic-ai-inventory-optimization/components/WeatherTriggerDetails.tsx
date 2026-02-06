@@ -61,7 +61,7 @@ export const WeatherTriggerDetails: React.FC<WeatherTriggerDetailsProps> = ({ op
 
             <div className={`${theme.components.card} p-6`}>
                 <h3 className={`font-bold ${theme.colors.text.primary} mb-6 flex items-center`}>
-                    <TrendingUp className="w-5 h-5 mr-2 text-indigo-400" />
+                    <TrendingUp className="w-5 h-5 mr-2 text-[var(--color-brand-secondary-200)]" />
                     Demand Surge Projection
                 </h3>
                 <div className="h-[300px]">
