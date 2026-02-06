@@ -25,33 +25,10 @@ const App: React.FC = () => {
   );
 
   return (
-    // CONTENEDOR PRINCIPAL: Flex Column para Header Global arriba + Cuerpo abajo
+    // CONTENEDOR PRINCIPAL: Flex Column
     <div className="flex flex-col h-screen bg-brand-dark text-brand-text overflow-hidden">
       
-      {/* --- GLOBAL HEADER (Endava Branding - Full Width) --- */}
-      <header className="h-24 bg-brand-secondary border-b border-brand-border shrink-0 flex items-center justify-center relative z-50 shadow-xl">
-        <div className="flex items-center gap-5 px-10 py-2 rounded-2xl transition-all duration-300">
-            {/* Logo Endava */}
-            <div className="w-14 h-14 rounded-xl overflow-hidden border border-white/10 shadow-lg shrink-0">
-              <img
-                src="https://cdn.brandfetch.io/id4YZ7PWEj/w/200/h/200/theme/dark/icon.jpeg?c=1bxid64Mup7aczewSAYMX&t=1761617484712"
-                alt="Endava"
-                className="w-full h-full object-cover"
-              />
-            </div>
-
-            {/* Título del Proyecto */}
-            <div className="flex flex-col leading-tight justify-center">
-              <span className="text-2xl font-black tracking-tighter text-white mb-0.5">
-                Cloud Compliance
-              </span>
-              <span className="text-[11px] font-bold tracking-[0.25em] text-brand-primary uppercase">
-                Agentic Suit v2
-              </span>
-            </div>
-        </div>
-      </header>
-      {/* -------------------------------------------------- */}
+      {/* ELIMINADO EL HEADER GLOBAL DE AQUÍ */}
 
       {/* BODY CONTAINER (Sidebar + Main Content) */}
       <div className="flex flex-1 overflow-hidden relative">
@@ -59,11 +36,16 @@ const App: React.FC = () => {
         {/* SIDEBAR */}
         <aside className="w-72 bg-brand-secondary border-r border-brand-border flex flex-col shrink-0 shadow-lg z-40">
           
-          {/* --- SIDEBAR HEADER: RESTAURADO GUARDIAN AI --- */}
+          {/* --- SIDEBAR HEADER: MODIFICADO CON LOGO ENDAVA --- */}
           <div className="p-8 border-b border-brand-border">
             <div className="flex items-center gap-3 text-brand-primary mb-2">
-              <div className="w-10 h-10 bg-brand-primary rounded-lg flex items-center justify-center text-white shadow-lg shadow-brand-primary/20">
-                <i className="fas fa-fingerprint text-xl"></i>
+              {/* Ícono reemplazado por Logo de Endava */}
+              <div className="w-10 h-10 rounded-lg overflow-hidden border border-white/10 shadow-lg shrink-0">
+                <img
+                  src="https://cdn.brandfetch.io/id4YZ7PWEj/w/200/h/200/theme/dark/icon.jpeg?c=1bxid64Mup7aczewSAYMX&t=1761617484712"
+                  alt="Endava"
+                  className="w-full h-full object-cover"
+                />
               </div>
               <h1 className="font-extrabold text-xl tracking-tight text-white">GuardianAI</h1>
             </div>
