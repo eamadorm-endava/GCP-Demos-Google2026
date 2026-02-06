@@ -119,7 +119,7 @@ const Dashboard: React.FC = () => {
         <section className="bg-white p-8 lg:p-10 rounded-[3rem] shadow-sm border border-slate-200 space-y-10">
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
             <div className="flex items-center gap-3">
-              <div className="w-1.5 h-10 bg-indigo-600 rounded-full"></div>
+              <div className="w-1.5 h-10 bg-brand-600 rounded-full"></div>
               <div>
                 <h3 className="text-2xl font-black text-slate-800">Head-to-Head Analytics</h3>
                 <p className="text-xs font-bold text-slate-400 uppercase tracking-widest mt-1">Multi-Vendor Side-by-Side Comparison</p>
@@ -133,7 +133,7 @@ const Dashboard: React.FC = () => {
                     onClick={() => toggleVendor(v.id)}
                     className={`flex items-center gap-2 px-5 py-2.5 rounded-2xl text-[11px] font-black uppercase tracking-widest transition-all ${
                       selectedVendorIds.has(v.id) 
-                        ? 'bg-indigo-600 text-white shadow-lg shadow-indigo-100 pr-8' 
+                        ? 'bg-[color:var(--color-brand-600)] text-white shadow-lg shadow-[color:var(--color-brand-50)] pr-8' 
                         : 'bg-slate-100 text-slate-400 grayscale hover:grayscale-0 hover:bg-slate-200'
                     }`}
                   >

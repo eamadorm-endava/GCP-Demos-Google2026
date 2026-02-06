@@ -44,9 +44,25 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
         ${isMobileMenuOpen ? 'translate-x-0' : '-translate-x-full'}
       `}>
         <div className="p-6 flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <div className="w-9 h-9 bg-indigo-600 rounded-xl flex items-center justify-center text-white font-black shadow-lg shadow-indigo-200 ring-2 ring-indigo-50">A</div>
-            <span className="font-black text-slate-800 text-lg leading-tight tracking-tight">Agentic Governance</span>
+          <div className="flex items-center gap-4">
+            {/* Logo */}
+            <div className="w-10 h-10 rounded-xl overflow-hidden">
+              <img
+                src="https://cdn.brandfetch.io/id4YZ7PWEj/w/200/h/200/theme/dark/icon.jpeg?c=1bxid64Mup7aczewSAYMX&t=1761617484712"
+                alt="Agentic Vendor Governance"
+                className="w-full h-full object-cover"
+              />
+            </div>
+
+            {/* Title */}
+            <div className="flex flex-col leading-tight">
+              <span className="text-xl font-black tracking-tight text-slate-900">
+                Agentic Vendor
+              </span>
+              <span className="text-sm font-bold tracking-wide text-slate-500 uppercase">
+                Governance Platform
+              </span>
+            </div>
           </div>
           <button onClick={() => setIsMobileMenuOpen(false)} className="lg:hidden p-2 text-slate-400 hover:bg-slate-50 rounded-lg">
             <X size={20} />
@@ -63,7 +79,7 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
               className={({ isActive }) => `
                 flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-200 group
                 ${isActive 
-                  ? 'bg-indigo-600 text-white shadow-xl shadow-indigo-100 font-bold' 
+                  ? 'bg-[color:var(--color-brand-600)] text-white shadow-xl shadow-brand-100 font-bold' 
                   : 'text-slate-500 hover:bg-slate-50 hover:text-slate-900'}
               `}
             >
@@ -79,7 +95,7 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
             onClick={() => setIsMobileMenuOpen(false)}
             className={({ isActive }) => `
               flex items-center gap-3 w-full px-4 py-3 rounded-xl transition-colors text-sm font-medium
-              ${isActive ? 'bg-indigo-50 text-indigo-600' : 'text-slate-500 hover:bg-slate-50'}
+              ${isActive ? 'bg-[color:var(--color-brand-600)] text-white' : 'text-slate-500 hover:bg-slate-50'}
             `}
           >
             <Settings size={20} />
@@ -104,14 +120,14 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
               <Menu size={24} />
             </button>
             <div className="hidden md:flex items-center gap-4 text-slate-600">
-              <span className="text-xs font-black text-indigo-600 bg-indigo-50 px-2 py-1 rounded uppercase tracking-widest">Enterprise</span>
+              <span className="text-xs font-black text-[color:var(--color-brand-600)] bg-brand-50 px-2 py-1 rounded uppercase tracking-widest">Enterprise</span>
             </div>
           </div>
           
           <div className="flex items-center gap-3 lg:gap-6">
             <button className="relative p-2.5 text-slate-500 hover:bg-slate-100 rounded-full transition-all group">
               <Bell size={20} />
-              <span className="absolute top-2.5 right-2.5 w-2 h-2 bg-indigo-500 rounded-full border-2 border-white group-hover:scale-125 transition-transform"></span>
+              <span className="absolute top-2.5 right-2.5 w-2 h-2 bg-brand-600 rounded-full border-2 border-[color:var(--color-brand-60)] group-hover:scale-125 transition-transform"></span>
             </button>
             <div className="flex items-center gap-3 pl-2 border-l border-slate-100">
               <div className="hidden sm:block text-right">
@@ -142,7 +158,7 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
               to={item.to}
               className={({ isActive }) => `
                 flex flex-col items-center gap-1 transition-colors
-                ${isActive ? 'text-indigo-600' : 'text-slate-400'}
+                ${isActive ? 'text-[color:var(--color-brand-600)]' : 'text-slate-400'}
               `}
             >
               {item.icon}
