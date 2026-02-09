@@ -3,7 +3,7 @@ substitutions:
   _AR_REPO: gcp-demos
   _SERVICE: cloud-compliance-agentic-suite-v2
   _DEMO_DIR: cloud-compliance-agentic-suite-v2
-  _PROJECT_ID: p-dev-stemilt-0sjp-1
+  _PROJECT_ID: p-s-gcu-na-marketing-bd5y-1
   _IAP_GROUP: gcu_demos_temp_group@endava.com
 
 availableSecrets:
