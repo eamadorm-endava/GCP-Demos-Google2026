@@ -88,7 +88,7 @@ export const VERTICALS: VerticalConfig[] = [
     title: 'Agentic Governance',
     icon: 'shield-check',
     color: 'bg-indigo-600',
-    externalUrl: 'https://agentic-vendor-governance-platform-32424718016.us-west4.run.app',
+    externalUrl: 'https://agentic-vendor-governance-platform-956266717219.us-west4.run.app',
     pitch: {
       problem: 'Enterprises lack real-time oversight and control over autonomous AI agents.',
       solution: 'Policy-aware agent orchestration with continuous compliance and auditability.',
@@ -104,7 +104,7 @@ export const VERTICALS: VerticalConfig[] = [
     title: 'ShelfLogic AI',
     icon: 'layers',
     color: 'bg-emerald-600',
-    externalUrl: 'https://shelflogic-ai-inventory-optimization-32424718016.us-west4.run.app',
+    externalUrl: 'https://shelflogic-ai-inventory-optimization-956266717219.us-west4.run.app',
     pitch: {
       problem: 'Merchandising decisions are slow, manual, and disconnected from real-time demand.',
       solution: 'Autonomous AI agents continuously optimize assortment, pricing, and placement.',
@@ -120,7 +120,7 @@ export const VERTICALS: VerticalConfig[] = [
     title: 'Contract Intelligence',
     icon: 'file-text',
     color: 'bg-sky-600',
-    externalUrl: 'https://contract-intelligence-platform-32424718016.us-west4.run.app',
+    externalUrl: 'https://contract-intelligence-platform-956266717219.us-west4.run.app',
     pitch: {
       problem: 'Critical contract risks and obligations are hidden in unstructured documents.',
       solution: 'AI-powered contract analysis with risk scoring and obligation tracking.',
@@ -136,7 +136,7 @@ export const VERTICALS: VerticalConfig[] = [
     title: 'Sentinel AI',
     icon: 'shield-alert',
     color: 'bg-red-700',
-    externalUrl: 'https://sentinel-ai-autonomous-risk-assurance-32424718016.us-west4.run.app',
+    externalUrl: 'https://sentinel-ai-autonomous-risk-assurance-956266717219.us-west4.run.app',
     pitch: {
       problem: 'Traditional controls fail to detect complex, fast-moving enterprise risks.',
       solution: 'Autonomous AI agents monitor, detect, and respond to risk in real time.',
@@ -152,7 +152,7 @@ export const VERTICALS: VerticalConfig[] = [
     title: 'Supply Chain and Logistics',
     icon: 'truck',
     color: 'bg-orange-500',
-    externalUrl: 'https://supply-chain-and-logistics-demo-32424718016.us-west4.run.app',
+    externalUrl: 'https://supply-chain-and-logistics-demo-956266717219.us-west4.run.app',
     pitch: {
       problem: 'Global supply chains suffer from poor visibility and slow response to disruptions.',
       solution: 'AI-driven logistics orchestration with predictive and prescriptive insights.',
