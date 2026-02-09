@@ -1,0 +1,8 @@
+{
+  "name": "   Cloud Compliance Agentic Suite V2",
+  "description": "An enterprise-grade agentic solution for risk and compliance management featuring a four-agent orchestration layer for documentation retrieval, TOE/TOD testing, and supervisory auditing.",
+  "requestFramePermissions": [
+    "camera",
+    "microphone"
+  ]
+}

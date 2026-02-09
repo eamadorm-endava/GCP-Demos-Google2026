@@ -56,7 +56,7 @@ const AttractMode: React.FC = () => {
       <div className="absolute bottom-12 left-0 right-0 text-center flex flex-col items-center gap-3">
         <div className="w-16 h-1 bg-[#DE411B] rounded-full" />
         <span className="text-gray-600 text-[10px] md:text-xs font-black tracking-[0.4em] uppercase">
-          Mandalay Bay • Booth #204
+          Endava
         </span>
       </div>
     </div>

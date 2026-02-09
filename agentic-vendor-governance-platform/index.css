@@ -1,0 +1,31 @@
+@import "tailwindcss";
+@import "tailwindcss/preflight";
+@import "tailwindcss/utilities";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@theme {
+  /* Define the exact scale steps you will use in classes */
+  --color-brand-50:  #FFF1EE;
+  --color-brand-200: #FFD6CF;
+  --color-brand-600: #D93A28;
+  --color-brand-100: #FFE4E0;
+  --color-brand-300: #FFB3A8;
+  --color-brand-500: #FF5640;
+  --color-brand-700: #B52D1D;
+  --color-brand-400: #FF8775;
+  --color-brand-800: #912418;
+  --color-brand-900: #731D14;
+
+  --color-brand-connect-50:#cfe0ff;
+  --color-brand-connect-200:#192B37;
+  --color-brand-connect-300:#b6d0ff;
+}
+
+@layer utilities {
+  .__keep_gradients__ {
+    @apply bg-gradient-to-br from-red-500 to-blue-500;
+  }
+}

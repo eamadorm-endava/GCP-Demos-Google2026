@@ -1,0 +1,62 @@
+@import "tailwindcss";
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+@theme {
+  /* --- Identidad Visual Endava (Tailwind 4 Configuration) --- */
+  
+  /* Primary Colours */
+  --color-brand-primary: #FF5540;   /* Endava Orange (Sunset) */
+  --color-brand-hover: #E04030;     /* Darker Orange for hover */
+  
+  /* Backgrounds & Surfaces */
+  --color-brand-dark: #0f172a;      /* Fondo Principal (Deep Slate) */
+  --color-brand-secondary: #192B37; /* Endava Solid Blue 90% (Cards/Sidebar) */
+  --color-brand-tertiary: #232323;  /* Charcoal corporativo */
+  
+  /* Typography */
+  --color-brand-text: #FFFFFF;      /* Blanco Puro */
+  --color-brand-muted: #B0B0B0;     /* Gris Claro para textos secundarios */
+  --color-brand-border: #334155;    /* Slate 700 para bordes sutiles */
+
+  /* Signal Colours (Endava Specs) */
+  --color-signal-green: #3DD17B;
+  --color-signal-amber: #F99C11;
+  --color-signal-red: #E84641;
+  --color-signal-blue: #68B5E8;
+
+  /* Data Visualization Colours (Endava Specs) */
+  --color-data-blue: #5899C4;
+  --color-data-orange: #FF5641;
+  --color-data-yellow: #CF820E;
+  --color-data-green: #30A661;
+  --color-data-violet: #8684BF;
+
+  /* Utility */
+  --background-image-brand-gradient: linear-gradient(to right, #FF5540, #E04030);
+  --animate-pulse-fast: pulse 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@layer base {
+  body {
+    background-color: var(--color-brand-dark);
+    color: var(--color-brand-text);
+    font-family: 'Inter', system-ui, sans-serif;
+  }
+
+  /* Scrollbar personalizado para modo oscuro */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  ::-webkit-scrollbar-track {
+    background: var(--color-brand-dark); 
+  }
+  ::-webkit-scrollbar-thumb {
+    background: var(--color-brand-border); 
+    border-radius: 4px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--color-brand-primary); 
+  }
+}

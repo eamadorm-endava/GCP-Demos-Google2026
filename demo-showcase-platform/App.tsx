@@ -75,13 +75,16 @@ const App: React.FC = () => {
       <header className="h-16 md:h-20 lg:h-24 bg-[#121417] border-b border-white/5 flex items-center justify-between px-4 md:px-10 flex-shrink-0 z-30 pt-[env(safe-area-inset-top)]">
         <div className="flex items-center gap-3 md:gap-6">
           <div className="w-9 h-9 md:w-12 md:h-12 bg-white flex items-center justify-center flex-shrink-0 rounded-lg shadow-lg">
-             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-6 h-6 md:w-8 md:h-8">
-                <path d="M12 18C7.5 18 4 14.5 4 10C4 5.5 7.5 2 12 2C16.5 2 20 5.5 20 10H9C9 11.5 10.5 13 12 13C13.5 13 14.5 12.5 15 11.5L19.5 13C18.5 15.5 15.5 18 12 18ZM9 7H15C14.5 5.5 13.5 4.5 12 4.5C10.5 4.5 9.5 5.5 9 7Z" fill="#DE411B" />
-             </svg>
+             <div className="w-10 h-10 rounded-xl overflow-hidden">
+              <img
+                src="https://cdn.brandfetch.io/id4YZ7PWEj/w/200/h/200/theme/dark/icon.jpeg?c=1bxid64Mup7aczewSAYMX&t=1761617484712"
+                alt="Agentic Vendor Governance"
+                className="w-full h-full object-cover"
+              />
+            </div>
           </div>
           <div className="flex flex-col">
-            <span className="text-lg md:text-2xl lg:text-3xl font-black tracking-tighter text-white leading-tight">endava</span>
-            <span className="text-[8px] md:text-[10px] font-black text-[#DE411B] uppercase tracking-[0.3em]">Next '26 Showcase</span>
+            <span className="text-lg md:text-2xl lg:text-3xl font-black tracking-tighter text-white leading-tight">Endava</span>
           </div>
         </div>
 
@@ -94,8 +97,7 @@ const App: React.FC = () => {
 
         <div className="flex items-center gap-3 md:gap-10">
           <div className="hidden md:flex flex-col text-right">
-            <span className="text-[10px] font-black text-[#DE411B] tracking-[0.2em] uppercase">Booth #204</span>
-            <span className="text-xs font-bold text-gray-600">Mandalay Bay</span>
+            <span className="text-[10px] font-black text-[#DE411B] tracking-[0.2em] uppercase">Control Center Options</span>
           </div>
           <button 
             onClick={() => setAdminOpen(true)}
