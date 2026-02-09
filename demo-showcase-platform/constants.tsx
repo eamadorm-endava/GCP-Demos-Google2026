@@ -120,7 +120,7 @@ export const VERTICALS: VerticalConfig[] = [
     title: 'Contract Intelligence',
     icon: 'file-text',
     color: 'bg-sky-600',
-    externalUrl: 'https://contract-intelligence-platform-32424718016.us-west4.run.app',
+    externalUrl: 'https://contract-intelligence-platform-956266717219.us-west4.run.app',
     pitch: {
       problem: 'Critical contract risks and obligations are hidden in unstructured documents.',
       solution: 'AI-powered contract analysis with risk scoring and obligation tracking.',
