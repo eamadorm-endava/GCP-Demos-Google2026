@@ -136,7 +136,7 @@ export const VERTICALS: VerticalConfig[] = [
     title: 'Sentinel AI',
     icon: 'shield-alert',
     color: 'bg-red-700',
-    externalUrl: 'https://sentinel-ai-autonomous-risk-assurance-32424718016.us-west4.run.app',
+    externalUrl: 'https://sentinel-ai-autonomous-risk-assurance-956266717219.us-west4.run.app',
     pitch: {
       problem: 'Traditional controls fail to detect complex, fast-moving enterprise risks.',
       solution: 'Autonomous AI agents monitor, detect, and respond to risk in real time.',
