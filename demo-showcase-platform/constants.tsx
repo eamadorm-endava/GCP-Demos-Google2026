@@ -152,7 +152,7 @@ export const VERTICALS: VerticalConfig[] = [
     title: 'Supply Chain and Logistics',
     icon: 'truck',
     color: 'bg-orange-500',
-    externalUrl: 'https://supply-chain-and-logistics-demo-32424718016.us-west4.run.app',
+    externalUrl: 'https://supply-chain-and-logistics-demo-956266717219.us-west4.run.app',
     pitch: {
       problem: 'Global supply chains suffer from poor visibility and slow response to disruptions.',
       solution: 'AI-driven logistics orchestration with predictive and prescriptive insights.',
