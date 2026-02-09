@@ -104,7 +104,7 @@ export const VERTICALS: VerticalConfig[] = [
     title: 'ShelfLogic AI',
     icon: 'layers',
     color: 'bg-emerald-600',
-    externalUrl: 'https://shelflogic-ai-inventory-optimization-32424718016.us-west4.run.app',
+    externalUrl: 'https://shelflogic-ai-inventory-optimization-956266717219.us-west4.run.app',
     pitch: {
       problem: 'Merchandising decisions are slow, manual, and disconnected from real-time demand.',
       solution: 'Autonomous AI agents continuously optimize assortment, pricing, and placement.',
