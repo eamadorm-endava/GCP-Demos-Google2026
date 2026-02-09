@@ -51,7 +51,7 @@ steps:
           --iap \
           --port=80 \
           --set-env-vars="GEMINI_API_KEY=$$GEMINI_API_KEY" \
-          --min-instanes 1
+          --min-instances 1
 
     secretEnv: ['GEMINI_API_KEY']
 
