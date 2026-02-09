@@ -3,7 +3,7 @@ substitutions:
   _AR_REPO: gcp-demos
   _SERVICE: demo-showcase-platform
   _DEMO_DIR: demo-showcase-platform
-  _PROJECT_ID: p-dev-stemilt-0sjp-1
+  _PROJECT_ID: p-s-gcu-na-marketing-bd5y-1
 
 availableSecrets:
   secretManager:

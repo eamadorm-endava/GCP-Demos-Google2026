@@ -3,7 +3,7 @@ substitutions:
   _AR_REPO: gcp-demos
   _SERVICE: agentic-vendor-governance-platform
   _DEMO_DIR: agentic-vendor-governance-platform
-  _PROJECT_ID: p-dev-stemilt-0sjp-1
+  _PROJECT_ID: p-s-gcu-na-marketing-bd5y-1
   _IAP_GROUP: gcu_demos_temp_group@endava.com
 
 availableSecrets:
@@ -48,8 +48,10 @@ steps:
           --region=${_REGION} \
           --platform=managed \
           --no-allow-unauthenticated \
-          --iap \
-          --set-env-vars="GEMINI_API_KEY=$$GEMINI_API_KEY"
+          --set-env-vars="GEMINI_API_KEY=$$GEMINI_API_KEY" \
+          --min-instances 1 \
+          --iap
+
     secretEnv: ['GEMINI_API_KEY']
 
   # 4. Allow access to the IAP group
