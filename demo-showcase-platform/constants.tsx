@@ -164,7 +164,7 @@ export const VERTICALS: VerticalConfig[] = [
   },
   {
     id: 'cloud-compliance',
-    title: 'GuardianAI Compliance',
+    title: 'Guardian AI Compliance',
     icon: 'clipboard-check',
     color: 'bg-teal-600',
     externalUrl: 'https://cloud-compliance-agentic-suite-v2-956266717219.us-west4.run.app',
