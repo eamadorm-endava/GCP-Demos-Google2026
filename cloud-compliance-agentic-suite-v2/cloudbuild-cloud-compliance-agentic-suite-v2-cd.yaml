@@ -50,7 +50,9 @@ steps:
           --no-allow-unauthenticated \
           --iap \
           --port=80 \
-          --set-env-vars="GEMINI_API_KEY=$$GEMINI_API_KEY"
+          --set-env-vars="GEMINI_API_KEY=$$GEMINI_API_KEY" \
+          --min-instances 1
+
     secretEnv: ['GEMINI_API_KEY']
 
   # 4. Allow access to the IAP group
