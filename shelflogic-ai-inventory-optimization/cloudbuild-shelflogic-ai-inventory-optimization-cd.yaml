@@ -48,7 +48,6 @@ steps:
           --region=${_REGION} \
           --platform=managed \
           --no-allow-unauthenticated \
-          --iap \
           --port=80 \
           --set-env-vars="GEMINI_API_KEY=$$GEMINI_API_KEY" \
           --min-instances 1 \
