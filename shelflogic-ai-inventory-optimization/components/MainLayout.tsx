@@ -42,7 +42,9 @@ export const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
           className={`w-10 h-10 bg-gradient-to-br ${theme.semantic.primary.gradient} rounded-xl mb-10 flex items-center justify-center text-white font-bold cursor-pointer shadow-lg shadow-[var(--color-brand-primary-500)]`} 
           onClick={() => useStore.getState().setCurrentView('dashboard')}
         >
-            S
+          <img src="https://cdn.brandfetch.io/id4YZ7PWEj/w/200/h/200/theme/dark/icon.jpeg"
+            className="w-full h-full object-cover"
+          /> 
         </div>
         <div className="space-y-6 flex flex-col items-center w-full px-3 flex-1">
           <NavButton view="dashboard" icon={LayoutDashboard} label="Dashboard" />

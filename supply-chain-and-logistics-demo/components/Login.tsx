@@ -20,7 +20,8 @@ export const Login: React.FC<LoginProps> = ({ onLogin, error }) => {
   return (
     <div className="flex min-h-screen flex-col justify-center bg-brand-primary-200 py-12 sm:px-6 lg:px-8">
       <div className="sm:mx-auto sm:w-full sm:max-w-md">
-        <FlowerIcon className="mx-auto h-12 w-auto text-brand-primary-50" />
+        <img src="https://cdn.brandfetch.io/id4YZ7PWEj/w/200/h/200/theme/dark/icon.jpeg"
+             className="mx-auto h-12 w-auto text-brand-primary-50" />
         <h2 className="mt-6 text-center text-2xl font-bold leading-9 tracking-tight text-brand-primary-300">
           {t('loginTitle')}
         </h2>

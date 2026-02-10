@@ -15,8 +15,9 @@ export const Layout: React.FC<LayoutProps> = ({ children, currentView, onViewCha
         <div className="p-6 border-b border-[var(--color-brand-sb-shade-80)]">
           <div className="flex items-center gap-2">
             <div className="w-8 h-8 bg-secondary rounded-lg flex items-center justify-center bg-[var(--color-brand-primary-50)]">
-              <ShieldAlert size={20} className="text-white" />
-            </div>
+              <img src="https://cdn.brandfetch.io/id4YZ7PWEj/w/200/h/200/theme/dark/icon.jpeg" 
+               className="w-full h-full object-cover"/>              
+            </div>           
             <h1 className="text-xl font-bold tracking-tight text-[var(--color-brand-primary-300)]">ContractIntel</h1>
           </div>
           <p className="text-xs text-[var(--color-brand-sb-shade-40)] mt-2 ">Financial Risk Intelligence</p>

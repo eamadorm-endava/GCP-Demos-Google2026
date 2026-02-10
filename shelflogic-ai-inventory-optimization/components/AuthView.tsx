@@ -16,7 +16,8 @@ export const AuthView: React.FC<AuthViewProps> = ({ onLogin, className = '' }) =
         <div className={`w-full md:w-2/5 bg-gradient-to-br ${theme.semantic.primary.gradient} p-12 flex flex-col justify-between text-white relative overflow-hidden`}>
           <div className="z-10">
             <div className="w-12 h-12 bg-white/10 backdrop-blur-md rounded-xl flex items-center justify-center mb-6 border border-white/20">
-               <Sparkles className="w-6 h-6 text-[var(--color-brand-primary-500)]" />
+               <img src="https://cdn.brandfetch.io/id4YZ7PWEj/w/200/h/200/theme/dark/icon.jpeg"
+                 className="w-full h-full object-cover" />
             </div>
             <h1 className="text-4xl font-bold tracking-tight mb-2">ShelfLogic AI</h1>
             <p className="text-[var(--color-brand-primary-50)] text-lg opacity-90">Autonomous Merchandising</p>
