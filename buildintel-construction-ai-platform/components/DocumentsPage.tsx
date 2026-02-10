@@ -46,7 +46,7 @@ const DocumentsPage: React.FC<DocumentsPageProps> = ({ data }) => {
                 <div key={doc.id} className="bg-slate-900/50 border border-slate-800 rounded-xl p-4 hover:border-primary-500/30 transition-all group cursor-pointer">
                     <div className="flex items-start justify-between mb-4">
                         <div className="p-3 bg-slate-800 rounded-lg group-hover:bg-slate-700 transition-colors">
-                            <Icon className="w-6 h-6 text-primary-400" />
+                            <Icon className="w-6 h-6 text-[color:var(--color-brand-600)]" />
                         </div>
                         <div className="text-[10px] font-bold text-slate-500 bg-slate-900 px-2 py-1 rounded">
                             {doc.type}

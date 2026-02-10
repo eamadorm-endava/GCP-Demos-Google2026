@@ -65,7 +65,7 @@ const SchedulePage: React.FC<SchedulePageProps> = ({ data }) => {
         {/* Master Schedule */}
         <div className="lg:col-span-2 bg-slate-900 border border-slate-800 rounded-2xl p-6 flex flex-col h-[600px]">
             <h3 className="text-lg font-bold text-white mb-4 flex items-center">
-                <CalendarDays className="w-5 h-5 mr-2 text-primary-400" />
+                <CalendarDays className="w-5 h-5 mr-2 text-[color:var(--color-brand-600)]" />
                 Master Schedule
             </h3>
             <div className="flex-1 overflow-y-auto custom-scrollbar space-y-1">

@@ -248,7 +248,7 @@ const Dashboard: React.FC<DashboardProps> = ({ data, riskThreshold }) => {
         <div className="bg-slate-900/50 border border-slate-800 rounded-2xl p-6 backdrop-blur-sm flex flex-col">
             <div className="flex justify-between items-center mb-4">
                 <h3 className="text-lg font-bold text-white flex items-center">
-                    <ShieldAlert className="w-5 h-5 mr-2 text-primary-400" />
+                    <ShieldAlert className="w-5 h-5 mr-2 text-[color:var(--color-brand-600)]" />
                     Active Risk Alerts
                 </h3>
                 <span className="text-xs text-slate-500">Confidence &ge; {riskThreshold}%</span>
@@ -270,7 +270,7 @@ const Dashboard: React.FC<DashboardProps> = ({ data, riskThreshold }) => {
                                     {alert.confidenceScore}% Conf.
                                 </span>
                             </div>
-                            <h4 className="text-sm font-medium text-white group-hover:text-primary-400 transition-colors line-clamp-1">{alert.title}</h4>
+                            <h4 className="text-sm font-medium text-white group-hover:text-[color:var(--color-brand-500)] transition-colors line-clamp-1">{alert.title}</h4>
                             <p className="text-xs text-slate-400 mt-1 line-clamp-2">{alert.description}</p>
                             <div className="flex justify-between items-center mt-2 pt-2 border-t border-slate-800/50">
                                 <span className="text-[10px] text-slate-600 font-mono">{alert.agentType}</span>

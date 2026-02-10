@@ -44,8 +44,12 @@ const Sidebar: React.FC<SidebarProps> = ({ activeTab, setActiveTab, currentProje
         className="p-6 flex items-center justify-center lg:justify-start space-x-3 border-b border-slate-900/50 bg-slate-950 cursor-pointer"
         onClick={handlePortfolioSelect}
       >
-        <div className="bg-gradient-to-br from-primary-500 to-primary-700 p-2 rounded-lg shadow-lg shadow-primary-500/20">
-          <HardHat className="text-white w-6 h-6" />
+        <div className="w-10 h-10 rounded-xl overflow-hidden">
+              <img
+                src="https://cdn.brandfetch.io/id4YZ7PWEj/w/200/h/200/theme/dark/icon.jpeg?c=1bxid64Mup7aczewSAYMX&t=1761617484712"
+                alt="Agentic Vendor Governance"
+                className="w-full h-full object-cover"
+              />
         </div>
         <h1 className="text-xl font-bold text-white tracking-tight hidden lg:block font-sans">BuildIntel</h1>
       </div>
@@ -113,12 +117,12 @@ const Sidebar: React.FC<SidebarProps> = ({ activeTab, setActiveTab, currentProje
                 onClick={() => setActiveTab(item.id)}
                 className={`w-full flex items-center space-x-3 px-3 py-3 rounded-xl transition-all duration-200 group relative ${
                     isActive 
-                    ? 'bg-slate-900 text-white border border-slate-800 shadow-inner' 
+                    ? 'bg-[color:var(--color-brand-600)] text-white border border-slate-800 shadow-inner' 
                     : 'text-slate-400 hover:bg-slate-900/50 hover:text-slate-200'
                 }`}
                 >
                 <div className={`absolute left-0 top-1/2 -translate-y-1/2 w-1 h-8 rounded-r-full bg-primary-500 transition-all duration-200 ${isActive ? 'opacity-100' : 'opacity-0'}`} />
-                <Icon className={`w-5 h-5 flex-shrink-0 ${isActive ? 'text-primary-400' : 'text-slate-500 group-hover:text-slate-300'}`} />
+                <Icon className={`w-5 h-5 flex-shrink-0 ${isActive ? 'text-white-400' : 'text-slate-500 group-hover:text-slate-300'}`} />
                 <span className="font-medium text-sm hidden lg:block">{item.label}</span>
                 </button>
             );

@@ -49,7 +49,7 @@ const SettingsPage: React.FC = () => {
       <section className="space-y-4">
           <div className="flex items-center justify-between">
               <h3 className="text-lg font-bold text-white flex items-center">
-                  <Database className="w-5 h-5 mr-2 text-primary-400" />
+                  <Database className="w-5 h-5 mr-2 text-[color:var(--color-brand-600)]" />
                   Data Source Integrations
               </h3>
               <button className="text-xs font-medium text-primary-400 hover:text-primary-300 flex items-center bg-slate-900 border border-slate-800 px-3 py-1.5 rounded-lg transition-colors">

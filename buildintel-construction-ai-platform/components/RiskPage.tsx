@@ -211,7 +211,7 @@ const RiskPage: React.FC<RiskPageProps> = ({ data, threshold, setThreshold }) =>
       {/* Alert Feed Header & Filters */}
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-4">
           <h3 className="text-lg font-bold text-white flex items-center">
-              <ShieldAlert className="w-5 h-5 mr-2 text-primary-400" />
+              <ShieldAlert className="w-5 h-5 mr-2 text-[color:var(--color-brand-600)]" />
               Detected Anomalies
           </h3>
           <div className="flex flex-wrap gap-2">

@@ -98,7 +98,7 @@ const PortfolioDashboard: React.FC<PortfolioDashboardProps> = ({ onSelectProject
       {/* Projects Grid */}
       <div>
         <h3 className="text-lg font-bold text-white mb-4 flex items-center">
-            <Building2 className="w-5 h-5 mr-2 text-primary-400" /> 
+            <Building2 className="w-5 h-5 mr-2 text-[color:var(--color-brand-600)]" /> 
             Active Projects
         </h3>
         <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
@@ -106,7 +106,7 @@ const PortfolioDashboard: React.FC<PortfolioDashboardProps> = ({ onSelectProject
                 <div 
                     key={project.id} 
                     onClick={() => onSelectProject(project.id)}
-                    className="bg-slate-900 border border-slate-800 rounded-2xl p-6 hover:border-primary-500/30 hover:bg-slate-900/80 transition-all cursor-pointer group"
+                    className="bg-slate-900 border border-slate-800 rounded-2xl p-6 hover:border-primary-500/30 hover:bg-[color:var(--color-brand-600)] transition-all cursor-pointer group"
                 >
                     <div className="flex justify-between items-start mb-4">
                         <div className="flex items-center space-x-3">
@@ -114,7 +114,7 @@ const PortfolioDashboard: React.FC<PortfolioDashboardProps> = ({ onSelectProject
                                 <Building2 className="w-5 h-5 text-slate-400 group-hover:text-primary-400" />
                             </div>
                             <div>
-                                <h4 className="font-bold text-white group-hover:text-primary-400 transition-colors">{project.projectName}</h4>
+                                <h4 className="font-bold text-white transition-colors">{project.projectName}</h4>
                                 <p className="text-xs text-slate-500">{project.location}</p>
                             </div>
                         </div>
