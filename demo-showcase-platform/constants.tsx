@@ -51,38 +51,6 @@ export const VERTICALS: VerticalConfig[] = [
     }
   },
   {
-    id: 'manufacturing',
-    title: 'Smart Factory',
-    icon: 'factory',
-    color: 'bg-orange-600',
-    externalUrl: 'https://cloud.google.com/solutions/manufacturing',
-    pitch: {
-      problem: 'Factories lose millions due to unplanned downtime and equipment failure.',
-      solution: 'Vertex AI Vision + IoT Core for predictive maintenance and quality control.',
-      talkingPoints: [
-        '95% accuracy in automated visual quality inspection.',
-        'Predict equipment failure 48 hours in advance.',
-        'Reduced energy consumption by 15% via AI optimization.'
-      ]
-    }
-  },
-  {
-    id: 'genai-labs',
-    title: 'GenAI Labs',
-    icon: 'globe',
-    color: 'bg-red-600',
-    externalUrl: 'https://cloud.google.com/vertex-ai', // Example external demo
-    pitch: {
-      problem: 'Enterprises need a centralized environment to test and scale GenAI prototypes.',
-      solution: 'Endava Enterprise GenAI Accelerator with Vertex AI Model Garden integration.',
-      talkingPoints: [
-        'Rapid prototyping with 100+ pre-trained models.',
-        'Enterprise-grade security and data isolation.',
-        'Direct integration with existing GCP datasets.'
-      ]
-    }
-  },
-  {
     id: 'agentic-governance',
     title: 'Agentic Governance',
     icon: 'shield-check',
