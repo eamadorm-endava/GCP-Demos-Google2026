@@ -206,7 +206,7 @@ export const NewOrderForm: React.FC<NewOrderFormProps> = ({ farms, onClose, onAd
         
         <div className="flex justify-end items-center p-5 border-t border-slate-200 bg-slate-50 rounded-b-lg">
           <button onClick={onClose} className="px-4 py-2 text-sm font-medium text-slate-700 bg-white border border-slate-300 rounded-md shadow-sm hover:bg-slate-50">{t('cancel')}</button>
-          <button type="submit" form="new-shipment-form" className="ml-3 px-4 py-2 text-sm font-medium text-white bg-rose-600 border border-transparent rounded-md shadow-sm hover:bg-rose-700">{t('createShipment')}</button>
+          <button type="submit" form="new-shipment-form" className="ml-3 px-4 py-2 text-sm font-medium text-white bg-brand-primary-50 border border-transparent rounded-md shadow-sm hover:bg-brand-primary-100">{t('createShipment')}</button>
         </div>
       </div>
     </div>

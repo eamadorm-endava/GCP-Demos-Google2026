@@ -43,7 +43,7 @@ export const FarmManagement: React.FC<FarmManagementProps> = ({ user, farms, onU
 
     return (
         <div className="w-full h-full flex overflow-hidden">
-            <div className={`w-full lg:w-1/3 xl:w-1/4 border-r border-slate-200 overflow-y-auto bg-slate-50 ${selectedFarm ? 'hidden lg:block' : 'block'}`}>
+            <div className={`w-full lg:w-1/3 xl:w-1/4 border-r border-brand-sb-shade-80 overflow-y-auto bg-brand-sb-shade-90 ${selectedFarm ? 'hidden lg:block' : 'block'}`}>
                <FarmList 
                  farms={filteredFarms}
                  selectedFarmId={selectedFarmId}
@@ -54,7 +54,7 @@ export const FarmManagement: React.FC<FarmManagementProps> = ({ user, farms, onU
                  onFilterChange={setStatusFilter}
                />
             </div>
-            <div className={`flex-1 overflow-y-auto bg-white ${selectedFarm ? 'block' : 'hidden lg:block'}`}>
+            <div className={`flex-1 overflow-y-auto bg-brand-primary-200 ${selectedFarm ? 'block' : 'hidden lg:block'}`}>
                 {selectedFarm ? (
                     <FarmDetail 
                         farm={selectedFarm} 

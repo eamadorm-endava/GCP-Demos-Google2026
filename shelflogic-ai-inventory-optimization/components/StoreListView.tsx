@@ -193,7 +193,7 @@ export const StoreListView: React.FC<StoreListViewProps> = ({ className = '' }) 
 
                         <button 
                             onClick={() => viewStore(store.store_id)}
-                            className={`w-full mt-6 py-2 ${theme.components.button.secondary} text-xs font-bold rounded-lg group-hover:bg-cyan-600 group-hover:text-white group-hover:border-cyan-600 transition-colors flex items-center justify-center`}
+                            className={`w-full mt-6 py-2 ${theme.components.button.secondary} text-xs font-bold rounded-lg group-hover:bg-[var(--color-brand-primary-50)] group-hover:text-white group-hover:border-[var(--color-brand-primary-50)] transition-colors flex items-center justify-center`}
                         >
                             View Details <ChevronRight className="w-3 h-3 ml-1" />
                         </button>

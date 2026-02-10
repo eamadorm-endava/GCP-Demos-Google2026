@@ -22,7 +22,7 @@ const NavButton: React.FC<{
     <button 
         onClick={onClick}
         className={`px-3 py-1.5 text-sm font-semibold rounded-md transition-colors ${
-            isActive ? 'bg-rose-100 text-rose-700' : 'text-slate-600 hover:bg-slate-100'
+            isActive ? 'bg-rose-100 text-brand-primary-25' : 'text-brand-sb-shade-30 hover:bg-brand-sb-shade-80'
         }`}
     >
         {label}
@@ -46,11 +46,11 @@ export const Header: React.FC<HeaderProps> = ({ user, onLogout, onNewOrder, onNe
   }, []);
 
   return (
-    <header className="bg-white border-b border-slate-200 px-4 py-3 sm:px-6 flex items-center justify-between shadow-sm sticky top-0 z-20">
+    <header className="bg-brand-primary-250 border-b border-slate-200 px-4 py-3 sm:px-6 flex items-center justify-between shadow-sm sticky top-0 z-20">
       <div className="flex items-center gap-6">
         <button onClick={() => onNavigate('dashboard')} className="flex items-center gap-3 text-left">
-          <FlowerIcon className="w-8 h-8 text-rose-500" />
-          <h1 className="text-xl font-bold text-slate-800 tracking-tight hidden sm:block">
+          <img src="https://cdn.brandfetch.io/id4YZ7PWEj/w/200/h/200/theme/dark/icon.jpeg" className="w-8 h-8 text-rose-500" />
+          <h1 className="text-xl font-bold text-brand-primary-300 tracking-tight hidden sm:block">
             {t('supplyChain')}
           </h1>
         </button>
@@ -70,15 +70,15 @@ export const Header: React.FC<HeaderProps> = ({ user, onLogout, onNewOrder, onNe
         </button>
         <button
           onClick={onNewOrder}
-          className="inline-flex items-center gap-2 px-4 py-2 bg-rose-600 text-white text-sm font-semibold rounded-lg shadow-md hover:bg-rose-700 focus:outline-none focus:ring-2 focus:ring-rose-500 focus:ring-offset-2 transition-all"
+          className="inline-flex items-center gap-2 px-4 py-2 bg-brand-primary-50 text-white text-sm font-semibold rounded-lg shadow-md hover:bg-brand-primary-100 focus:outline-none focus:ring-2 focus:ring-rose-500 focus:ring-offset-2 transition-all"
         >
           <PlusCircleIcon className="w-5 h-5" />
           <span className="hidden sm:inline">{t('newShipment')}</span>
         </button>
         <div className="relative" ref={menuRef}>
           <button onClick={() => setIsMenuOpen(!isMenuOpen)} className="flex items-center gap-2 text-sm font-semibold text-slate-600 hover:bg-slate-100 rounded-full p-1.5 transition-colors">
-            <UserCircleIcon className="w-7 h-7 text-slate-500" />
-            <span className="hidden md:inline">{user.name}</span>
+            <UserCircleIcon className="w-7 h-7 text-brand-sb-shade-30" />
+            <span className="hidden md:inline text-brand-sb-shade-30">{user.name}</span>
           </button>
           {isMenuOpen && (
             <div className="absolute right-0 mt-2 w-56 origin-top-right bg-white rounded-md shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">

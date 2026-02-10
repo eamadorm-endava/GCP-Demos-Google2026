@@ -33,12 +33,12 @@ const FarmListItem: React.FC<{ farm: Farm; isSelected: boolean; onSelect: () => 
     return (
         <li 
             onClick={onSelect}
-            className={`cursor-pointer p-4 border-b border-slate-200 hover:bg-slate-100 transition-colors duration-150 ${isSelected ? 'bg-rose-50 border-l-4 border-rose-500' : ''}`}
+            className={`cursor-pointer p-4 border-b border-slate-200 hover:bg-slate-100 transition-colors duration-150 ${isSelected ? 'bg-rose-50 border-l-4 border-rose-500' : 'border-brand-primary-50'}`}
         >
             <div className="flex justify-between items-start">
                 <div>
-                    <p className={`text-sm font-bold ${isSelected ? 'text-rose-600' : 'text-slate-800'}`}>{farm.name}</p>
-                    <p className="text-xs text-slate-500">{farm.originCountry}</p>
+                    <p className={`text-sm font-bold ${isSelected ? 'text-brand-primary-50' : 'text-brand-primary-300'}`}>{farm.name}</p>
+                    <p className="text-xs text-brand-sb-shade-30">{farm.originCountry}</p>
                 </div>
                 <span className={`px-2 py-0.5 text-xs font-medium rounded-full ${statusColors[farm.status]}`}>
                     {translatedStatus}
@@ -54,9 +54,9 @@ export const FarmList: React.FC<FarmListProps> = ({ farms, selectedFarmId, onSel
   
   return (
     <div>
-        <div className="p-4 border-b border-slate-200 sticky top-0 bg-slate-50/80 backdrop-blur-sm z-10">
-            <h2 className="text-lg font-bold text-slate-800">{t('farmManagement')}</h2>
-            <p className="text-sm text-slate-500">{t('farmManagementSubtitle')}</p>
+        <div className="p-4 border-b border-slate-200 sticky top-0 bg-brand-sb-shade-90 backdrop-blur-sm z-10">
+            <h2 className="text-lg font-bold text-brand-primary-300">{t('farmManagement')}</h2>
+            <p className="text-sm text-brand-sb-shade-30">{t('farmManagementSubtitle')}</p>
              <div className="mt-3 flex flex-col sm:flex-row gap-3">
               <div className="relative flex-grow">
                 <label htmlFor="search-farm" className="sr-only">{t('searchFarms')}</label>

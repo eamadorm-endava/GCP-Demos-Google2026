@@ -212,4 +212,8 @@ export const MOCK_DATA = {
       { id: 'TX-1000', amount: 89.99, risk: 'Low', status: 'Approved' }
     ]
   }
+<<<<<<< HEAD
 };
+=======
+}; 
+>>>>>>> origin
