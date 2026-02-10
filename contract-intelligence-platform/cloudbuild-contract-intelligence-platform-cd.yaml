@@ -3,8 +3,8 @@ substitutions:
   _AR_REPO: gcp-demos
   _SERVICE: contract-intelligence-platform
   _DEMO_DIR: contract-intelligence-platform
-  _PROJECT_ID: p-dev-stemilt-0sjp-1
-  _AIP_GROUP: gcu_demos_temp_group@endava.com
+  _PROJECT_ID: p-s-gcu-na-marketing-bd5y-1
+  _IAP_GROUP: gcu_demos_temp_group@endava.com
 
 availableSecrets:
   secretManager:
@@ -50,7 +50,9 @@ steps:
           --no-allow-unauthenticated \
           --iap \
           --port=80 \
-          --set-env-vars="GEMINI_API_KEY=$$GEMINI_API_KEY"
+          --set-env-vars="GEMINI_API_KEY=$$GEMINI_API_KEY" \
+          --min-instances 1
+
     secretEnv: ['GEMINI_API_KEY']
 
   # 4. Allow access to the IAP group
@@ -61,7 +63,7 @@ steps:
       - '-c'
       - |
         gcloud beta iap web add-iam-policy-binding \
-          --member=group:${_AIP_GROUP} \
+          --member=group:${_IAP_GROUP} \
           --role=roles/iap.httpsResourceAccessor \
           --region=${_REGION} \
           --resource-type=cloud-run \
