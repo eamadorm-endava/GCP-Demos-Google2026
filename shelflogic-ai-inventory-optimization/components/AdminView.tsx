@@ -77,7 +77,7 @@ const AdminView: React.FC = () => {
       id: externalForm.id,
       title: externalForm.title || 'Untitled Demo',
       icon: 'globe',
-      color: 'bg-indigo-600',
+      color: 'bg-[var(--color-brand-secondary-200)]',
       externalUrl: externalForm.url,
       pitch: {
         problem: externalForm.problem,

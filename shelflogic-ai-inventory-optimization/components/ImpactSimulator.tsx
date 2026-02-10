@@ -13,12 +13,12 @@ export const ImpactSimulator = () => {
     const totalProj = (baseRevenue + parseFloat(projectedLift)).toFixed(2);
 
     return (
-        <div className={`${theme.components.card} p-5 bg-gradient-to-br from-slate-900 to-slate-900 border-l-4 border-l-cyan-500 relative overflow-hidden group`}>
+        <div className={`${theme.components.card} p-5 bg-gradient-to-br from-slate-900 to-slate-900 border-l-4 border-l-[var(--color-brand-primary-500)] relative overflow-hidden group`}>
              <div className="absolute top-0 right-0 p-4 opacity-5">
                  <Sliders className="w-24 h-24" />
              </div>
              <div className="relative z-10">
-                 <h3 className="text-xs font-bold text-cyan-400 uppercase tracking-widest mb-4 flex items-center">
+                 <h3 className="text-xs font-bold text-[var(--color-brand-primary-500)] uppercase tracking-widest mb-4 flex items-center">
                      <Sliders className="w-4 h-4 mr-2" />
                      Revenue Impact Simulator
                  </h3>
@@ -41,7 +41,7 @@ export const ImpactSimulator = () => {
                     max="100" 
                     value={adoptionRate} 
                     onChange={(e) => setAdoptionRate(parseInt(e.target.value))}
-                    className="w-full h-1.5 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-cyan-500"
+                    className="w-full h-1.5 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-[var(--color-brand-primary-500)]"
                  />
                  <div className="flex justify-between mt-2 text-[10px] text-slate-500 font-mono">
                      <span>0% (Current)</span>

@@ -15,9 +15,9 @@ const RoleNarrative: React.FC<RoleNarrativeProps> = ({ user }) => {
     const body = isManager ? t('managerWelcomeBody') : t('specialistWelcomeBody');
 
     return (
-        <div className="mb-8 bg-white p-6 rounded-lg shadow-sm border border-slate-200">
-            <h1 className="text-2xl font-bold text-slate-800">{title}, {user.name}!</h1>
-            <p className="text-slate-600 mt-2">{body}</p>
+        <div className="mb-8 bg-brand-sb-shade-90 p-6 rounded-lg shadow-sm border border-brand-sb-shade-80">
+            <h1 className="text-2xl font-bold text-brand-primary-300">{title}, {user.name}!</h1>
+            <p className="text-brand-primary-300 mt-2">{body}</p>
         </div>
     )
 }
@@ -38,15 +38,15 @@ const KpiCard: React.FC<{
     color: string;
     onClick?: () => void;
 }> = ({ title, value, icon, color, onClick }) => {
-    const clickableStyles = onClick ? 'cursor-pointer hover:bg-slate-50 transition-colors' : '';
+    const clickableStyles = onClick ? 'cursor-pointer hover:bg-brand-sb-shade-10 transition-colors' : '';
     return (
-        <div className={`bg-white p-5 rounded-lg shadow-sm border border-slate-200 flex items-start ${clickableStyles}`} onClick={onClick}>
+        <div className={`bg-brand-sb-shade-80 p-5 rounded-lg shadow-sm border border-brand-sb-shade-70 flex items-start ${clickableStyles}`} onClick={onClick}>
             <div className={`rounded-full p-3 mr-4 ${color}`}>
                 {icon}
             </div>
             <div>
-                <p className="text-sm font-medium text-slate-500">{title}</p>
-                <p className="text-3xl font-bold text-slate-800">{value}</p>
+                <p className="text-sm font-medium text-brand-sb-shade-30">{title}</p>
+                <p className="text-3xl font-bold text-brand-primary-300">{value}</p>
             </div>
         </div>
     );
@@ -60,17 +60,17 @@ const AtRiskShipmentItem: React.FC<{ shipment: Shipment; onSelect: (id: string) 
     const config = statusConfig[shipment.status as 'Delayed' | 'Requires Action'];
 
     return (
-        <li onClick={() => onSelect(shipment.id)} className="flex items-center justify-between p-3 -m-3 rounded-lg hover:bg-slate-100 transition-colors cursor-pointer">
+        <li onClick={() => onSelect(shipment.id)} className="flex items-center justify-between p-3 -m-3 rounded-lg hover:bg-brand-sb-shade-10 transition-colors cursor-pointer">
             <div className="flex items-center gap-3">
                 <span className={`p-2 rounded-full ${config.color}`}>
                     {config.icon}
                 </span>
                 <div>
-                    <p className="font-semibold text-sm text-slate-800">{shipment.id}</p>
-                    <p className="text-xs text-slate-500">{shipment.customer}</p>
+                    <p className="font-semibold text-sm text-brand-primary-300">{shipment.id}</p>
+                    <p className="text-xs text-brand-sb-shade-30">{shipment.customer}</p>
                 </div>
             </div>
-            <ArrowRightIcon className="w-5 h-5 text-slate-400" />
+            <ArrowRightIcon className="w-5 h-5 text-brand-sb-shade-50" />
         </li>
     )
 }
@@ -87,8 +87,8 @@ const DelayHotspotsChart: React.FC<{ data: { nameKey: string; count: number }[] 
             {data.map(({ nameKey, count }) => (
                 <div key={nameKey} className="group">
                     <div className="flex justify-between items-center text-xs mb-1">
-                        <span className="font-semibold text-slate-600">{t(nameKey)}</span>
-                        <span className="text-slate-500">{t('delayCount', { count })}</span>
+                        <span className="font-semibold text-brand-sb-shade-30">{t(nameKey)}</span>
+                        <span className="text-brand-sb-shade-30">{t('delayCount', { count })}</span>
                     </div>
                     <div className="w-full bg-slate-100 rounded-full h-2.5">
                         <div
@@ -112,8 +112,8 @@ const TopTradeLanes: React.FC<{ lanes: { lane: string; count: number; onTimePerc
             {lanes.map(({ lane, count, onTimePercent }) => (
                 <li key={lane} className="flex justify-between items-center">
                     <div className="text-sm">
-                        <p className="font-semibold text-slate-800">{lane}</p>
-                        <p className="text-xs text-slate-500">{t('shipmentCount', { count })}</p>
+                        <p className="font-semibold text-brand-primary-300">{lane}</p>
+                        <p className="text-xs text-brand-sb-shade-50">{t('shipmentCount', { count })}</p>
                     </div>
                     <div className={`text-sm font-bold ${onTimePercent > 90 ? 'text-green-600' : 'text-amber-600'}`}>
                         {onTimePercent}% {t('onTime')}
@@ -196,7 +196,7 @@ export const Dashboard: React.FC<DashboardProps> = ({ shipments, farms, user, on
     }, [shipments, farms]);
 
     return (
-        <div className="w-full bg-slate-50 overflow-y-auto p-6 lg:p-8">
+        <div className="w-full bg-brand-primary-200 overflow-y-auto p-6 lg:p-8">
             <div className="max-w-7xl mx-auto">
                 <RoleNarrative user={user} />
 
@@ -207,8 +207,8 @@ export const Dashboard: React.FC<DashboardProps> = ({ shipments, farms, user, on
                     <KpiCard title={t('delayedShipments')} value={metrics.delayedCount.toString()} icon={<ExclamationCircleIcon className="w-6 h-6 text-red-500"/>} color="bg-red-100" onClick={() => onDrilldown('Delayed')} />
                 </div>
                 
-                <div className="mt-6 bg-white p-6 rounded-lg shadow-sm border border-slate-200">
-                    <h2 className="text-lg font-bold text-slate-800 flex items-center gap-2 mb-4">{t('farmOverview')}</h2>
+                <div className="mt-6 bg-brand-sb-shade-90 p-6 rounded-lg shadow-sm border border-brand-sb-shade-80">
+                    <h2 className="text-lg font-bold text-brand-primary-300 flex items-center gap-2 mb-4">{t('farmOverview')}</h2>
                      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                         <KpiCard title={t('totalFarms')} value={metrics.farmMetrics.totalFarms.toString()} icon={<FlowerIcon className="w-6 h-6 text-rose-500"/>} color="bg-rose-100" onClick={() => onNavigateToFarms('All')} />
                         <KpiCard title={t('approvedFarms')} value={metrics.farmMetrics.approvedFarms.toString()} icon={<CheckCircleIcon className="w-6 h-6 text-green-500"/>} color="bg-green-100" onClick={() => onNavigateToFarms('Approved')} />
@@ -218,9 +218,9 @@ export const Dashboard: React.FC<DashboardProps> = ({ shipments, farms, user, on
 
                 <div className="mt-8 grid grid-cols-1 lg:grid-cols-3 gap-8">
                      <div className="lg:col-span-2 space-y-8">
-                        <div className="bg-white p-6 rounded-lg shadow-sm border border-slate-200">
-                             <h2 className="text-lg font-bold text-slate-800 flex items-center gap-2">
-                                <ExclamationTriangleIcon className="w-6 h-6 text-amber-500"/>
+                        <div className="bg-brand-sb-shade-90 p-6 rounded-lg shadow-sm border border-brand-sb-shade-80">
+                             <h2 className="text-lg font-bold text-brand-primary-300 flex items-center gap-2">
+                                <ExclamationTriangleIcon className="w-6 h-6 text-brand-sc-warning"/>
                                 {t('attentionRequired')}
                             </h2>
                             {metrics.atRiskShipments.length > 0 ? (
@@ -231,8 +231,8 @@ export const Dashboard: React.FC<DashboardProps> = ({ shipments, farms, user, on
                                 <p className="mt-4 text-sm text-slate-500">{t('noAttentionRequired')}</p>
                             )}
                         </div>
-                        <div className="bg-white p-6 rounded-lg shadow-sm border border-slate-200">
-                             <h2 className="text-lg font-bold text-slate-800 flex items-center gap-2">
+                        <div className="bg-brand-sb-shade-90 p-6 rounded-lg shadow-sm border border-brand-sb-shade-80">
+                             <h2 className="text-lg font-bold text-brand-primary-300 flex items-center gap-2">
                                 <ChartBarIcon className="w-6 h-6 text-slate-500"/>
                                 {t('topTradeLanes')}
                             </h2>
@@ -244,26 +244,26 @@ export const Dashboard: React.FC<DashboardProps> = ({ shipments, farms, user, on
 
                     <div className="space-y-8">
                         {user.role === 'Manager' && (
-                            <div className="bg-white p-6 rounded-lg shadow-sm border border-slate-200">
-                                <h2 className="text-lg font-bold text-slate-800 flex items-center gap-2 mb-4">
+                            <div className="bg-brand-sb-shade-90 p-6 rounded-lg shadow-sm border border-brand-sb-shade-80">
+                                <h2 className="text-lg font-bold text-brand-primary-300 flex items-center gap-2 mb-4">
                                     <BanknotesIcon className="w-6 h-6 text-slate-500"/>
                                     {t('financials')}
                                 </h2>
                                 <div className="space-y-4">
                                     <div>
-                                        <p className="text-sm text-slate-500">{t('totalLandedCost')}</p>
-                                        <p className="text-2xl font-bold text-slate-800">${metrics.totalLandedCost.toLocaleString()}</p>
+                                        <p className="text-sm text-brand-sb-shade-30">{t('totalLandedCost')}</p>
+                                        <p className="text-2xl font-bold text-brand-primary-300">${metrics.totalLandedCost.toLocaleString()}</p>
                                     </div>
                                     <div>
-                                        <p className="text-sm text-slate-500">{t('avgCostPerShipment')}</p>
-                                        <p className="text-2xl font-bold text-slate-800">${metrics.avgCostPerShipment.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</p>
+                                        <p className="text-sm text-brand-sb-shade-30">{t('avgCostPerShipment')}</p>
+                                        <p className="text-2xl font-bold text-brand-primary-300">${metrics.avgCostPerShipment.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</p>
                                     </div>
                                 </div>
                             </div>
                         )}
 
-                         <div className="bg-white p-6 rounded-lg shadow-sm border border-slate-200">
-                             <h2 className="text-lg font-bold text-slate-800 flex items-center gap-2">
+                         <div className="bg-brand-sb-shade-90 p-6 rounded-lg shadow-sm border border-brand-sb-shade-80">
+                             <h2 className="text-lg font-bold text-brand-primary-300 flex items-center gap-2">
                                 <ChartPieIcon className="w-6 h-6 text-red-500"/>
                                 {t('delayHotspots')}
                             </h2>

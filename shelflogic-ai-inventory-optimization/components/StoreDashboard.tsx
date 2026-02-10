@@ -73,7 +73,7 @@ export const StoreDashboard: React.FC<StoreDashboardProps> = ({ store, className
                                         {isPrice ? <Tag className={`w-6 h-6 ${theme.semantic.success.base}`} /> : isInventory ? <Truck className={`w-6 h-6 ${theme.semantic.secondary.base}`} /> : <RefreshCw className={`w-6 h-6 ${theme.semantic.warning.base}`} />}
                                     </div>
                                     <div>
-                                        <h3 className={`text-lg font-bold ${theme.colors.text.primary} group-hover:text-cyan-400 transition-colors`}>
+                                        <h3 className={`text-lg font-bold ${theme.colors.text.primary} group-hover:text-[var(--color-brand-primary-500)] transition-colors`}>
                                             {isPrice ? 'Price Update Required' : isInventory ? 'Incoming Stock Transfer' : 'Assortment Reset'}
                                         </h3>
                                         <p className={`${theme.colors.text.secondary} text-sm`}>
@@ -84,7 +84,7 @@ export const StoreDashboard: React.FC<StoreDashboardProps> = ({ store, className
                                     </div>
                                 </div>
                                 
-                                <button className={`mt-4 md:mt-0 w-full md:w-auto px-4 py-2 ${theme.components.button.secondary} text-sm font-semibold rounded-lg group-hover:bg-cyan-600 group-hover:text-white group-hover:border-cyan-600 transition-colors`}>
+                                <button className={`mt-4 md:mt-0 w-full md:w-auto px-4 py-2 ${theme.components.button.secondary} text-sm font-semibold rounded-lg group-hover:text-white transition-colors`}>
                                     View Details
                                 </button>
                             </div>

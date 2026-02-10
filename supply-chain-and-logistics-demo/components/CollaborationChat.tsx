@@ -51,9 +51,9 @@ export const CollaborationChat: React.FC<CollaborationChatProps> = ({ shipment, 
     }
 
   return (
-    <div className="flex flex-col h-[70vh] bg-slate-50 rounded-lg border border-slate-200">
-        <div className="p-3 border-b border-slate-200 bg-white rounded-t-lg flex justify-between items-center">
-            <h3 className="text-lg font-bold text-slate-800">{t('collaboration')}</h3>
+    <div className="flex flex-col h-[70vh] bg-brand-sb-shade-80 rounded-lg border border-brand-sb-shade-70">
+        <div className="p-3 border-b border-brand-sb-shade-80 bg-brand-sb-shade-90 rounded-t-lg flex justify-between items-center">
+            <h3 className="text-lg font-bold text-brand-primary-300">{t('collaboration')}</h3>
             <button
                 onClick={handleSummarize}
                 disabled={isSummarizing || shipment.communication.length < 2}
@@ -87,13 +87,13 @@ export const CollaborationChat: React.FC<CollaborationChatProps> = ({ shipment, 
         {shipment.communication.map((msg) => (
           <div key={msg.id} className={`flex items-start gap-3 ${msg.sender.name === userParty.name ? 'justify-end' : ''}`}>
              {msg.sender.name !== userParty.name && (
-                <div className="w-8 h-8 rounded-full bg-slate-200 flex items-center justify-center text-sm font-bold text-slate-600 shrink-0" title={`${msg.sender.name} (${msg.sender.role})`}>
+                <div className="w-8 h-8 rounded-full bg-brand-sb-shade-30 flex items-center justify-center text-sm font-bold text-slate-600 shrink-0" title={`${msg.sender.name} (${msg.sender.role})`}>
                     {msg.sender.name.charAt(0)}
                 </div>
              )}
-            <div className={`max-w-xs lg:max-w-md p-3 rounded-lg ${msg.sender.name === userParty.name ? 'bg-rose-500 text-white rounded-br-none' : 'bg-white border border-slate-200 text-slate-700 rounded-bl-none'}`}>
+            <div className={`max-w-xs lg:max-w-md p-3 rounded-lg ${msg.sender.name === userParty.name ? 'bg-rose-500 text-white rounded-br-none' : 'bg-brand-sb-shade-10 border border-slate-200 text-slate-700 rounded-bl-none'}`}>
               <p className="text-sm">{msg.text}</p>
-              <p className={`text-xs mt-1 ${msg.sender.name === userParty.name ? 'text-rose-200' : 'text-slate-400'}`}>
+              <p className={`text-xs mt-1 ${msg.sender.name === userParty.name ? 'text-rose-200' : 'text-brand-sb-shade-50'}`}>
                 {msg.sender.name} - {new Date(msg.timestamp).toLocaleTimeString()}
               </p>
             </div>
@@ -110,7 +110,7 @@ export const CollaborationChat: React.FC<CollaborationChatProps> = ({ shipment, 
             </div>
         )}
       </div>
-      <div className="p-4 bg-white border-t border-slate-200 rounded-b-lg">
+      <div className="p-4 bg-brand-sb-shade-80 border-t border-brand-sb-shade-70 rounded-b-lg">
         <form onSubmit={handleSendMessage} className="flex items-center gap-3">
           <input
             type="text"

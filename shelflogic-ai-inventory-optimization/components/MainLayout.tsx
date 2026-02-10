@@ -14,8 +14,8 @@ const NavButton = ({ view, icon: Icon, label }: { view: any, icon: any, label?: 
   const isActive = currentView === view;
   const isLab = view === 'ml_lab';
   const activeClasses = isLab 
-    ? 'bg-indigo-600 text-white shadow-lg shadow-indigo-900/40' 
-    : 'bg-cyan-600 text-white shadow-lg shadow-cyan-900/40';
+    ? 'bg-[var(--color-brand-secondary-200)] text-white shadow-lg shadow-[var(--color-brand-secondary-100)]' 
+    : 'bg-[var(--color-brand-primary-500)] text-white shadow-lg shadow-[var(--color-brand-primary-500)]';
 
   return (
     <button 
@@ -39,10 +39,12 @@ export const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
       {/* Desktop Sidebar */}
       <div className={`hidden md:flex fixed left-0 top-0 bottom-0 w-20 ${theme.colors.background.sidebar} flex-col items-center py-8 z-50 border-r ${theme.colors.border.base} glass-panel`}>
         <div 
-          className={`w-10 h-10 bg-gradient-to-br ${theme.semantic.primary.gradient} rounded-xl mb-10 flex items-center justify-center text-white font-bold cursor-pointer shadow-lg shadow-cyan-900/50`} 
+          className={`w-10 h-10 bg-gradient-to-br ${theme.semantic.primary.gradient} rounded-xl mb-10 flex items-center justify-center text-white font-bold cursor-pointer shadow-lg shadow-[var(--color-brand-primary-500)]`} 
           onClick={() => useStore.getState().setCurrentView('dashboard')}
         >
-            S
+          <img src="https://cdn.brandfetch.io/id4YZ7PWEj/w/200/h/200/theme/dark/icon.jpeg"
+            className="w-full h-full object-cover"
+          /> 
         </div>
         <div className="space-y-6 flex flex-col items-center w-full px-3 flex-1">
           <NavButton view="dashboard" icon={LayoutDashboard} label="Dashboard" />

@@ -1,0 +1,57 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@theme {
+  /* Define the exact scale steps you will use in classes */
+  --color-brand-50:  #FFF1EE;
+  --color-brand-200: #FFD6CF;
+  --color-brand-600: #D93A28;
+  --color-brand-100: #FFE4E0;
+  --color-brand-300: #FFB3A8;
+  --color-brand-500: #FF5640;
+  --color-brand-700: #B52D1D;
+  --color-brand-400: #FF8775;
+  --color-brand-800: #912418;
+  --color-brand-900: #731D14;
+
+  --color-brand-connect-50:#cfe0ff;
+  --color-brand-connect-200:#192B37;
+  --color-brand-connect-300:#b6d0ff;
+
+  /* Primary Colours */
+  --color-brand-primary-25:#FF6D5A;
+  --color-brand-primary-50:#FF5640;
+  --color-brand-primary-100:#FF3F27;
+  --color-brand-primary-200:#192B37;
+  --color-brand-primary-250:#111D25;
+  --color-brand-primary-300:#FFFFFF;
+
+  /* Solid Blue Shades */
+  --color-brand-sb-shade-10:#E8EAEB;
+  --color-brand-sb-shade-20:#D1D5D7;
+  --color-brand-sb-shade-30:#BABFC3;
+  --color-brand-sb-shade-40:#A3AAAF;
+  --color-brand-sb-shade-50:#8C959B;
+  --color-brand-sb-shade-60:#758087;
+  --color-brand-sb-shade-70:#5E6A73;
+  --color-brand-sb-shade-80:#47555F;
+  --color-brand-sb-shade-90:#30404B;
+
+  /* Signal Colours */
+  --color-brand-sc-positive:#3DD17B;
+  --color-brand-sc-warning:#F99C11;
+  --color-brand-sc-negative:#E84641;
+
+  /* Data Visualisation */
+  --color-brand-dv-blue:#5899C4;
+  --color-brand-dv-orange:#FF5641;
+  --color-brand-dv-yellow:#CF820E;
+  --color-brand-dv-green:#30A661;
+  --color-brand-dv-violet:#8684BF;
+  --color-brand-dv-grass-green:#7B9922;
+  --color-brand-dv-avocado:#998F63;
+  --color-brand-dv-jeans:#7C94A6;
+  --color-brand-dv-teal:#3E9C8F;
+
+}

@@ -18,22 +18,23 @@ export const Login: React.FC<LoginProps> = ({ onLogin, error }) => {
   };
 
   return (
-    <div className="flex min-h-screen flex-col justify-center bg-slate-100 py-12 sm:px-6 lg:px-8">
+    <div className="flex min-h-screen flex-col justify-center bg-brand-primary-200 py-12 sm:px-6 lg:px-8">
       <div className="sm:mx-auto sm:w-full sm:max-w-md">
-        <FlowerIcon className="mx-auto h-12 w-auto text-rose-600" />
-        <h2 className="mt-6 text-center text-2xl font-bold leading-9 tracking-tight text-slate-900">
+        <img src="https://cdn.brandfetch.io/id4YZ7PWEj/w/200/h/200/theme/dark/icon.jpeg"
+             className="mx-auto h-12 w-auto text-brand-primary-50" />
+        <h2 className="mt-6 text-center text-2xl font-bold leading-9 tracking-tight text-brand-primary-300">
           {t('loginTitle')}
         </h2>
-        <p className="mt-2 text-center text-sm text-slate-500">
+        <p className="mt-2 text-center text-sm text-brand-sb-shade-30">
             {t('loginSubtitle')}
         </p>
       </div>
 
       <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-[480px]">
-        <div className="bg-white px-6 py-12 shadow-lg sm:rounded-lg sm:px-12 border border-slate-200">
+        <div className="bg-brand-sb-shade-90 px-6 py-12 shadow-lg sm:rounded-lg sm:px-12 border border-brand-sb-shade-80">
           <form className="space-y-6" onSubmit={handleSubmit}>
             <div>
-              <label htmlFor="username" className="block text-sm font-medium leading-6 text-slate-900">
+              <label htmlFor="username" className="block text-sm font-medium leading-6 text-brand-sb-shade-20">
                 {t('username')}
               </label>
               <div className="mt-2">
@@ -51,7 +52,7 @@ export const Login: React.FC<LoginProps> = ({ onLogin, error }) => {
             </div>
 
             <div>
-              <label htmlFor="password"className="block text-sm font-medium leading-6 text-slate-900">
+              <label htmlFor="password"className="block text-sm font-medium leading-6 text-brand-sb-shade-20">
                 {t('password')}
               </label>
               <div className="mt-2">
@@ -77,7 +78,7 @@ export const Login: React.FC<LoginProps> = ({ onLogin, error }) => {
             <div>
               <button
                 type="submit"
-                className="flex w-full justify-center rounded-md bg-rose-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-rose-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rose-600"
+                className="flex w-full justify-center rounded-md bg-brand-primary-50 px-3 py-1.5 text-sm font-semibold leading-6 text-brand-primary-300 shadow-sm hover:bg-brand-primary-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rose-600"
               >
                 {t('loginButton')}
               </button>
@@ -90,15 +91,15 @@ export const Login: React.FC<LoginProps> = ({ onLogin, error }) => {
                 <div className="w-full border-t border-slate-200" />
               </div>
               <div className="relative flex justify-center text-sm font-medium leading-6">
-                <span className="bg-white px-6 text-slate-500">Demo Credentials</span>
+                <span className="bg-brand-sb-shade-80 px-6 text-brand-sb-shade-50">Demo Credentials</span>
               </div>
             </div>
 
             <div className="mt-6 grid grid-cols-1 gap-4">
-                <p className="text-center text-sm text-slate-500">
+                <p className="text-center text-sm text-brand-primary-300">
                     <b>Manager:</b> manager / password123
                 </p>
-                 <p className="text-center text-sm text-slate-500">
+                 <p className="text-center text-sm text-brand-primary-300">
                     <b>Specialist:</b> specialist / password123
                 </p>
             </div>
