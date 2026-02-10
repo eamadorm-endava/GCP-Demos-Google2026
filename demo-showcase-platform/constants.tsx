@@ -178,6 +178,22 @@ export const VERTICALS: VerticalConfig[] = [
       ]
     }
   },
+  {
+    id: 'contractinel-ai',
+    title: 'Contractinel AI',
+    icon: 'clipboard-check',
+    color: 'bg-teal-600',
+    externalUrl: 'https://contractintel-ai-956266717219.us-west4.run.app',
+    pitch: {
+      problem: 'Organizations lack real-time visibility into contractual risk, compliance exposure, and review inefficiencies.',
+      solution: 'AI-powered contract analysis platform delivering real-time risk intelligence, automated reviews, and compliance insights.',
+      talkingPoints: [
+        'Real-time detection of high-risk clauses and compliance gaps.',
+        'Average contract review time reduced to under 10 minutes.',
+        'Automated risk scoring across jurisdictions and contract categories.'
+      ]
+    }
+  },
 ];
 
 export const MOCK_DATA = {
@@ -212,8 +228,4 @@ export const MOCK_DATA = {
       { id: 'TX-1000', amount: 89.99, risk: 'Low', status: 'Approved' }
     ]
   }
-<<<<<<< HEAD
 };
-=======
-}; 
->>>>>>> origin
