@@ -162,6 +162,22 @@ export const VERTICALS: VerticalConfig[] = [
       ]
     }
   },
+  {
+    id: 'buildintel',
+    title: 'BuildIntel',
+    icon: 'shield-check',
+    color: 'bg-navy',
+    externalUrl: 'https://buildintel-construction-ai-platform-956266717219.us-west4.run.app',
+    pitch: {
+      problem: 'Large construction portfolios lack real-time oversight across projects, risks, workforce, and cost variance—leading to delayed decisions and escalating delivery risk.',
+      solution: 'An agentic governance dashboard that provides real-time portfolio intelligence, continuous risk monitoring, and proactive AI agent alerts across all active projects.',
+      talkingPoints: [
+        'Unified real-time visibility across projects, risks, and workforce in a single portfolio view.',
+        'Autonomous agents surface critical risk alerts and escalate issues before they impact delivery.',
+        'Continuous tracking of forecast variance and progress to improve governance and execution control.'
+      ]
+    }
+  },
 ];
 
 export const MOCK_DATA = {
