@@ -48,11 +48,8 @@ steps:
           --region=${_REGION} \
           --platform=managed \
           --no-allow-unauthenticated \
-          --set-env-vars="GEMINI_API_KEY=$$GEMINI_API_KEY" \
           --min-instances 1 \
           --iap
-
-    secretEnv: ['GEMINI_API_KEY']
 
   # 4. Allow access to the IAP group
   - name: 'gcr.io/cloud-builders/gcloud'
