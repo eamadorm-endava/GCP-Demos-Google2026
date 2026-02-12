@@ -6,51 +6,6 @@ export const IDLE_TIMEOUT = 120000; // 2 minutes
 
 export const VERTICALS: VerticalConfig[] = [
   {
-    id: 'retail',
-    title: 'Smart Retail',
-    icon: 'shopping-cart',
-    color: 'bg-blue-600',
-    pitch: {
-      problem: 'Retailers struggle with siloed inventory data and unpredictable supply chains.',
-      solution: 'Vertex AI + BigQuery unified data platform for real-time demand forecasting.',
-      talkingPoints: [
-        '30% reduction in stock-outs using predictive modeling.',
-        'Real-time inventory syncing across 500+ locations.',
-        'Generative AI shopping assistants for personalized CX.'
-      ]
-    }
-  },
-  {
-    id: 'healthcare',
-    title: 'HealthCare AI',
-    icon: 'stethoscope',
-    color: 'bg-green-600',
-    pitch: {
-      problem: 'Clinicians spend 40% of their time on manual administrative tasks.',
-      solution: 'Google Cloud Healthcare API + Gemini Pro for automated medical documentation.',
-      talkingPoints: [
-        'Secure HIPAA-compliant data interoperability.',
-        'Automated clinical summarization from patient transcripts.',
-        'Predictive analytics for early chronic disease detection.'
-      ]
-    }
-  },
-  {
-    id: 'fintech',
-    title: 'FinTech Secure',
-    icon: 'landmark',
-    color: 'bg-purple-600',
-    pitch: {
-      problem: 'Legacy fraud detection systems miss 15% of sophisticated digital attacks.',
-      solution: 'Cloud Spanner + ML Hub for sub-millisecond transaction scoring.',
-      talkingPoints: [
-        '99.999% uptime for global transactional processing.',
-        'Graph analysis for detecting hidden money laundering rings.',
-        'Seamless integration with multi-cloud payment gateways.'
-      ]
-    }
-  },
-  {
     id: 'agentic-governance',
     title: 'Agentic Governance',
     icon: 'shield-check',
