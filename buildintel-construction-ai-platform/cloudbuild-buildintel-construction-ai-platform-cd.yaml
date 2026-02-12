@@ -50,8 +50,6 @@ steps:
           --min-instances 1 \
           --no-iap
 
-    secretEnv: ['GEMINI_API_KEY']
-
 
 images:
   - '${_REGION}-docker.pkg.dev/${_PROJECT_ID}/${_AR_REPO}/${_SERVICE}:${SHORT_SHA}'
