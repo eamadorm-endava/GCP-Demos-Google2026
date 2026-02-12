@@ -48,11 +48,9 @@ steps:
           --platform=managed \
           --allow-unauthenticated \
           --port=80 \
-          --set-env-vars="GEMINI_API_KEY=$$GEMINI_API_KEY" \
           --min-instances 1 \
           --no-iap
 
-    secretEnv: ['GEMINI_API_KEY']
 
 images:
   - '${_REGION}-docker.pkg.dev/${_PROJECT_ID}/${_AR_REPO}/${_SERVICE}:${SHORT_SHA}'
