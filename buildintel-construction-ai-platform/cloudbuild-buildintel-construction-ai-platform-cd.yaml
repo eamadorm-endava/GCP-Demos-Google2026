@@ -4,7 +4,6 @@ substitutions:
   _SERVICE: buildintel-construction-ai-platform
   _DEMO_DIR: buildintel-construction-ai-platform
   _PROJECT_ID: p-s-gcu-na-marketing-bd5y-1
-  _IAP_GROUP: gcu_demos_temp_group@endava.com
 
 availableSecrets:
   secretManager:
@@ -47,25 +46,12 @@ steps:
           --image=${_REGION}-docker.pkg.dev/${_PROJECT_ID}/${_AR_REPO}/${_SERVICE}:${SHORT_SHA} \
           --region=${_REGION} \
           --platform=managed \
-          --no-allow-unauthenticated \
+          --allow-unauthenticated \
           --min-instances 1 \
-          --iap
+          --no-iap
 
     secretEnv: ['GEMINI_API_KEY']
 
-  # 4. Allow access to the IAP group
-  - name: 'gcr.io/cloud-builders/gcloud'
-    id: 'IAP-Access'
-    entrypoint: 'bash'
-    args:
-      - '-c'
-      - |
-        gcloud beta iap web add-iam-policy-binding \
-          --member=group:${_IAP_GROUP} \
-          --role=roles/iap.httpsResourceAccessor \
-          --region=${_REGION} \
-          --resource-type=cloud-run \
-          --service=${_SERVICE}
 
 images:
   - '${_REGION}-docker.pkg.dev/${_PROJECT_ID}/${_AR_REPO}/${_SERVICE}:${SHORT_SHA}'
