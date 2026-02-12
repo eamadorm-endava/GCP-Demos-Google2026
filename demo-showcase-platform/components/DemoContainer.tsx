@@ -99,12 +99,12 @@ const DemoContainer: React.FC = () => {
           <div className="flex items-center gap-2">
             <ShieldCheck className="w-3 h-3 text-[#DE411B]" /> Endava Sandboxed Session
           </div>
-          <div className="flex items-center gap-4">
+          {/* <div className="flex items-center gap-4">
             <span>{verticalConfig.externalUrl}</span>
             <a href={verticalConfig.externalUrl} target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">
               <ExternalLink className="w-3 h-3" />
             </a>
-          </div>
+          </div> */}
         </div>
         <div className="flex-grow relative bg-white">
           <iframe src={verticalConfig.externalUrl} className="absolute inset-0 w-full h-full border-none" title={verticalConfig.title} allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen />
