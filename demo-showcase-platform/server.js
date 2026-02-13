@@ -33,33 +33,55 @@ const VERTICALS = {
   'agentic-governance': 'https://test-agentic-vendor-governance-platform-956266717219.us-west4.run.app',
 };
 
-async function getAuthHeaders(targetUrl) {
+// Helper to get token ID
+async function getAuthToken(targetUrl) {
   try {
+    // Uses the SA of the CloudRun instance
     const client = await auth.getIdTokenClient(targetUrl);
     const headers = await client.getRequestHeaders();
     return headers['Authorization'];
   } catch (error) {
-    console.error(`Error fetching auth token for ${targetUrl}:`, error);
+    console.error(`Error generating token for ${targetUrl}:`, error);
     return null;
   }
 }
 
+// Proxy configuration with Auth Middleware
 Object.entries(VERTICALS).forEach(([key, targetUrl]) => {
+  const routePath = `/demos/${key}`;
+
+  // 1. Middleware of Authentication
+  app.use(routePath, async (req, res, next) => {
+    try {
+      // Get the token
+      const authToken = await getAuthToken(targetUrl);
+      
+      if (authToken) {
+        // Inject the token in the headers of the incoming requests
+        req.headers['authorization'] = authToken;
+      } else {
+        console.warn(`Token could not be generated for: ${key}`);
+      }
+      
+      next();
+    } catch (err) {
+      console.error('Error in authentication middleware:', err);
+      next(err);
+    }
+  });
+
+  // 2. Proxy Middleware (After the token is set)
   app.use(
-    `/demos/${key}`,
+    routePath,
     createProxyMiddleware({
       target: targetUrl,
       changeOrigin: true,
       pathRewrite: {
-        [`^/demos/${key}`]: '', 
+        [`^/demos/${key}`]: '', // Delete the prefix /demos/xyz
       },
-      // Intercept the outgoing request to the child demo and attach the IAM token
-      onProxyReq: async (proxyReq, req, res) => {
-        const authHeader = await getAuthHeaders(targetUrl);
-        if (authHeader) {
-          proxyReq.setHeader('Authorization', authHeader);
+      onProxyReq: (proxyReq, req, res) => {
+        console.log(`Proxy request to: ${targetUrl}${proxyReq.path}`);
         }
-      },
     })
   );
 });
