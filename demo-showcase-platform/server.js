@@ -10,6 +10,7 @@ import rateLimit from 'express-rate-limit';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
+
 const app = express();
 // Initializes GoogleAuth to automatically retrieve credentials from the Cloud Run Metadata Server
 const auth = new GoogleAuth();
