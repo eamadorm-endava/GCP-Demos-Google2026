@@ -30,7 +30,7 @@ const limiter = rateLimit({
 app.use(limiter);
 
 const VERTICALS = {
-  'agentic-governance': 'https://agentic-vendor-governance-platform-956266717219.us-west4.run.app',
+  'agentic-governance': 'https://test-agentic-vendor-governance-platform-956266717219.us-west4.run.app',
 };
 
 async function getAuthHeaders(targetUrl) {
