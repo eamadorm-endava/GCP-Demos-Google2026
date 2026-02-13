@@ -45,7 +45,7 @@ steps:
       - '-c'
       - |
         gcloud beta run deploy ${_SERVICE} \
-          --image=${_REGION}-docker.pkg.dev/${_PROJECT_ID}/${_AR_REPO}/${_SERVICE}:${SHORT_SHA} latest \
+          --image=${_REGION}-docker.pkg.dev/${_PROJECT_ID}/${_AR_REPO}/${_SERVICE}:${SHORT_SHA} \
           --region=${_REGION} \
           --platform=managed \
           --no-allow-unauthenticated \
