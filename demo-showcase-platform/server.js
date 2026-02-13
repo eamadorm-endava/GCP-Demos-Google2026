@@ -40,15 +40,33 @@ const VERTICALS = {
 // Helper to get token ID
 async function getAuthToken(targetUrl) {
   try {
-    // Uses the SA of the CloudRun instance
+    console.log(`[AUTH START] Intentando generar token para: ${targetUrl}`);
+    
+    // 1. Verificar si targetUrl es válido
+    if (!targetUrl) throw new Error('Target URL is undefined or empty');
+
+    // 2. Obtener cliente
     const client = await auth.getIdTokenClient(targetUrl);
+    console.log('[AUTH CLIENT] Cliente de identidad obtenido correctamente');
+
+    // 3. Obtener headers
     const headers = await client.getRequestHeaders();
+    console.log('[AUTH HEADERS] Headers generados con éxito');
+    
     return headers['Authorization'];
   } catch (error) {
+    // --- ESTOS SON LOS LOGS QUE NECESITAMOS ---
     console.error('=======================================');
     console.error(`[AUTH ERROR] Falló la generación de token para: ${targetUrl}`);
-    console.error('Detalle del error:', error.message);
-    if (error.response) console.error('Response data:', error.response.data);
+    console.error('Mensaje:', error.message);
+    if (error.response) {
+       console.error('Response Status:', error.response.status);
+       console.error('Response Data:', JSON.stringify(error.response.data));
+    }
+    // Si el error es de credenciales, suele ser esto:
+    if (error.message.includes('Could not load the default credentials')) {
+        console.error('CAUSA PROBABLE: La Service Account no está asignada al contenedor o la librería no está instalada en prod.');
+    }
     console.error('=======================================');
     return null;
   }
@@ -58,27 +76,23 @@ async function getAuthToken(targetUrl) {
 Object.entries(VERTICALS).forEach(([key, targetUrl]) => {
   const routePath = `/demos/${key}`;
 
-  // Middleware 1: Auth Injection
+  // Middleware de Autenticación
   app.use(routePath, async (req, res, next) => {
-    try {
-      // Get the token
-      const authToken = await getAuthToken(targetUrl);
-      
-      if (authToken) {
-        // Inject the token in the headers of the incoming requests
-        req.headers['authorization'] = authToken;
-      } else {
-        console.warn(`Token could not be generated for: ${key}`);
-      }
-      
-      next();
-    } catch (err) {
-      console.error('Error in authentication middleware:', err);
-      next(err);
+    // Si ya tiene auth (ej. pruebas locales), no hacemos nada
+    if (req.headers['authorization']) return next();
+
+    const authToken = await getAuthToken(targetUrl);
+    
+    if (authToken) {
+      req.headers['authorization'] = authToken;
+      console.log(`[PROXY] Token inyectado para ${key}`);
+    } else {
+      console.warn(`[PROXY WARNING] Enviando petición a ${key} SIN TOKEN (Auth falló)`);
     }
+    next();
   });
 
-  // Middleware 2: Proxy
+  // Middleware del Proxy
   app.use(
     routePath,
     createProxyMiddleware({
@@ -87,9 +101,14 @@ Object.entries(VERTICALS).forEach(([key, targetUrl]) => {
       pathRewrite: {
         [`^/demos/${key}`]: '', // Delete the prefix /demos/xyz
       },
-      onProxyReq: (proxyReq, req, res) => {
-        console.log(`Proxy request to: ${targetUrl}${proxyReq.path}`);
-        }
+      onProxyReq: (proxyReq) => {
+         // Log para confirmar la salida
+         // console.log(`[OUTGOING] -> ${targetUrl}${proxyReq.path}`);
+      },
+      onError: (err, req, res) => {
+        console.error('[PROXY FAIL]', err);
+        res.status(500).send('Proxy Error');
+      }
     })
   );
 });
@@ -97,8 +116,7 @@ Object.entries(VERTICALS).forEach(([key, targetUrl]) => {
 // Serve the static React assets from Vite's build folder
 app.use(express.static(path.join(__dirname, 'dist')));
 
-// Fallback for React Router
-app.get(/.*/, (req, res) => {
+app.get('/(.*)', (req, res) => {
   res.sendFile(path.join(__dirname, 'dist', 'index.html'));
 });
 
