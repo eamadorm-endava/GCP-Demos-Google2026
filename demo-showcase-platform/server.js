@@ -41,55 +41,53 @@ const VERTICALS = {
 // Helper to get token ID
 async function getAuthToken(targetUrl) {
   try {
-    console.log(`[AUTH START] Intentando generar token para: ${targetUrl}`);
-    
-    // 1. Verificar si targetUrl es válido
     if (!targetUrl) throw new Error('Target URL is undefined or empty');
     
-    // 2. Obtener cliente
+    // console.log(`[AUTH START] Intentando generar token para: ${targetUrl}`);
+    
+    // 1. Obtenemos el cliente para ID Token
     const client = await auth.getIdTokenClient(targetUrl);
-    console.log('[AUTH CLIENT] Cliente de identidad obtenido correctamente');
 
-    // 3. Obtener headers
-    const headers = await client.getRequestHeaders();
+    // 2. CAMBIO CRÍTICO: Usamos fetchIdToken para obtener el string crudo
+    // Esto evita el problema de getRequestHeaders() devolviendo {}
+    const idToken = await client.fetchIdToken(targetUrl);
     
-    // --- EL CAMBIO CLAVE AQUÍ ---
-    // Buscamos 'Authorization' O 'authorization'. Si no, falla.
-    const token = headers['Authorization'] || headers['authorization'];
-    
-    if (!token) {
-        console.error('[AUTH DEBUG] Headers recibidos:', JSON.stringify(headers)); // Veremos qué llegó si falla
-        return null;
+    if (!idToken) {
+        throw new Error('fetchIdToken devolvió vacío');
     }
 
-    return token;
+    console.log('[AUTH SUCCESS] Token generado correctamente. Longitud:', idToken.length);
+    
+    // 3. Construimos nosotros mismos el valor del header
+    return `Bearer ${idToken}`;
+
   } catch (error) {
-    console.error(`[AUTH ERROR] Falló token para: ${targetUrl}`, error.message);
+    console.error(`[AUTH ERROR] Falló token para: ${targetUrl}`);
+    console.error('Mensaje:', error.message);
+    // Si hay respuesta detallada del error de Google, la mostramos
+    if (error.response) console.error('Data:', JSON.stringify(error.response.data));
     return null;
   }
 }
 
-// Proxy Configuration
 Object.entries(VERTICALS).forEach(([key, targetUrl]) => {
   const routePath = `/demos/${key}`;
 
-  // Middleware de Autenticación
   app.use(routePath, async (req, res, next) => {
-    // Si ya tiene auth (ej. pruebas locales), no hacemos nada
+    // Si ya viene con auth (pruebas locales), lo respetamos
     if (req.headers['authorization']) return next();
 
     const authToken = await getAuthToken(targetUrl);
     
     if (authToken) {
       req.headers['authorization'] = authToken;
-      console.log(`[PROXY SUCCESS] Token inyectado correctamente para ${key}`);
+      // console.log(`[PROXY] Token inyectado para ${key}`);
     } else {
-      console.warn(`[PROXY WARNING] Enviando petición a ${key} SIN TOKEN (Auth falló)`);
+      console.warn(`[PROXY WARNING] ¡ERROR CRÍTICO! Enviando petición a ${key} SIN TOKEN.`);
     }
     next();
   });
 
-  // Middleware del Proxy
   app.use(
     routePath,
     createProxyMiddleware({
