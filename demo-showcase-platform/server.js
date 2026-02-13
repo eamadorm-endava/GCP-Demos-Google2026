@@ -85,7 +85,7 @@ Object.entries(VERTICALS).forEach(([key, targetUrl]) => {
     
     if (authToken) {
       req.headers['authorization'] = authToken;
-      console.log(`[PROXY] Token inyectado para ${key}`);
+      console.log(`[PROXY SUCCESS] Token inyectado correctamente para ${key}`);
     } else {
       console.warn(`[PROXY WARNING] Enviando petición a ${key} SIN TOKEN (Auth falló)`);
     }
@@ -102,8 +102,8 @@ Object.entries(VERTICALS).forEach(([key, targetUrl]) => {
         [`^/demos/${key}`]: '', // Delete the prefix /demos/xyz
       },
       onProxyReq: (proxyReq) => {
-         // Log para confirmar la salida
-         // console.log(`[OUTGOING] -> ${targetUrl}${proxyReq.path}`);
+         // Opcional: ver si el header viaja en la salida
+         console.log('[PROXY OUT CHECK] Auth Header:', proxyReq.getHeader('authorization') ? 'PRESENT' : 'MISSING');
       },
       onError: (err, req, res) => {
         console.error('[PROXY FAIL]', err);
