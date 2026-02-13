@@ -9,6 +9,7 @@ import DemoContainer from './components/DemoContainer';
 import AdminView from './components/AdminView';
 import { Home, RefreshCw, LayoutGrid, Settings, ChevronRight, ShieldCheck, Terminal } from 'lucide-react';
 
+
 const App: React.FC = () => {
   const currentVertical = useStore((state) => state.currentVertical);
   const isQuickPitchOpen = useStore((state) => state.isQuickPitchOpen);
