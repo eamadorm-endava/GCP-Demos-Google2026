@@ -116,7 +116,7 @@ Object.entries(VERTICALS).forEach(([key, targetUrl]) => {
 // Serve the static React assets from Vite's build folder
 app.use(express.static(path.join(__dirname, 'dist')));
 
-app.get('/.*/', (req, res) => {
+app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'dist', 'index.html'));
 });
 
