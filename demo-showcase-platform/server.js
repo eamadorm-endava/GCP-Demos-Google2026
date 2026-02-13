@@ -5,6 +5,7 @@ import { createProxyMiddleware } from 'http-proxy-middleware';
 import { GoogleAuth } from 'google-auth-library';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import rateLimit from 'express-rate-limit';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -14,12 +15,24 @@ const app = express();
 const auth = new GoogleAuth();
 const PORT = process.env.PORT || 8080;
 
-// Mapping of local proxy paths to secure backend Cloud Run URLs
+// Configure rate limiter
+// Limits requests to 200 per 15 minutes per IP.
+// This prevents DoS attacks on file system access (res.sendFile)
+const limiter = rateLimit({
+	windowMs: 15 * 60 * 1000, // 15 minutes
+	limit: 200, // Limit each IP to 200 requests per `window`
+	standardHeaders: 'draft-7', // draft-6: `RateLimit-*` headers; draft-7: combined `RateLimit` header
+	legacyHeaders: false, // Disable the `X-RateLimit-*` headers
+	message: 'Too many requests from this IP, please try again after 15 minutes',
+});
+
+//Apply rate limiting to all requests
+app.use(limiter);
+
 const VERTICALS = {
   'agentic-governance': 'https://agentic-vendor-governance-platform-956266717219.us-west4.run.app',
 };
 
-// Function to fetch OIDC tokens scoped to the target application
 async function getAuthHeaders(targetUrl) {
   try {
     const client = await auth.getIdTokenClient(targetUrl);
@@ -31,7 +44,6 @@ async function getAuthHeaders(targetUrl) {
   }
 }
 
-// Setup proxy middleware for each defined vertical
 Object.entries(VERTICALS).forEach(([key, targetUrl]) => {
   app.use(
     `/demos/${key}`,
