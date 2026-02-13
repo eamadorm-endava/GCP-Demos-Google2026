@@ -43,22 +43,19 @@ async function getAuthToken(targetUrl) {
   try {
     if (!targetUrl) throw new Error('Target URL is undefined or empty');
     
-    // console.log(`[AUTH START] Intentando generar token para: ${targetUrl}`);
-    
-    // 1. Obtenemos el cliente para ID Token
+    // 1. Obtenemos el cliente para ID Token (ya configurado con la audiencia targetUrl)
     const client = await auth.getIdTokenClient(targetUrl);
 
-    // 2. CAMBIO CRÍTICO: Usamos fetchIdToken para obtener el string crudo
-    // Esto evita el problema de getRequestHeaders() devolviendo {}
-    const idToken = await client.fetchIdToken(targetUrl);
+    // 2. CORRECCIÓN: Usamos getAccessToken().
+    // Aunque suene raro, en un IdTokenClient este método obtiene y firma el OIDC Token.
+    const response = await client.getAccessToken();
+    const idToken = response.token;
     
     if (!idToken) {
-        throw new Error('fetchIdToken devolvió vacío');
+        throw new Error('getAccessToken() devolvió un token vacío');
     }
 
-    console.log('[AUTH SUCCESS] Token generado correctamente. Longitud:', idToken.length);
-    
-    // 3. Construimos nosotros mismos el valor del header
+    // 3. Construimos el header manualmente con el token crudo
     return `Bearer ${idToken}`;
 
   } catch (error) {
@@ -81,7 +78,7 @@ Object.entries(VERTICALS).forEach(([key, targetUrl]) => {
     
     if (authToken) {
       req.headers['authorization'] = authToken;
-      // console.log(`[PROXY] Token inyectado para ${key}`);
+      console.log(`[PROXY SUCCESS] Token inyectado para ${key}`);
     } else {
       console.warn(`[PROXY WARNING] ¡ERROR CRÍTICO! Enviando petición a ${key} SIN TOKEN.`);
     }
