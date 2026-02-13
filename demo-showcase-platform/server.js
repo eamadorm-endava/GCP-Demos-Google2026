@@ -45,30 +45,26 @@ async function getAuthToken(targetUrl) {
     
     // 1. Verificar si targetUrl es válido
     if (!targetUrl) throw new Error('Target URL is undefined or empty');
-
+    
     // 2. Obtener cliente
     const client = await auth.getIdTokenClient(targetUrl);
     console.log('[AUTH CLIENT] Cliente de identidad obtenido correctamente');
 
     // 3. Obtener headers
     const headers = await client.getRequestHeaders();
-    console.log('[AUTH HEADERS] Headers generados con éxito');
     
-    return headers['Authorization'];
+    // --- EL CAMBIO CLAVE AQUÍ ---
+    // Buscamos 'Authorization' O 'authorization'. Si no, falla.
+    const token = headers['Authorization'] || headers['authorization'];
+    
+    if (!token) {
+        console.error('[AUTH DEBUG] Headers recibidos:', JSON.stringify(headers)); // Veremos qué llegó si falla
+        return null;
+    }
+
+    return token;
   } catch (error) {
-    // --- ESTOS SON LOS LOGS QUE NECESITAMOS ---
-    console.error('=======================================');
-    console.error(`[AUTH ERROR] Falló la generación de token para: ${targetUrl}`);
-    console.error('Mensaje:', error.message);
-    if (error.response) {
-       console.error('Response Status:', error.response.status);
-       console.error('Response Data:', JSON.stringify(error.response.data));
-    }
-    // Si el error es de credenciales, suele ser esto:
-    if (error.message.includes('Could not load the default credentials')) {
-        console.error('CAUSA PROBABLE: La Service Account no está asignada al contenedor o la librería no está instalada en prod.');
-    }
-    console.error('=======================================');
+    console.error(`[AUTH ERROR] Falló token para: ${targetUrl}`, error.message);
     return null;
   }
 }
@@ -100,11 +96,7 @@ Object.entries(VERTICALS).forEach(([key, targetUrl]) => {
       target: targetUrl,
       changeOrigin: true,
       pathRewrite: {
-        [`^/demos/${key}`]: '', // Delete the prefix /demos/xyz
-      },
-      onProxyReq: (proxyReq) => {
-         // Opcional: ver si el header viaja en la salida
-         console.log('[PROXY OUT CHECK] Auth Header:', proxyReq.getHeader('authorization') ? 'PRESENT' : 'MISSING');
+        [`^/demos/${key}`]: '', 
       },
       onError: (err, req, res) => {
         console.error('[PROXY FAIL]', err);
@@ -114,7 +106,6 @@ Object.entries(VERTICALS).forEach(([key, targetUrl]) => {
   );
 });
 
-// Serve the static React assets from Vite's build folder
 app.use(express.static(path.join(__dirname, 'dist')));
 
 app.get('*', (req, res) => {
