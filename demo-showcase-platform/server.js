@@ -41,28 +41,36 @@ const VERTICALS = {
 // Helper to get token ID
 async function getAuthToken(targetUrl) {
   try {
-    if (!targetUrl) throw new Error('Target URL is undefined or empty');
+    if (!targetUrl) throw new Error('Target URL is undefined');
+
+    // 1. Inicializamos GoogleAuth (Usamos ADC, no archivo JSON, para Cloud Run)
+    const auth = new GoogleAuth();
     
-    // 1. Obtenemos el cliente para ID Token (ya configurado con la audiencia targetUrl)
+    // 2. Obtenemos el cliente para el target específico
     const client = await auth.getIdTokenClient(targetUrl);
 
-    // 2. CORRECCIÓN: Usamos getAccessToken().
-    // Aunque suene raro, en un IdTokenClient este método obtiene y firma el OIDC Token.
-    const response = await client.getAccessToken();
-    const idToken = response.token;
-    
-    if (!idToken) {
-        throw new Error('getAccessToken() devolvió un token vacío');
-    }
+    // 3. LA CORRECCIÓN CLAVE BASADA EN TU EJEMPLO:
+    // Accedemos a 'idTokenProvider' para generar el token
+    const token = await client.idTokenProvider.fetchIdToken(targetUrl);
 
-    // 3. Construimos el header manualmente con el token crudo
-    return `Bearer ${idToken}`;
+    // console.log(`[AUTH SUCCESS] Token generado para ${targetUrl}`);
+    return `Bearer ${token}`;
 
   } catch (error) {
-    console.error(`[AUTH ERROR] Falló token para: ${targetUrl}`);
+    console.error(`[AUTH ERROR] Falló la generación de token para: ${targetUrl}`);
     console.error('Mensaje:', error.message);
-    // Si hay respuesta detallada del error de Google, la mostramos
-    if (error.response) console.error('Data:', JSON.stringify(error.response.data));
+    
+    // Fallback de emergencia: Intento directo al Metadata Server si la librería falla
+    // Esto es un "plan B" robusto exclusivo de Cloud Run
+    try {
+        console.log('[AUTH RETRY] Intentando método nativo de Metadata Server...');
+        const metadataUrl = `http://metadata.google.internal/computeMetadata/v1/instance/service-accounts/default/identity?audience=${targetUrl}`;
+        const response = await fetch(metadataUrl, { headers: { 'Metadata-Flavor': 'Google' } });
+        if (response.ok) return `Bearer ${await response.text()}`;
+    } catch (e) {
+        console.error('[AUTH FATAL] El fallback también falló.');
+    }
+    
     return null;
   }
 }
