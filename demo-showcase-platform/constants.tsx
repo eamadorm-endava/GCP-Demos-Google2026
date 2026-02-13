@@ -10,7 +10,10 @@ export const VERTICALS: VerticalConfig[] = [
     title: 'Agentic Governance',
     icon: 'shield-check',
     color: 'bg-indigo-600',
-    externalUrl: 'https://agentic-vendor-governance-platform-956266717219.us-west4.run.app',
+    // CHANGED: Replaced the direct public Cloud Run URL with a local proxy route. 
+    // This ensures the iframe calls our own Node.js server first, which will then 
+    // inject the Service Account authorization token before forwarding the request to the secure demo.
+    externalUrl: '/demos/agentic-governance/',
     pitch: {
       problem: 'Enterprises lack real-time oversight and control over autonomous AI agents.',
       solution: 'Policy-aware agent orchestration with continuous compliance and auditability.',
