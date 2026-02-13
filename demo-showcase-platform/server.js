@@ -15,20 +15,24 @@ const app = express();
 const auth = new GoogleAuth();
 const PORT = process.env.PORT || 8080;
 
-// Configure rate limiter
-// Limits requests to 200 per 15 minutes per IP.
-// This prevents DoS attacks on file system access (res.sendFile)
+// 1. CRITICAL FIX FOR CLOUD RUN: Trust the Google Load Balancer
+// This fixes the "ValidationError: The 'Forwarded' header..." error
+app.set('trust proxy', true);
+
+// Configure Rate Limit
 const limiter = rateLimit({
-	windowMs: 15 * 60 * 1000, // 15 minutes
-	limit: 200, // Limit each IP to 200 requests per `window`
-	standardHeaders: 'draft-7', // draft-6: `RateLimit-*` headers; draft-7: combined `RateLimit` header
-	legacyHeaders: false, // Disable the `X-RateLimit-*` headers
-	message: 'Too many requests from this IP, please try again after 15 minutes',
+  windowMs: 15 * 60 * 1000, 
+  limit: 200, 
+  standardHeaders: 'draft-7',
+  legacyHeaders: false,
+  // This disables the strict check if trust proxy isn't enough, 
+  // but app.set('trust proxy') is the real fix.
+  validate: { xForwardedForHeader: false } 
 });
 
-//Apply rate limiting to all requests
 app.use(limiter);
 
+// Target URLs (Backend)
 const VERTICALS = {
   'agentic-governance': 'https://test-agentic-vendor-governance-platform-956266717219.us-west4.run.app',
 };
@@ -41,16 +45,20 @@ async function getAuthToken(targetUrl) {
     const headers = await client.getRequestHeaders();
     return headers['Authorization'];
   } catch (error) {
-    console.error(`Error generating token for ${targetUrl}:`, error);
+    console.error('=======================================');
+    console.error(`[AUTH ERROR] Falló la generación de token para: ${targetUrl}`);
+    console.error('Detalle del error:', error.message);
+    if (error.response) console.error('Response data:', error.response.data);
+    console.error('=======================================');
     return null;
   }
 }
 
-// Proxy configuration with Auth Middleware
+// Proxy Configuration
 Object.entries(VERTICALS).forEach(([key, targetUrl]) => {
   const routePath = `/demos/${key}`;
 
-  // 1. Middleware of Authentication
+  // Middleware 1: Auth Injection
   app.use(routePath, async (req, res, next) => {
     try {
       // Get the token
@@ -70,7 +78,7 @@ Object.entries(VERTICALS).forEach(([key, targetUrl]) => {
     }
   });
 
-  // 2. Proxy Middleware (After the token is set)
+  // Middleware 2: Proxy
   app.use(
     routePath,
     createProxyMiddleware({
