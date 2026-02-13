@@ -19,11 +19,13 @@ RUN npm run build
 # ---------- Runtime stage ----------
 FROM nginx:alpine
 
-# Cloud Run expects the container to listen on $PORT (usually 8080)
-RUN sed -i 's/listen\s\+80;/listen 8080;/' /etc/nginx/conf.d/default.conf
+# Remove initial configuration
+RUN rm /etc/nginx/conf.d/default.conf
 
-# Copy the built static files
+# Copy current nginx.conf
+COPY nginx.conf /etc/nginx/conf.d/default.conf
+
 COPY --from=build /app/dist /usr/share/nginx/html
 
 EXPOSE 8080
-CMD ["nginx", "-g", "daemon off;"] 
+CMD ["nginx", "-g", "daemon off;"]
