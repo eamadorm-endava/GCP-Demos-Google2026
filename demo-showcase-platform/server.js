@@ -97,8 +97,8 @@ Object.entries(VERTICALS).forEach(([key, targetUrl]) => {
 
     onProxyReq: (proxyReq, req, res) => {
       console.log(`[PROXY] Sending request to ${targetUrl}`);
-      console.log('[DEBUG] Request Headers:', req.headers);
-      console.log('[DEBUG] Request Body:', req.body);
+      console.log('[DEBUG] req.headers.authorization:', req.headers.authorization);
+      console.log('[DEBUG] proxyReq.headers.authorization:', proxyReq.getHeaders()["authorization"]);
     },
     onError: (err, req, res) => {
       console.error('[PROXY ERROR]', err);
