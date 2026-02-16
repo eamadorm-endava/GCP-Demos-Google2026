@@ -49,6 +49,7 @@ async function getAuthHeaders(targetAudience) {
     // 2. Método Mágico: Obtiene headers con el token OIDC válido y firmado.
     // Maneja automáticamente la expiración y renovación.
     const headers = await client.getRequestHeaders(targetAudience);
+    console.log("client.getRequestHeaders = ", headers)
     
     return headers['Authorization']; // Retorna "Bearer eyJ..."
   } catch (err) {
