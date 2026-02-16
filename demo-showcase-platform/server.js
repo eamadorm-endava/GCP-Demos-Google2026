@@ -78,6 +78,7 @@ Object.entries(VERTICALS).forEach(([key, targetUrl]) => {
       if (token) {
         req.headers['authorization'] = `Bearer ${token}`;
         console.log("Token succesfully set in the request header")
+        console.log('[DEBUG] Token Auth:', req.headers['authorization'].substring(0, 50) + '...');
       }
       next();
     } catch (error) {
