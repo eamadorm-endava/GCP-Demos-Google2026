@@ -101,6 +101,10 @@ Object.entries(VERTICALS).forEach(([key, targetUrl]) => {
       const targetHost = new URL(targetUrl).host;
       proxyReq.setHeader('host', targetHost);
 
+      if (proxyReq.path === '/') {
+        proxyReq.path = ''; 
+      }
+
       console.log(`[PROXY SEND] Destino: https://${targetHost}${proxyReq.path}`)
 
       console.log(`[PROXY] Sending request to ${targetUrl}`);
@@ -126,6 +130,7 @@ Object.entries(VERTICALS).forEach(([key, targetUrl]) => {
         if (proxyRes.statusCode === 301 || proxyRes.statusCode === 302) {
             console.log(`[PROXY REDIRECT] Location header: ${proxyRes.headers['location']}`);
         }
+        console.error(`[CLOUD RUN ERROR] Motivo del ${proxyRes.statusCode}: ${proxyRes.headers['www-authenticate']}`);
     },
   });
 
