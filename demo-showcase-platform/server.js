@@ -103,7 +103,15 @@ Object.entries(VERTICALS).forEach(([key, targetUrl]) => {
     onError: (err, req, res) => {
       console.error('[PROXY ERROR]', err);
       res.status(502).send('Gateway Proxy Error');
-    }
+    },
+    onProxyRes: (proxyRes, req, res) => {
+        console.log(`[PROXY RESPONSE] ${req.method} ${req.url} -> Status: ${proxyRes.statusCode}`);
+        
+        // Si quieres ver a dónde te redirige (si es un 301/302)
+        if (proxyRes.statusCode === 301 || proxyRes.statusCode === 302) {
+            console.log(`[PROXY REDIRECT] Location header: ${proxyRes.headers['location']}`);
+        }
+    },
   });
 
   // 3. Chain auth & proxy
