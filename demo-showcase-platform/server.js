@@ -15,7 +15,7 @@ const app = express();
 const PORT = process.env.PORT || 8080;
 
 // 1. Trust Proxy
-app.set('trust proxy', true);
+app.set('trust proxy', 1);
 
 // 2. Rate Limit
 const limiter = rateLimit({
