@@ -50,8 +50,10 @@ async function getAuthHeaders(targetAudience) {
     // Maneja automáticamente la expiración y renovación.
     const headers = await client.getRequestHeaders(targetAudience);
     console.log("client.getRequestHeaders = ", headers)
+
+    console.log("headers.get(Authorization)", headers.get('Authorization'))
     
-    return headers['Authorization']; // Retorna "Bearer eyJ..."
+    return headers.get('Authorization'); // Retorna "Bearer eyJ..."
   } catch (err) {
     console.error(`[AUTH ERROR] Falló al obtener cliente para ${targetAudience}:`, err.message);
     return null;
