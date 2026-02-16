@@ -98,7 +98,14 @@ Object.entries(VERTICALS).forEach(([key, targetUrl]) => {
     onProxyReq: (proxyReq, req, res) => {
       console.log(`[PROXY] Sending request to ${targetUrl}`);
       console.log('[DEBUG] req.headers.authorization:', req.headers.authorization);
-      console.log('[DEBUG] proxyReq.headers.authorization:', proxyReq.getHeaders()["authorization"]);
+      console.log('[DEBUG] proxyReq.getHeader(authorization):', proxyReq.getHeader("authorization"));
+
+      const protocol = 'https:';
+      const host = proxyReq.getHeader('host');
+      const path = proxyReq.path; 
+
+      console.log(`[PROXY DEBUG] Final path: ${protocol}//${host}${path}`);
+      console.log('[DEBUG] proxyReq.getHeader(host):', proxyReq.getHeader("host"))
     },
     onError: (err, req, res) => {
       console.error('[PROXY ERROR]', err);
