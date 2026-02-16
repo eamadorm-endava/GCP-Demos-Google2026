@@ -97,13 +97,13 @@ Object.entries(VERTICALS).forEach(([key, targetUrl]) => {
 
     onProxyReq: (proxyReq, req, res) => {
       
+      if (!proxyReq.path || proxyReq.path === '') {
+        proxyReq.path = '/';
+      }
+
       // Set the right target host
       const targetHost = new URL(targetUrl).host;
       proxyReq.setHeader('host', targetHost);
-
-      if (proxyReq.path === '/') {
-        proxyReq.path = ''; 
-      }
 
       console.log(`[PROXY SEND] Destino: https://${targetHost}${proxyReq.path}`)
 
