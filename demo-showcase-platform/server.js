@@ -30,7 +30,7 @@ app.use(limiter);
 
 // Target URLs
 const VERTICALS = {
-  'agentic-governance/': 'https://test-agentic-vendor-governance-platform-956266717219.us-west4.run.app',
+  'agentic-governance': 'https://test-agentic-vendor-governance-platform-956266717219.us-west4.run.app',
 };
 
 
@@ -92,10 +92,17 @@ Object.entries(VERTICALS).forEach(([key, targetUrl]) => {
     target: targetUrl,
     changeOrigin: true,
     pathRewrite: {
-      [`^/demos/${key}`]: '', // Delete the prefix /demos/demo1 when sending the request
+      [`^${routePath}`]: '', // Delete the prefix /demos/demo1 when sending the request
     },
 
     onProxyReq: (proxyReq, req, res) => {
+      
+      // Set the right target host
+      const targetHost = new URL(targetUrl).host;
+      proxyReq.setHeader('host', targetHost);
+
+      console.log(`[PROXY SEND] Destino: https://${targetHost}${proxyReq.path}`)
+
       console.log(`[PROXY] Sending request to ${targetUrl}`);
       console.log('[DEBUG] req.headers.authorization:', req.headers.authorization);
       console.log('[DEBUG] proxyReq.getHeader(authorization):', proxyReq.getHeader("authorization"));
