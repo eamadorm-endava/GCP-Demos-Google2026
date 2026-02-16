@@ -91,6 +91,7 @@ Object.entries(VERTICALS).forEach(([key, targetUrl]) => {
 
       if (req.cloudRunAuth) {
         proxyReq.setHeader('Authorization', req.cloudRunAuth);
+        console.log("proxyReq.getHeader('Authorization') = ", proxyReq.getHeader('Authorization'))
       }
 
       if (!proxyReq.path || proxyReq.path.trim() === '') {
@@ -102,6 +103,18 @@ Object.entries(VERTICALS).forEach(([key, targetUrl]) => {
       proxyReq.setHeader('host', targetHost);
 
       console.log(`[PROXY SEND] Destiny: https://${targetHost}${proxyReq.path}`);
+      console.log(`│ 📝 Method:         ${proxyReq.method}`);
+      console.log(`│ 🏠 Host Header:    ${proxyReq.getHeader('host')}`); // <--- CRÍTICO: Esto es lo que valida Google
+      const auth = proxyReq.getHeader('Authorization');
+      if (auth) {
+        // Mostramos solo los últimos 6 caracteres para verificar que no esté vacío/null
+        console.log(`│ 🔐 TOKEN:          ✅ PRESENTE (...${auth.slice(-6)})`);
+      } else {
+        console.log(`│ 🔐 TOKEN:          ❌ AUSENTE (Esto fallará)`);
+      }
+      console.log('└──────────────────────────────────────────────────┘');
+      console.log("Final ProxyReq path: ", proxyReq.path);
+      
     },
     
     onError: (err, req, res) => {
