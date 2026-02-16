@@ -47,7 +47,7 @@ async function getIdToken(targetAudience) {
     return tokenCache[targetAudience].token;
   }
 
-  console.log(`[AUTH] Generating new token Id for target: ${targetAudience}`);
+  console.log(`[AUTH] Generating new token for: ${targetAudience}`);
 
   try {
     const client = await auth.getIdTokenClient(targetAudience);
@@ -61,7 +61,7 @@ async function getIdToken(targetAudience) {
 
     return token;
   } catch (err) {
-    console.error(`[AUTH ERROR] No se pudo generar token para ${targetAudience}:`, err.message);
+    console.error(`[AUTH ERROR] Failed for ${targetAudience}:`, err.message);
     throw err;
   }
 }
@@ -71,36 +71,43 @@ async function getIdToken(targetAudience) {
 Object.entries(VERTICALS).forEach(([key, targetUrl]) => {
   const routePath = `/demos/${key}`;
 
-  const proxyOptions = {
+  // 1. Authentication Middleware (executed before the proxy)
+  const authMiddleware = async (req, res, next) => {
+    try {
+      const token = await getIdToken(targetUrl);
+      if (token) {
+        req.headers['authorization'] = `Bearer ${token}`;
+        console.log("Token succesfully set in the request header")
+      }
+      next();
+    } catch (error) {
+      console.error('[AUTH MIDDLEWARE ERROR]', error);
+      next(); 
+    }
+  };
+
+  // 2. Proxy Middleware
+  const proxyMiddleware = createProxyMiddleware({
     target: targetUrl,
     changeOrigin: true,
     pathRewrite: {
       [`^/demos/${key}`]: '', // Delete the prefix /demos/demo1 when sending the request
     },
-    // Hook: It is executed right before sending the request to the demos
-    onProxyReq: async (proxyReq, req, res) => {
-      try {
-        const idToken = await getIdToken(targetUrl);
-        
-        // Set the authentication: Bearer <token>
-        if (idToken) {
-          proxyReq.setHeader('Authorization', `Bearer ${idToken}`);
-        }
-      } catch (err) {
-        console.error('[PROXY AUTH FAILED]', err);
 
-      }
+    onProxyReq: (proxyReq, req, res) => {
+      console.log(`[PROXY] Sending request to ${targetUrl}`);
     },
     onError: (err, req, res) => {
       console.error('[PROXY ERROR]', err);
-      res.status(500).send('Proxy Error');
+      res.status(502).send('Gateway Proxy Error');
     }
-  };
+  });
 
-  app.use(routePath, createProxyMiddleware(proxyOptions));
+  // 3. Chain auth & proxy
+  app.use(routePath, authMiddleware, proxyMiddleware);
 });
 
-// 4. Serve Frontend
+// Serve Frontend
 app.use(express.static(path.join(__dirname, 'dist')));
 
 // 5. SPA Fallback (For React Router, etc.)
