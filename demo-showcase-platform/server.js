@@ -34,14 +34,26 @@ const VERTICALS = {
 };
 
 
-function decodeJwtAudience(authHeader) {
+function inspectToken(authHeader) {
   try {
+    if (!authHeader) return { error: 'No header' };
+    
     const token = authHeader.replace('Bearer ', '');
-    const payloadPart = token.split('.')[1];
+    const parts = token.split('.');
+    
+    if (parts.length < 2) return { error: 'Token mal formado' };
+
+    const payloadPart = parts[1];
+    // Decodificamos el Base64Url
     const decoded = JSON.parse(Buffer.from(payloadPart, 'base64').toString());
-    return decoded.aud; // Esto es lo que Google está validando
+    
+    return {
+      audience: decoded.aud,      // El destino (URL del microservicio)
+      issuer: decoded.email,      // LA CUENTA DE SERVICIO (El origen)
+      expiration: new Date(decoded.exp * 1000).toISOString() // Cuándo caduca
+    }; 
   } catch (e) {
-    return 'Error al decodificar';
+    return { error: 'Error al decodificar: ' + e.message };
   }
 }
 
@@ -103,8 +115,8 @@ Object.entries(VERTICALS).forEach(([key, targetUrl]) => {
       if (req.cloudRunAuth) {
         proxyReq.setHeader('Authorization', req.cloudRunAuth);
         console.log("proxyReq.getHeader('Authorization') = ", proxyReq.getHeader('Authorization'))
-        const realAudience = decodeJwtAudience(req.cloudRunAuth);
-        console.log(`[TOKEN AUDIT] El token se generó para la audiencia: "${realAudience}"`);
+        const realAudience = inspectToken(req.cloudRunAuth);
+        console.log(`[TOKEN AUDIT] El token se generó con los siguientes datos: "${realAudience}"`);
       }
 
       if (!proxyReq.path || proxyReq.path.trim() === '') {
