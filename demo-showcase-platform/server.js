@@ -30,7 +30,7 @@ app.use(limiter);
 
 // Target URLs
 const VERTICALS = {
-  'agentic-governance': 'https://test-agentic-vendor-governance-platform-956266717219.us-west4.run.app',
+  'agentic-governance': 'https://test-agentic-vendor-governance-platform-956266717219.us-west4.run.app/',
 };
 
 
