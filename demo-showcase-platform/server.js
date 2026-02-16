@@ -115,8 +115,10 @@ Object.entries(VERTICALS).forEach(([key, targetUrl]) => {
       if (req.cloudRunAuth) {
         proxyReq.setHeader('Authorization', req.cloudRunAuth);
         console.log("proxyReq.getHeader('Authorization') = ", proxyReq.getHeader('Authorization'))
-        const realAudience = inspectToken(req.cloudRunAuth);
-        console.log(`[TOKEN AUDIT] El token se generó con los siguientes datos: "${realAudience}"`);
+        const info = inspectToken(req.cloudRunAuth);
+        console.log(`│ 👤 QUIÉN FIRMA (SA): ${info.issuer}`); 
+        console.log(`│ 🎯 PARA QUIÉN (AUD): ${info.audience}`);
+        console.log(`│ ⏳ EXPIRA:           ${info.expiration}`);
       }
 
       if (!proxyReq.path || proxyReq.path.trim() === '') {
