@@ -34,6 +34,17 @@ const VERTICALS = {
 };
 
 
+function decodeJwtAudience(authHeader) {
+  try {
+    const token = authHeader.replace('Bearer ', '');
+    const payloadPart = token.split('.')[1];
+    const decoded = JSON.parse(Buffer.from(payloadPart, 'base64').toString());
+    return decoded.aud; // Esto es lo que Google está validando
+  } catch (e) {
+    return 'Error al decodificar';
+  }
+}
+
 const auth = new GoogleAuth();
 const clientCache = {};
 async function getAuthHeaders(targetAudience) {
@@ -92,6 +103,8 @@ Object.entries(VERTICALS).forEach(([key, targetUrl]) => {
       if (req.cloudRunAuth) {
         proxyReq.setHeader('Authorization', req.cloudRunAuth);
         console.log("proxyReq.getHeader('Authorization') = ", proxyReq.getHeader('Authorization'))
+        const realAudience = decodeJwtAudience(req.cloudRunAuth);
+        console.log(`[TOKEN AUDIT] El token se generó para la audiencia: "${realAudience}"`);
       }
 
       if (!proxyReq.path || proxyReq.path.trim() === '') {
