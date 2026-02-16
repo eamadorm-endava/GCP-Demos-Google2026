@@ -106,13 +106,14 @@ Object.entries(VERTICALS).forEach(([key, targetUrl]) => {
 
       console.log(`[PROXY DEBUG] Final path: ${protocol}//${host}${path}`);
       console.log('[DEBUG] proxyReq.getHeader(host):', proxyReq.getHeader("host"))
+      console.log(" proxyReq.path: ", proxyReq.path)
     },
     onError: (err, req, res) => {
       console.error('[PROXY ERROR]', err);
       res.status(502).send('Gateway Proxy Error');
     },
     onProxyRes: (proxyRes, req, res) => {
-        console.log(`[PROXY RESPONSE] ${req.method} ${req.url} -> Status: ${proxyRes.statusCode}`);
+        console.log(`[PROXY RESPONSE] ${req.method} ${req.path} -> Status: ${proxyRes.statusCode}`);
         
         // Si quieres ver a dónde te redirige (si es un 301/302)
         if (proxyRes.statusCode === 301 || proxyRes.statusCode === 302) {
