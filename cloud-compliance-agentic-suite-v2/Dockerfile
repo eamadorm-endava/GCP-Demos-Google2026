@@ -18,6 +18,12 @@ RUN npm run build
 # Stage 2: Production Server
 FROM nginx:stable-alpine
 
+# Remove initial configuration
+RUN rm /etc/nginx/conf.d/default.conf
+
+# Copy current nginx.conf
+COPY nginx.conf /etc/nginx/conf.d/default.conf
+
 # Copy built assets from the 'build' stage
 COPY --from=build /app/dist /usr/share/nginx/html
 
