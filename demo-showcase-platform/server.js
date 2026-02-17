@@ -96,9 +96,9 @@ Object.entries(VERTICALS).forEach(([key, targetUrl]) => {
     try {
       const tokenId = await getTokenId(targetUrl);
       if (tokenId) {
-        req.headers['Authorization'] = tokenId;
+        req.headers['authorization'] = tokenId;
         console.log("Token stored in req headers");
-        console.log("req.headers[Authorization] = ", req.headers['Authorization']);
+        console.log("req.headers[authorization] = ", req.headers['authorization'] ? "PRESENT" : "MISSING");
       }
       next();
     } catch (error) {
@@ -118,12 +118,12 @@ Object.entries(VERTICALS).forEach(([key, targetUrl]) => {
     onProxyReq: (proxyReq, req, res) => {
 
       // FIX: Aseguramos que el header se pase al proxyReq desde el req modificado anteriormente
-      if (req.headers['Authorization']) {
-          proxyReq.setHeader('Authorization', req.headers['Authorization']);
+      if (req.headers['authorization']) {
+          proxyReq.setHeader('Authorization', req.headers['authorization']);
       }
 
       console.log("Checking if auth header is already on proxyReq")
-      console.log("proxyReq.getHeader('Authorization') = ", proxyReq.getHeader('Authorization'))
+      console.log("proxyReq.getHeader('Authorization') = ", proxyReq.getHeader('Authorization') ? "YES" : "NO")
       const info = inspectToken(proxyReq.getHeader('Authorization')); // Leemos del proxyReq ya seteado
       console.log(`│ 👤 QUIÉN FIRMA (SA): ${info.issuer}`); 
       console.log(`│ 🎯 PARA QUIÉN (AUD): ${info.audience}`);
@@ -167,7 +167,8 @@ Object.entries(VERTICALS).forEach(([key, targetUrl]) => {
         }
         if (proxyRes.statusCode >= 400) {
             console.error(`[CLOUD RUN ERROR] Motivo del ${proxyRes.statusCode}: ${proxyRes.headers['www-authenticate']}`);
-        console.error("ProxyRes.headers = ", proxyRes.headers)
+            console.error("ProxyRes.headers = ", proxyRes.headers);
+        }
     }
   });
 
