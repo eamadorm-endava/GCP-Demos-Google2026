@@ -70,7 +70,7 @@ async function getTokenId(targetAudience) {
 
     const client = clientCache[targetAudience];
 
-    const tokenId = await client.fetchIdToken(targetAudience);
+    const tokenId = await client.idTokenProvider.fetchIdToken(targetAudience);
     
     if (tokenId){
       console.log("tokenId Generated = ", tokenId); 
