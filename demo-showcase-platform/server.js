@@ -59,7 +59,7 @@ function inspectToken(authHeader) {
 
 const auth = new GoogleAuth();
 const clientCache = {};
-async function getAuthHeaders(targetAudience) {
+async function getTokenId(targetAudience) {
   try {
     // 1. Reutilizamos el cliente si ya existe para esa audiencia
     if (!clientCache[targetAudience]) {
@@ -69,17 +69,15 @@ async function getAuthHeaders(targetAudience) {
 
     const client = clientCache[targetAudience];
 
-    // 2. Método Mágico: Obtiene headers con el token OIDC válido y firmado.
-    // Maneja automáticamente la expiración y renovación.
-    const headers = await client.getRequestHeaders(targetAudience);
-    console.log("client.getRequestHeaders = ", headers)
-
-    console.log("headers.get(Authorization)", headers.get('Authorization'))
-
-    const res = await client.fetch(targetAudience,);
-    console.log("status code from client.fetch(targetAudience) = ", res.statusCode)
-    
-    return headers.get('Authorization'); // Retorna "Bearer eyJ..."
+    const tokenId = client.idTokenProvider.fetchIdToken(targetAudience);
+    if (tokenId){
+      console.log("tokenId Generated = ", tokenId.slice(0,10)); 
+    }
+    else {
+      console.log("tokenId was not generated");
+      return null;
+    }    
+    return `Bearer ${tokenId}`
   } catch (err) {
     console.error(`[AUTH ERROR] Falló al obtener cliente para ${targetAudience}:`, err.message);
     return null;
@@ -94,9 +92,11 @@ Object.entries(VERTICALS).forEach(([key, targetUrl]) => {
   // 1. Authentication Middleware (executed before the proxy)
   const authMiddleware = async (req, res, next) => {
     try {
-      const authHeader = await getAuthHeaders(targetUrl);
-      if (authHeader) {
-        req.cloudRunAuth = authHeader; // Guardamos el header listo
+      const tokenId = await getTokenId(targetUrl);
+      if (tokenId) {
+        req.setHeader("Authorization", tokenId);
+        console.log("Token stored in req headers");
+        console.log("req.getHeader('Authorization') = ", req.getHeader('Authorization'));
       }
       next();
     } catch (error) {
@@ -115,14 +115,13 @@ Object.entries(VERTICALS).forEach(([key, targetUrl]) => {
 
     onProxyReq: (proxyReq, req, res) => {
 
-      if (req.cloudRunAuth) {
-        proxyReq.setHeader('Authorization', req.cloudRunAuth);
-        console.log("proxyReq.getHeader('Authorization') = ", proxyReq.getHeader('Authorization'))
-        const info = inspectToken(req.cloudRunAuth);
-        console.log(`│ 👤 QUIÉN FIRMA (SA): ${info.issuer}`); 
-        console.log(`│ 🎯 PARA QUIÉN (AUD): ${info.audience}`);
-        console.log(`│ ⏳ EXPIRA:           ${info.expiration}`);
-      }
+      console.log("Checking if auth header is already on proxyReq")
+      console.log("proxyReq.getHeader('Authorization') = ", proxyReq.getHeader('Authorization'))
+      const info = inspectToken(req.getHeader('Authorization'));
+      console.log(`│ 👤 QUIÉN FIRMA (SA): ${info.issuer}`); 
+      console.log(`│ 🎯 PARA QUIÉN (AUD): ${info.audience}`);
+      console.log(`│ ⏳ EXPIRA:           ${info.expiration}`);
+    
 
       if (!proxyReq.path || proxyReq.path.trim() === '') {
         proxyReq.path = '/';
@@ -160,6 +159,7 @@ Object.entries(VERTICALS).forEach(([key, targetUrl]) => {
             console.log(`[PROXY REDIRECT] Location header: ${proxyRes.headers['location']}`);
         }
         console.error(`[CLOUD RUN ERROR] Motivo del ${proxyRes.statusCode}: ${proxyRes.headers['www-authenticate']}`);
+        console.error("ProxyRes.headers = ", proxyRes.headers)
     },
   });
 
