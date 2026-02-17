@@ -119,11 +119,14 @@ Object.entries(VERTICALS).forEach(([key, targetUrl]) => {
 
       proxyReq.removeHeader('Authorization');
       proxyReq.removeHeader('authorization');
+      proxyReq.removeHeader('cookie');
       
       // FIX: Aseguramos que el header se pase al proxyReq desde el req modificado anteriormente
       if (req.headers['authorization']) {
           proxyReq.setHeader('Authorization', req.headers['authorization']);
       }
+      console.log("Checking proxyReq headers after setting Authorization: ");
+      console.log(proxyReq.getHeaders());
 
       console.log("Checking if auth header is already on proxyReq")
       console.log("proxyReq.getHeader('Authorization') = ", proxyReq.getHeader('Authorization') ? "YES" : "NO")
