@@ -33,36 +33,12 @@ const VERTICALS = {
   'agentic-governance': 'https://test-agentic-vendor-governance-platform-956266717219.us-west4.run.app',
 };
 
-
-function inspectToken(authHeader) {
-  try {
-    if (!authHeader) return { error: 'No header' };
-    
-    const token = authHeader.replace('Bearer ', '');
-    const parts = token.split('.');
-    
-    if (parts.length < 2) return { error: 'Token mal formado' };
-
-    const payloadPart = parts[1];
-    // Decodificamos el Base64Url
-    const decoded = JSON.parse(Buffer.from(payloadPart, 'base64').toString());
-    
-    return {
-      audience: decoded.aud,      // El destino (URL del microservicio)
-      issuer: decoded.email,      // LA CUENTA DE SERVICIO (El origen)
-      expiration: new Date(decoded.exp * 1000).toISOString() // Cuándo caduca
-    }; 
-  } catch (e) {
-    return { error: 'Error al decodificar: ' + e.message };
-  }
-}
-
 const auth = new GoogleAuth();
 const clientCache = {};
 
 async function getTokenId(targetAudience) {
   try {
-    // 1. Reutilizamos el cliente si ya existe para esa audiencia
+    // Cache the client that generates the token for the required target audience
     if (!clientCache[targetAudience]) {
       console.log(`[AUTH] Creando nuevo IdTokenClient para: ${targetAudience}`);
       clientCache[targetAudience] = await auth.getIdTokenClient(targetAudience);
@@ -73,7 +49,7 @@ async function getTokenId(targetAudience) {
     const tokenId = await client.idTokenProvider.fetchIdToken(targetAudience);
     
     if (tokenId){
-      console.log("tokenId Generated = ", tokenId); 
+      console.log("tokenId Successfully Generated");
     }
     else {
       console.log("tokenId was not generated");
@@ -81,13 +57,12 @@ async function getTokenId(targetAudience) {
     }    
     return `Bearer ${tokenId}`
   } catch (err) {
-    console.error(`[AUTH ERROR] Falló al obtener cliente para ${targetAudience}:`, err.message);
+    console.error(`TokenID was not generated for ${targetAudience}: `, err.message);
     return null;
   }
 }
 
 // --- PROXY Config ---
-
 Object.entries(VERTICALS).forEach(([key, targetUrl]) => {
   const routePath = `/demos/${key}`;
 
@@ -96,13 +71,14 @@ Object.entries(VERTICALS).forEach(([key, targetUrl]) => {
     try {
       const tokenId = await getTokenId(targetUrl);
       if (tokenId) {
+        // Store the authorization in the original request (temporal, in further steps this header is passed to the actual request that will be 
+        // sent to the demos)
         req.headers['authorization'] = tokenId;
         console.log("Token stored in req headers");
-        console.log("req.headers[authorization] = ", req.headers['authorization'] ? "PRESENT" : "MISSING");
       }
       next();
     } catch (error) {
-      console.error('[AUTH MIDDLEWARE ERROR]', error);
+      console.error('Auth Middleware Error: ', error);
       next(); 
     }
   };
@@ -117,6 +93,7 @@ Object.entries(VERTICALS).forEach(([key, targetUrl]) => {
 
     onProxyReq: (proxyReq, req, res) => {
 
+      // IAP and cookies headers confuse CloudRun demos at authentication time, for that reason it is required to be removed
       const headersToRemove = [
         'cookie',
         'referer',
@@ -129,35 +106,29 @@ Object.entries(VERTICALS).forEach(([key, targetUrl]) => {
         'sec-fetch-site',
         'sec-fetch-user',
         'upgrade-insecure-requests',
-        'user-agent', // Optional
+        'user-agent',
         'x-goog-iap-jwt-assertion',
         'x-goog-authenticated-user-email',
         'x-goog-authenticated-user-id',
         'x-serverless-authorization',
-        'via', // A veces los proxies de Google agregan esto
-        'x-forwarded-for', // Opcional: a veces Cloud Run confía más si parece una petición directa
+        'via',
+        'x-forwarded-for',
         'x-cloud-trace-context'
       ];
 
       headersToRemove.forEach(header => proxyReq.removeHeader(header));
       
+      // User-Agent header identifies the client making the request 
       proxyReq.setHeader('User-Agent', 'Demo-Showcase-Proxy/1.0');
 
-      // FIX: Aseguramos que el header se pase al proxyReq desde el req modificado anteriormente
+      // Add the authorization header in the proxyReq (the request that Will be sent to the demos)
       if (req.headers['authorization']) {
           proxyReq.setHeader('Authorization', req.headers['authorization']);
       }
-      console.log("Checking proxyReq headers after setting Authorization: ");
-      console.log(proxyReq.getHeaders());
 
-      console.log("Checking if auth header is already on proxyReq")
-      console.log("proxyReq.getHeader('Authorization') = ", proxyReq.getHeader('Authorization') ? "YES" : "NO")
-      const info = inspectToken(proxyReq.getHeader('Authorization')); // Leemos del proxyReq ya seteado
-      console.log(`│ 👤 QUIÉN FIRMA (SA): ${info.issuer}`); 
-      console.log(`│ 🎯 PARA QUIÉN (AUD): ${info.audience}`);
-      console.log(`│ ⏳ EXPIRA:           ${info.expiration}`);
-    
+      console.log("Header in proxyReq: ", proxyReq.getHeader('Authorization') ? "YES" : "NO")
 
+      // Make sure that the path is not empty
       if (!proxyReq.path || proxyReq.path.trim() === '') {
         proxyReq.path = '/';
       }
@@ -166,41 +137,28 @@ Object.entries(VERTICALS).forEach(([key, targetUrl]) => {
       const targetHost = new URL(targetUrl).host;
       proxyReq.setHeader('host', targetHost);
 
-      console.log(`[PROXY SEND] Destiny: https://${targetHost}${proxyReq.path}`);
-      console.log(`│ 📝 Method:         ${proxyReq.method}`);
-      console.log(`│ 🏠 Host Header:    ${proxyReq.getHeader('host')}`); // <--- CRÍTICO: Esto es lo que valida Google
-      const auth = proxyReq.getHeader('Authorization');
-      if (auth) {
-        // Mostramos solo los últimos 6 caracteres para verificar que no esté vacío/null
-        console.log(`│ 🔐 TOKEN:          ✅ PRESENTE (...${auth.slice(-6)})`);
-      } else {
-        console.log(`│ 🔐 TOKEN:          ❌ AUSENTE (Esto fallará)`);
-      }
-      console.log('└──────────────────────────────────────────────────┘');
-      console.log("Final ProxyReq path: ", proxyReq.path);
-      
+      console.log(`Sending request to: https://${targetHost}${proxyReq.path}`);
+      console.log(`│ Method:         ${proxyReq.method}`);
+      console.log(`│ Host Header:    ${proxyReq.getHeader('host')}`);
+      console.log("Path inside the host: ", proxyReq.path); 
     },
     
     onError: (err, req, res) => {
-      console.error('[PROXY ERROR]', err);
+      console.error('Error in the proxy request: ', err);
       res.status(502).send('Gateway Proxy Error');
     },
     
+    // Checks the status of the response
     onProxyRes: (proxyRes, req, res) => {
-        console.log(`[PROXY RESPONSE] ${req.method} ${req.path} -> Status: ${proxyRes.statusCode}`);
+        console.log(`Proxy Response: ${req.method} https://${req.host}${req.path} -> Status: ${proxyRes.statusCode}`);
         
-        // Si quieres ver a dónde te redirige (si es un 301/302)
-        if (proxyRes.statusCode === 301 || proxyRes.statusCode === 302) {
-            console.log(`[PROXY REDIRECT] Location header: ${proxyRes.headers['location']}`);
-        }
-        if (proxyRes.statusCode >= 400) {
-            console.error(`[CLOUD RUN ERROR] Motivo del ${proxyRes.statusCode}: ${proxyRes.headers['www-authenticate']}`);
-            console.error("ProxyRes.headers = ", proxyRes.headers);
+        if (proxyRes.statusCode !== 200) {
+            console.error(`Request Failed. Status Code: ${proxyRes.statusCode}: ${proxyRes.headers['www-authenticate']}`);
         }
     }
   });
 
-  // 3. Chain auth & proxy
+  // 3. Chain auth & proxy middlewares
   app.use(routePath, authMiddleware, proxyMiddleware);
 });
 
