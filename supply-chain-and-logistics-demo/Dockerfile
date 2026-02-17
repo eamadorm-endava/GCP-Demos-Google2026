@@ -19,6 +19,12 @@ RUN npm run build
 # ---------- Runtime stage ----------
 FROM nginx:alpine
 
+# 1. Remove the default Nginx configuration
+RUN rm /etc/nginx/conf.d/default.conf
+
+# 2. Copy your custom nginx.conf (configured for port 80)
+COPY nginx.conf /etc/nginx/conf.d/default.conf
+
 # Cloud Run expects the container to listen on $PORT (usually 8080)
 RUN sed -i 's/listen\s\+80;/listen 8080;/' /etc/nginx/conf.d/default.conf
 
