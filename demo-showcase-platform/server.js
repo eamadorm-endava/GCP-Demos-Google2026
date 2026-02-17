@@ -75,6 +75,9 @@ async function getAuthHeaders(targetAudience) {
     console.log("client.getRequestHeaders = ", headers)
 
     console.log("headers.get(Authorization)", headers.get('Authorization'))
+
+    const res = await client.fetch(targetAudience,);
+    console.log("status code from client.fetch(targetAudience) = ", res.statusCode)
     
     return headers.get('Authorization'); // Retorna "Bearer eyJ..."
   } catch (err) {
