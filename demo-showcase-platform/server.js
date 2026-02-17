@@ -117,10 +117,25 @@ Object.entries(VERTICALS).forEach(([key, targetUrl]) => {
 
     onProxyReq: (proxyReq, req, res) => {
 
-      proxyReq.removeHeader('Authorization');
-      proxyReq.removeHeader('authorization');
-      proxyReq.removeHeader('cookie');
+      const headersToRemove = [
+        'cookie',
+        'referer',
+        'origin',
+        'sec-ch-ua',
+        'sec-ch-ua-mobile',
+        'sec-ch-ua-platform',
+        'sec-fetch-dest',
+        'sec-fetch-mode',
+        'sec-fetch-site',
+        'sec-fetch-user',
+        'upgrade-insecure-requests',
+        'user-agent' // Optional
+      ];
+
+      headersToRemove.forEach(header => proxyReq.removeHeader(header));
       
+      proxyReq.setHeader('User-Agent', 'Demo-Showcase-Proxy/1.0');
+
       // FIX: Aseguramos que el header se pase al proxyReq desde el req modificado anteriormente
       if (req.headers['authorization']) {
           proxyReq.setHeader('Authorization', req.headers['authorization']);
