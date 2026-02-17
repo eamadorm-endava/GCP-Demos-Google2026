@@ -1,11 +1,9 @@
 substitutions:
   _REGION: us-west4
   _AR_REPO: gcp-demos
-  _SERVICE: test-demo-showcase-platform
+  _SERVICE: demo-showcase-platform
   _DEMO_DIR: demo-showcase-platform
   _PROJECT_ID: p-s-gcu-na-marketing-bd5y-1
-  _IAP_GROUP: gcu_demos_temp_group@endava.com
-  _GALLERY_SA: demo-showcase@p-s-gcu-na-marketing-bd5y-1.iam.gserviceaccount.com
 
 availableSecrets:
   secretManager:
@@ -35,35 +33,6 @@ steps:
       - 'push'
       - '${_REGION}-docker.pkg.dev/${_PROJECT_ID}/${_AR_REPO}/${_SERVICE}:${SHORT_SHA}'
 
-  # 3. Deploy a Cloud Run
-  - name: 'gcr.io/cloud-builders/gcloud'
-    id: 'Deploy'
-    entrypoint: 'bash'
-    args:
-      - '-c'
-      - |
-        gcloud beta run deploy ${_SERVICE} \
-          --image=${_REGION}-docker.pkg.dev/${_PROJECT_ID}/${_AR_REPO}/${_SERVICE}:${SHORT_SHA} \
-          --region=${_REGION} \
-          --platform=managed \
-          --no-allow-unauthenticated \
-          --min-instances 1 \
-          --iap \
-          --service-account ${_GALLERY_SA}
-
-  # 4. Allow access to the IAP group
-  - name: 'gcr.io/cloud-builders/gcloud'
-    id: 'IAP-Access'
-    entrypoint: 'bash'
-    args:
-      - '-c'
-      - |
-        gcloud beta iap web add-iam-policy-binding \
-          --member=group:${_IAP_GROUP} \
-          --role=roles/iap.httpsResourceAccessor \
-          --region=${_REGION} \
-          --resource-type=cloud-run \
-          --service=${_SERVICE}
 
 # Define la imagen aquí para que Cloud Build la rastree automáticamente
 images:
