@@ -129,7 +129,14 @@ Object.entries(VERTICALS).forEach(([key, targetUrl]) => {
         'sec-fetch-site',
         'sec-fetch-user',
         'upgrade-insecure-requests',
-        'user-agent' // Optional
+        'user-agent', // Optional
+        'x-goog-iap-jwt-assertion',
+        'x-goog-authenticated-user-email',
+        'x-goog-authenticated-user-id',
+        'x-serverless-authorization',
+        'via', // A veces los proxies de Google agregan esto
+        'x-forwarded-for', // Opcional: a veces Cloud Run confía más si parece una petición directa
+        'x-cloud-trace-context'
       ];
 
       headersToRemove.forEach(header => proxyReq.removeHeader(header));
