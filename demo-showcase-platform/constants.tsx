@@ -29,7 +29,7 @@ export const VERTICALS: VerticalConfig[] = [
     title: 'ShelfLogic AI',
     icon: 'layers',
     color: 'bg-emerald-600',
-    externalUrl: 'https://shelflogic-ai-inventory-optimization-956266717219.us-west4.run.app',
+    externalUrl: '/demos/shelflogic-inventory/',
     pitch: {
       problem: 'Merchandising decisions are slow, manual, and disconnected from real-time demand.',
       solution: 'Autonomous AI agents continuously optimize assortment, pricing, and placement.',
@@ -45,7 +45,7 @@ export const VERTICALS: VerticalConfig[] = [
     title: 'Contract Intelligence',
     icon: 'file-text',
     color: 'bg-sky-600',
-    externalUrl: 'https://contract-intelligence-platform-956266717219.us-west4.run.app',
+    externalUrl: '/demos/contract-intelligence/',
     pitch: {
       problem: 'Critical contract risks and obligations are hidden in unstructured documents.',
       solution: 'AI-powered contract analysis with risk scoring and obligation tracking.',
@@ -61,7 +61,7 @@ export const VERTICALS: VerticalConfig[] = [
     title: 'Sentinel AI',
     icon: 'shield-alert',
     color: 'bg-red-700',
-    externalUrl: 'https://sentinel-ai-autonomous-risk-assurance-956266717219.us-west4.run.app',
+    externalUrl: '/demos/sentinel-ai/',
     pitch: {
       problem: 'Traditional controls fail to detect complex, fast-moving enterprise risks.',
       solution: 'Autonomous AI agents monitor, detect, and respond to risk in real time.',
@@ -77,7 +77,7 @@ export const VERTICALS: VerticalConfig[] = [
     title: 'Supply Chain and Logistics',
     icon: 'truck',
     color: 'bg-orange-500',
-    externalUrl: 'https://supply-chain-and-logistics-demo-956266717219.us-west4.run.app',
+    externalUrl: '/demos/supply-chain/',
     pitch: {
       problem: 'Global supply chains suffer from poor visibility and slow response to disruptions.',
       solution: 'AI-driven logistics orchestration with predictive and prescriptive insights.',
@@ -93,7 +93,7 @@ export const VERTICALS: VerticalConfig[] = [
     title: 'Guardian AI Compliance',
     icon: 'clipboard-check',
     color: 'bg-teal-600',
-    externalUrl: 'https://cloud-compliance-agentic-suite-v2-956266717219.us-west4.run.app',
+    externalUrl: '/demos/cloud-compliance/',
     pitch: {
       problem: 'Regulatory compliance is manual, reactive, and prone to human error.',
       solution: 'Agentic suite for continuous monitoring, audit generation, and regulatory alignment.',
@@ -109,7 +109,7 @@ export const VERTICALS: VerticalConfig[] = [
     title: 'Contractinel AI',
     icon: 'clipboard-check',
     color: 'bg-teal-600',
-    externalUrl: 'https://contractintel-ai-956266717219.us-west4.run.app',
+    externalUrl: '/demos/contractintel/',
     pitch: {
       problem: 'Organizations lack real-time visibility into contractual risk, compliance exposure, and review inefficiencies.',
       solution: 'AI-powered contract analysis platform delivering real-time risk intelligence, automated reviews, and compliance insights.',
@@ -125,7 +125,7 @@ export const VERTICALS: VerticalConfig[] = [
     title: 'BuildIntel',
     icon: 'shield-check',
     color: 'bg-navy',
-    externalUrl: 'https://buildintel-construction-ai-platform-956266717219.us-west4.run.app',
+    externalUrl: '/demos/buildintel-construction/',
     pitch: {
       problem: 'Large construction portfolios lack real-time oversight across projects, risks, workforce, and cost variance—leading to delayed decisions and escalating delivery risk.',
       solution: 'An agentic governance dashboard that provides real-time portfolio intelligence, continuous risk monitoring, and proactive AI agent alerts across all active projects.',
