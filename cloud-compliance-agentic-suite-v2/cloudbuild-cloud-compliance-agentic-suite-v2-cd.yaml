@@ -46,7 +46,7 @@ steps:
           --image=${_REGION}-docker.pkg.dev/${_PROJECT_ID}/${_AR_REPO}/${_SERVICE}:${SHORT_SHA} \
           --region=${_REGION} \
           --platform=managed \
-          --allow-unauthenticated \
+          --no-allow-unauthenticated \
           --no-iap \
           --port=80 \
           --min-instances 1

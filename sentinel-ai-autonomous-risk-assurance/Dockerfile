@@ -16,17 +16,13 @@ RUN npm run build
 
 FROM nginx:alpine
 
-COPY --from=build /app/dist /usr/share/nginx/html
+# 1. Remove the default Nginx configuration
+RUN rm /etc/nginx/conf.d/default.conf
 
-RUN echo 'server { \
-    listen 80; \
-    server_name localhost; \
-    root /usr/share/nginx/html; \
-    index index.html; \
-    location / { \
-        try_files $uri $uri/ /index.html; \
-    } \
-}' > /etc/nginx/conf.d/default.conf
+# 2. Copy your custom nginx.conf (configured for port 80)
+COPY nginx.conf /etc/nginx/conf.d/default.conf
+
+COPY --from=build /app/dist /usr/share/nginx/html
 
 EXPOSE 80
 

@@ -17,17 +17,13 @@ RUN npm run build
 # Production (Nginx) ---
 FROM nginx:alpine
 
-COPY --from=build /app/dist /usr/share/nginx/html
+# 1. Remove the default Nginx configuration
+RUN rm /etc/nginx/conf.d/default.conf
 
-# Redirect all the routs to index.html, so React Router will work at loading the page
-RUN echo 'server { \
-    listen 80; \
-    location / { \
-        root /usr/share/nginx/html; \
-        index index.html index.htm; \
-        try_files $uri $uri/ /index.html; \
-    } \
-}' > /etc/nginx/conf.d/default.conf
+# 2. Copy your custom nginx.conf (configured for port 80)
+COPY nginx.conf /etc/nginx/conf.d/default.conf
+
+COPY --from=build /app/dist /usr/share/nginx/html
 
 EXPOSE 80
 

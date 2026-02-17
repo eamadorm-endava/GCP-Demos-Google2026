@@ -17,13 +17,24 @@ RUN npm run build
 
 
 # ---------- Runtime stage ----------
-FROM nginx:alpine
+FROM node:20-alpine AS runner
 
-# Cloud Run expects the container to listen on $PORT (usually 8080)
-RUN sed -i 's/listen\s\+80;/listen 8080;/' /etc/nginx/conf.d/default.conf
+WORKDIR /app
 
-# Copy the built static files
-COPY --from=build /app/dist /usr/share/nginx/html
+ENV NODE_ENV=production
+ENV PORT=8080
+
+# Copy package.json to install only prod dependencies (Express, Auth, etc)
+COPY package*.json ./
+
+RUN npm install --only=production
+
+# Copy the proxy server
+COPY server.js .
+
+# Copy static files built
+COPY --from=build /app/dist ./dist
 
 EXPOSE 8080
-CMD ["nginx", "-g", "daemon off;"] 
+
+CMD ["node", "server.js"]

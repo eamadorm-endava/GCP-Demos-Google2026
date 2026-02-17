@@ -33,6 +33,7 @@ steps:
       - 'push'
       - '${_REGION}-docker.pkg.dev/${_PROJECT_ID}/${_AR_REPO}/${_SERVICE}:${SHORT_SHA}'
 
+
 # Define la imagen aquí para que Cloud Build la rastree automáticamente
 images:
   - '${_REGION}-docker.pkg.dev/${_PROJECT_ID}/${_AR_REPO}/${_SERVICE}:${SHORT_SHA}'
