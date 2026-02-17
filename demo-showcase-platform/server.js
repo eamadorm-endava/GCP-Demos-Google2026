@@ -166,9 +166,9 @@ Object.entries(VERTICALS).forEach(([key, targetUrl]) => {
             console.log(`[PROXY REDIRECT] Location header: ${proxyRes.headers['location']}`);
         }
         if (proxyRes.statusCode >= 400) {
-        console.error(`[CLOUD RUN ERROR] Motivo del ${proxyRes.statusCode}: ${proxyRes.headers['www-authenticate']}`);
+            console.error(`[CLOUD RUN ERROR] Motivo del ${proxyRes.statusCode}: ${proxyRes.headers['www-authenticate']}`);
         console.error("ProxyRes.headers = ", proxyRes.headers)
-    },
+    }
   });
 
   // 3. Chain auth & proxy
