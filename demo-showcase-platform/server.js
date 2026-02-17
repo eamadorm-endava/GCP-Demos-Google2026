@@ -59,6 +59,7 @@ function inspectToken(authHeader) {
 
 const auth = new GoogleAuth();
 const clientCache = {};
+
 async function getTokenId(targetAudience) {
   try {
     // 1. Reutilizamos el cliente si ya existe para esa audiencia
@@ -69,9 +70,10 @@ async function getTokenId(targetAudience) {
 
     const client = clientCache[targetAudience];
 
-    const tokenId = client.idTokenProvider.fetchIdToken(targetAudience);
+    const tokenId = await client.fetchIdToken(targetAudience);
+    
     if (tokenId){
-      console.log("tokenId Generated = ", tokenId.slice(0,10)); 
+      console.log("tokenId Generated = ", tokenId); 
     }
     else {
       console.log("tokenId was not generated");
@@ -94,9 +96,9 @@ Object.entries(VERTICALS).forEach(([key, targetUrl]) => {
     try {
       const tokenId = await getTokenId(targetUrl);
       if (tokenId) {
-        req.setHeader("Authorization", tokenId);
+        req.headers['Authorization'] = tokenId;
         console.log("Token stored in req headers");
-        console.log("req.getHeader('Authorization') = ", req.getHeader('Authorization'));
+        console.log("req.headers[Authorization] = ", req.headers['Authorization']);
       }
       next();
     } catch (error) {
@@ -115,9 +117,14 @@ Object.entries(VERTICALS).forEach(([key, targetUrl]) => {
 
     onProxyReq: (proxyReq, req, res) => {
 
+      // FIX: Aseguramos que el header se pase al proxyReq desde el req modificado anteriormente
+      if (req.headers['Authorization']) {
+          proxyReq.setHeader('Authorization', req.headers['Authorization']);
+      }
+
       console.log("Checking if auth header is already on proxyReq")
       console.log("proxyReq.getHeader('Authorization') = ", proxyReq.getHeader('Authorization'))
-      const info = inspectToken(req.getHeader('Authorization'));
+      const info = inspectToken(proxyReq.getHeader('Authorization')); // Leemos del proxyReq ya seteado
       console.log(`│ 👤 QUIÉN FIRMA (SA): ${info.issuer}`); 
       console.log(`│ 🎯 PARA QUIÉN (AUD): ${info.audience}`);
       console.log(`│ ⏳ EXPIRA:           ${info.expiration}`);
@@ -158,6 +165,7 @@ Object.entries(VERTICALS).forEach(([key, targetUrl]) => {
         if (proxyRes.statusCode === 301 || proxyRes.statusCode === 302) {
             console.log(`[PROXY REDIRECT] Location header: ${proxyRes.headers['location']}`);
         }
+        if (proxyRes.statusCode >= 400) {
         console.error(`[CLOUD RUN ERROR] Motivo del ${proxyRes.statusCode}: ${proxyRes.headers['www-authenticate']}`);
         console.error("ProxyRes.headers = ", proxyRes.headers)
     },
