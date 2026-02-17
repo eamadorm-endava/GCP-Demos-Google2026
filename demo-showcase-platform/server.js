@@ -117,6 +117,9 @@ Object.entries(VERTICALS).forEach(([key, targetUrl]) => {
 
     onProxyReq: (proxyReq, req, res) => {
 
+      proxyReq.removeHeader('Authorization');
+      proxyReq.removeHeader('authorization');
+      
       // FIX: Aseguramos que el header se pase al proxyReq desde el req modificado anteriormente
       if (req.headers['authorization']) {
           proxyReq.setHeader('Authorization', req.headers['authorization']);
