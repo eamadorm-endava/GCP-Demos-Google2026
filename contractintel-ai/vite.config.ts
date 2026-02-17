@@ -6,6 +6,10 @@ import tailwindcss from '@tailwindcss/vite'
 export default defineConfig(({ mode }) => {
     const env = loadEnv(mode, '.', '');
     return {
+      // Added 'base' path to match the reverse proxy URL structure in the parent showcase.
+      // This ensures all built assets (js, css, images) are requested relatively from this sub-path 
+      // instead of the root '/', preventing 404 errors when loaded inside the showcase iframe.
+      base: '/demos/contractintel/',
       server: {
         port: 3000,
         host: '0.0.0.0',
