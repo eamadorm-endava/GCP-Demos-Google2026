@@ -290,6 +290,7 @@ function App() {
         'Content-Type': 'application/json',
         'X-A2A-Extensions':
           'https://ucp.dev/specification/reference?v=2026-01-11',
+        //"Authorization": f"Bearer {token_id}",
         'UCP-Agent':
           `profile="${window.location.origin}/profile/agent_profile.json"`,
       };
