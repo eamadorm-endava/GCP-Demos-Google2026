@@ -1,0 +1,110 @@
+[
+    {
+        "@type": "Product",
+        "productID": "TDC-COF-GR-001",
+        "name": "Colombian Ground Coffee — Medium Roast",
+        "sku": "TDC-GR-COF-001",
+        "image": [
+            "/images/tierra_cafe/ground_colombian.png"
+        ],
+        "brand": {
+            "@type": "Brand",
+            "name": "AndesBrew"
+        },
+        "offers": {
+            "price": "7.99",
+            "priceCurrency": "USD",
+            "priceSpecification": null,
+            "@type": "Offer",
+            "availability": "https://schema.org/InStock",
+            "itemCondition": "https://schema.org/NewCondition"
+        },
+        "aggregateRating": null,
+        "url": "https://example.com/tdc-cof-gr-001",
+        "description": "Smooth Colombian ground coffee with chocolate notes. Free shipping on all orders.",
+        "gtin": "1111111111111",
+        "mpn": "AB-GR-001",
+        "category": "Coffee & Tea > Coffee > Ground"
+    },
+    {
+        "@type": "Product",
+        "productID": "TDC-COF-WB-001",
+        "name": "Ethiopian Whole Bean Coffee — Light Roast",
+        "sku": "TDC-WB-COF-001",
+        "image": [
+            "/images/tierra_cafe/ethiopian_beans.png"
+        ],
+        "brand": {
+            "@type": "Brand",
+            "name": "OriginRoast"
+        },
+        "offers": {
+            "price": "11.49",
+            "priceCurrency": "USD",
+            "priceSpecification": null,
+            "@type": "Offer",
+            "availability": "https://schema.org/InStock",
+            "itemCondition": "https://schema.org/NewCondition"
+        },
+        "aggregateRating": null,
+        "url": "https://example.com/tdc-cof-wb-001",
+        "description": "Floral and fruity Ethiopian whole bean coffee. Free shipping on all orders.",
+        "gtin": "2222222222221",
+        "mpn": "OR-WB-001",
+        "category": "Coffee & Tea > Coffee > Whole Bean"
+    },
+    {
+        "@type": "Product",
+        "productID": "TDC-COF-IN-001",
+        "name": "Instant Coffee — Classic",
+        "sku": "TDC-IN-COF-001",
+        "image": [
+            "/images/tierra_cafe/instant_coffee.png"
+        ],
+        "brand": {
+            "@type": "Brand",
+            "name": "QuickCup"
+        },
+        "offers": {
+            "price": "4.79",
+            "priceCurrency": "USD",
+            "priceSpecification": null,
+            "@type": "Offer",
+            "availability": "https://schema.org/InStock",
+            "itemCondition": "https://schema.org/NewCondition"
+        },
+        "aggregateRating": null,
+        "url": "https://example.com/tdc-cof-in-001",
+        "description": "Easy and smooth instant coffee for everyday use. Free shipping on all orders.",
+        "gtin": "3333333333331",
+        "mpn": "QC-IN-001",
+        "category": "Coffee & Tea > Coffee > Instant"
+    },
+    {
+        "@type": "Product",
+        "productID": "TDC-COF-ESP-001",
+        "name": "Espresso Blend Whole Bean Coffee — Dark Roast",
+        "sku": "TDC-ESP-COF-001",
+        "image": [
+            "/images/tierra_cafe/espresso_beans.png"
+        ],
+        "brand": {
+            "@type": "Brand",
+            "name": "UrbanGrind"
+        },
+        "offers": {
+            "price": "13.49",
+            "priceCurrency": "USD",
+            "priceSpecification": null,
+            "@type": "Offer",
+            "availability": "https://schema.org/InStock",
+            "itemCondition": "https://schema.org/NewCondition"
+        },
+        "aggregateRating": null,
+        "url": "https://example.com/tdc-cof-esp-001",
+        "description": "Rich espresso blend designed for intense flavor. Free shipping on all orders.",
+        "gtin": "4444444444441",
+        "mpn": "UG-ESP-001",
+        "category": "Coffee & Tea > Coffee > Whole Bean"
+    }
+]

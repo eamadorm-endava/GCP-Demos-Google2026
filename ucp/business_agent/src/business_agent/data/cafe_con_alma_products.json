@@ -1,0 +1,218 @@
+[
+    {
+        "@type": "Product",
+        "productID": "COF-GR-001",
+        "name": "Colombian Ground Coffee — Medium Roast",
+        "sku": "GR-COF-001",
+        "image": [
+            "/images/alma_cafe/ground_colombian.jpg"
+        ],
+        "brand": {
+            "@type": "Brand",
+            "name": "AndesBrew"
+        },
+        "offers": {
+            "price": "8.99",
+            "priceCurrency": "USD",
+            "priceSpecification": null,
+            "@type": "Offer",
+            "availability": "https://schema.org/InStock",
+            "itemCondition": "https://schema.org/NewCondition"
+        },
+        "aggregateRating": null,
+        "url": "https://example.com/cof-gr-001",
+        "description": "Smooth Colombian ground coffee with chocolate notes.",
+        "gtin": "1111111111111",
+        "mpn": "AB-GR-001",
+        "category": "Coffee & Tea > Coffee > Ground"
+    },
+    {
+        "@type": "Product",
+        "productID": "COF-GR-002",
+        "name": "Colombian Ground Coffee — Dark Roast",
+        "sku": "GR-COF-002",
+        "image": [
+            "/images/alma_cafe/ground_colombian_dark.jpg"
+        ],
+        "brand": {
+            "@type": "Brand",
+            "name": "AndesBrew"
+        },
+        "offers": {
+            "price": "9.49",
+            "priceCurrency": "USD",
+            "priceSpecification": null,
+            "@type": "Offer",
+            "availability": "https://schema.org/InStock",
+            "itemCondition": "https://schema.org/NewCondition"
+        },
+        "aggregateRating": null,
+        "url": "https://example.com/cof-gr-002",
+        "description": "Bold dark roast ground coffee with smoky notes.",
+        "gtin": "1111111111112",
+        "mpn": "AB-GR-002",
+        "category": "Coffee & Tea > Coffee > Ground"
+    },
+    {
+        "@type": "Product",
+        "productID": "COF-WB-001",
+        "name": "Ethiopian Whole Bean Coffee — Light Roast",
+        "sku": "WB-COF-001",
+        "image": [
+            "/images/alma_cafe/ethiopian_beans.jpg"
+        ],
+        "brand": {
+            "@type": "Brand",
+            "name": "OriginRoast"
+        },
+        "offers": {
+            "price": "12.99",
+            "priceCurrency": "USD",
+            "priceSpecification": null,
+            "@type": "Offer",
+            "availability": "https://schema.org/InStock",
+            "itemCondition": "https://schema.org/NewCondition"
+        },
+        "aggregateRating": null,
+        "url": "https://example.com/cof-wb-001",
+        "description": "Floral and fruity Ethiopian whole bean coffee.",
+        "gtin": "2222222222221",
+        "mpn": "OR-WB-001",
+        "category": "Coffee & Tea > Coffee > Whole Bean"
+    },
+    {
+        "@type": "Product",
+        "productID": "COF-IN-001",
+        "name": "Instant Coffee — Classic",
+        "sku": "IN-COF-001",
+        "image": [
+            "/images/alma_cafe/instant_coffee.jpg"
+        ],
+        "brand": {
+            "@type": "Brand",
+            "name": "QuickCup"
+        },
+        "offers": {
+            "price": "5.49",
+            "priceCurrency": "USD",
+            "priceSpecification": null,
+            "@type": "Offer",
+            "availability": "https://schema.org/InStock",
+            "itemCondition": "https://schema.org/NewCondition"
+        },
+        "aggregateRating": null,
+        "url": "https://example.com/cof-in-001",
+        "description": "Easy and smooth instant coffee for everyday use.",
+        "gtin": "3333333333331",
+        "mpn": "QC-IN-001",
+        "category": "Coffee & Tea > Coffee > Instant"
+    },
+    {
+        "@type": "Product",
+        "productID": "COF-IN-002",
+        "name": "Instant Coffee — Gold",
+        "sku": "IN-COF-002",
+        "image": [
+            "/images/alma_cafe/instant_coffee_gold.jpg"
+        ],
+        "brand": {
+            "@type": "Brand",
+            "name": "QuickCup"
+        },
+        "offers": {
+            "price": "6.99",
+            "priceCurrency": "USD",
+            "priceSpecification": null,
+            "@type": "Offer",
+            "availability": "https://schema.org/InStock",
+            "itemCondition": "https://schema.org/NewCondition"
+        },
+        "aggregateRating": null,
+        "url": "https://example.com/cof-in-002",
+        "description": "Premium instant coffee with richer aroma.",
+        "gtin": "3333333333332",
+        "mpn": "QC-IN-002",
+        "category": "Coffee & Tea > Coffee > Instant"
+    },
+    {
+        "@type": "Product",
+        "productID": "COF-ESP-001",
+        "name": "Espresso Blend Whole Bean Coffee — Dark Roast",
+        "sku": "ESP-COF-001",
+        "image": [
+            "/images/alma_cafe/espresso_beans.jpg"
+        ],
+        "brand": {
+            "@type": "Brand",
+            "name": "UrbanGrind"
+        },
+        "offers": {
+            "price": "14.99",
+            "priceCurrency": "USD",
+            "priceSpecification": null,
+            "@type": "Offer",
+            "availability": "https://schema.org/InStock",
+            "itemCondition": "https://schema.org/NewCondition"
+        },
+        "aggregateRating": null,
+        "url": "https://example.com/cof-esp-001",
+        "description": "Rich espresso blend designed for intense flavor.",
+        "gtin": "4444444444441",
+        "mpn": "UG-ESP-001",
+        "category": "Coffee & Tea > Coffee > Whole Bean"
+    },
+    {
+        "@type": "Product",
+        "productID": "COF-RS-001",
+        "name": "House Roast Whole Bean Coffee — Medium Roast",
+        "sku": "RS-COF-001",
+        "image": [
+            "/images/alma_cafe/medium_roasted_beans.jpg"
+        ],
+        "brand": {
+            "@type": "Brand",
+            "name": "RoastMaster"
+        },
+        "offers": {
+            "price": "11.49",
+            "priceCurrency": "USD",
+            "priceSpecification": null,
+            "@type": "Offer",
+            "availability": "https://schema.org/InStock",
+            "itemCondition": "https://schema.org/NewCondition"
+        },
+        "aggregateRating": null,
+        "url": "https://example.com/cof-rs-001",
+        "description": "Freshly house-roasted whole bean coffee with balanced flavor.",
+        "gtin": "5555555555551",
+        "mpn": "RM-RS-001",
+        "category": "Coffee & Tea > Coffee > Whole Bean"
+    },
+    {
+        "@type": "Product",
+        "productID": "COF-RS-002",
+        "name": "House Roast Whole Bean Coffee — Dark Roast",
+        "sku": "RS-COF-002",
+        "image": [
+            "/images/alma_cafe/roasted_dark.jpg"
+        ],
+        "brand": {
+            "@type": "Brand",
+            "name": "RoastMaster"
+        },
+        "offers": {
+            "price": "11.99",
+            "priceCurrency": "USD",
+            "priceSpecification": null,
+            "@type": "Offer",
+            "availability": "https://schema.org/InStock",
+            "itemCondition": "https://schema.org/NewCondition"
+        },
+        "aggregateRating": null,
+        "url": "https://example.com/cof-rs-002",
+        "description": "Dark roast whole bean coffee with intense aroma and body.",
+        "gtin": "5555555555552",
+        "mpn": "RM-RS-002",
+        "category": "Coffee & Tea > Coffee > Whole Bean"
+    }
+]
