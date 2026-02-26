@@ -48,7 +48,7 @@ async function getTokenId(targetAudience) {
   try {
     // Cache the client that generates the token for the required target audience
     if (!clientCache[targetAudience]) {
-      console.log(`[AUTH] Creando nuevo IdTokenClient para: ${targetAudience}`);
+      console.log(`[AUTH] Creating a new TokenID for the audience: ${targetAudience}`);
       clientCache[targetAudience] = await auth.getIdTokenClient(targetAudience);
     }
 
