@@ -1,0 +1,33 @@
+substitutions:
+  _REGION: us-west4
+  _AR_REPO: gcp-demos
+  _SERVICE: ucp-business-backend
+  _DEMO_DIR: ucp/business_agent
+  _PROJECT_ID: p-s-gcu-na-marketing-bd5y-1
+
+ 
+options:
+  logging: CLOUD_LOGGING_ONLY
+ 
+steps:
+  - name: 'gcr.io/cloud-builders/docker'
+    id: 'Build'
+    entrypoint: 'bash'
+    args:
+      - '-c'
+      - |
+        docker build \
+          -f ${_DEMO_DIR}/Dockerfile \
+          -t ${_REGION}-docker.pkg.dev/${_PROJECT_ID}/${_AR_REPO}/${_SERVICE}:${SHORT_SHA} \
+          ucp/.
+ 
+  # 2. Push de la imagen
+  - name: 'gcr.io/cloud-builders/docker'
+    id: 'Push'
+    args:
+      - 'push'
+      - '${_REGION}-docker.pkg.dev/${_PROJECT_ID}/${_AR_REPO}/${_SERVICE}:${SHORT_SHA}'
+ 
+ 
+images:
+  - '${_REGION}-docker.pkg.dev/${_PROJECT_ID}/${_AR_REPO}/${_SERVICE}:${SHORT_SHA}'

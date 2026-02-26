@@ -1,0 +1,121 @@
+
+<!--
+   Copyright 2026 UCP Authors
+
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Agent</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      // Tailwind CDN theme customization with provided palette schema
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              // Primary brand
+              brand: {
+                primary: '#FF5640',
+                dark: '#192B37',
+                white: '#FFFFFF',
+              },
+              // Solid Blue shades
+              solidBlue: {
+                90: '#30404B',
+                80: '#47555F',
+                70: '#5E6A73',
+                60: '#758087',
+                50: '#8C959B',
+                40: '#A3AAAF',
+                30: '#BABFC3',
+                20: '#D1D5D7',
+                10: '#E8EAEB',
+              },
+              // Signal colours
+              signal: {
+                light: {
+                  positive: '#2D9C5B',
+                  warning: '#EB9410',
+                  negative: '#D4403B',
+                },
+                dark: {
+                  positive: '#3DD17B',
+                  warning: '#F99C11',
+                  negative: '#E84641',
+                },
+              },
+              // Data Visualization colours
+              dataViz: {
+                blue: '#5899C4',
+                orange: '#FF5641',
+                yellow: '#CF820E',
+                green: '#30A661',
+                violet: '#8684BF',
+                grassGreen: '#7B9922',
+                avocado: '#998F63',
+                jeans: '#7C94A6',
+                teal: '#3E9C8F',
+              },
+              // Illustration accents
+              illustration: {
+                darkGrey: '#3D4952',
+                mediumBlue: '#417191',
+                brightGrey: '#8AA5B8',
+                brightBlue: '#68B5E8',
+              },
+            },
+            boxShadow: {
+              card: '0 4px 12px rgba(17, 24, 39, 0.08)',
+              cardHover: '0 8px 20px rgba(17, 24, 39, 0.12)',
+            },
+            borderRadius: {
+              xl: '0.75rem',
+            },
+            fontFamily: {
+              sans: [
+                'Dava Sans',
+                'Inter',
+                'system-ui',
+                'Segoe UI',
+                'Roboto',
+                'Helvetica Neue',
+                'Arial',
+                'Noto Sans',
+                'sans-serif',
+              ],
+            },
+          },
+        },
+      };
+    </script>
+  <script type="importmap">
+{
+  "imports": {
+    "react": "https://aistudiocdn.com/react@^19.2.0",
+    "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/",
+    "react/": "https://aistudiocdn.com/react@^19.2.0/",
+    "@google/genai": "https://aistudiocdn.com/@google/genai@^1.27.0"
+  }
+}
+</script>
+<link rel="stylesheet" href="/index.css">
+</head>
+  <body class="bg-solidBlue-10 antialiased">
+    <div id="root"></div>
+  <script type="module" src="/index.tsx"></script>
+</body>
+</html>
