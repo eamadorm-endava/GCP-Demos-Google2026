@@ -23,9 +23,9 @@ import {CredentialProviderProxy} from './mocks/credentialProviderProxy';
 import {type ChatMessage, type PaymentInstrument, type Product, Sender, type Checkout, type PaymentHandler} from './types';
 import {normalizeForDisplay} from './utils/text';
 
-// Read the backend URL from the env var during the build of the docker image.
-// If not exists, use '/api' (for local dev)
-const API_URL = import.meta.env.VITE_API_URL || '/api';
+// CHANGED: Removed the leading slash to make the API call relative. 
+// If the app runs on /demos/ucp/, the fetch will target /demos/ucp/api.
+const API_URL = import.meta.env.VITE_API_URL || 'api';
 
 type RequestPart =
   | {type: 'text'; text: string}
@@ -284,15 +284,19 @@ function App() {
         requestParams.message.taskId = taskId;
       }
 
-      // Use window.location.origin so the URL of the profile (frontend) is dynamic and
-      // match the domain where this app is running (localhost o Cloud Run)
+      // CHANGED: Construct the profile URL dynamically to respect the base path from the proxy.
+      // This guarantees that the UCP-Agent header sends the absolute URL with the right proxy subpath included.
+      const currentUrl = window.location.href;
+      const baseUrl = currentUrl.endsWith('/') ? currentUrl : currentUrl + '/';
+      const profileUrl = new URL('profile/agent_profile.json', baseUrl).toString();
+
       const defaultHeaders = {
         'Content-Type': 'application/json',
         'X-A2A-Extensions':
           'https://ucp.dev/specification/reference?v=2026-01-11',
         //"Authorization": f"Bearer {token_id}",
-        'UCP-Agent':
-          `profile="${window.location.origin}/profile/agent_profile.json"`,
+        // CHANGED: Use the dynamically resolved profile URL
+        'UCP-Agent': `profile="${profileUrl}"`,
       };
 
       // Use the API_URL env var defined above
