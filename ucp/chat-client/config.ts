@@ -41,7 +41,8 @@ export class AppProperties {
 export const appConfig = new AppProperties(
     'Premium Coffee Shopper',
     'Your personal coffee shopping assistant.',
-    '/images/endava_symbol_RGB.png',
+    // Made the image path relative (added a dot) so it works regardless of the base URL path
+    './images/endava_symbol_RGB.png',
     'Hello, I am here to assist you with your coffee shopping. How can I help you?',
     'Endava UCP Coffee Explorer',
     'This demo compares two stores — one with poor UCP and one with proper UCP — to show how UCP improves transparency and checkout visibility.',
