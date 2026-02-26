@@ -4,6 +4,8 @@ substitutions:
   _SERVICE: test-demo-showcase-platform
   _DEMO_DIR: demo-showcase-platform
   _PROJECT_ID: p-s-gcu-na-marketing-bd5y-1
+  _IAP_GROUP: gcu_demos_temp_group@endava.com
+  _GALLERY_SA: demo-showcase@p-s-gcu-na-marketing-bd5y-1.iam.gserviceaccount.com
 
 availableSecrets:
   secretManager:
