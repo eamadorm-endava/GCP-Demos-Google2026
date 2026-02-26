@@ -37,7 +37,8 @@ const VERTICALS = {
   'contractintel': 'https://contractintel-ai-956266717219.us-west4.run.app',
   'sentinel-ai': 'https://sentinel-ai-autonomous-risk-assurance-956266717219.us-west4.run.app',
   'shelflogic-inventory' : 'https://shelflogic-ai-inventory-optimization-956266717219.us-west4.run.app',
-  'supply-chain': 'https://supply-chain-and-logistics-demo-956266717219.us-west4.run.app'
+  'supply-chain': 'https://supply-chain-and-logistics-demo-956266717219.us-west4.run.app',
+  'ucp': 'https://ucp-business-frontend-956266717219.us-west4.run.app'
 };
 
 const auth = new GoogleAuth();
