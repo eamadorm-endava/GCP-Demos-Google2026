@@ -2,7 +2,7 @@ substitutions:
   _REGION: us-west4
   _AR_REPO: gcp-demos
   _SERVICE: ucp-business-frontend
-  _DEMO_DIR: business_agent
+  _DEMO_DIR: ucp/chat-client
   _PROJECT_ID: p-s-gcu-na-marketing-bd5y-1
 
  
@@ -20,7 +20,7 @@ steps:
         docker build \
           -f ${_DEMO_DIR}/Dockerfile \
           -t ${_REGION}-docker.pkg.dev/${_PROJECT_ID}/${_AR_REPO}/${_SERVICE}:${SHORT_SHA} \
-          .
+          ucp/.
  
   # 2. Push de la imagen
   - name: 'gcr.io/cloud-builders/docker'
