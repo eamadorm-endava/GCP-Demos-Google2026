@@ -2,7 +2,7 @@ substitutions:
   _REGION: us-west4
   _AR_REPO: gcp-demos
   _SERVICE: ucp-business-backend
-  _DEMO_DIR: business_agent
+  _DEMO_DIR: ucp/business_agent
   _PROJECT_ID: p-s-gcu-na-marketing-bd5y-1
   _IAP_GROUP: gcu_latam_team_devs@endava.com
  
@@ -25,7 +25,7 @@ steps:
         docker build \
           -f ${_DEMO_DIR}/Dockerfile \
           -t ${_REGION}-docker.pkg.dev/${_PROJECT_ID}/${_AR_REPO}/${_SERVICE}:${SHORT_SHA} \
-          .
+          ucp/.
  
   # 2. Push de la imagen
   - name: 'gcr.io/cloud-builders/docker'
