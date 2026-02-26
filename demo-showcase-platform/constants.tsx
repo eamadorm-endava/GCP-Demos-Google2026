@@ -136,6 +136,22 @@ export const VERTICALS: VerticalConfig[] = [
       ]
     }
   },
+  {
+    id: 'ucp-commerce',
+    title: 'UCP Commerce Agent',
+    icon: 'shopping-cart',
+    color: 'bg-purple-600',
+    externalUrl: '/demos/ucp/',
+    pitch: {
+      problem: 'Commerce platforms lack interoperability, making AI shopping assistants difficult to integrate across different merchants.',
+      solution: 'Universal Commerce Protocol (UCP) provides an open standard for AI agents to discover, negotiate, and execute commerce transactions autonomously.',
+      talkingPoints: [
+        'Standardized UCP data types for checkout, fulfillment, and payment operations.',
+        'Agent-to-Agent (A2A) discovery and dynamic capability negotiation.',
+        'Seamless integration with any UCP-compatible merchant or platform.'
+      ]
+    }
+  }
 ];
 
 export const MOCK_DATA = {
