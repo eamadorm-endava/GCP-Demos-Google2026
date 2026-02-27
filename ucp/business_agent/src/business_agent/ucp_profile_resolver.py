@@ -17,11 +17,15 @@
 from pathlib import Path
 from datetime import datetime
 import json
+import logging
 from a2a.types import InternalError
 from a2a.utils.errors import ServerError
 import httpx
 from ucp_sdk.models.schemas.capability import Response as UcpMetadataCapability
 from ucp_sdk.models.schemas.ucp import ResponseCheckout as UcpMetadata
+
+
+logger = logging.getLogger(__name__)
 
 
 class ProfileResolver:
@@ -46,7 +50,12 @@ class ProfileResolver:
             self.merchant_profile = json.load(f)
         return self.merchant_profile
 
-    def _fetch_profile(self, client_profile_url: str) -> dict:
+    def _fetch_profile(
+        self,
+        client_profile_url: str,
+        headers: dict[str, str] | None = None,
+        request_id: str | None = None,
+    ) -> dict:
         """Fetch a profile from a URL.
 
         Args:
@@ -56,11 +65,23 @@ class ProfileResolver:
             dict: The fetched profile object.
 
         """
-        response = self.httpx_client.get(client_profile_url)
+        logger.info(
+            "[token-flow][backend] Fetching client profile request_id=%s auth_forwarded=%s url=%s",
+            request_id,
+            bool(headers and headers.get("Authorization")),
+            client_profile_url,
+        )
+
+        response = self.httpx_client.get(client_profile_url, headers=headers)
         response.raise_for_status()
         return response.json()
 
-    def resolve_profile(self, client_profile_url: str) -> dict:
+    def resolve_profile(
+        self,
+        client_profile_url: str,
+        headers: dict[str, str] | None = None,
+        request_id: str | None = None,
+    ) -> dict:
         """Resolve a profile url to a UCP profile object.
 
         Args:
@@ -77,7 +98,11 @@ class ProfileResolver:
         if client_profile_url in self.profiles:
             return self.profiles[client_profile_url]
 
-        profile = self._fetch_profile(client_profile_url)
+        profile = self._fetch_profile(
+            client_profile_url,
+            headers=headers,
+            request_id=request_id,
+        )
 
         client_version = profile.get("ucp").get("version")
         if not client_version:

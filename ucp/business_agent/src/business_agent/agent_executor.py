@@ -15,6 +15,7 @@
 """UCP."""
 
 import json
+import logging
 import re
 from typing import Any
 from a2a.server.agent_execution import AgentExecutor, RequestContext
@@ -43,6 +44,9 @@ from .constants import (
     UCP_RISK_SIGNALS_KEY,
 )
 from .ucp_profile_resolver import ProfileResolver
+
+
+logger = logging.getLogger(__name__)
 
 
 class UcpRequestProcessor:
@@ -75,6 +79,26 @@ class UcpRequestProcessor:
 
         headers = context.call_context.state.get("headers")  # type: ignore
 
+        request_id_header_key = next(
+            (key for key in headers if key.lower() == "x-request-id"),
+            None,
+        )
+        request_id = (
+            headers[request_id_header_key]
+            if request_id_header_key
+            else str(context.context_id)
+        )
+
+        frontend_auth_status_key = next(
+            (key for key in headers if key.lower() == "x-auth-token-present"),
+            None,
+        )
+        frontend_auth_status = (
+            headers[frontend_auth_status_key]
+            if frontend_auth_status_key
+            else "unknown"
+        )
+
         ucp_agent_header_key = next(
             (key for key in headers if key.lower() == UCP_AGENT_HEADER.lower()),
             None,
@@ -85,6 +109,24 @@ class UcpRequestProcessor:
 
         ucp_agent_header_value = headers[ucp_agent_header_key]
 
+        authorization_header_key = next(
+            (key for key in headers if key.lower() == "authorization"),
+            None,
+        )
+        forward_headers = (
+            {"Authorization": headers[authorization_header_key]}
+            if authorization_header_key
+            else None
+        )
+
+        logger.info(
+            "[token-flow][backend] Incoming request auth status request_id=%s context_id=%s auth_present=%s frontend_token_present=%s",
+            request_id,
+            context.context_id,
+            bool(forward_headers),
+            frontend_auth_status,
+        )
+
         match = re.search(r'profile="([^"]*)"', ucp_agent_header_value)
         if not match or not match.group(1):
             raise ValueError(
@@ -92,8 +134,15 @@ class UcpRequestProcessor:
             )
 
         client_profile_url = match.group(1)
+        logger.info(
+            "[token-flow][backend] Resolving client profile request_id=%s auth_forwarded=%s",
+            request_id,
+            bool(forward_headers),
+        )
         client_profile_metadata = self.profile_resolver.resolve_profile(
-            client_profile_url
+            client_profile_url,
+            headers=forward_headers,
+            request_id=request_id,
         )
         return self.profile_resolver.get_ucp_metadata(client_profile_metadata)
 

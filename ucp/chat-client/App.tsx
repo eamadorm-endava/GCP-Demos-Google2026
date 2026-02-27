@@ -294,9 +294,16 @@ function App() {
       const client = (window as Window & {idTokenClient?: IdTokenClient})
         .idTokenClient;
       const targetAudience = TARGET_AUDIENCE;
+      const requestId = crypto.randomUUID();
       const tokenId = client
         ? await client.idTokenProvider.fetchIdToken(targetAudience)
         : undefined;
+
+      console.info('[token-flow][frontend] Prepared request auth token status', {
+        requestId,
+        targetAudience,
+        tokenPresent: Boolean(tokenId),
+      });
 
       // Use window.location.origin so the URL of the profile (frontend) is dynamic and
       // match the domain where this app is running (localhost o Cloud Run)
@@ -304,6 +311,8 @@ function App() {
         'Content-Type': 'application/json',
         'X-A2A-Extensions':
           'https://ucp.dev/specification/reference?v=2026-01-11',
+        'X-Request-Id': requestId,
+        'X-Auth-Token-Present': tokenId ? 'true' : 'false',
         ...(tokenId ? {'Authorization': `Bearer ${tokenId}`} : {}),
         'UCP-Agent':
           `profile="${window.location.origin}/profile/agent_profile.json"`,
