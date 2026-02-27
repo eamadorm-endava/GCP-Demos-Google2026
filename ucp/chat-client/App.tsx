@@ -23,9 +23,8 @@ import {CredentialProviderProxy} from './mocks/credentialProviderProxy';
 import {type ChatMessage, type PaymentInstrument, type Product, Sender, type Checkout, type PaymentHandler} from './types';
 import {normalizeForDisplay} from './utils/text';
 
-// CHANGED: Removed the leading slash to make the API call relative. 
-// If the app runs on /demos/ucp/, the fetch will target /demos/ucp/api.
 const API_URL = import.meta.env.VITE_API_URL || 'api';
+const FRONT_URL = import.meta.env.VITE_UCP_FRONTEND_URL || window.location.origin;
 
 type RequestPart =
   | {type: 'text'; text: string}
@@ -284,18 +283,16 @@ function App() {
         requestParams.message.taskId = taskId;
       }
 
-      // CHANGED: Construct the profile URL dynamically to respect the base path from the proxy.
-      // This guarantees that the UCP-Agent header sends the absolute URL with the right proxy subpath included.
-      const currentUrl = window.location.href;
-      const baseUrl = currentUrl.endsWith('/') ? currentUrl : currentUrl + '/';
-      const profileUrl = new URL('profile/agent_profile.json', baseUrl).toString();
+      const baseUrl = FRONT_URL.endsWith('/') ? FRONT_URL : FRONT_URL + '/';
+      // Construct the absolute profile URL using the clean base URL
+      const profileUrl = `${baseUrl}/profile/agent_profile.json`;
 
       const defaultHeaders = {
         'Content-Type': 'application/json',
         'X-A2A-Extensions':
           'https://ucp.dev/specification/reference?v=2026-01-11',
         //"Authorization": f"Bearer {token_id}",
-        // CHANGED: Use the dynamically resolved profile URL
+        // CHANGED: Use the explicitly configured profile URL
         'UCP-Agent': `profile="${profileUrl}"`,
       };
 
