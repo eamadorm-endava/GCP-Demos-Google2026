@@ -77,7 +77,8 @@ steps:
       - |
         gcloud run services delete \
         ${_TEST_SERVICE} \
-        --region=${_REGION}
+        --region=${_REGION} \
+        --quiet
 
 images:
   - '${_REGION}-docker.pkg.dev/${_PROJECT_ID}/${_AR_REPO}/${_SERVICE}:${SHORT_SHA}'
