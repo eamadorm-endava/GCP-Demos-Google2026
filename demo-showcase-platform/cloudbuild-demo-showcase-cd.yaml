@@ -6,7 +6,8 @@ substitutions:
   _PROJECT_ID: p-s-gcu-na-marketing-bd5y-1
   _IAP_GROUP: gcu_demos_temp_group@endava.com
   _GALLERY_SA: demo-showcase@p-s-gcu-na-marketing-bd5y-1.iam.gserviceaccount.com
-  
+  _TEST_SERVICE: test-demo-showcase-platform
+
 availableSecrets:
   secretManager:
     - versionName: projects/${_PROJECT_ID}/secrets/GEMINI_API_KEY/versions/latest
@@ -66,6 +67,17 @@ steps:
           --region=${_REGION} \
           --resource-type=cloud-run \
           --service=${_SERVICE}
+
+  # 5. Delete Test instance created during the CI
+  - name: 'gcr.io/cloud-builders/gcloud'
+    id: 'Delete-Test-CloudRun-instance'
+    entrypoint: 'bash'
+    args:
+      - '-c'
+      - |
+        gcloud run services delete \
+        ${_TEST_SERVICE} \
+        --region=${_REGION}
 
 images:
   - '${_REGION}-docker.pkg.dev/${_PROJECT_ID}/${_AR_REPO}/${_SERVICE}:${SHORT_SHA}'
