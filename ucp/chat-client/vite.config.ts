@@ -19,6 +19,8 @@ import {defineConfig} from 'vite';
 
 export default defineConfig(() => {  
   return {
+    // CHANGED: Added relative base path so assets (CSS/JS) load correctly when served behind a proxy subpath (e.g. /demos/ucp/)
+    base: './',
     server: {
       port: 3000,
       host: '0.0.0.0',

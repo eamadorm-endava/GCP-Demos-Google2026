@@ -25,7 +25,9 @@ import {normalizeForDisplay} from './utils/text';
 
 // Read the backend URL from the env var during the build of the docker image.
 // If not exists, use '/api' (for local dev)
-const API_URL = import.meta.env.VITE_API_URL || '/api';
+
+const API_URL = import.meta.env.VITE_API_URL || 'api';
+const FRONT_URL = import.meta.env.VITE_FRONT_URL || window.location.origin;
 const TARGET_AUDIENCE = import.meta.env.VITE_TARGET_AUDIENCE || API_URL;
 
 type IdTokenClient = {
@@ -307,6 +309,10 @@ function App() {
 
       // Use window.location.origin so the URL of the profile (frontend) is dynamic and
       // match the domain where this app is running (localhost o Cloud Run)
+      const baseUrl = FRONT_URL.endsWith('/') ? FRONT_URL : FRONT_URL + '/';
+      // Construct the absolute profile URL using the clean base URL
+      const profileUrl = `${baseUrl}/profile/agent_profile.json`;
+
       const defaultHeaders = {
         'Content-Type': 'application/json',
         'X-A2A-Extensions':
@@ -314,8 +320,9 @@ function App() {
         'X-Request-Id': requestId,
         'X-Auth-Token-Present': tokenId ? 'true' : 'false',
         ...(tokenId ? {'Authorization': `Bearer ${tokenId}`} : {}),
-        'UCP-Agent':
-          `profile="${window.location.origin}/profile/agent_profile.json"`,
+        //"Authorization": f"Bearer {token_id}",
+        // CHANGED: Use the explicitly configured profile URL
+        'UCP-Agent': `profile="${profileUrl}"`,
       };
 
       // Use the API_URL env var defined above
