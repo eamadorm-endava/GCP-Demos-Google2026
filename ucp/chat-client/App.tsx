@@ -24,7 +24,7 @@ import {type ChatMessage, type PaymentInstrument, type Product, Sender, type Che
 import {normalizeForDisplay} from './utils/text';
 
 const API_URL = import.meta.env.VITE_API_URL || 'api';
-const FRONT_URL = import.meta.env.VITE_UCP_FRONTEND_URL || window.location.origin;
+const FRONT_URL = import.meta.env.VITE_FRONT_URL || window.location.origin;
 
 type RequestPart =
   | {type: 'text'; text: string}
