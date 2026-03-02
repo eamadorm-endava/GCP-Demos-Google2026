@@ -28,13 +28,6 @@ import {normalizeForDisplay} from './utils/text';
 
 const API_URL = import.meta.env.VITE_API_URL || 'api';
 const FRONT_URL = import.meta.env.VITE_FRONT_URL || window.location.origin;
-const TARGET_AUDIENCE = import.meta.env.VITE_TARGET_AUDIENCE || API_URL;
-
-type IdTokenClient = {
-  idTokenProvider: {
-    fetchIdToken: (targetAudience: string) => Promise<string>;
-  };
-};
 
 type RequestPart =
   | {type: 'text'; text: string}
@@ -292,20 +285,7 @@ function App() {
       if (taskId) {
         requestParams.message.taskId = taskId;
       }
-
-      const client = (window as Window & {idTokenClient?: IdTokenClient})
-        .idTokenClient;
-      const targetAudience = TARGET_AUDIENCE;
       const requestId = crypto.randomUUID();
-      const tokenId = client
-        ? await client.idTokenProvider.fetchIdToken(targetAudience)
-        : undefined;
-
-      console.info('[token-flow][frontend] Prepared request auth token status', {
-        requestId,
-        targetAudience,
-        tokenPresent: Boolean(tokenId),
-      });
 
       // Use window.location.origin so the URL of the profile (frontend) is dynamic and
       // match the domain where this app is running (localhost o Cloud Run)
@@ -318,8 +298,6 @@ function App() {
         'X-A2A-Extensions':
           'https://ucp.dev/specification/reference?v=2026-01-11',
         'X-Request-Id': requestId,
-        'X-Auth-Token-Present': tokenId ? 'true' : 'false',
-        ...(tokenId ? {'Authorization': `Bearer ${tokenId}`} : {}),
         //"Authorization": f"Bearer {token_id}",
         // CHANGED: Use the explicitly configured profile URL
         'UCP-Agent': `profile="${profileUrl}"`,
