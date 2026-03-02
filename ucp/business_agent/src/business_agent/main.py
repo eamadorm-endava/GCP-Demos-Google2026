@@ -108,7 +108,7 @@ async def run(host, port):
             ),
             Mount(
                 "/images",
-                app=StaticFiles(directory=str("api" / "data" / "images")),
+                app=StaticFiles(directory=str(base_path / "data" / "images")),
                 name="images",
             ),
         ]
