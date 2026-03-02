@@ -14,10 +14,10 @@
  * limitations under the License.
  */
 import type React from 'react';
-import {useState} from 'react';
+import { useState } from 'react';
 
-import type {Checkout, CheckoutItem} from '../types';
-import {normalizeForDisplay} from '../utils/text';
+import type { Checkout, CheckoutItem } from '../types';
+import { normalizeForDisplay } from '../utils/text';
 
 interface CheckoutProps {
   checkout: Checkout;
@@ -46,6 +46,21 @@ const CheckoutComponent: React.FC<CheckoutProps> = ({
 
   const getItemTotal = (lineItem: CheckoutItem) => {
     return lineItem.totals.find((t) => t.type === 'total');
+  };
+
+  const getImageUrl = (url?: string) => {
+    if (!url) return '/images/no_image.png';
+    const backendUrl = import.meta.env.VITE_BACKEND_URL;
+    const baseUrl = backendUrl?.endsWith('/') ? backendUrl.slice(0, -1) : backendUrl || 'http://localhost:10999';
+
+    // Exact string match condition
+    if (url.startsWith(baseUrl)) {
+      return url.replace(baseUrl, '/api');
+    }
+
+    if (url.startsWith('/')) return `/api${url}`;
+
+    return url;
   };
 
   const grandTotal = getTotal('total');
@@ -82,7 +97,7 @@ const CheckoutComponent: React.FC<CheckoutProps> = ({
           {itemsToShow.map((lineItem: CheckoutItem) => (
             <div key={lineItem.id} className="flex items-center text-sm">
               <img
-                src={lineItem.item.image_url}
+                src={getImageUrl(lineItem.item.image_url)}
                 alt={lineItem.item.id}
                 className="w-16 h-16 object-cover rounded-md mr-4"
               />
