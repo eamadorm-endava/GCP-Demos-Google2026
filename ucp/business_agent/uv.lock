@@ -107,6 +107,7 @@ version = "0.1.0"
 source = { editable = "." }
 dependencies = [
     { name = "google-adk", extra = ["a2a"] },
+    { name = "google-auth" },
     { name = "httpx" },
     { name = "pydantic", extra = ["email"] },
     { name = "ucp-sdk" },
@@ -121,6 +122,7 @@ dev = [
 [package.metadata]
 requires-dist = [
     { name = "google-adk", extras = ["a2a"], specifier = ">=1.22.0" },
+    { name = "google-auth", specifier = ">=2.47.0" },
     { name = "httpx", specifier = ">=0.28.1" },
     { name = "pydantic", extras = ["email"], specifier = ">=2.12.3" },
     { name = "ucp-sdk", specifier = "==0.1.0" },
