@@ -1,7 +1,7 @@
 substitutions:
   _REGION: us-west4
   _AR_REPO: gcp-demos
-  _SERVICE: ucp-business-frontend
+  _SERVICE: test-ucp-business-frontend
   _DEMO_DIR: ucp/chat-client
   _PROJECT_ID: p-s-gcu-na-marketing-bd5y-1
 
@@ -28,6 +28,22 @@ steps:
     args:
       - 'push'
       - '${_REGION}-docker.pkg.dev/${_PROJECT_ID}/${_AR_REPO}/${_SERVICE}:${SHORT_SHA}'
- 
+
+# 3. Deploy a Cloud Run
+  - name: 'gcr.io/cloud-builders/gcloud'
+    id: 'Deploy'
+    entrypoint: 'bash'
+    args:
+      - '-c'
+      - |
+        gcloud beta run deploy ${_SERVICE} \
+          --image=${_REGION}-docker.pkg.dev/${_PROJECT_ID}/${_AR_REPO}/${_SERVICE}:${SHORT_SHA} \
+          --region=${_REGION} \
+          --platform=managed \
+          --no-allow-unauthenticated \
+          --port=8080 \
+          --no-iap \
+          --min-instances 1
+  
 images:
   - '${_REGION}-docker.pkg.dev/${_PROJECT_ID}/${_AR_REPO}/${_SERVICE}:${SHORT_SHA}'
