@@ -5,7 +5,11 @@ substitutions:
   _DEMO_DIR: ucp/business_agent
   _PROJECT_ID: p-s-gcu-na-marketing-bd5y-1
 
- 
+availableSecrets:
+  secretManager:
+    - versionName: projects/${_PROJECT_ID}/secrets/GEMINI_API_KEY/versions/latest
+      env: GEMINI_API_KEY 
+
 options:
   logging: CLOUD_LOGGING_ONLY
  
