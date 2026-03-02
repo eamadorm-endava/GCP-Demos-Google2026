@@ -12,7 +12,7 @@ const app = express();
 const PORT = process.env.PORT || 8080;
 
 // Cloud Run backend URL (the Cloud Run service you want to call)
-const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL || 'https://test-ucp-business-backend-956266717219.us-west4.run.app';
 
 
 
