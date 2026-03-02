@@ -13,47 +13,25 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { useEffect, useRef, useState } from 'react';
+import {useEffect, useRef, useState} from 'react';
 import ChatInput from './components/ChatInput';
 import ChatMessageComponent from './components/ChatMessage';
 import Header from './components/Header';
-import { appConfig } from './config';
-import { CredentialProviderProxy } from './mocks/credentialProviderProxy';
+import {appConfig} from './config';
+import {CredentialProviderProxy} from './mocks/credentialProviderProxy';
 
-import { GoogleAuth } from 'google-auth-library';
+import {type ChatMessage, type PaymentInstrument, type Product, Sender, type Checkout, type PaymentHandler} from './types';
+import {normalizeForDisplay} from './utils/text';
 
-import { type ChatMessage, type PaymentInstrument, type Product, Sender, type Checkout, type PaymentHandler } from './types';
-import { normalizeForDisplay } from './utils/text';
+// Read the backend URL from the env var during the build of the docker image.
+// If not exists, use '/api' (for local dev)
 
 const API_URL = import.meta.env.VITE_API_URL || 'api';
 const FRONT_URL = import.meta.env.VITE_FRONT_URL || window.location.origin;
 
-const auth = new GoogleAuth();
-
-
-async function getTokenId(targetAudience) {
-  try {
-    const client = await auth.getIdTokenClient(targetAudience);
-    const tokenId = await client.idTokenProvider.fetchIdToken(targetAudience);
-
-    if (tokenId) {
-      console.log("tokenId Successfully Generated");
-    }
-    else {
-      console.log("tokenId was not generated");
-      return null;
-    }
-    return `Bearer ${tokenId}`
-  } catch (err) {
-    console.error(`TokenID was not generated for ${targetAudience}: `, err.message);
-    return null;
-  }
-}
-
-
 type RequestPart =
-  | { type: 'text'; text: string }
-  | { type: 'data'; data: Record<string, unknown> };
+  | {type: 'text'; text: string}
+  | {type: 'data'; data: Record<string, unknown>};
 
 function createChatMessage(
   sender: Sender,
@@ -71,7 +49,7 @@ function createChatMessage(
 const initialMessage: ChatMessage = createChatMessage(
   Sender.MODEL,
   appConfig.defaultMessage,
-  { id: 'initial' },
+  {id: 'initial'},
 );
 
 /**
@@ -109,8 +87,8 @@ function App() {
   };
 
   const handleStartPayment = () => {
-    const actionPayload = JSON.stringify({ action: 'start_payment' });
-    handleSendMessage(actionPayload, { isUserAction: true, userText: 'Started payment' });
+    const actionPayload = JSON.stringify({action: 'start_payment'});
+    handleSendMessage(actionPayload, {isUserAction: true, userText: 'Started payment'});
   };
 
   const handlePaymentMethodSelection = async (checkout: Checkout) => {
@@ -166,7 +144,7 @@ function App() {
     const userActionMessage = createChatMessage(
       Sender.USER,
       'Selected a payment method',
-      { isUserAction: true },
+      {isUserAction: true},
     );
     setMessages((prev) => [...prev, userActionMessage]);
 
@@ -204,7 +182,7 @@ function App() {
     const userActionMessage = createChatMessage(
       Sender.USER,
       `User confirmed payment.`,
-      { isUserAction: true },
+      {isUserAction: true},
     );
     // Let handleSendMessage manage the loading indicator
     setMessages((prev) => [
@@ -214,12 +192,12 @@ function App() {
 
     try {
       const parts: RequestPart[] = [
-        { type: 'data', data: { 'action': 'complete_checkout' } },
+        {type: 'data', data: {'action': 'complete_checkout'}},
         {
           type: 'data',
           data: {
             'a2a.ucp.checkout.payment_data': paymentInstrument,
-            'a2a.ucp.checkout.risk_signals': { 'data': 'some risk data' },
+            'a2a.ucp.checkout.risk_signals': {'data': 'some risk data'},
           },
         },
       ];
@@ -267,14 +245,14 @@ function App() {
     }
     setMessages((prev) => [
       ...prev,
-      createChatMessage(Sender.MODEL, '', { isLoading: true }),
+      createChatMessage(Sender.MODEL, '', {isLoading: true}),
     ]);
     setIsLoading(true);
 
     try {
       const requestParts =
         typeof messageContent === 'string'
-          ? [{ type: 'text', text: messageContent }]
+          ? [{type: 'text', text: messageContent}]
           : messageContent;
 
       const requestParams: {
@@ -307,18 +285,20 @@ function App() {
       if (taskId) {
         requestParams.message.taskId = taskId;
       }
+      const requestId = crypto.randomUUID();
 
+      // Use window.location.origin so the URL of the profile (frontend) is dynamic and
+      // match the domain where this app is running (localhost o Cloud Run)
       const baseUrl = FRONT_URL.endsWith('/') ? FRONT_URL : FRONT_URL + '/';
       // Construct the absolute profile URL using the clean base URL
       const profileUrl = `${baseUrl}/profile/agent_profile.json`;
-
-      const tokenId = await getTokenId(API_URL);
 
       const defaultHeaders = {
         'Content-Type': 'application/json',
         'X-A2A-Extensions':
           'https://ucp.dev/specification/reference?v=2026-01-11',
-        "Authorization": `Bearer ${tokenId}`,
+        'X-Request-Id': requestId,
+        //"Authorization": f"Bearer {token_id}",
         // CHANGED: Use the explicitly configured profile URL
         'UCP-Agent': `profile="${profileUrl}"`,
       };
@@ -326,7 +306,7 @@ function App() {
       // Use the API_URL env var defined above
       const response = await fetch(API_URL, {
         method: 'POST',
-        headers: { ...defaultHeaders, ...options?.headers },
+        headers: {...defaultHeaders, ...options?.headers},
         body: JSON.stringify({
           jsonrpc: '2.0',
           id: crypto.randomUUID(),
