@@ -12,12 +12,12 @@ WORKDIR /app/chat-client
 RUN npm install
 
 # Set the backend URL for the frontend to connect. This will be replaced during build by the value of the VITE_API_URL build arg.
-ARG VITE_API_URL="https://ucp-business-backend-956266717219.us-west4.run.app"
+ARG VITE_API_URL="https://test-ucp-business-backend-956266717219.us-west4.run.app"
 ENV VITE_API_URL=$VITE_API_URL
 
 # Set the frontend URL, required due to the front send its own URL, so the backend
 # could also retrieve data from the front itself.
-ARG VITE_FRONT_URL="https://ucp-business-frontend-956266717219.us-west4.run.app"
+ARG VITE_FRONT_URL="https://test-ucp-business-frontend-956266717219.us-west4.run.app"
 ENV VITE_FRONT_URL=$VITE_FRONT_URL
 
 RUN npm run build

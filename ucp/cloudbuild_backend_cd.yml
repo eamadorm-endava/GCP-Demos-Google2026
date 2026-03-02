@@ -47,7 +47,7 @@ steps:
           --platform=managed \
           --allow-unauthenticated \
           --port=10999 \
-          --set-env-vars="GOOGLE_API_KEY=$$GEMINI_API_KEY,API_BASE_URL=https://ucp-business-backend-956266717219.us-west4.run.app" \
+          --set-env-vars="GOOGLE_API_KEY=$$GEMINI_API_KEY,API_BASE_URL=https://test-ucp-business-backend-956266717219.us-west4.run.app" \
           --min-instances 1 \
           --no-iap
 
