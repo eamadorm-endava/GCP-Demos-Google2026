@@ -4,7 +4,7 @@ substitutions:
   _SERVICE: test-ucp-business-frontend
   _DEMO_DIR: ucp/chat-client
   _PROJECT_ID: p-s-gcu-na-marketing-bd5y-1
-
+  _GALLERY_SA: demo-showcase@p-s-gcu-na-marketing-bd5y-1.iam.gserviceaccount.com
  
 options:
   logging: CLOUD_LOGGING_ONLY
@@ -43,7 +43,8 @@ steps:
           --no-allow-unauthenticated \
           --port=8080 \
           --no-iap \
-          --min-instances 1
+          --min-instances 1 \
+          --service-account=${_GALLERY_SA}
   
 images:
   - '${_REGION}-docker.pkg.dev/${_PROJECT_ID}/${_AR_REPO}/${_SERVICE}:${SHORT_SHA}'

@@ -4,6 +4,7 @@ substitutions:
   _SERVICE: test-ucp-business-backend
   _DEMO_DIR: ucp/business_agent
   _PROJECT_ID: p-s-gcu-na-marketing-bd5y-1
+  _GALLERY_SA: demo-showcase@p-s-gcu-na-marketing-bd5y-1.iam.gserviceaccount.com
 
 availableSecrets:
   secretManager:
@@ -47,7 +48,8 @@ steps:
           --port=10999 \
           --set-env-vars="GOOGLE_API_KEY=$$GEMINI_API_KEY,API_BASE_URL=https://test-ucp-business-backend-956266717219.us-west4.run.app" \
           --min-instances 1 \
-          --no-iap
+          --no-iap \
+          --service-account=${_GALLERY_SA}
 
     secretEnv: ['GEMINI_API_KEY']
  
