@@ -21,7 +21,7 @@ steps:
           -t ${_REGION}-docker.pkg.dev/${_PROJECT_ID}/${_AR_REPO}/${_SERVICE}:${SHORT_SHA} \
           ucp/.
  
-  # 2. Push de la imagen
+  # 2. Push docker image
   - name: 'gcr.io/cloud-builders/docker'
     id: 'Push'
     args:
