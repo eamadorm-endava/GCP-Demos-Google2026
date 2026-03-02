@@ -4,7 +4,8 @@ substitutions:
   _SERVICE: ucp-business-backend
   _DEMO_DIR: ucp/business_agent
   _PROJECT_ID: p-s-gcu-na-marketing-bd5y-1
-  _IAP_GROUP: gcu_latam_team_devs@endava.com
+  _GALLERY_SA: demo-showcase@p-s-gcu-na-marketing-bd5y-1.iam.gserviceaccount.com
+  _TEST_SERVICE: test-ucp-business-backend
  
 availableSecrets:
   secretManager:
@@ -45,14 +46,26 @@ steps:
           --image=${_REGION}-docker.pkg.dev/${_PROJECT_ID}/${_AR_REPO}/${_SERVICE}:${SHORT_SHA} \
           --region=${_REGION} \
           --platform=managed \
-          --allow-unauthenticated \
+          --no-allow-unauthenticated \
           --port=10999 \
           --set-env-vars="GOOGLE_API_KEY=$$GEMINI_API_KEY,API_BASE_URL=https://ucp-business-backend-956266717219.us-west4.run.app" \
           --min-instances 1 \
-          --no-iap
+          --no-iap \
+          --service-account=${_GALLERY_SA}
 
     secretEnv: ['GEMINI_API_KEY']
 
+  # 5. Delete Test instance created during the CI
+  - name: 'gcr.io/cloud-builders/gcloud'
+    id: 'Delete-Test-CloudRun-instance'
+    entrypoint: 'bash'
+    args:
+      - '-c'
+      - |
+        gcloud run services delete \
+        ${_TEST_SERVICE} \
+        --region=${_REGION} \
+        --quiet
  
 images:
   - '${_REGION}-docker.pkg.dev/${_PROJECT_ID}/${_AR_REPO}/${_SERVICE}:${SHORT_SHA}'

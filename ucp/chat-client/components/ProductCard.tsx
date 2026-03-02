@@ -14,22 +14,38 @@
  * limitations under the License.
  */
 import type React from 'react';
-import type {Product} from '../types';
-import {normalizeForDisplay} from '../utils/text';
+import type { Product } from '../types';
+import { normalizeForDisplay } from '../utils/text';
 
 interface ProductCardProps {
   product: Product;
   onAddToCart: (product: Product) => void;
 }
 
-const ProductCard: React.FC<ProductCardProps> = ({product, onAddToCart}) => {
+const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart }) => {
   const isAvailable = product.offers.availability.includes('InStock');
   const handleAddToCartClick = () => onAddToCart?.(product);
+
+  const getImageUrl = (url?: string) => {
+    if (!url) return '/images/no_image.png';
+    // @ts-ignore
+    const backendUrl = import.meta.env.VITE_BACKEND_URL;
+    const baseUrl = backendUrl?.endsWith('/') ? backendUrl.slice(0, -1) : backendUrl || 'http://localhost:10999';
+
+    // Exact string match condition
+    if (url.startsWith(baseUrl)) {
+      return url.replace(baseUrl, 'api');
+    }
+
+    if (url.startsWith('/')) return `api${url}`;
+
+    return url;
+  };
 
   return (
     <div className="bg-white rounded-xl shadow-card hover:shadow-cardHover overflow-hidden w-64 flex-shrink-0 transition-shadow">
       <img
-        src={product.image[0]}
+        src={getImageUrl(product.image?.[0])}
         alt={normalizeForDisplay(product.name)}
         className="w-full h-48 object-cover"
       />
@@ -46,11 +62,10 @@ const ProductCard: React.FC<ProductCardProps> = ({product, onAddToCart}) => {
             {product.offers.price}
           </p>
           <span
-            className={`px-2 py-1 text-xs font-semibold rounded-full ${
-              isAvailable
-                ? 'bg-signal-light-positive/10 text-signal-light-positive ring-1 ring-signal-light-positive/30'
-                : 'bg-signal-light-negative/10 text-signal-light-negative ring-1 ring-signal-light-negative/30'
-            }`}>
+            className={`px-2 py-1 text-xs font-semibold rounded-full ${isAvailable
+              ? 'bg-signal-light-positive/10 text-signal-light-positive ring-1 ring-signal-light-positive/30'
+              : 'bg-signal-light-negative/10 text-signal-light-negative ring-1 ring-signal-light-negative/30'
+              }`}>
             {isAvailable ? 'In Stock' : 'Out of Stock'}
           </span>
         </div>

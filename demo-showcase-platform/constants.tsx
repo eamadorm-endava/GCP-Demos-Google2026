@@ -2,7 +2,7 @@ import React from 'react';
 import { ShoppingCart, Stethoscope, Landmark, Factory, Globe } from 'lucide-react';
 import { VerticalType, VerticalConfig } from './types';
 
-export const IDLE_TIMEOUT = 120000; // 2 minutes
+export const IDLE_TIMEOUT = 900_000; // 15 minutes
 
 export const VERTICALS: VerticalConfig[] = [
   {

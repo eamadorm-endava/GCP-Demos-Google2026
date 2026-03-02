@@ -20,6 +20,8 @@ import json
 from a2a.types import InternalError
 from a2a.utils.errors import ServerError
 import httpx
+import google.auth.transport.requests
+from google.oauth2 import id_token
 from ucp_sdk.models.schemas.capability import Response as UcpMetadataCapability
 from ucp_sdk.models.schemas.ucp import ResponseCheckout as UcpMetadata
 
@@ -56,7 +58,10 @@ class ProfileResolver:
             dict: The fetched profile object.
 
         """
-        response = self.httpx_client.get(client_profile_url)
+        auth_req = google.auth.transport.requests.Request()
+        token = id_token.fetch_id_token(auth_req, client_profile_url)
+        headers = {"Authorization": f"Bearer {token}"}
+        response = self.httpx_client.get(client_profile_url, headers=headers)
         response.raise_for_status()
         return response.json()
 
