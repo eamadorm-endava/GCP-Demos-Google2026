@@ -1,7 +1,7 @@
 substitutions:
   _REGION: us-west4
   _AR_REPO: gcp-demos
-  _SERVICE: ucp-business-backend
+  _SERVICE: test-ucp-business-backend
   _DEMO_DIR: ucp/business_agent
   _PROJECT_ID: p-s-gcu-na-marketing-bd5y-1
 
@@ -27,7 +27,25 @@ steps:
     args:
       - 'push'
       - '${_REGION}-docker.pkg.dev/${_PROJECT_ID}/${_AR_REPO}/${_SERVICE}:${SHORT_SHA}'
- 
+
+# 3. Deploy a Cloud Run
+  - name: 'gcr.io/cloud-builders/gcloud'
+    id: 'Deploy'
+    entrypoint: 'bash'
+    args:
+      - '-c'
+      - |
+        gcloud beta run deploy ${_SERVICE} \
+          --image=${_REGION}-docker.pkg.dev/${_PROJECT_ID}/${_AR_REPO}/${_SERVICE}:${SHORT_SHA} \
+          --region=${_REGION} \
+          --platform=managed \
+          --no-allow-unauthenticated \
+          --port=10999 \
+          --set-env-vars="GOOGLE_API_KEY=$$GEMINI_API_KEY,API_BASE_URL=https://ucp-business-backend-956266717219.us-west4.run.app" \
+          --min-instances 1 \
+          --no-iap
+
+    secretEnv: ['GEMINI_API_KEY']
  
 images:
   - '${_REGION}-docker.pkg.dev/${_PROJECT_ID}/${_AR_REPO}/${_SERVICE}:${SHORT_SHA}'
