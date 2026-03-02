@@ -52,6 +52,6 @@ steps:
           --service-account=${_GALLERY_SA}
 
     secretEnv: ['GEMINI_API_KEY']
- 
+  
 images:
   - '${_REGION}-docker.pkg.dev/${_PROJECT_ID}/${_AR_REPO}/${_SERVICE}:${SHORT_SHA}'
