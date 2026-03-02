@@ -36,9 +36,9 @@ const VERTICALS = {
   'contract-intelligence': 'https://contract-intelligence-platform-956266717219.us-west4.run.app',
   'contractintel': 'https://contractintel-ai-956266717219.us-west4.run.app',
   'sentinel-ai': 'https://sentinel-ai-autonomous-risk-assurance-956266717219.us-west4.run.app',
-  'shelflogic-inventory' : 'https://shelflogic-ai-inventory-optimization-956266717219.us-west4.run.app',
+  'shelflogic-inventory': 'https://shelflogic-ai-inventory-optimization-956266717219.us-west4.run.app',
   'supply-chain': 'https://supply-chain-and-logistics-demo-956266717219.us-west4.run.app',
-  'ucp': 'https://ucp-business-frontend-956266717219.us-west4.run.app'
+  'ucp': 'https://test-ucp-business-frontend-956266717219.us-west4.run.app'
 };
 
 const auth = new GoogleAuth();
@@ -55,14 +55,14 @@ async function getTokenId(targetAudience) {
     const client = clientCache[targetAudience];
 
     const tokenId = await client.idTokenProvider.fetchIdToken(targetAudience);
-    
-    if (tokenId){
+
+    if (tokenId) {
       console.log("tokenId Successfully Generated");
     }
     else {
       console.log("tokenId was not generated");
       return null;
-    }    
+    }
     return `Bearer ${tokenId}`
   } catch (err) {
     console.error(`TokenID was not generated for ${targetAudience}: `, err.message);
@@ -87,7 +87,7 @@ Object.entries(VERTICALS).forEach(([key, targetUrl]) => {
       next();
     } catch (error) {
       console.error('Auth Middleware Error: ', error);
-      next(); 
+      next();
     }
   };
 
@@ -96,7 +96,7 @@ Object.entries(VERTICALS).forEach(([key, targetUrl]) => {
     target: targetUrl,
     changeOrigin: true,
     pathRewrite: {
-      [`^${routePath}`]: '', 
+      [`^${routePath}`]: '',
     },
 
     onProxyReq: (proxyReq, req, res) => {
@@ -125,13 +125,13 @@ Object.entries(VERTICALS).forEach(([key, targetUrl]) => {
       ];
 
       headersToRemove.forEach(header => proxyReq.removeHeader(header));
-      
+
       // User-Agent header identifies the client making the request 
       proxyReq.setHeader('User-Agent', 'Demo-Showcase-Proxy/1.0');
 
       // Add the authorization header in the proxyReq (the request that Will be sent to the demos)
       if (req.headers['authorization']) {
-          proxyReq.setHeader('Authorization', req.headers['authorization']);
+        proxyReq.setHeader('Authorization', req.headers['authorization']);
       }
 
       console.log("Header in proxyReq: ", proxyReq.getHeader('Authorization') ? "YES" : "NO")
@@ -148,21 +148,21 @@ Object.entries(VERTICALS).forEach(([key, targetUrl]) => {
       console.log(`Sending request to: https://${targetHost}${proxyReq.path}`);
       console.log(`│ Method:         ${proxyReq.method}`);
       console.log(`│ Host Header:    ${proxyReq.getHeader('host')}`);
-      console.log("Path inside the host: ", proxyReq.path); 
+      console.log("Path inside the host: ", proxyReq.path);
     },
-    
+
     onError: (err, req, res) => {
       console.error('Error in the proxy request: ', err);
       res.status(502).send('Gateway Proxy Error');
     },
-    
+
     // Checks the status of the response
     onProxyRes: (proxyRes, req, res) => {
-        console.log(`Proxy Response: ${req.method} https://${req.host}${req.path} -> Status: ${proxyRes.statusCode}`);
-        
-        if (proxyRes.statusCode !== 200) {
-            console.error(`Request Failed. Status Code: ${proxyRes.statusCode}: ${proxyRes.headers['www-authenticate']}`);
-        }
+      console.log(`Proxy Response: ${req.method} https://${req.host}${req.path} -> Status: ${proxyRes.statusCode}`);
+
+      if (proxyRes.statusCode !== 200) {
+        console.error(`Request Failed. Status Code: ${proxyRes.statusCode}: ${proxyRes.headers['www-authenticate']}`);
+      }
     }
   });
 
