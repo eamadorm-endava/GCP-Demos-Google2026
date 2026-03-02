@@ -28,15 +28,16 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart }) => {
 
   const getImageUrl = (url?: string) => {
     if (!url) return '/images/no_image.png';
+    // @ts-ignore
     const backendUrl = import.meta.env.VITE_BACKEND_URL;
     const baseUrl = backendUrl?.endsWith('/') ? backendUrl.slice(0, -1) : backendUrl || 'http://localhost:10999';
 
     // Exact string match condition
     if (url.startsWith(baseUrl)) {
-      return url.replace(baseUrl, '/api');
+      return url.replace(baseUrl, 'api');
     }
 
-    if (url.startsWith('/')) return `/api${url}`;
+    if (url.startsWith('/')) return `api${url}`;
 
     return url;
   };
