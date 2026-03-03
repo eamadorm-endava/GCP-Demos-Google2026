@@ -4,6 +4,7 @@ substitutions:
   _SERVICE: agentic-vendor-governance-platform
   _DEMO_DIR: agentic-vendor-governance-platform
   _PROJECT_ID: p-s-gcu-na-marketing-bd5y-1
+  _TEST_SERVICE: test-agentic-vendor-governance-platform
 
 availableSecrets:
   secretManager:
@@ -49,6 +50,18 @@ steps:
           --no-allow-unauthenticated \
           --min-instances 1 \
           --no-iap
+
+  # 4. Delete the test instance
+  - name: 'gcr.io/cloud-builders/gcloud'
+    id: 'Delete Test'
+    entrypoint: 'bash'
+    args:
+      - '-c'
+      - |
+        gcloud beta run delete ${_TEST_SERVICE} \
+          --region=${_REGION} \
+          --platform=managed \
+          --quiet
 
 images:
   - '${_REGION}-docker.pkg.dev/${_PROJECT_ID}/${_AR_REPO}/${_SERVICE}:${SHORT_SHA}'
