@@ -8,7 +8,7 @@ import QuickPitch from './components/QuickPitch';
 import DemoContainer from './components/DemoContainer';
 import AdminView from './components/AdminView';
 import EndavaLogo from './components/EndavaLogo';
-import { Home, RefreshCw, LayoutGrid, Settings, ChevronRight, ShieldCheck, Terminal } from 'lucide-react';
+import { Home, RefreshCw, LayoutGrid, Settings, ChevronRight, ShieldCheck, Terminal, Maximize, Minimize, Sparkles } from 'lucide-react';
 
 
 const App: React.FC = () => {
@@ -25,6 +25,27 @@ const App: React.FC = () => {
   const setPitchVertical = useStore((state) => state.setPitchVertical);
   const toggleQuickPitch = useStore((state) => state.toggleQuickPitch);
   const setAdminOpen = useStore((state) => state.setAdminOpen);
+  const [isFullscreen, setIsFullscreen] = React.useState(false);
+
+  const toggleFullscreen = () => {
+    if (!document.fullscreenElement) {
+      document.documentElement.requestFullscreen().catch((err) => {
+        console.error(`Error attempting to enable full-screen mode: ${err.message}`);
+      });
+      setIsFullscreen(true);
+    } else {
+      document.exitFullscreen();
+      setIsFullscreen(false);
+    }
+  };
+
+  useEffect(() => {
+    const handleFullscreenChange = () => {
+      setIsFullscreen(!!document.fullscreenElement);
+    };
+    document.addEventListener('fullscreenchange', handleFullscreenChange);
+    return () => document.removeEventListener('fullscreenchange', handleFullscreenChange);
+  }, []);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -91,15 +112,29 @@ const App: React.FC = () => {
           </div>
         )}
 
-        <div className="flex items-center gap-3 md:gap-10">
-          <div className="hidden md:flex flex-col text-right">
-            <span className="text-[10px] font-black text-endava-orange tracking-[0.2em] uppercase">Control Center Options</span>
-          </div>
+        <div className="flex items-center gap-2 md:gap-6">
+          <button
+            onClick={() => setIdle(true)}
+            className="p-3 md:p-5 hover:bg-white/10 active:bg-endava-orange/10 rounded-full transition-all text-endava-blue-50 hover:text-white"
+            title="Start Attract Mode"
+          >
+            <Sparkles className="w-5 h-5 md:w-8 md:h-8" />
+          </button>
+
+          <button
+            onClick={toggleFullscreen}
+            className="p-3 md:p-5 hover:bg-white/10 active:bg-endava-orange/10 rounded-full transition-all text-endava-blue-50 hover:text-white"
+            title="Toggle Fullscreen"
+          >
+            {isFullscreen ? <Minimize className="w-5 h-5 md:w-8 md:h-8" /> : <Maximize className="w-5 h-5 md:w-8 md:h-8" />}
+          </button>
+
+
           <button
             onClick={() => setAdminOpen(true)}
-            className="p-3 md:p-5 hover:bg-white/10 active:bg-endava-orange/10 rounded-full transition-all text-endava-blue-50 hover:text-white"
+            className="p-3 md:p-5 hover:bg-white/10 active:bg-endava-orange/10 rounded-full transition-all text-endava-blue-50 hover:text-white -ml-2 md:-ml-4"
           >
-            <Terminal className="w-6 h-6 md:w-8 md:h-8" />
+            <Terminal className="w-5 h-5 md:w-8 md:h-8" />
           </button>
         </div>
       </header>
