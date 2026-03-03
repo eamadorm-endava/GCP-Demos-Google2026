@@ -144,6 +144,13 @@ const App: React.FC = () => {
         </button>
       </nav>
 
+      {/* Copyright Footer */}
+      <div className="fixed bottom-4 md:bottom-6 right-4 md:right-8 z-[50] pointer-events-none hidden md:block">
+        <p className="text-[9px] md:text-[10px] text-endava-blue-60/40 font-bold uppercase tracking-[0.4em] text-right">
+          © 2026 ENDAVA | ALL RIGHTS RESERVED
+        </p>
+      </div>
+
       <style>{`
         @keyframes scan {
           from { top: 0; }
