@@ -145,8 +145,8 @@ const App: React.FC = () => {
       </nav>
 
       {/* Copyright Footer */}
-      <div className="fixed bottom-4 md:bottom-6 right-4 md:right-8 z-[50] pointer-events-none hidden md:block">
-        <p className="text-[9px] md:text-[10px] text-endava-blue-60/40 font-bold uppercase tracking-[0.4em] text-right">
+      <div className="fixed bottom-4 w-full z-[50] pointer-events-none hidden md:block">
+        <p className="text-[9px] md:text-[10px] text-endava-blue-60/40 font-bold uppercase tracking-[0.4em] text-center">
           © 2026 ENDAVA | ALL RIGHTS RESERVED
         </p>
       </div>
