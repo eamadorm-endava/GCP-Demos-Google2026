@@ -7,6 +7,7 @@ import Dashboard from './components/Dashboard';
 import QuickPitch from './components/QuickPitch';
 import DemoContainer from './components/DemoContainer';
 import AdminView from './components/AdminView';
+import EndavaLogo from './components/EndavaLogo';
 import { Home, RefreshCw, LayoutGrid, Settings, ChevronRight, ShieldCheck, Terminal } from 'lucide-react';
 
 
@@ -73,26 +74,20 @@ const App: React.FC = () => {
       )}
 
       {/* Header */}
-      <header className="h-16 md:h-20 lg:h-24 bg-endava-dark border-b border-white/5 flex items-center justify-between px-4 md:px-10 flex-shrink-0 z-30 pt-[env(safe-area-inset-top)] shadow-2xl shadow-black/20">
-        <div className="flex items-center gap-3 md:gap-6">
-          <div className="w-9 h-9 md:w-12 md:h-12 bg-white flex items-center justify-center flex-shrink-0 rounded-lg shadow-lg">
-            <div className="w-10 h-10 rounded-xl overflow-hidden">
-              <img
-                src="https://cdn.brandfetch.io/id4YZ7PWEj/w/200/h/200/theme/dark/icon.jpeg?c=1bxid64Mup7aczewSAYMX&t=1761617484712"
-                alt="Agentic Vendor Governance"
-                className="w-full h-full object-cover"
-              />
-            </div>
-          </div>
-          <div className="flex flex-col">
-            <span className="text-lg md:text-2xl lg:text-3xl font-black tracking-tighter text-white leading-tight">Endava</span>
-          </div>
+      <header className="h-20 md:h-24 lg:h-32 bg-endava-dark border-b border-white/5 flex items-center justify-between px-6 md:px-12 flex-shrink-0 z-30 pt-[env(safe-area-inset-top)] shadow-2xl shadow-black/20">
+        <div className="flex items-center gap-4 md:gap-8">
+          <button
+            onClick={handleSwitch}
+            className="flex flex-col justify-center py-4 hover:opacity-80 transition-opacity active:scale-95"
+          >
+            <EndavaLogo height={48} className="md:h-12 lg:h-16 w-auto" />
+          </button>
         </div>
 
         {currentVertical && (
-          <div className="hidden sm:flex items-center gap-2 md:gap-3 animate-in slide-in-from-left-4">
-            <ChevronRight className="text-endava-blue-40 w-4 h-4 md:w-5 md:h-5" />
-            <span className="text-sm md:text-lg font-medium text-endava-blue-20 capitalize truncate max-w-[120px] lg:max-w-none">{currentVertical}</span>
+          <div className="hidden sm:flex items-center gap-4 md:gap-6 animate-in slide-in-from-left-4">
+            <ChevronRight className="text-endava-blue-40 w-5 h-5 md:w-6 md:h-6" />
+            <span className="text-lg md:text-2xl font-medium text-endava-blue-20 capitalize truncate max-w-[200px] lg:max-w-none">{currentVertical}</span>
           </div>
         )}
 
@@ -102,9 +97,9 @@ const App: React.FC = () => {
           </div>
           <button
             onClick={() => setAdminOpen(true)}
-            className="p-2 md:p-3 hover:bg-white/10 active:bg-endava-orange/10 rounded-full transition-all text-endava-blue-50 hover:text-white"
+            className="p-3 md:p-5 hover:bg-white/10 active:bg-endava-orange/10 rounded-full transition-all text-endava-blue-50 hover:text-white"
           >
-            <Terminal className="w-5 h-5 md:w-6 md:h-6" />
+            <Terminal className="w-6 h-6 md:w-8 md:h-8" />
           </button>
         </div>
       </header>

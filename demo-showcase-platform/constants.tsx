@@ -14,6 +14,7 @@ export const VERTICALS: VerticalConfig[] = [
     // This ensures the iframe calls our own Node.js server first, which will then 
     // inject the Service Account authorization token before forwarding the request to the secure demo.
     externalUrl: '/demos/agentic-governance/',
+    imageUrl: '/assets/agentic-governance.jpg',
     pitch: {
       problem: 'Enterprises lack real-time oversight and control over autonomous AI agents.',
       solution: 'Policy-aware agent orchestration with continuous compliance and auditability.',
@@ -30,6 +31,7 @@ export const VERTICALS: VerticalConfig[] = [
     icon: 'layers',
     color: 'bg-emerald-600',
     externalUrl: '/demos/shelflogic-inventory/',
+    imageUrl: '/assets/shelflogic.jpg',
     pitch: {
       problem: 'Merchandising decisions are slow, manual, and disconnected from real-time demand.',
       solution: 'Autonomous AI agents continuously optimize assortment, pricing, and placement.',
@@ -46,6 +48,7 @@ export const VERTICALS: VerticalConfig[] = [
     icon: 'file-text',
     color: 'bg-sky-600',
     externalUrl: '/demos/contract-intelligence/',
+    imageUrl: '/assets/contract-intelligence.jpg',
     pitch: {
       problem: 'Critical contract risks and obligations are hidden in unstructured documents.',
       solution: 'AI-powered contract analysis with risk scoring and obligation tracking.',
@@ -62,6 +65,7 @@ export const VERTICALS: VerticalConfig[] = [
     icon: 'shield-alert',
     color: 'bg-red-700',
     externalUrl: '/demos/sentinel-ai/',
+    imageUrl: '/assets/sentinel-ai.jpg',
     pitch: {
       problem: 'Traditional controls fail to detect complex, fast-moving enterprise risks.',
       solution: 'Autonomous AI agents monitor, detect, and respond to risk in real time.',
@@ -78,6 +82,7 @@ export const VERTICALS: VerticalConfig[] = [
     icon: 'truck',
     color: 'bg-orange-500',
     externalUrl: '/demos/supply-chain/',
+    imageUrl: '/assets/supply-chain.jpg',
     pitch: {
       problem: 'Global supply chains suffer from poor visibility and slow response to disruptions.',
       solution: 'AI-driven logistics orchestration with predictive and prescriptive insights.',
@@ -94,6 +99,7 @@ export const VERTICALS: VerticalConfig[] = [
     icon: 'clipboard-check',
     color: 'bg-teal-600',
     externalUrl: '/demos/cloud-compliance/',
+    imageUrl: '/assets/cloud-compliance.jpg',
     pitch: {
       problem: 'Regulatory compliance is manual, reactive, and prone to human error.',
       solution: 'Agentic suite for continuous monitoring, audit generation, and regulatory alignment.',
@@ -110,6 +116,7 @@ export const VERTICALS: VerticalConfig[] = [
     icon: 'clipboard-check',
     color: 'bg-teal-600',
     externalUrl: '/demos/contractintel/',
+    imageUrl: '/assets/contractintel.jpg',
     pitch: {
       problem: 'Organizations lack real-time visibility into contractual risk, compliance exposure, and review inefficiencies.',
       solution: 'AI-powered contract analysis platform delivering real-time risk intelligence, automated reviews, and compliance insights.',
@@ -126,6 +133,7 @@ export const VERTICALS: VerticalConfig[] = [
     icon: 'shield-check',
     color: 'bg-navy',
     externalUrl: '/demos/buildintel-construction/',
+    imageUrl: '/assets/buildintel.jpg',
     pitch: {
       problem: 'Large construction portfolios lack real-time oversight across projects, risks, workforce, and cost variance—leading to delayed decisions and escalating delivery risk.',
       solution: 'An agentic governance dashboard that provides real-time portfolio intelligence, continuous risk monitoring, and proactive AI agent alerts across all active projects.',
@@ -142,6 +150,7 @@ export const VERTICALS: VerticalConfig[] = [
     icon: 'shopping-cart',
     color: 'bg-purple-600',
     externalUrl: '/demos/ucp/',
+    imageUrl: '/assets/ucp.jpg',
     pitch: {
       problem: 'Commerce platforms lack interoperability, making AI shopping assistants difficult to integrate across different merchants.',
       solution: 'Universal Commerce Protocol (UCP) provides an open standard for AI agents to discover, negotiate, and execute commerce transactions autonomously.',
