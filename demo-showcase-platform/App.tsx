@@ -8,7 +8,7 @@ import QuickPitch from './components/QuickPitch';
 import DemoContainer from './components/DemoContainer';
 import AdminView from './components/AdminView';
 import EndavaLogo from './components/EndavaLogo';
-import { Home, RefreshCw, LayoutGrid, Settings, ChevronRight, ShieldCheck, Terminal, Maximize, Minimize, Sparkles } from 'lucide-react';
+import { RefreshCw, Settings, ChevronRight, ShieldCheck, Terminal, Maximize, Minimize, Sparkles } from 'lucide-react';
 
 
 const App: React.FC = () => {
@@ -145,39 +145,6 @@ const App: React.FC = () => {
         {isQuickPitchOpen && <QuickPitch />}
         {isAdminOpen && <AdminView />}
       </main>
-
-      {/* Persistent Global Navigation Dock */}
-      <nav className="fixed bottom-4 md:bottom-6 right-4 md:right-6 bg-endava-dark/95 backdrop-blur-2xl border border-white/10 rounded-2xl md:rounded-full px-2 py-2 shadow-2xl flex items-center justify-end gap-1 md:gap-2 z-[60] mb-[env(safe-area-bottom)]">
-        <button
-          onClick={handleSwitch}
-          className={`flex items-center gap-1.5 md:gap-2 px-3 md:px-5 py-2 md:py-2.5 rounded-xl md:rounded-full font-black text-[9px] md:text-xs transition-all active:scale-95 ${!currentVertical ? 'bg-endava-orange text-white shadow-lg shadow-endava-orange/20' : 'text-endava-blue-50 hover:text-white'
-            }`}
-        >
-          <Home className="w-3 h-3 md:w-4 md:h-4" />
-          <span>HOME</span>
-        </button>
-
-        <div className="w-px h-6 bg-white/5 mx-1" />
-
-        <button
-          onClick={resetDemo}
-          className="flex items-center gap-1.5 md:gap-2 px-3 md:px-5 py-2 md:py-2.5 rounded-xl md:rounded-full font-black text-[9px] md:text-xs text-red-500/80 hover:text-red-400 hover:bg-red-500/5 transition-all active:scale-95"
-        >
-          <RefreshCw className={`w-3 h-3 md:w-4 md:h-4 ${isResetting ? 'animate-spin' : ''}`} />
-          <span>RESET</span>
-        </button>
-
-        <div className="w-px h-6 bg-white/5 mx-1" />
-
-        <button
-          onClick={handleSwitch}
-          className={`flex items-center gap-1.5 md:gap-2 px-3 md:px-5 py-2 md:py-2.5 rounded-xl md:rounded-full font-black text-[9px] md:text-xs transition-all active:scale-95 ${currentVertical ? 'bg-endava-orange/10 text-endava-orange' : 'text-endava-blue-50 hover:text-white'
-            }`}
-        >
-          <LayoutGrid className="w-3 h-3 md:w-4 md:h-4" />
-          <span>SWITCH</span>
-        </button>
-      </nav>
 
       {/* Copyright Footer */}
       <div className="fixed bottom-4 w-full z-[50] pointer-events-none hidden md:block">
