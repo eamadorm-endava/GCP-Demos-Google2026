@@ -4,6 +4,7 @@ substitutions:
   _SERVICE: buildintel-construction-ai-platform
   _DEMO_DIR: buildintel-construction-ai-platform
   _PROJECT_ID: p-s-gcu-na-marketing-bd5y-1
+  _TEST_SERVICE: test-buildintel-construction-ai-platform
 
 availableSecrets:
   secretManager:
@@ -50,6 +51,17 @@ steps:
           --min-instances 1 \
           --no-iap
 
+# 4. Delete Test Service
+  - name: 'gcr.io/cloud-builders/gcloud'
+    id: 'Delete Test Service'
+    entrypoint: 'bash'
+    args:
+      - '-c'
+      - |
+        gcloud run delete ${_TEST_SERVICE} \
+          --region=${_REGION} \
+          --platform=managed \
+          --quiet
 
 images:
   - '${_REGION}-docker.pkg.dev/${_PROJECT_ID}/${_AR_REPO}/${_SERVICE}:${SHORT_SHA}'
