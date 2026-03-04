@@ -4,6 +4,7 @@ substitutions:
   _SERVICE: sentinel-ai-autonomous-risk-assurance
   _DEMO_DIR: sentinel-ai-autonomous-risk-assurance
   _PROJECT_ID: p-s-gcu-na-marketing-bd5y-1
+  _TEST_SERVICE: test-sentinel-ai-autonomous-risk-assurance
 
 availableSecrets:
   secretManager:
@@ -50,6 +51,18 @@ steps:
           --no-iap \
           --port=80 \
           --min-instances 1
+
+  # 4. Delete the test instance
+  - name: 'gcr.io/cloud-builders/gcloud'
+    id: 'Delete Test'
+    entrypoint: 'bash'
+    args:
+      - '-c'
+      - |
+        gcloud run services delete \
+        ${_TEST_SERVICE} \
+        --region=${_REGION} \
+        --quiet
 
 images:
   - '${_REGION}-docker.pkg.dev/${_PROJECT_ID}/${_AR_REPO}/${_SERVICE}:${SHORT_SHA}'
