@@ -1,7 +1,7 @@
 substitutions:
   _REGION: us-west4
   _AR_REPO: gcp-demos
-  _SERVICE: cloud-compliance-agentic-suite-v2
+  _SERVICE: test-cloud-compliance-agentic-suite-v2
   _DEMO_DIR: cloud-compliance-agentic-suite-v2
   _PROJECT_ID: p-s-gcu-na-marketing-bd5y-1
 
@@ -32,6 +32,22 @@ steps:
     args:
       - 'push'
       - '${_REGION}-docker.pkg.dev/${_PROJECT_ID}/${_AR_REPO}/${_SERVICE}:${SHORT_SHA}'
+
+  # 3. Deploy a Cloud Run test instance
+  - name: 'gcr.io/cloud-builders/gcloud'
+    id: 'Deploy'
+    entrypoint: 'bash'
+    args:
+      - '-c'
+      - |
+        gcloud beta run deploy ${_SERVICE} \
+          --image=${_REGION}-docker.pkg.dev/${_PROJECT_ID}/${_AR_REPO}/${_SERVICE}:${SHORT_SHA} \
+          --region=${_REGION} \
+          --platform=managed \
+          --allow-unauthenticated \
+          --no-iap \
+          --port=80 \
+          --min-instances 1
 
 # Define la imagen aquí para que Cloud Build la rastree automáticamente
 images:
