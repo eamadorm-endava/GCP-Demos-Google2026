@@ -28,14 +28,14 @@ const Dashboard: React.FC = () => {
         <div className="absolute -left-16 top-0 w-1 h-32 bg-gradient-to-b from-endava-orange via-transparent to-transparent opacity-50 hidden xl:block" />
 
         <div className="space-y-4 md:space-y-6">
-          <h1 className="text-3xl md:text-5xl lg:text-6xl font-black mb-2 md:mb-4 tracking-tighter uppercase italic leading-[0.9]">
-            Innovation <span className="text-endava-orange drop-shadow-[0_0_20px_rgba(255,86,64,0.3)]">Gallery</span>
+          <h1 className="text-3xl md:text-5xl lg:text-7xl font-black mb-2 md:mb-4 tracking-tighter uppercase leading-[0.9]">
+            Innovation <span className="bg-gradient-to-br from-endava-orange via-[#ff7e6b] to-[#ffb3a8] text-transparent bg-clip-text drop-shadow-[0_0_30px_rgba(255,86,64,0.4)]">Gallery</span>
           </h1>
 
           <div className="flex flex-col md:flex-row md:items-center gap-4 md:gap-8">
             <div className="h-[2px] w-16 bg-endava-orange hidden md:block" />
             <p className="text-lg md:text-2xl lg:text-3xl text-endava-blue-20 font-light leading-snug max-w-4xl tracking-tight">
-              Exploring the next frontier of <span className="text-white font-medium border-b border-endava-orange/30">Digital Acceleration</span> through high-performance <span className="italic font-bold text-endava-orange">AI-Powered</span> vertical solutions.
+              Exploring the next frontier of <span className="text-white font-medium">Digital Acceleration</span> through high-performance <span className="bg-gradient-to-r from-endava-orange to-[#ff8c7a] text-transparent bg-clip-text font-bold">AI-Powered</span> vertical solutions.
             </p>
           </div>
         </div>
@@ -47,7 +47,7 @@ const Dashboard: React.FC = () => {
           return (
             <div
               key={v.id}
-              className="group relative overflow-hidden flex flex-col sm:min-h-[500px] lg:min-h-[600px] shadow-2xl kiosk-card-glass border border-white/10 hover:border-endava-orange/40 transition-all duration-500 rounded-2xl md:rounded-3xl"
+              className="group relative overflow-hidden flex flex-col sm:min-h-[500px] lg:min-h-[600px] rounded-[2rem] bg-white/[0.02] border border-white/[0.05] hover:bg-white/[0.04] hover:border-white/[0.1] backdrop-blur-xl transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_30px_60px_-15px_rgba(0,0,0,0.6)] shadow-[0_10px_40px_-10px_rgba(0,0,0,0.4)]"
             >
               {v.isAiGenerated && (
                 <div className="absolute top-5 right-5 z-20 bg-endava-orange text-white px-4 py-1.5 rounded-full text-[9px] md:text-xs font-black uppercase tracking-widest flex items-center gap-2 shadow-xl animate-pulse-glow">
@@ -55,7 +55,7 @@ const Dashboard: React.FC = () => {
                 </div>
               )}
 
-              <div className="aspect-[16/10] sm:aspect-square md:aspect-[16/10] lg:aspect-square flex items-center justify-center bg-endava-dark relative overflow-hidden">
+              <div className="aspect-[16/10] sm:aspect-square md:aspect-[16/10] lg:aspect-square flex items-center justify-center bg-transparent relative overflow-hidden border-b border-white/[0.05]">
                 {v.imageUrl ? (
                   <>
                     <img
@@ -64,24 +64,24 @@ const Dashboard: React.FC = () => {
                       className="absolute inset-0 w-full h-full object-cover opacity-60 transition-all group-hover:opacity-80 group-hover:scale-105 duration-700"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-endava-dark via-transparent to-transparent opacity-80" />
-                    <div className="absolute top-4 left-4 p-2 bg-white/10 backdrop-blur-md rounded-xl border border-white/10 shadow-lg">
-                      <Icon className="w-6 h-6 md:w-8 md:h-8 text-endava-orange" strokeWidth={1.5} />
+                    <div className="absolute top-6 left-6 p-4 rounded-2xl bg-white/[0.05] backdrop-blur-xl border border-white/10 shadow-2xl group-hover:bg-white/10 group-hover:scale-105 transition-all duration-500">
+                      <Icon className="w-8 h-8 md:w-10 md:h-10 lg:w-12 lg:h-12 text-endava-orange" strokeWidth={1.5} />
                     </div>
                   </>
                 ) : (
                   <>
-                    <div className="absolute inset-0 opacity-10 transition-all group-hover:opacity-30 group-hover:scale-110 endava-gradient" />
-                    <div className="absolute inset-0 bg-black/20 backdrop-blur-[2px] transition-opacity group-hover:opacity-0" />
-                    <Icon className="w-12 h-12 md:w-16 md:h-16 lg:w-24 lg:h-24 text-endava-orange drop-shadow-2xl relative z-10 transition-transform group-hover:scale-110" strokeWidth={1} />
+                    <div className="absolute inset-0 opacity-10 transition-all group-hover:opacity-40 group-hover:scale-110 endava-gradient-premium" />
+                    <div className="absolute inset-0 bg-black/40 backdrop-blur-[4px] transition-opacity group-hover:opacity-20" />
+                    <Icon className="w-16 h-16 md:w-24 md:h-24 lg:w-32 lg:h-32 text-endava-orange drop-shadow-[0_0_30px_rgba(255,86,64,0.5)] relative z-10 transition-transform duration-500 group-hover:scale-110" strokeWidth={1} />
                   </>
                 )}
               </div>
 
               <div className="p-6 md:p-8 lg:p-10 flex-grow flex flex-col">
-                <h3 className="text-xl md:text-3xl lg:text-4xl font-medium mb-3 md:mb-5 group-hover:text-endava-orange transition-colors uppercase tracking-tight endava-text-glow">
+                <h3 className="text-xl md:text-3xl lg:text-4xl font-semibold mb-3 md:mb-5 group-hover:text-endava-orange transition-colors uppercase tracking-tight">
                   {v.title}
                 </h3>
-                <p className="text-endava-blue-40 text-xs md:text-lg lg:text-xl mb-6 md:mb-10 line-clamp-3 md:line-clamp-4 font-light leading-relaxed">
+                <p className="text-endava-blue-40 text-xs md:text-lg lg:text-xl mb-6 md:mb-10 font-light leading-relaxed">
                   {v.pitch.problem}
                 </p>
 
@@ -108,6 +108,13 @@ const Dashboard: React.FC = () => {
             </div>
           );
         })}
+      </div>
+
+      {/* Copyright Footer */}
+      <div className="mt-auto pt-8 pb-4 w-full text-center pointer-events-none hidden md:block">
+        <p className="text-[10px] md:text-xs text-endava-blue-60/40 font-bold uppercase tracking-[0.4em]">
+          @2026 ENDAVA | ALL RIGHTS RESERVED
+        </p>
       </div>
     </div>
   );
