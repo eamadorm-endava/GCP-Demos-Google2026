@@ -42,7 +42,7 @@ export const RiskDistributionChart: React.FC<RiskDistributionChartProps> = ({ da
         Portfolio Risk Spread
       </h3>
       <div style={{ width: '100%', height: 300 }}>
-        <ResponsiveContainer>
+        <ResponsiveContainer width="100%" height="100%">
           {hasData ? (
             <PieChart>
               <Pie
@@ -61,30 +61,30 @@ export const RiskDistributionChart: React.FC<RiskDistributionChartProps> = ({ da
                 stroke="none"
               >
                 {data.map((entry, index) => (
-                  <Cell 
-                    key={`cell-${index}`} 
-                    fill={entry.fill} 
+                  <Cell
+                    key={`cell-${index}`}
+                    fill={entry.fill}
                     style={{ filter: 'drop-shadow(0px 4px 6px rgba(0,0,0,0.3))' }}
                   />
                 ))}
               </Pie>
               <Tooltip content={<CustomTooltip />} />
-              <Legend 
-                verticalAlign="bottom" 
-                height={36} 
-                iconType="circle" 
+              <Legend
+                verticalAlign="bottom"
+                height={36}
+                iconType="circle"
                 iconSize={8}
                 formatter={(value) => <span className="text-[11px] text-brand-light uppercase tracking-wider font-medium">{value}</span>}
               />
             </PieChart>
           ) : (
             <div className="flex flex-col items-center justify-center h-full text-brand-light/40 italic">
-               <svg className="w-8 h-8 mb-2 opacity-20" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M11 3.055A9.001 9.001 0 1020.945 13H11V3.055z" />
-                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M20.488 9H15V3.512A9.025 9.025 0 0120.488 9z" />
-               </svg>
-               <span className="text-xs">Insufficient risk data</span>
-             </div>
+              <svg className="w-8 h-8 mb-2 opacity-20" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M11 3.055A9.001 9.001 0 1020.945 13H11V3.055z" />
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M20.488 9H15V3.512A9.025 9.025 0 0120.488 9z" />
+              </svg>
+              <span className="text-xs">Insufficient risk data</span>
+            </div>
           )}
         </ResponsiveContainer>
       </div>

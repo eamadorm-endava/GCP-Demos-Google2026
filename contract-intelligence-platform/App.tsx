@@ -10,7 +10,7 @@ import { queryContracts, SmartFilterResponse, getContractInsights, PortfolioInsi
 const App: React.FC = () => {
   const [contracts, setContracts] = useState<Contract[]>(mockContracts);
   const [selectedContractId, setSelectedContractId] = useState<string | null>(null);
-  const [industry, setIndustry] = useState<IndustryTrack>('All');
+  const [industry, setIndustry] = useState<IndustryTrack | 'All'>('All');
   const [contractType, setContractType] = useState<string>('All');
   const [searchQuery, setSearchQuery] = useState('');
   
@@ -90,6 +90,10 @@ const App: React.FC = () => {
         return c;
     }));
   };
+  
+  const handleUpdateContract = (updatedContract: Contract) => {
+    setContracts(prev => prev.map(c => c.id === updatedContract.id ? updatedContract : c));
+  };
 
   const handleAskAI = async (query: string) => {
     if (!query.trim()) return;
@@ -127,7 +131,11 @@ const App: React.FC = () => {
       <Header />
       <main className="p-4 sm:p-6 lg:p-8 max-w-7xl mx-auto">
         {selectedContract ? (
-          <ContractDetails contract={selectedContract} onBack={handleBackToDashboard} />
+          <ContractDetails 
+            contract={selectedContract} 
+            onBack={handleBackToDashboard} 
+            onUpdateContract={handleUpdateContract}
+          />
         ) : (
           <PortfolioDashboard
             contracts={finalContracts}

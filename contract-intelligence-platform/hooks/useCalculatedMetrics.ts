@@ -1,3 +1,4 @@
+
 import { useMemo } from 'react';
 import { Contract } from '../types';
 
@@ -53,12 +54,10 @@ export const useCalculatedMetrics = (contracts: Contract[]) => {
       },
       { low: 0, medium: 0, high: 0 }
     );
-
-    // ENDAVA SIGNAL COLOURS (Dark Mode)
     const riskDistributionData = [
-      { name: 'Low Risk (1-3)', value: riskDistribution.low, fill: '#3DD17B' }, // Signal Positive
-      { name: 'Medium Risk (4-6)', value: riskDistribution.medium, fill: '#F99C11' }, // Signal Warning
-      { name: 'High Risk (7-10)', value: riskDistribution.high, fill: '#E84641' }, // Signal Negative
+      { name: 'Low Risk (1-3)', value: riskDistribution.low, fill: '#10B981' }, // Emerald-500
+      { name: 'Medium Risk (4-6)', value: riskDistribution.medium, fill: '#F59E0B' }, // Amber-500
+      { name: 'High Risk (7-10)', value: riskDistribution.high, fill: '#EF4444' }, // Red-500
     ];
 
     const governingLaw = contracts.reduce((acc, c) => {

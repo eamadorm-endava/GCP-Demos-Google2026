@@ -1,33 +1,36 @@
+
 import React from 'react';
 
 export const Header: React.FC = () => {
-  return (
-    <header className="sticky top-0 z-50 w-full border-b border-brand-accent/20 bg-brand-dark/80 backdrop-blur-xl supports-[backdrop-filter]:bg-brand-dark/60">
-      <div className="container mx-auto px-4 h-20 flex items-center">
-        
-        {/* Logo & Title Block - Aligned Left */}
-        <div className="flex items-center gap-4">
-            {/* Logo */}
-            <div className="w-10 h-10 rounded-xl overflow-hidden shadow-lg shadow-brand-primary/20 ring-1 ring-white/10">
-              <img
-                src="https://cdn.brandfetch.io/id4YZ7PWEj/w/200/h/200/theme/dark/icon.jpeg?c=1bxid64Mup7aczewSAYMX&t=1761617484712"
-                alt="Agentic Vendor Governance"
-                className="w-full h-full object-cover"
-              />
-            </div>
+    return (
+        <header className="bg-brand-secondary border-b border-brand-accent/40 sticky top-0 z-20 backdrop-blur-md">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div className="flex items-center justify-between h-16">
+                    {/* Logo + Brand */}
+                    <div className="flex items-center gap-3">
+                        <div className="relative flex-shrink-0">
+                            <div className="w-9 h-9 rounded-xl bg-brand-highlight/10 border border-brand-highlight/30 flex items-center justify-center coral-glow-sm p-1.5">
+                                <img src="/endava-logo.svg" alt="SupplyLens" className="w-full h-full" />
+                            </div>
+                        </div>
+                        <div className="flex flex-col leading-none">
+                            <span className="text-lg font-bold text-brand-text tracking-tight">SupplyLens</span>
+                            <span className="text-[10px] text-brand-light font-medium tracking-widest uppercase">Contract Intelligence</span>
+                        </div>
+                    </div>
 
-            {/* Title */}
-            <div className="flex flex-col leading-tight">
-              <span className="text-xl font-black tracking-tight text-brand-text">
-                Contract Intelligence
-              </span>
-              <span className="text-sm font-bold tracking-wide text-brand-light uppercase">
-                Platform
-              </span>
+                    {/* Right: Gemini Badge */}
+                    <div className="flex items-center gap-2">
+                        <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-brand-highlight/20 bg-brand-highlight/5 backdrop-blur-sm">
+                            <span className="relative flex h-1.5 w-1.5">
+                                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-highlight opacity-75"></span>
+                                <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-brand-highlight"></span>
+                            </span>
+                            <span className="text-[10px] font-semibold text-brand-highlight uppercase tracking-widest">Gemini 3.1 Flash Image</span>
+                        </div>
+                    </div>
+                </div>
             </div>
-        </div>
-
-      </div>
-    </header>
-  );
+        </header>
+    );
 };

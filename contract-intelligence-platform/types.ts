@@ -1,5 +1,26 @@
 
-export type IndustryTrack = "All" | "Financial Services" | "Healthcare" | "Manufacturing" | "Base";
+export type IndustryTrack = "Automotive" | "Electronics" | "Aerospace" | "Pharma/Bio" | "FMCG" | "General Mfg";
+
+export interface RenewalReminderConfig {
+  isEnabled: boolean;
+  leadTimeDays: 30 | 60 | 90;
+  recipients: string[];
+}
+
+export type ContractType = 
+  | "Master Supply Agreement" 
+  | "Quality Assurance (QAA)" 
+  | "3PL Logistics" 
+  | "VMI Agreement" 
+  | "Equipment Lease" 
+  | "Raw Material Framework" 
+  | "Distributor Agreement" 
+  | "Software/SaaS" 
+  | "Facility Lease"
+  | "IP Licensing"
+  | "Joint Development"
+  | "NDA"
+  | "Consulting Services";
 
 export interface Contract {
   id: string;
@@ -7,8 +28,10 @@ export interface Contract {
   fileUrl: string;
   industryTrack: IndustryTrack;
   contractTitle: string;
-  contractType: "MSA" | "ISDA" | "BAA" | "NDA" | "Lease" | "Loan Covenant" | "Payer Contract" | "Supply Agreement" | "Equipment Lease" | "Logistics Contract" | "Other";
+  contractType: ContractType;
   parties: string[];
+  supplierTier: "Tier 1" | "Tier 2" | "Tier 3" | "Indirect";
+  criticality: "Strategic" | "Bottleneck" | "Leverage" | "Routine";
   agreementDate: string;
   effectiveDate: string;
   expirationDate: string;
@@ -22,4 +45,5 @@ export interface Contract {
   liabilityTerms: string;
   tags: string[];
   industrySpecific: { [key: string]: any };
+  renewalReminder?: RenewalReminderConfig;
 }
