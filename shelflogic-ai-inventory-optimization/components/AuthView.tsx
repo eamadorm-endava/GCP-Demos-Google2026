@@ -45,7 +45,7 @@ export const AuthView: React.FC<AuthViewProps> = ({ onLogin, className = '' }) =
         <div className={`w-full md:w-2/5 bg-gradient-to-br ${theme.semantic.primary.gradient} p-12 flex flex-col justify-between text-white relative overflow-hidden`}>
           <div className="z-10">
             <div className="w-12 h-12 bg-white rounded-xl flex items-center justify-center mb-6 border border-[#5E6A73] overflow-hidden p-1.5">
-              <img src="/endava-logo.svg" alt="Endava Logo" className="w-full h-full object-contain" />
+              <img src="./endava-logo.svg" alt="Endava Logo" className="w-full h-full object-contain" />
             </div>
             <h1 className="text-4xl font-bold tracking-tight mb-2">ShelfLogic AI</h1>
             <p className="text-cyan-100 text-lg opacity-90">Autonomous Merchandising</p>
