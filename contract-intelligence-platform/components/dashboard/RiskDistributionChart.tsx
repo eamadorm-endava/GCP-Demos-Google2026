@@ -39,7 +39,7 @@ export const RiskDistributionChart: React.FC<RiskDistributionChartProps> = ({ da
     <Card className="col-span-1 border border-brand-accent/20 hover:border-brand-highlight/20 transition-colors">
       <h3 className="text-sm font-bold uppercase tracking-widest text-brand-light mb-6 flex items-center gap-2">
         <span className="w-1 h-4 bg-brand-highlight rounded-full"></span>
-        Portfolio Risk Spread
+        Supplier Risk Distribution
       </h3>
       <div style={{ width: '100%', height: 300 }}>
         <ResponsiveContainer width="100%" height="100%">

@@ -245,10 +245,19 @@ export const queryContracts = async (query: string, contracts: Contract[]): Prom
     id: c.id,
     title: c.contractTitle,
     type: c.contractType,
+    industry: c.industryTrack,
+    parties: c.parties,
     tier: c.supplierTier,
     criticality: c.criticality,
-    risk: c.riskScore,
+    riskScore: c.riskScore,
+    riskAnalysis: c.riskAnalysis,
     summary: c.executiveSummary,
+    governingLaw: c.governingLaw,
+    expirationDate: c.expirationDate,
+    tags: c.tags,
+    liabilityTerms: c.liabilityTerms,
+    renewalTerms: c.renewalTerms,
+    contractValue: c.industrySpecific?.contractValue ? `$${Number(c.industrySpecific.contractValue).toLocaleString()}` : 'Undisclosed',
     industryDetails: c.industrySpecific
   }));
 

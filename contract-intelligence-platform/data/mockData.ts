@@ -2,6 +2,9 @@
 import { Contract } from '../types';
 
 export const mockContracts: Contract[] = [
+  // ══════════════════════════════════════════════
+  //  EXISTING CONTRACTS (1–9)
+  // ══════════════════════════════════════════════
   {
     id: "sup-semicon-001",
     fileName: "global_chip_supply_msa.pdf",
@@ -27,7 +30,9 @@ export const mockContracts: Contract[] = [
     industrySpecific: {
       leadTime: "26 Weeks",
       moq: "50,000 units",
-      qualityStandard: "ISO 26262 (Auto)"
+      qualityStandard: "ISO 26262 (Auto)",
+      contractValue: 180000000,
+      annualVolume: "2.4M units"
     },
     renewalReminder: {
       isEnabled: true,
@@ -60,7 +65,9 @@ export const mockContracts: Contract[] = [
     industrySpecific: {
       onTimeInFull_Target: "98.5%",
       fuelSurcharge: "Floating (Monthly Index)",
-      warehousingLocations: ["Hamburg", "Lyon", "Milan"]
+      warehousingLocations: ["Hamburg", "Lyon", "Milan"],
+      contractValue: 24000000,
+      annualVolume: "12,000 shipments"
     },
     renewalReminder: {
       isEnabled: false,
@@ -80,20 +87,22 @@ export const mockContracts: Contract[] = [
     criticality: "Bottleneck",
     agreementDate: "2021-11-10",
     effectiveDate: "2021-11-10",
-    expirationDate: "2024-11-09", // Expiring soon
+    expirationDate: "2024-11-09",
     governingLaw: "New York",
-    executiveSummary: "Supply of rolled steel and aluminum sheets. Pricing pegged to LME (London Metal Exchange) with a fixed markup.",
-    riskAnalysis: "High Risk. Approaching expiration with volatile market pricing. No guaranteed allocation in case of global shortage.",
+    executiveSummary: "Supply of rolled steel and aluminum sheets. Pricing pegged to LME (London Metal Exchange) with a fixed markup. Covers 60% of Nexus's annual steel needs.",
+    riskAnalysis: "High Risk. Approaching expiration with volatile market pricing. No guaranteed allocation in case of global shortage. Single facility origin in Brazil.",
     riskScore: 7,
     isConfidential: true,
     renewalTerms: "Evergreen unless terminated.",
     terminationTerms: "90 days written notice.",
     liabilityTerms: "Replacement of defective material only.",
-    tags: ["Commodity", "Expiring Soon"],
+    tags: ["Commodity", "Expiring Soon", "Price Risk"],
     industrySpecific: {
       pricingIndex: "LME + 8%",
       origin: "Brazil / USA",
-      incoterms: "DDP Factory"
+      incoterms: "DDP Factory",
+      contractValue: 45000000,
+      annualVolume: "18,000 metric tons"
     },
     renewalReminder: {
       isEnabled: true,
@@ -126,7 +135,9 @@ export const mockContracts: Contract[] = [
     industrySpecific: {
       changeControlNotification: "6 months prior",
       auditFrequency: "Annual",
-      regulatoryStandard: "EU GMP / FDA 21 CFR"
+      regulatoryStandard: "EU GMP / FDA 21 CFR",
+      contractValue: 32000000,
+      annualVolume: "500 kg API"
     },
     renewalReminder: {
       isEnabled: false,
@@ -159,7 +170,9 @@ export const mockContracts: Contract[] = [
     industrySpecific: {
       minMaxLevels: "Min 2 weeks / Max 6 weeks",
       consignment: "Yes (Pay on consumption)",
-      stockoutPenalty: "5% of invoice value"
+      stockoutPenalty: "5% of invoice value",
+      contractValue: 8500000,
+      annualVolume: "14M units"
     },
     renewalReminder: {
       isEnabled: false,
@@ -181,7 +194,7 @@ export const mockContracts: Contract[] = [
     effectiveDate: "2023-06-15",
     expirationDate: "2026-06-14",
     governingLaw: "Germany",
-    executiveSummary: "Lease of 10 high-precision CNC machines for turbine blade manufacturing. Includes maintenance SLA.",
+    executiveSummary: "Lease of 10 high-precision CNC machines for turbine blade manufacturing. Includes maintenance SLA with 98% uptime guarantee.",
     riskAnalysis: "Low Risk. Standard lease. Maintenance SLA ensures 98% uptime or rent abatement.",
     riskScore: 3,
     isConfidential: true,
@@ -192,7 +205,9 @@ export const mockContracts: Contract[] = [
     industrySpecific: {
       uptimeGuarantee: "98%",
       preventativeMaintenance: "Monthly included",
-      responseTime: "4 hours"
+      responseTime: "4 hours",
+      contractValue: 12000000,
+      assetCount: 10
     },
     renewalReminder: {
       isEnabled: true,
@@ -225,7 +240,9 @@ export const mockContracts: Contract[] = [
     industrySpecific: {
       milestone1: "Prototype by Q4 2024",
       costSharing: "50/50",
-      exclusivity: "5 Years post-launch"
+      exclusivity: "5 Years post-launch",
+      contractValue: 50000000,
+      partnerContribution: "$25M each"
     },
     renewalReminder: {
       isEnabled: true,
@@ -258,7 +275,9 @@ export const mockContracts: Contract[] = [
     industrySpecific: {
       royaltyRate: "2% per unit",
       territory: "Global",
-      auditRights: "Annual"
+      auditRights: "Annual",
+      contractValue: 6000000,
+      patentNumbers: "US 11,234,567 / EP 3,456,789"
     },
     renewalReminder: {
       isEnabled: false,
@@ -280,7 +299,7 @@ export const mockContracts: Contract[] = [
     effectiveDate: "2024-01-15",
     expirationDate: "2026-01-15",
     governingLaw: "New York",
-    executiveSummary: "Mutual non-disclosure for exploring potential partnership on drone propulsion systems.",
+    executiveSummary: "Mutual non-disclosure for exploring potential partnership on drone propulsion systems. Covers confidential design specs and test data.",
     riskAnalysis: "Low Risk. Standard terms. Definition of 'Confidential Information' is standard.",
     riskScore: 1,
     isConfidential: true,
@@ -292,6 +311,332 @@ export const mockContracts: Contract[] = [
       survivalPeriod: "3 Years",
       purpose: "Business Exploration",
       permittedDisclosures: "Representatives only"
+    },
+    renewalReminder: {
+      isEnabled: false,
+      leadTimeDays: 30,
+      recipients: []
+    }
+  },
+
+  // ══════════════════════════════════════════════
+  //  NEW CONTRACTS (10–18) — Additional richness
+  // ══════════════════════════════════════════════
+  {
+    id: "msa-auto-010",
+    fileName: "ev_motor_supply_msa.pdf",
+    fileUrl: "/docs/ev_motor_supply_msa.pdf",
+    industryTrack: "Automotive",
+    contractTitle: "EV Traction Motor Supply Agreement",
+    contractType: "Master Supply Agreement",
+    parties: ["Nexus Auto Group", "MagDrive Systems Inc."],
+    supplierTier: "Tier 1",
+    criticality: "Strategic",
+    agreementDate: "2024-03-01",
+    effectiveDate: "2024-04-01",
+    expirationDate: "2027-03-31",
+    governingLaw: "Delaware",
+    executiveSummary: "Exclusive supply of permanent-magnet traction motors for Nexus EV platform. Covers 3 model lines. Includes capacity reservation for 120,000 units/yr with step-up to 200,000 in Year 3.",
+    riskAnalysis: "Critical Risk. Single-source for a critical powertrain component. Rare earth material (neodymium) exposure creates commodity price risk. Exclusivity clause limits alternative sourcing.",
+    riskScore: 9,
+    isConfidential: true,
+    renewalTerms: "Option to extend 2 years with mutual agreement.",
+    terminationTerms: "18-month notice required. Breach of quality KPIs allows immediate termination.",
+    liabilityTerms: "Capped at 3x annual contract value. Recall costs shared 60/40.",
+    tags: ["EV", "Single Source", "Rare Earth", "Critical Path"],
+    industrySpecific: {
+      contractValue: 210000000,
+      annualVolume: "120,000–200,000 motors",
+      leadTime: "16 Weeks",
+      moq: "10,000 units/month",
+      qualityStandard: "IATF 16949",
+      ppapLevel: "Level 3",
+      rareEarthExposure: "Neodymium (NdFeB magnets)"
+    },
+    renewalReminder: {
+      isEnabled: true,
+      leadTimeDays: 90,
+      recipients: ["ev.program@nexusauto.com", "procurement@nexusauto.com"]
+    }
+  },
+  {
+    id: "raw-chem-011",
+    fileName: "specialty_resin_framework.pdf",
+    fileUrl: "/docs/specialty_resin_framework.pdf",
+    industryTrack: "General Mfg",
+    contractTitle: "Specialty Resin & Polymer Supply",
+    contractType: "Raw Material Framework",
+    parties: ["Nexus Composites", "PolyMax Chemical AG"],
+    supplierTier: "Tier 1",
+    criticality: "Bottleneck",
+    agreementDate: "2023-07-15",
+    effectiveDate: "2023-08-01",
+    expirationDate: "2026-07-31",
+    governingLaw: "Switzerland",
+    executiveSummary: "Supply of high-performance epoxy resins and thermoplastic polymers for structural composites. Pricing tied to petrochemical feedstock index with quarterly adjustments. Sole qualified source for aerospace-grade resin.",
+    riskAnalysis: "High Risk. Only qualified supplier for aerospace-grade EP-7 resin. Qualification of alternative takes 18+ months. Feedstock price volatility significant.",
+    riskScore: 8,
+    isConfidential: true,
+    renewalTerms: "Auto-renew 2 years unless 9 months notice.",
+    terminationTerms: "Breach of quality spec or supply failure >30 days.",
+    liabilityTerms: "Full replacement cost + line-down penalties up to $500K/day.",
+    tags: ["Sole Source", "Chemical", "Aerospace Grade", "Price Volatility"],
+    industrySpecific: {
+      contractValue: 38000000,
+      annualVolume: "2,400 metric tons",
+      pricingIndex: "ICIS Epoxy + 12%",
+      qualificationStatus: "Sole Qualified Source",
+      shelfLife: "6 months (cold storage required)",
+      hazmat: "UN 3082 — Environmentally hazardous substance"
+    },
+    renewalReminder: {
+      isEnabled: true,
+      leadTimeDays: 90,
+      recipients: ["materials@nexuscomposites.com"]
+    }
+  },
+  {
+    id: "dist-elec-012",
+    fileName: "apac_distribution_agreement.pdf",
+    fileUrl: "/docs/apac_distribution_agreement.pdf",
+    industryTrack: "Electronics",
+    contractTitle: "APAC Distribution & Fulfillment Agreement",
+    contractType: "Distributor Agreement",
+    parties: ["Nexus Electronics", "ShenZhen Global Trade Co."],
+    supplierTier: "Tier 2",
+    criticality: "Leverage",
+    agreementDate: "2023-09-01",
+    effectiveDate: "2023-10-01",
+    expirationDate: "2026-09-30",
+    governingLaw: "Singapore",
+    executiveSummary: "Exclusive distribution of Nexus consumer electronics across 8 APAC markets. Distributor manages local warehousing, last-mile delivery, and returns processing. Minimum annual purchase commitment of $15M.",
+    riskAnalysis: "Medium Risk. Exclusive territory lock-in limits flexibility. Minimum purchase commitment protects Nexus revenue. Counterparty credit risk rated BBB.",
+    riskScore: 5,
+    isConfidential: false,
+    renewalTerms: "Annual renewal with performance review.",
+    terminationTerms: "90 days notice. Automatic termination if minimum purchase not met for 2 consecutive quarters.",
+    liabilityTerms: "Distributor bears all local regulatory compliance costs.",
+    tags: ["APAC", "Distribution", "Exclusivity"],
+    industrySpecific: {
+      contractValue: 45000000,
+      annualMinPurchase: "$15M",
+      territories: ["Japan", "South Korea", "Taiwan", "Vietnam", "Thailand", "Indonesia", "Philippines", "Malaysia"],
+      marginStructure: "18% distributor margin",
+      returnsPolicy: "DOA within 30 days"
+    },
+    renewalReminder: {
+      isEnabled: true,
+      leadTimeDays: 60,
+      recipients: ["apac.sales@nexuselec.com"]
+    }
+  },
+  {
+    id: "svc-consult-013",
+    fileName: "erp_integration_consulting.pdf",
+    fileUrl: "/docs/erp_integration_consulting.pdf",
+    industryTrack: "General Mfg",
+    contractTitle: "SAP S/4HANA Integration Services",
+    contractType: "Consulting Services",
+    parties: ["Nexus Mfg Group", "Accenture Digital"],
+    supplierTier: "Indirect",
+    criticality: "Routine",
+    agreementDate: "2024-01-10",
+    effectiveDate: "2024-02-01",
+    expirationDate: "2025-12-31",
+    governingLaw: "New York",
+    executiveSummary: "Professional services for SAP S/4HANA implementation across 4 manufacturing plants. Covers process mapping, data migration, MES integration, and 6 months post-go-live support.",
+    riskAnalysis: "Low Risk. Fixed-price engagement with milestone-based payments. Delivery risk mitigated by partner's track record. Data migration complexity is the main risk.",
+    riskScore: 3,
+    isConfidential: false,
+    renewalTerms: "Project-based. Extension via Change Order.",
+    terminationTerms: "Either party with 30 days notice. Accrued fees payable.",
+    liabilityTerms: "Capped at total fees paid. Professional indemnity insurance required.",
+    tags: ["ERP", "Digital Transformation", "SAP"],
+    industrySpecific: {
+      contractValue: 8500000,
+      projectPhases: ["Discovery", "Build", "Test", "Deploy", "Hypercare"],
+      plantLocations: ["Detroit", "Chennai", "Stuttgart", "Tianjin"],
+      goLiveDate: "Q3 2025",
+      teamSize: "32 consultants"
+    },
+    renewalReminder: {
+      isEnabled: false,
+      leadTimeDays: 60,
+      recipients: []
+    }
+  },
+  {
+    id: "lease-fac-014",
+    fileName: "greenfield_facility_lease.pdf",
+    fileUrl: "/docs/greenfield_facility_lease.pdf",
+    industryTrack: "Automotive",
+    contractTitle: "Greenfield EV Battery Gigafactory Lease",
+    contractType: "Facility Lease",
+    parties: ["Nexus Auto Group", "Tennessee Industrial Parks LLC"],
+    supplierTier: "Indirect",
+    criticality: "Strategic",
+    agreementDate: "2024-06-01",
+    effectiveDate: "2024-07-01",
+    expirationDate: "2039-06-30",
+    governingLaw: "Tennessee",
+    executiveSummary: "15-year triple-net lease for a 2.1M sq ft greenfield facility in Chattanooga for EV battery cell manufacturing. Includes tenant improvement allowance of $45M and environmental compliance obligations.",
+    riskAnalysis: "Medium Risk. Long-term commitment reduces flexibility. Environmental remediation liability could be significant. Early termination penalty is substantial (remaining lease value).",
+    riskScore: 6,
+    isConfidential: true,
+    renewalTerms: "Two 5-year renewal options at fair market rent.",
+    terminationTerms: "No early termination without full remaining lease payout.",
+    liabilityTerms: "Tenant responsible for all environmental compliance and remediation.",
+    tags: ["Gigafactory", "Long-term", "EV", "Real Estate"],
+    industrySpecific: {
+      contractValue: 320000000,
+      facilitySize: "2.1M sq ft",
+      annualRent: "$18.5M (escalating 2.5%/yr)",
+      tenantImprovementAllowance: "$45M",
+      zoning: "Heavy Industrial (M-2)",
+      taxIncentives: "10-year PILOT + state grants"
+    },
+    renewalReminder: {
+      isEnabled: true,
+      leadTimeDays: 90,
+      recipients: ["real.estate@nexusauto.com", "cfo@nexusauto.com"]
+    }
+  },
+  {
+    id: "saas-mfg-015",
+    fileName: "predictive_maintenance_saas.pdf",
+    fileUrl: "/docs/predictive_maintenance_saas.pdf",
+    industryTrack: "General Mfg",
+    contractTitle: "AI Predictive Maintenance Platform",
+    contractType: "Software/SaaS",
+    parties: ["Nexus Mfg Group", "Uptake Technologies"],
+    supplierTier: "Indirect",
+    criticality: "Leverage",
+    agreementDate: "2024-02-15",
+    effectiveDate: "2024-03-01",
+    expirationDate: "2027-02-28",
+    governingLaw: "Illinois",
+    executiveSummary: "Enterprise SaaS license for AI-based predictive maintenance across 6 plants. Monitors 4,200 connected assets via IoT sensors. Includes data ingestion, anomaly detection, and work order generation.",
+    riskAnalysis: "Low Risk. Strong SLA (99.9% uptime). Data ownership retained by Nexus. Vendor lock-in risk moderate due to proprietary ML models.",
+    riskScore: 3,
+    isConfidential: false,
+    renewalTerms: "Auto-renew 1 year unless 60 days notice.",
+    terminationTerms: "Data export within 90 days of termination.",
+    liabilityTerms: "Capped at 12 months subscription fees.",
+    tags: ["IoT", "AI/ML", "Predictive", "SaaS"],
+    industrySpecific: {
+      contractValue: 4200000,
+      annualFee: "$1.4M",
+      connectedAssets: 4200,
+      plants: 6,
+      slaUptime: "99.9%",
+      dataRetention: "7 years"
+    },
+    renewalReminder: {
+      isEnabled: true,
+      leadTimeDays: 60,
+      recipients: ["it.ops@nexusmfg.com"]
+    }
+  },
+  {
+    id: "qaa-food-016",
+    fileName: "food_safety_quality_agreement.pdf",
+    fileUrl: "/docs/food_safety_quality_agreement.pdf",
+    industryTrack: "FMCG",
+    contractTitle: "Food Safety & Quality Assurance (Co-Packing)",
+    contractType: "Quality Assurance (QAA)",
+    parties: ["Nexus Foods", "BlueStar Co-Packaging"],
+    supplierTier: "Tier 1",
+    criticality: "Strategic",
+    agreementDate: "2023-11-01",
+    effectiveDate: "2023-12-01",
+    expirationDate: "2026-11-30",
+    governingLaw: "California",
+    executiveSummary: "Quality agreement for co-packing of nutritional bars and protein snacks. Covers allergen management, batch traceability, FSSC 22000 compliance, and product recall procedures.",
+    riskAnalysis: "Medium Risk. Allergen cross-contamination risk is the primary concern. Co-packer also serves competitors, raising confidentiality concerns for proprietary formulations.",
+    riskScore: 6,
+    isConfidential: true,
+    renewalTerms: "Linked to co-packing services agreement.",
+    terminationTerms: "Immediate upon food safety violation. 60 days notice otherwise.",
+    liabilityTerms: "Uncapped for product recall costs. $5M professional indemnity required.",
+    tags: ["Food Safety", "Allergen", "Co-Pack", "Recall Risk"],
+    industrySpecific: {
+      contractValue: 22000000,
+      annualVolume: "8M units",
+      certifications: "FSSC 22000, SQF Level 3, Organic",
+      allergenProtocol: "Dedicated lines for top-8 allergens",
+      traceability: "Full batch to ingredient level",
+      recallResponseTime: "4 hours"
+    },
+    renewalReminder: {
+      isEnabled: true,
+      leadTimeDays: 90,
+      recipients: ["quality@nexusfoods.com", "legal@nexusfoods.com"]
+    }
+  },
+  {
+    id: "msa-aero-017",
+    fileName: "titanium_forging_msa.pdf",
+    fileUrl: "/docs/titanium_forging_msa.pdf",
+    industryTrack: "Aerospace",
+    contractTitle: "Titanium Forging & Machining MSA",
+    contractType: "Master Supply Agreement",
+    parties: ["Nexus Aero", "Titan Precision Forge Ltd"],
+    supplierTier: "Tier 1",
+    criticality: "Strategic",
+    agreementDate: "2022-06-01",
+    effectiveDate: "2022-07-01",
+    expirationDate: "2027-06-30",
+    governingLaw: "UK",
+    executiveSummary: "Long-term supply of Ti-6Al-4V titanium forgings for landing gear and engine mount components. AS9100D certified supplier. Includes NADCAP-approved heat treatment and NDT services.",
+    riskAnalysis: "High Risk. Titanium sponge supply constrained (Russia/China dominate). Long qualification cycle (24 months) makes switching prohibitive. Single-source for 3 critical part numbers.",
+    riskScore: 8,
+    isConfidential: true,
+    renewalTerms: "Auto-renew 2 years. Price renegotiation at each renewal.",
+    terminationTerms: "24-month transition period required. Tooling transfer obligations apply.",
+    liabilityTerms: "Unlimited for airworthiness defects. Otherwise capped at contract value.",
+    tags: ["Titanium", "Single Source", "Aerospace Critical", "NADCAP"],
+    industrySpecific: {
+      contractValue: 95000000,
+      annualVolume: "4,500 forgings",
+      leadTime: "32 Weeks",
+      material: "Ti-6Al-4V Grade 5",
+      certifications: "AS9100D, NADCAP (Heat Treat, NDT)",
+      qualificationCycle: "24 months",
+      criticaParts: ["P/N LG-7042", "P/N EM-3018", "P/N FS-9921"]
+    },
+    renewalReminder: {
+      isEnabled: true,
+      leadTimeDays: 90,
+      recipients: ["aerospace.supply@nexusaero.com", "quality.aero@nexusaero.com"]
+    }
+  },
+  {
+    id: "nda-pharma-018",
+    fileName: "gene_therapy_nda.pdf",
+    fileUrl: "/docs/gene_therapy_nda.pdf",
+    industryTrack: "Pharma/Bio",
+    contractTitle: "Gene Therapy Platform NDA",
+    contractType: "NDA",
+    parties: ["Nexus BioLabs", "GenVec Therapeutics"],
+    supplierTier: "Tier 1",
+    criticality: "Strategic",
+    agreementDate: "2024-09-01",
+    effectiveDate: "2024-09-01",
+    expirationDate: "2029-08-31",
+    governingLaw: "Massachusetts",
+    executiveSummary: "Bilateral NDA covering evaluation of GenVec's AAV vector manufacturing platform for Nexus BioLabs' gene therapy pipeline. Includes data room access for CMC documentation and clinical trial results.",
+    riskAnalysis: "Low Risk. Standard bilateral terms. Extended 5-year survival period for clinical data. Carve-out for regulatory submissions is well-defined.",
+    riskScore: 2,
+    isConfidential: true,
+    renewalTerms: "Auto-renew annually.",
+    terminationTerms: "Either party with 30 days notice. Survival obligations continue.",
+    liabilityTerms: "Equitable relief. No monetary cap specified.",
+    tags: ["Gene Therapy", "Clinical Data", "Partnership Evaluation"],
+    industrySpecific: {
+      survivalPeriod: "5 Years",
+      purpose: "Technology Evaluation — AAV Manufacturing",
+      permittedDisclosures: "Representatives, regulatory authorities",
+      dataRoomAccess: "Level 3 (CMC + Clinical)"
     },
     renewalReminder: {
       isEnabled: false,

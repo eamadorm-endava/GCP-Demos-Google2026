@@ -27,7 +27,7 @@ export const NLQ_Search: React.FC<NLQSearchProps> = ({ query, setQuery, onAskAI,
                 onChange={(e) => setQuery(e.target.value)}
                 onKeyDown={handleKeyDown}
                 disabled={isAiLoading}
-                placeholder='Search or ask AI... (e.g. "Which contracts have uncapped liability?")'
+                placeholder='Search or ask AI... (e.g. "Which suppliers have single-source risk?")'
                 className={`block w-full bg-brand-secondary border border-brand-accent/40 text-brand-text rounded-xl py-3.5 pl-12 pr-28 shadow-inner placeholder:text-brand-light/40 focus:outline-none focus:ring-2 focus:ring-brand-highlight/50 focus:border-brand-highlight/50 transition-all duration-200 ${isAiLoading ? 'opacity-70 cursor-wait' : 'hover:border-brand-accent/70'}`}
             />
             <div className="absolute inset-y-0 right-0 flex items-center pr-2">
