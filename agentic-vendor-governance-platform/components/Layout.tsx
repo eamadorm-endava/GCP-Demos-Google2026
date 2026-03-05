@@ -46,7 +46,7 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
       `}>
         <div className="p-6 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <img src="/endava-logo.svg" alt="Endava Logo" className="w-9 h-9" />
+            <img src="./endava-logo.svg" alt="Endava Logo" className="w-9 h-9" />
             <span className="font-semibold text-white text-lg leading-tight tracking-tight">Agentic Governance</span>
           </div>
           <button onClick={() => setIsMobileMenuOpen(false)} className="lg:hidden p-2 text-endava-blue-40 hover:bg-endava-blue-90/5 rounded-lg">
