@@ -61,7 +61,7 @@ export const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
           onClick={() => useStore.getState().setCurrentView('dashboard')}
           title="ShelfLogic AI"
         >
-          <img src="/endava-logo.svg" alt="Endava Logo" className="w-full h-full object-contain" />
+          <img src="./endava-logo.svg" alt="Endava Logo" className="w-full h-full object-contain" />
         </div>
         <div className="space-y-2 flex flex-col items-center w-full px-3 flex-1">
           <NavButton view="dashboard" icon={LayoutDashboard} label="Home" />
