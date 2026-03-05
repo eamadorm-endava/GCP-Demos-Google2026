@@ -47,8 +47,8 @@ export const OpportunityCard: React.FC<OpportunityCardProps> = ({ opportunity, o
             <div className="p-5 grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_auto_auto] lg:items-center gap-4 lg:gap-6 group">
                 {/* Left: Icon, Title */}
                 <div className="flex items-center gap-5">
-                    <div className={`p-3 rounded-2xl bg-slate-800 border border-slate-700 group-hover:scale-110 transition-transform`}>
-                        <Sparkles className="w-6 h-6 text-[var(--color-brand-primary-50)]" />
+                    <div className={`p-3 rounded-2xl bg-[#30404B] border border-[#5E6A73] group-hover:scale-110 transition-transform`}>
+                        <Sparkles className="w-6 h-6 text-[#FF5640]" />
                     </div>
                     <div>
                         <div className="flex items-center gap-2 mb-1">
@@ -57,7 +57,7 @@ export const OpportunityCard: React.FC<OpportunityCardProps> = ({ opportunity, o
                             </span>
                             <span className="text-[10px] text-slate-500 font-mono tracking-widest">{opportunity.id}</span>
                         </div>
-                        <h3 className="text-base font-bold text-white group-hover:text-[var(--color-brand-primary-500)] transition-colors">
+                        <h3 className="text-base font-bold text-white group-hover:text-[#FF5640] transition-colors">
                             {getTitle(opportunity)}
                         </h3>
                         {store && (
@@ -70,17 +70,17 @@ export const OpportunityCard: React.FC<OpportunityCardProps> = ({ opportunity, o
                 </div>
 
                 {/* Middle: AI Confidence */}
-                <div className="flex flex-col items-start lg:items-center justify-center w-full lg:w-auto lg:px-6 lg:border-l lg:border-r border-slate-800">
+                <div className="flex flex-col items-start lg:items-center justify-center w-full lg:w-auto lg:px-6 lg:border-l lg:border-r border-[#47555F]">
                     <p className="text-[10px] font-bold text-slate-500 uppercase tracking-widest mb-1">AI Confidence</p>
                     <div className="flex items-center gap-2 w-full lg:w-auto">
-                        <div className="flex-1 lg:w-24 h-1.5 bg-slate-800 rounded-full overflow-hidden">
-                            <div className="h-full bg-[var(--color-brand-primary-500)]" style={{ width: `${opportunity.match_score * 100}%` }}></div>
+                        <div className="flex-1 lg:w-24 h-1.5 bg-[#30404B] rounded-full overflow-hidden">
+                            <div className="h-full bg-[#FF5640]" style={{ width: `${opportunity.match_score * 100}%` }}></div>
                         </div>
                         <span className="text-xs font-bold text-slate-300">{(opportunity.match_score * 100).toFixed(0)}%</span>
                     </div>
                     <button
                         onClick={toggleRationale}
-                        className="mt-2 text-slate-500 hover:text-[var(--color-brand-primary-500)] transition-colors"
+                        className="mt-2 text-[#758087] hover:text-[#FF5640] transition-colors"
                         aria-label={isExpanded ? 'Hide AI rationale' : 'Show AI rationale'}
                     >
                         {isExpanded ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
@@ -95,9 +95,9 @@ export const OpportunityCard: React.FC<OpportunityCardProps> = ({ opportunity, o
                             +${opportunity.projected_lift.toLocaleString()}
                         </p>
                     </div>
-                    
-                    <div className="p-2 rounded-full bg-slate-800 border border-slate-700 group-hover:bg-[var(--color-brand-primary-50)] transition-colors">
-                        <ChevronRight className="w-5 h-5 text-slate-400 group-hover:text-white" />
+
+                    <div className="p-2 rounded-full bg-[#30404B] border border-[#5E6A73] group-hover:bg-[#FF5640] transition-colors">
+                        <ChevronRight className="w-5 h-5 text-[#A3AAAF] group-hover:text-white" />
                     </div>
                 </div>
             </div>
@@ -105,13 +105,13 @@ export const OpportunityCard: React.FC<OpportunityCardProps> = ({ opportunity, o
             {isExpanded && (
                 <div className="bg-slate-900/50 border-t border-slate-800 p-5 animate-in slide-in-from-top-2">
                     <div className="flex items-start gap-3">
-                        <BrainCircuit className="w-5 h-5 text-[var(--color-brand-secondary-100)] mt-0.5" />
+                        <BrainCircuit className="w-5 h-5 text-indigo-400 mt-0.5" />
                         <div className="flex-1">
-                            <h4 className="text-xs font-bold text-[var(--color-brand-secondary-100)] uppercase tracking-widest mb-2">AI Logic & Match Reasoning</h4>
+                            <h4 className="text-xs font-bold text-indigo-400 uppercase tracking-widest mb-2">AI Logic & Match Reasoning</h4>
                             <ul className="grid grid-cols-1 md:grid-cols-2 gap-2">
                                 {opportunity.match_reasons.map((reason, idx) => (
-                                    <li key={idx} className="flex items-start gap-2 text-sm text-slate-300">
-                                        <span className="w-1.5 h-1.5 rounded-full bg-[var(--color-brand-secondary-200)] mt-1.5 flex-shrink-0"></span>
+                                    <li key={idx} className="flex items-start gap-2 text-sm text-[#D1D5D7]">
+                                        <span className="w-1.5 h-1.5 rounded-full bg-[#FF5640] mt-1.5 flex-shrink-0"></span>
                                         {reason}
                                     </li>
                                 ))}

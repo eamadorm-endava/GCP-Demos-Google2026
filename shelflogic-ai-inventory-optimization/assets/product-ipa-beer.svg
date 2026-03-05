@@ -1,8 +1,14 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 200 200" fill="none">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" fill="none">
+  <defs>
+    <linearGradient id="beerBottle" x1="100" y1="20" x2="100" y2="180" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#78350f"/>
+      <stop offset="1" stop-color="#451a03"/>
+    </linearGradient>
+  </defs>
   <rect width="200" height="200" fill="#1e293b"/>
-  <rect x="65" y="40" width="70" height="120" rx="10" fill="#475569"/>
-  <rect x="65" y="40" width="70" height="10" fill="#334155"/>
-  <rect x="65" y="150" width="70" height="10" fill="#334155"/>
-  <rect x="75" y="60" width="50" height="80" fill="#fbbf24"/>
-  <text x="100" y="105" font-family="Inter, sans-serif" font-size="24" fill="#1e293b" text-anchor="middle" font-weight="bold">IPA</text>
+  <path d="M92 20 H108 V50 C108 50 130 70 130 110 V170 C130 175 125 180 120 180 H80 C75 180 70 175 70 170 V110 C70 70 92 50 92 50 V20 Z" fill="url(#beerBottle)" stroke="#000" stroke-width="1"/>
+  <rect x="90" y="18" width="20" height="6" rx="1" fill="#fbbf24"/>
+  <rect x="75" y="100" width="50" height="40" rx="2" fill="#d97706"/>
+  <text x="100" y="120" font-family="sans-serif" font-size="12" font-weight="bold" fill="#fffbeb" text-anchor="middle">IPA</text>
+  <text x="100" y="132" font-family="sans-serif" font-size="6" fill="#fffbeb" text-anchor="middle">CRAFT</text>
 </svg>

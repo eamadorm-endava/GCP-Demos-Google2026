@@ -8,10 +8,10 @@ import { theme } from '../theme';
 // --- SIMULATION LOGIC ---
 
 const CLUSTERS = [
-  { x: 15, y: 20, z: 100, cluster: 'Rural', name: 'Store A' },
-  { x: 50, y: 52, z: 210, cluster: 'Target Group', name: 'Dubuque Node' },
-  { x: 52, y: 48, z: 205, cluster: 'Target Group', name: 'Davenport Node' },
-  { x: 80, y: 85, z: 150, cluster: 'Urban High-Density', name: 'Store X' },
+    { x: 15, y: 20, z: 100, cluster: 'Rural', name: 'Store A' },
+    { x: 50, y: 52, z: 210, cluster: 'Target Group', name: 'Dubuque Node' },
+    { x: 52, y: 48, z: 205, cluster: 'Target Group', name: 'Davenport Node' },
+    { x: 80, y: 85, z: 150, cluster: 'Urban High-Density', name: 'Store X' },
 ];
 
 export const MLSimulationView = () => {
@@ -65,13 +65,13 @@ export const MLSimulationView = () => {
     }, [sensitivity, volatility, activeTab]);
 
     return (
-        <div className="flex flex-col h-full bg-slate-950 overflow-hidden font-sans">
+        <div className="flex flex-col h-full bg-[#192B37] overflow-hidden font-sans">
             {/* Simulation Header */}
-            <div className="p-8 border-b border-slate-800 bg-slate-900/40 backdrop-blur-xl relative">
+            <div className="p-8 border-b border-[#47555F] bg-[#30404B]/40 backdrop-blur-xl relative">
                 <div className="absolute inset-0 bg-grid-slate-900/[0.04] bg-[bottom_left_-1px] pointer-events-none"></div>
                 <div className="flex items-center justify-between relative z-10">
                     <div className="flex items-center">
-                        <div className="p-3 bg-[var(--color-brand-secondary-200)] rounded-xl mr-4 shadow-lg shadow-[var(--color-brand-secondary-100)]">
+                        <div className="p-3 bg-[#FF5640] rounded-xl mr-4 shadow-lg shadow-[#FF5640]/30">
                             <BrainCircuit className="w-8 h-8 text-white" />
                         </div>
                         <div>
@@ -79,12 +79,12 @@ export const MLSimulationView = () => {
                             <p className="text-slate-400 font-medium">Interactive Simulation & Stress Testing Engine</p>
                         </div>
                     </div>
-                    <div className="flex bg-slate-800 p-1 rounded-xl border border-slate-700">
+                    <div className="flex bg-[#30404B] p-1 rounded-xl border border-[#5E6A73]">
                         {['clustering', 'pricing', 'forecast'].map((tab) => (
                             <button
                                 key={tab}
                                 onClick={() => setActiveTab(tab as any)}
-                                className={`px-4 py-2 rounded-lg text-xs font-bold uppercase tracking-widest transition-all ${activeTab === tab ? 'bg-[var(--color-brand-secondary-200)] text-white shadow-lg' : 'text-slate-500 hover:text-slate-300'}`}
+                                className={`px-4 py-2 rounded-lg text-xs font-bold uppercase tracking-widest transition-all ${activeTab === tab ? 'bg-[#FF5640] text-white shadow-lg' : 'text-[#8C959B] hover:text-[#D1D5D7]'}`}
                             >
                                 {tab}
                             </button>
@@ -95,31 +95,31 @@ export const MLSimulationView = () => {
 
             <div className="flex-1 overflow-y-auto p-8">
                 <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-4 gap-8">
-                    
+
                     {/* LEFT PANEL: Interactive Controls */}
                     <div className="lg:col-span-1 space-y-6">
-                        <div className={`${theme.components.card} p-6 border-[var(--color-brand-secondary-100)] bg-slate-900/50`}>
-                            <h3 className="text-xs font-bold text-[var(--color-brand-secondary-100)] uppercase tracking-widest mb-6 flex items-center">
+                        <div className={`${theme.components.card} p-6 border-[#FF5640]/20 bg-[#30404B]/50`}>
+                            <h3 className="text-xs font-bold text-[#FF5640] uppercase tracking-widest mb-6 flex items-center">
                                 <Activity className="w-4 h-4 mr-2" />
                                 Model Parameters
                             </h3>
-                            
+
                             {activeTab === 'pricing' && (
                                 <div className="space-y-8">
                                     <div>
                                         <div className="flex justify-between mb-2">
                                             <label className="text-xs text-slate-300 font-bold">Elasticity (Beta)</label>
-                                            <span className="text-xs font-mono text-[var(--color-brand-secondary-100)]">{sensitivity.toFixed(2)}</span>
+                                            <span className="text-xs font-mono text-[#FF5640]">{sensitivity.toFixed(2)}</span>
                                         </div>
-                                        <input 
-                                            type="range" min="0.5" max="3.0" step="0.1" 
+                                        <input
+                                            type="range" min="0.5" max="3.0" step="0.1"
                                             value={sensitivity} onChange={(e) => setSensitivity(parseFloat(e.target.value))}
-                                            className="w-full h-1.5 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-[var(--color-brand-secondary-200)]"
+                                            className="w-full"
                                         />
                                         <p className="text-[10px] text-slate-500 mt-2">Higher = More price sensitive consumers.</p>
                                     </div>
-                                    <div className="p-4 bg-[var(--color-brand-secondary-100)] rounded-lg border border-[var(--color-brand-secondary-100)]">
-                                        <p className="text-[10px] text-[var(--color-brand-secondary-100)] uppercase font-bold mb-1">Target Strategy</p>
+                                    <div className="p-4 bg-[#FF5640]/5 rounded-lg border border-[#FF5640]/20">
+                                        <p className="text-[10px] text-[#FF5640] uppercase font-bold mb-1">Target Strategy</p>
                                         <p className="text-white text-sm font-bold">{sensitivity > 1.2 ? 'MARKDOWN TO VOLUME' : 'MARKUP TO MARGIN'}</p>
                                     </div>
                                 </div>
@@ -132,10 +132,10 @@ export const MLSimulationView = () => {
                                             <label className="text-xs text-slate-300 font-bold">Market Volatility</label>
                                             <span className="text-xs font-mono text-rose-400">{(volatility * 100).toFixed(0)}%</span>
                                         </div>
-                                        <input 
-                                            type="range" min="0" max="1" step="0.1" 
+                                        <input
+                                            type="range" min="0" max="1" step="0.1"
                                             value={volatility} onChange={(e) => setVolatility(parseFloat(e.target.value))}
-                                            className="w-full h-1.5 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-rose-500"
+                                            className="w-full"
                                         />
                                         <p className="text-[10px] text-slate-500 mt-2">Simulate external shocks (Game days, Weather).</p>
                                     </div>
@@ -148,7 +148,7 @@ export const MLSimulationView = () => {
                                         <p className="text-[10px] text-emerald-300 uppercase font-bold mb-1">Clustering Engine</p>
                                         <p className="text-white text-sm">KNN Euclidean Distance</p>
                                     </div>
-                                    <button className="w-full py-3 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-xl text-xs font-bold transition-all border border-slate-700">
+                                    <button className="w-full py-3 bg-[#30404B] hover:bg-[#47555F] text-[#D1D5D7] rounded-xl text-xs font-bold transition-all border border-[#5E6A73]">
                                         RE-CLUSTER NODES
                                     </button>
                                 </div>
@@ -156,32 +156,32 @@ export const MLSimulationView = () => {
                         </div>
 
                         {/* AGENT COMMENTARY BOX */}
-                        <div className={`${theme.components.card} p-6 bg-slate-900/80 border-[var(--color-brand-primary-500)] relative overflow-hidden`}>
-                             <div className="absolute top-0 right-0 p-2">
-                                 <Sparkles className={`w-5 h-5 text-[var(--color-brand-primary-50)] ${loadingExpert ? 'animate-pulse' : ''}`} />
-                             </div>
-                             <h4 className="text-[10px] font-bold text-[var(--color-brand-primary-50)] uppercase tracking-widest mb-3">Agent Diagnostic</h4>
-                             {loadingExpert ? (
-                                 <div className="space-y-2 animate-pulse">
-                                     <div className="h-2 bg-slate-800 rounded w-full"></div>
-                                     <div className="h-2 bg-slate-800 rounded w-4/5"></div>
-                                 </div>
-                             ) : (
-                                 <p className="text-xs text-slate-300 leading-relaxed italic border-l-2 border-[var(--color-brand-primary-500)] pl-3">
-                                     "{expertCommentary}"
-                                 </p>
-                             )}
+                        <div className={`${theme.components.card} p-6 bg-[#30404B]/80 border-[#FF5640]/20 relative overflow-hidden`}>
+                            <div className="absolute top-0 right-0 p-2">
+                                <Sparkles className={`w-5 h-5 text-cyan-500 ${loadingExpert ? 'animate-pulse' : ''}`} />
+                            </div>
+                            <h4 className="text-[10px] font-bold text-[#FF5640] uppercase tracking-widest mb-3">Agent Diagnostic</h4>
+                            {loadingExpert ? (
+                                <div className="space-y-2 animate-pulse">
+                                    <div className="h-2 bg-slate-800 rounded w-full"></div>
+                                    <div className="h-2 bg-slate-800 rounded w-4/5"></div>
+                                </div>
+                            ) : (
+                                <p className="text-xs text-[#D1D5D7] leading-relaxed italic border-l-2 border-[#FF5640]/50 pl-3">
+                                    "{expertCommentary}"
+                                </p>
+                            )}
                         </div>
                     </div>
 
                     {/* MAIN STAGE: The Simulation Visualization */}
                     <div className="lg:col-span-3 space-y-8">
-                        
+
                         {/* THE SIMULATOR COMPONENT */}
                         <div className={`${theme.components.card} p-8 bg-slate-900 relative border-slate-800 h-[600px] overflow-hidden`}>
                             {/* Grid Texture Overlay */}
                             <div className="absolute inset-0 opacity-[0.03] pointer-events-none" style={{ backgroundImage: `linear-gradient(#6366f1 1px, transparent 1px), linear-gradient(90deg, #6366f1 1px, transparent 1px)`, backgroundSize: '40px 40px' }}></div>
-                            
+
                             {activeTab === 'clustering' && (
                                 <div className="h-full w-full animate-fade-in">
                                     <h3 className="text-sm font-bold text-white mb-8 flex items-center">
@@ -200,7 +200,7 @@ export const MLSimulationView = () => {
                                                     return (
                                                         <div className="bg-slate-900 border border-slate-700 p-3 rounded-xl shadow-2xl">
                                                             <p className="text-white font-bold text-xs">{d.name}</p>
-                                                            <p className="text-[var(--color-brand-secondary-100)] text-[10px] font-bold uppercase">{d.cluster}</p>
+                                                            <p className="text-indigo-400 text-[10px] font-bold uppercase">{d.cluster}</p>
                                                         </div>
                                                     )
                                                 }
@@ -208,9 +208,9 @@ export const MLSimulationView = () => {
                                             }} />
                                             <Scatter name="Stores" data={CLUSTERS}>
                                                 {CLUSTERS.map((entry, index) => (
-                                                    <Cell 
-                                                        key={`cell-${index}`} 
-                                                        fill={entry.cluster === 'Target Group' ? theme.charts.primary : '#334155'} 
+                                                    <Cell
+                                                        key={`cell-${index}`}
+                                                        fill={entry.cluster === 'Target Group' ? theme.charts.primary : '#334155'}
                                                         className={entry.cluster === 'Target Group' ? 'animate-pulse' : ''}
                                                     />
                                                 ))}
@@ -219,12 +219,12 @@ export const MLSimulationView = () => {
                                     </ResponsiveContainer>
                                     <div className="absolute bottom-8 left-8 right-8 flex justify-between items-end">
                                         <div className="text-[10px] text-slate-500 font-mono">
-                                            AXIS_X: Foot Traffic Affinity<br/>
+                                            AXIS_X: Foot Traffic Affinity<br />
                                             AXIS_Y: Category Mix Deviation
                                         </div>
                                         <div className="flex gap-4">
                                             <div className="flex items-center text-[10px] text-slate-400">
-                                                <div className="w-2 h-2 bg-[var(--color-brand-primary-500)] rounded-full mr-2"></div> Lookalike Pairs
+                                                <div className="w-2 h-2 bg-cyan-400 rounded-full mr-2"></div> Lookalike Pairs
                                             </div>
                                             <div className="flex items-center text-[10px] text-slate-400">
                                                 <div className="w-2 h-2 bg-slate-700 rounded-full mr-2"></div> Global Network
@@ -243,8 +243,8 @@ export const MLSimulationView = () => {
                                     <ResponsiveContainer width="100%" height="80%">
                                         <ComposedChart data={pricingData}>
                                             <CartesianGrid strokeDasharray="3 3" stroke="#1e293b" vertical={false} />
-                                            <XAxis dataKey="price" tick={{fill: '#475569', fontSize: 10}} label={{ value: 'Unit Price ($)', position: 'insideBottom', offset: -10, fill: '#475569', fontSize: 10 }} />
-                                            <YAxis yAxisId="left" tick={{fill: '#475569', fontSize: 10}} axisLine={false} tickLine={false} />
+                                            <XAxis dataKey="price" tick={{ fill: '#475569', fontSize: 10 }} label={{ value: 'Unit Price ($)', position: 'insideBottom', offset: -10, fill: '#475569', fontSize: 10 }} />
+                                            <YAxis yAxisId="left" tick={{ fill: '#475569', fontSize: 10 }} axisLine={false} tickLine={false} />
                                             <Tooltip content={({ payload }) => {
                                                 if (payload && payload.length) {
                                                     const d = payload[0].payload;
@@ -271,7 +271,7 @@ export const MLSimulationView = () => {
                                         </div>
                                         <div className="text-center">
                                             <p className="text-[10px] text-slate-500 uppercase font-bold mb-1">Optimal Price</p>
-                                            <p className="text-lg font-bold text-[var(--color-brand-secondary-100)]">${optimalPoint.price}</p>
+                                            <p className="text-lg font-bold text-indigo-400">${optimalPoint.price}</p>
                                         </div>
                                         <div className="text-center">
                                             <p className="text-[10px] text-slate-500 uppercase font-bold mb-1">Efficiency</p>
@@ -290,8 +290,8 @@ export const MLSimulationView = () => {
                                     <ResponsiveContainer width="100%" height="80%">
                                         <AreaChart data={forecastData}>
                                             <CartesianGrid strokeDasharray="3 3" stroke="#1e293b" />
-                                            <XAxis dataKey="day" tick={{fill: '#475569', fontSize: 10}} label={{ value: 'Days from Present', position: 'insideBottom', offset: -10, fill: '#475569', fontSize: 10 }} />
-                                            <YAxis tick={{fill: '#475569', fontSize: 10}} domain={[0, 150]} axisLine={false} tickLine={false} />
+                                            <XAxis dataKey="day" tick={{ fill: '#475569', fontSize: 10 }} label={{ value: 'Days from Present', position: 'insideBottom', offset: -10, fill: '#475569', fontSize: 10 }} />
+                                            <YAxis tick={{ fill: '#475569', fontSize: 10 }} domain={[0, 150]} axisLine={false} tickLine={false} />
                                             <Tooltip />
                                             <Area type="step" dataKey="stock" fill="#f43f5e" stroke="#f43f5e" fillOpacity={0.15} strokeWidth={3} />
                                             <ReferenceLine y={20} stroke="#f43f5e" strokeDasharray="5 5">
@@ -316,8 +316,8 @@ export const MLSimulationView = () => {
                         {/* BOTTOM STATS */}
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                             <div className={`${theme.components.card} p-5 flex items-center gap-4`}>
-                                <div className="p-2 bg-[var(--color-brand-secondary-100)] rounded-lg">
-                                    <Database className="w-5 h-5 text-[var(--color-brand-secondary-100)]" />
+                                <div className="p-2 bg-[#FF5640]/10 rounded-lg">
+                                    <Database className="w-5 h-5 text-[#FF5640]" />
                                 </div>
                                 <div>
                                     <p className="text-[10px] text-slate-500 font-bold uppercase tracking-widest">Training Set</p>
@@ -348,15 +348,6 @@ export const MLSimulationView = () => {
             </div>
 
             <style>{`
-                input[type=range]::-webkit-slider-thumb {
-                    -webkit-appearance: none;
-                    height: 16px;
-                    width: 16px;
-                    border-radius: 50%;
-                    background: #6366f1;
-                    cursor: pointer;
-                    box-shadow: 0 0 10px rgba(99, 102, 241, 0.5);
-                }
                 .animate-pulse-slow {
                     animation: pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
                 }
