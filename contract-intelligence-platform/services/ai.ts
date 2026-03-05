@@ -2,11 +2,21 @@
 import { GoogleGenAI, Type } from "@google/genai";
 import { Contract } from "../types.ts";
 
-const apiKey = process.env.API_KEY;
-if (!apiKey) {
-  console.warn('[SupplyLens] ⚠️ Gemini API key is missing. Set API_KEY in your .env file.');
+const apiKey = process.env.API_KEY || process.env.GEMINI_API_KEY || '';
+const isKeyAvailable = !!apiKey;
+
+if (!isKeyAvailable) {
+  console.warn('[SupplyLens] ⚠️ Gemini API key is missing. AI features will be disabled. Set API_KEY or GEMINI_API_KEY in your .env file.');
 }
-const ai = new GoogleGenAI({ apiKey: apiKey || '' });
+
+let ai: GoogleGenAI | null = null;
+try {
+  if (isKeyAvailable) {
+    ai = new GoogleGenAI({ apiKey });
+  }
+} catch (e) {
+  console.warn('[SupplyLens] Failed to initialize GoogleGenAI client:', e);
+}
 
 // ─── Models ──────────────────────────────────────────────
 const TEXT_MODEL = 'gemini-3.1-flash-image-preview';
@@ -66,6 +76,14 @@ export const analyzeDocumentImage = async (
   imageBase64: string,
   mimeType: string = 'image/png'
 ): Promise<DocumentAnalysisResult> => {
+  if (!ai) {
+    console.warn('[SupplyLens] AI unavailable — returning placeholder document analysis.');
+    return {
+      documentTitle: 'AI Unavailable', documentType: 'N/A', parties: [], effectiveDate: '', totalValue: '',
+      governingLaw: '', overallRisk: 'Low', pages: [], executiveSummary: 'Gemini API key is not configured. Please set API_KEY or GEMINI_API_KEY to enable document analysis.', redFlags: [], recommendations: ['Configure a valid API key to enable AI-powered analysis.']
+    };
+  }
+
   const response = await ai.models.generateContent({
     model: IMAGE_MODEL,
     contents: [
@@ -145,6 +163,16 @@ Be specific about supply chain risks (single source dependencies, force majeure,
  * when no image is uploaded (demo mode).
  */
 export const generateDocumentPreview = async (contract: Contract): Promise<DocumentAnalysisResult> => {
+  if (!ai) {
+    console.warn('[SupplyLens] AI unavailable — returning placeholder document preview.');
+    return {
+      documentTitle: contract.contractTitle, documentType: contract.contractType, parties: contract.parties,
+      effectiveDate: contract.effectiveDate, totalValue: '', governingLaw: contract.governingLaw, overallRisk: 'Low',
+      pages: [{ pageNumber: 1, pageType: 'cover', summary: 'AI preview unavailable — API key not configured.', keyPoints: [], riskFlags: [], confidence: 0 }],
+      executiveSummary: 'Gemini API key is not configured. Please set API_KEY or GEMINI_API_KEY to enable document preview generation.', redFlags: [], recommendations: ['Configure a valid API key.']
+    };
+  }
+
   const response = await ai.models.generateContent({
     model: IMAGE_MODEL,
     contents: `
@@ -208,6 +236,11 @@ Return a full DocumentAnalysisResult JSON.
 };
 
 export const queryContracts = async (query: string, contracts: Contract[]): Promise<SmartFilterResponse> => {
+  if (!ai) {
+    console.warn('[SupplyLens] AI unavailable — returning empty query result.');
+    return { filterReasoning: 'AI features are disabled (no API key configured).', filteredIds: [], answer: 'AI is currently unavailable. Please configure a Gemini API key to enable natural language queries.' };
+  }
+
   const context = contracts.map(c => ({
     id: c.id,
     title: c.contractTitle,
@@ -256,6 +289,11 @@ export const queryContracts = async (query: string, contracts: Contract[]): Prom
 };
 
 export const getContractInsights = async (contracts: Contract[]): Promise<PortfolioInsight[]> => {
+  if (!ai) {
+    console.warn('[SupplyLens] AI unavailable — returning empty insights.');
+    return [];
+  }
+
   const summary = contracts.map(c =>
     `${c.contractTitle} [${c.contractType}, ${c.supplierTier}, ${c.criticality}]: Risk ${c.riskScore}`
   ).join(', ');
@@ -300,6 +338,11 @@ export const getContractInsights = async (contracts: Contract[]): Promise<Portfo
 };
 
 export const extractKeyClauses = async (contract: Contract): Promise<KeyClause[]> => {
+  if (!ai) {
+    console.warn('[SupplyLens] AI unavailable — returning empty clauses.');
+    return [];
+  }
+
   const response = await ai.models.generateContent({
     model: TEXT_MODEL,
     contents: `
