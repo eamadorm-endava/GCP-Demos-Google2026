@@ -1,0 +1,135 @@
+﻿
+M	navendu_shelflog-ai/.gi
+tignore
+A	shelflogic-ai-inventory
+-optimization/Dockerfile
+M	navendu_shelflog-ai/ass
+ets/product-apple-liqueur
+.svg
+M	navendu_shelflog-ai/ass
+ets/product-bourbon.svg
+M	navendu_shelflog-ai/ass
+ets/product-chardonnay.sv
+g
+M	navendu_shelflog-ai/ass
+ets/product-cherry-schnap
+ps.svg
+M	navendu_shelflog-ai/ass
+ets/product-ipa-beer.svg
+M	navendu_shelflog-ai/ass
+ets/product-seltzer.svg
+M	navendu_shelflog-ai/ass
+ets/product-snack-box.svg
+M	navendu_shelflog-ai/ass
+ets/product-tequila-anejo
+.svg
+M	navendu_shelflog-ai/ass
+ets/product-tequila-repos
+ado.svg
+M	navendu_shelflog-ai/ass
+ets/product-vodka.svg
+A	shelflogic-ai-inventory
+-optimization/cloudbuild-
+shelflogic-ai-inventory-o
+ptimization-cd.yaml
+A	shelflogic-ai-inventory
+-optimization/cloudbuild-
+shelflogic-ai-inventory-o
+ptimization-ci.yaml
+M	navendu_shelflog-ai/com
+ponents/AdminView.tsx
+M	navendu_shelflog-ai/com
+ponents/AiCopilot.tsx
+M	navendu_shelflog-ai/com
+ponents/AnalysisView.tsx
+M	navendu_shelflog-ai/com
+ponents/AssortmentSwapDet
+ails.tsx
+M	navendu_shelflog-ai/com
+ponents/AuthView.tsx
+M	navendu_shelflog-ai/com
+ponents/HQDashboard.tsx
+M	navendu_shelflog-ai/com
+ponents/Icons.tsx
+M	navendu_shelflog-ai/com
+ponents/ImpactSimulator.t
+sx
+M	navendu_shelflog-ai/com
+ponents/InventoryForecast
+Details.tsx
+M	navendu_shelflog-ai/com
+ponents/MLSimulationView.
+tsx
+M	navendu_shelflog-ai/com
+ponents/MainLayout.tsx
+M	navendu_shelflog-ai/com
+ponents/NetworkTicker.tsx
+M	navendu_shelflog-ai/com
+ponents/OpportunityCard.t
+sx
+M	navendu_shelflog-ai/com
+ponents/PriceOptimization
+Details.tsx
+M	navendu_shelflog-ai/com
+ponents/QuickPitch.tsx
+M	navendu_shelflog-ai/com
+ponents/ShelfComplianceDe
+tails.tsx
+M	navendu_shelflog-ai/com
+ponents/ShelfVisionSideba
+r.tsx
+M	navendu_shelflog-ai/com
+ponents/ShelfVisionView.t
+sx
+M	navendu_shelflog-ai/com
+ponents/StatsGrid.tsx
+M	navendu_shelflog-ai/com
+ponents/StoreDashboard.ts
+x
+M	navendu_shelflog-ai/com
+ponents/StoreDetailView.t
+sx
+M	navendu_shelflog-ai/com
+ponents/StoreListView.tsx
+M	navendu_shelflog-ai/com
+ponents/WeatherTriggerDet
+ails.tsx
+M	navendu_shelflog-ai/con
+stants.ts
+M	navendu_shelflog-ai/doc
+s/demo_script.md
+D	navendu_shelflog-ai/doc
+s/google_vids_script.md
+M	navendu_shelflog-ai/doc
+s/implementation_plan.md
+D	navendu_shelflog-ai/ind
+ex.css
+M	navendu_shelflog-ai/ind
+ex.html
+A	shelflogic-ai-inventory
+-optimization/nginx.conf
+M	navendu_shelflog-ai/pac
+kage.json
+A	shelflogic-ai-inventory
+-optimization/postcss.con
+fig.js
+D	navendu_shelflog-ai/pub
+lic/endava-logo.svg
+A	shelflogic-ai-inventory
+-optimization/server.js
+M	navendu_shelflog-ai/ser
+vices/geminiService.ts
+A	shelflogic-ai-inventory
+-optimization/src/index.c
+ss
+M	navendu_shelflog-ai/sto
+re/useStore.ts
+A	shelflogic-ai-inventory
+-optimization/tailwind.co
+nfig.js
+M	navendu_shelflog-ai/the
+me.ts
+M	navendu_shelflog-ai/vit
+e.config.ts
+
+
