@@ -26,7 +26,7 @@ export const generateQBRContent = async (vendor: Vendor, metrics: MetricLog[], e
   `;
 
   const response = await ai.models.generateContent({
-    model: 'gemini-3-pro-preview',
+    model: 'gemini-3.1-flash-image-preview',
     // FIX: For single text prompts, `contents` should be a string.
     contents: prompt,
     config: {
@@ -71,7 +71,7 @@ export const generateSlidesJSON = async (qbrResult: any) => {
   `;
 
   const response = await ai.models.generateContent({
-    model: 'gemini-3-pro-preview',
+    model: 'gemini-3.1-flash-image-preview',
     // FIX: For single text prompts, `contents` should be a string.
     contents: prompt,
     config: {
@@ -83,9 +83,9 @@ export const generateSlidesJSON = async (qbrResult: any) => {
           properties: {
             title: { type: Type.STRING },
             content: { type: Type.ARRAY, items: { type: Type.STRING } },
-            visualType: { 
-              type: Type.STRING, 
-              enum: ["CHART_SPEND", "CHART_VELOCITY", "CHART_SLA", "SCORECARD", "NONE"] 
+            visualType: {
+              type: Type.STRING,
+              enum: ["CHART_SPEND", "CHART_VELOCITY", "CHART_SLA", "SCORECARD", "NONE"]
             }
           },
           required: ["title", "content", "visualType"]
@@ -101,7 +101,7 @@ export const transcribeAndSummarizeMeeting = async (audioBase64: string, mimeTyp
   const ai = getAI();
   const response = await ai.models.generateContent({
     // FIX: Use a multimodal model appropriate for audio input and JSON output.
-    model: 'gemini-3-pro-preview',
+    model: 'gemini-3.1-flash-image-preview',
     // FIX: `contents` should be an array of Content objects.
     contents: [{
       parts: [
@@ -149,7 +149,7 @@ export const parseInvoiceAndAudit = async (fileBase64: string, mimeType: string,
   `;
 
   const response = await ai.models.generateContent({
-    model: 'gemini-3-pro-preview',
+    model: 'gemini-3.1-flash-image-preview',
     // FIX: `contents` should be an array of Content objects.
     contents: [{
       parts: [
@@ -208,7 +208,7 @@ export const auditInvoice = async (invoice: Invoice, rateCard: any) => {
   `;
 
   const response = await ai.models.generateContent({
-    model: 'gemini-3-pro-preview',
+    model: 'gemini-3.1-flash-image-preview',
     // FIX: For single text prompts, `contents` should be a string.
     contents: prompt,
     config: {
