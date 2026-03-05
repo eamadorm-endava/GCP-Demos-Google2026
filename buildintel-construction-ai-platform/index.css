@@ -1,35 +1,53 @@
 @import "tailwindcss";
-@import "tailwindcss/preflight";
-@import "tailwindcss/utilities";
-
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
 
 @theme {
-  /* Define the exact scale steps you will use in classes */
-  --color-brand-50:  #FFF1EE;
-  --color-brand-200: #FFD6CF;
-  --color-brand-600: #D93A28;
-  --color-brand-100: #FFE4E0;
-  --color-brand-300: #FFB3A8;
-  --color-brand-500: #FF5640;
-  --color-brand-700: #B52D1D;
-  --color-brand-400: #FF8775;
-  --color-brand-800: #912418;
-  --color-brand-900: #731D14;
+  --color-endava-orange: #FF5640;
+  --color-endava-dark: #192B37;
+  --color-endava-blue-90: #30404B;
+  --color-endava-blue-80: #47555F;
+  --color-endava-blue-70: #5E6A73;
+  --color-endava-blue-60: #758087;
+  --color-endava-blue-50: #8C959B;
+  --color-endava-blue-40: #A3AAAF;
+  --color-endava-blue-30: #BABFC3;
+  --color-endava-blue-20: #D1D5D7;
+  --color-endava-blue-10: #E8EAEB;
 
-  --color-brand-connect-50:#cfe0ff;
-  --color-brand-connect-200:#192B37;
-  --color-brand-connect-300:#b6d0ff;
+  --font-sans: 'Poppins', sans-serif;
 
-  --color-backgroun-primary:#30404B
-  --color-brand-connect-secondary:#47555F
-}
+  --animate-fade-in: fadeIn 0.5s ease-out;
+  --animate-fade-in-up: fadeInUp 0.5s ease-out;
 
-@layer utilities {
-  .__keep_gradients__ {
-    @apply bg-gradient-to-br from-red-500 to-blue-500;
+  @keyframes fadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+  }
+  @keyframes fadeInUp {
+    0% { opacity: 0; transform: translateY(10px); }
+    100% { opacity: 1; transform: translateY(0); }
   }
 }
 
+@layer utilities {
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  .custom-scrollbar::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    background: #4A5D73;  /* matches original script */
+    border-radius: 4px;
+  }
+  .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: #8C959B;
+  }
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
