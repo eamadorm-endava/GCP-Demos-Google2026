@@ -7,7 +7,7 @@ export const PRODUCT_CHERRY: Product = {
   name: "Brand X Cherry Schnapps",
   category: "Liqueurs",
   price: 18.50,
-  image: "assets/product-cherry-schnapps.svg", 
+  image: "/assets/product-cherry-schnapps.svg", 
   velocity_target_store: 0.3, 
   velocity_lookalike_store: 0, 
 };
@@ -17,7 +17,7 @@ export const PRODUCT_APPLE: Product = {
   name: "Brand Y Apple Liqueur",
   category: "Liqueurs",
   price: 22.00,
-  image: "assets/product-apple-liqueur.svg", 
+  image: "/assets/product-apple-liqueur.svg", 
   velocity_target_store: 0,
   velocity_lookalike_store: 42, 
 };
@@ -27,7 +27,7 @@ export const PRODUCT_VODKA: Product = {
   name: "Crystal Peak Vodka 750ml",
   category: "Spirits",
   price: 29.99,
-  image: "assets/product-vodka.svg",
+  image: "/assets/product-vodka.svg",
   velocity_target_store: 12,
   velocity_lookalike_store: 25,
 };
@@ -37,7 +37,7 @@ export const PRODUCT_BEER: Product = {
   name: "River City IPA 6pk",
   category: "Beer",
   price: 11.49,
-  image: "assets/product-ipa-beer.svg", 
+  image: "/assets/product-ipa-beer.svg", 
   velocity_target_store: 0, 
   velocity_lookalike_store: 45, 
 };
@@ -47,7 +47,7 @@ export const PRODUCT_TEQUILA: Product = {
   name: "Gato Negro Tequila Reposado",
   category: "Spirits",
   price: 45.99,
-  image: "assets/product-tequila-reposado.svg",
+  image: "/assets/product-tequila-reposado.svg",
   velocity_target_store: 5,
   velocity_lookalike_store: 8,
 };
@@ -57,7 +57,7 @@ export const PRODUCT_PREMIUM_TEQUILA: Product = {
   name: "Don Oro Extra Añejo",
   category: "Spirits",
   price: 159.99,
-  image: "assets/product-tequila-anejo.svg",
+  image: "./assets/product-tequila-anejo.svg",
   velocity_target_store: 1,
   velocity_lookalike_store: 12,
 };
@@ -67,7 +67,7 @@ export const PRODUCT_WHISKEY: Product = {
   name: "Old Oak Bourbon 750ml",
   category: "Spirits",
   price: 42.00,
-  image: "assets/product-bourbon.svg",
+  image: "./assets/product-bourbon.svg",
   velocity_target_store: 15,
   velocity_lookalike_store: 18,
 };
@@ -77,7 +77,7 @@ export const PRODUCT_CHARDONNAY: Product = {
   name: "Golden Vine Chardonnay",
   category: "Wine",
   price: 14.99,
-  image: "assets/product-chardonnay.svg",
+  image: "/assets/product-chardonnay.svg",
   velocity_target_store: 8,
   velocity_lookalike_store: 30,
 };
@@ -87,7 +87,7 @@ export const PRODUCT_COOLER: Product = {
   name: "Frostbite Hard Seltzer 12pk",
   category: "Beer",
   price: 19.99,
-  image: "assets/product-seltzer.svg",
+  image: "/assets/product-seltzer.svg",
   velocity_target_store: 2,
   velocity_lookalike_store: 15,
 };
@@ -97,13 +97,12 @@ export const PRODUCT_SNACK_BOX: Product = {
   name: "Artisan Meat & Cheese Board",
   category: "Fresh",
   price: 24.99,
-  image: "assets/product-snack-box.svg",
+  image: "/assets/product-snack-box.svg",
   velocity_target_store: 5,
   velocity_lookalike_store: 60,
 };
 
 // Mock Stores
-// Updated coordinates to fit within h-64 (approx 256px height) and w-full container
 export const STORE_DUBUQUE: Store = {
   store_id: "104",
   name: "Dubuque (Hy-Vee #104)",
@@ -209,7 +208,7 @@ export const STORE_CEDAR_RAPIDS: Store = {
   compliance_score: 82,
 };
 
-// Opportunities for Category Managers (Spirits, Beer, Wine)
+// Opportunities
 export const OPP_SPIRITS_SWAP: Opportunity = {
   id: "OPP-SPIR-001",
   type: "ASSORTMENT_SWAP",
@@ -230,7 +229,7 @@ export const OPP_WEATHER_BOOST: Opportunity = {
   status: "NEW",
   target_store_id: STORE_DUBUQUE.store_id,
   product: PRODUCT_COOLER,
-  projected_lift: 3800, // CRITICAL LIFT
+  projected_lift: 3800,
   match_score: 0.99,
   match_reasons: ["Upcoming Heatwave (95°F+)", "Historical 3x multiplier on Hard Seltzers during peaks"],
   created_at: new Date().toISOString(),
@@ -256,7 +255,7 @@ export const OPP_PREMIUM_SWAP_DM: Opportunity = {
   lookalike_store_id: STORE_DAVENPORT.store_id,
   delist_candidate: PRODUCT_WHISKEY,
   add_candidate: PRODUCT_PREMIUM_TEQUILA,
-  projected_lift: 5200, // VERY HIGH URGENCY
+  projected_lift: 5200,
   match_score: 0.98,
   match_reasons: ["High-income demographic mismatch", "Premium tequila trend in metro-elite clusters"],
   created_at: new Date().toISOString(),
@@ -282,7 +281,7 @@ export const OPP_MUSIC_FESTIVAL_DM: Opportunity = {
   target_store_id: STORE_DES_MOINES.store_id,
   product: PRODUCT_SNACK_BOX,
   event_name: "80-35 Music Festival",
-  projected_lift: 4500, // URGENT
+  projected_lift: 4500,
   match_score: 0.97,
   match_reasons: ["Festival proximity (0.5 miles)", "Historical grab-and-go surge during urban events"],
   created_at: new Date().toISOString(),
@@ -292,8 +291,8 @@ export const OPP_COMPETITOR_PRICE_CUT: Opportunity = {
   id: "OPP-COMP-022",
   type: "COMPETITOR_GAP",
   status: "NEW",
-  target_store_id: "104", // Dubuque
-  product: PRODUCT_WHISKEY, // Reusing whiskey
+  target_store_id: "104",
+  product: PRODUCT_WHISKEY,
   competitor_price: 38.99,
   projected_lift: 1850,
   match_score: 0.92,
@@ -305,8 +304,8 @@ export const OPP_EXCESS_STOCK_SWAP: Opportunity = {
   id: "OPP-INV-034",
   type: "INVENTORY_REBALANCE",
   status: "NEW",
-  target_store_id: "401", // Des Moines
-  lookalike_store_id: "512", // Cedar Rapids
+  target_store_id: "401",
+  lookalike_store_id: "512",
   product: PRODUCT_BEER,
   projected_lift: 1400,
   match_score: 0.89,
@@ -318,7 +317,7 @@ export const OPP_LOCAL_EVENT_SPORTS: Opportunity = {
   id: "OPP-EVT-041",
   type: "LOCAL_EVENT",
   status: "NEW",
-  target_store_id: "305", // Ames (University town)
+  target_store_id: "305",
   product: PRODUCT_COOLER,
   event_name: "Varsity Football vs State",
   projected_lift: 2900,
@@ -331,12 +330,25 @@ export const OPP_MARGIN_OPPORTUNITY: Opportunity = {
   id: "OPP-PRC-055",
   type: "PRICE_OPTIMIZATION",
   status: "NEW",
-  target_store_id: "202", // Davenport
+  target_store_id: "202",
   product: PRODUCT_CHARDONNAY,
-  projected_lift: 1150,
+  projected_lift: 4850,
   match_score: 0.85,
   match_reasons: ["Demand curve indicates inelasticity at $14.99", "Opportunity to increase to $16.49 with <2% volume loss"],
   created_at: new Date().toISOString(),
+};
+
+export const OPP_TRANSFER_DUBUQUE: Opportunity = {
+    id: "OPP-TRF-104",
+    type: "INVENTORY_REBALANCE",
+    status: "NEW",
+    target_store_id: STORE_DUBUQUE.store_id,
+    lookalike_store_id: STORE_DAVENPORT.store_id,
+    product: PRODUCT_BEER,
+    projected_lift: 1500,
+    match_score: 0.92,
+    match_reasons: ["Predicted Stockout in 2 days", "High velocity weekend approaching"],
+    created_at: new Date().toISOString(),
 };
 
 export const ALL_OPPORTUNITIES = [
@@ -349,6 +361,7 @@ export const ALL_OPPORTUNITIES = [
   OPP_COMPETITOR_PRICE_CUT,
   OPP_EXCESS_STOCK_SWAP,
   OPP_LOCAL_EVENT_SPORTS,
-  OPP_MARGIN_OPPORTUNITY
+  OPP_MARGIN_OPPORTUNITY,
+  OPP_TRANSFER_DUBUQUE
 ];
 export const ALL_STORES = [STORE_DUBUQUE, STORE_DAVENPORT, STORE_AMES, STORE_DES_MOINES, STORE_CEDAR_RAPIDS];

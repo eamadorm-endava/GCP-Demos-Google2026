@@ -13,7 +13,7 @@ const Settings: React.FC = () => {
     auditTolerance: 50,
     autoApprove: false,
     // FIX: Updated to a recommended model from the guidelines.
-    scribeModel: 'gemini-3-flash-preview',
+    scribeModel: 'gemini-3.1-flash-image-preview',
     tone: 'professional'
   });
 
@@ -131,7 +131,7 @@ const Settings: React.FC = () => {
                     className="w-full p-3 bg-endava-blue-80 border border-white/10 rounded-xl text-sm font-medium text-white focus:outline-none focus:ring-2 focus:ring-endava-orange/20"
                   >
                     {/* FIX: Use correct model names and update labels. */}
-                    <option value="gemini-3-flash-preview">Gemini 3 Flash (Fastest)</option>
+                    <option value="gemini-3.1-flash-image-preview">Gemini 3 Flash (Fastest)</option>
                     <option value="gemini-3-pro-preview">Gemini 3 Pro (High Reasoning)</option>
                   </select>
                 </div>
@@ -205,8 +205,8 @@ const Settings: React.FC = () => {
                   <button
                     onClick={() => setIntegrations({ ...integrations, [tool.id]: !integrations[tool.id as keyof typeof integrations] })}
                     className={`px-4 py-2 rounded-xl text-xs font-medium transition-all ${integrations[tool.id as keyof typeof integrations]
-                        ? 'bg-red-50 text-red-600 hover:bg-red-100'
-                        : 'bg-endava-orange/20 text-endava-orange hover:bg-endava-orange/80 hover:scale-105 30'
+                      ? 'bg-red-50 text-red-600 hover:bg-red-100'
+                      : 'bg-endava-orange/20 text-endava-orange hover:bg-endava-orange/80 hover:scale-105 30'
                       }`}
                   >
                     {integrations[tool.id as keyof typeof integrations] ? 'Disconnect' : 'Connect'}

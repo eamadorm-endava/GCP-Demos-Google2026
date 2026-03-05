@@ -2,8 +2,10 @@
 import { GoogleGenAI } from "@google/genai";
 import { Store, Product, Opportunity } from "../types";
 
-// Always use const ai = new GoogleGenAI({apiKey: process.env.API_KEY});
-const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
+const DEFAULT_MODEL = 'gemini-3.1-flash-image-preview';
+
+const apiKey = process.env.GEMINI_API_KEY || process.env.API_KEY || '';
+const ai = new GoogleGenAI({ apiKey });
 
 export const generateExpertMathExplanation = async (concept: string, dataPoints: any): Promise<string> => {
   if (!process.env.API_KEY) return "AI Expert offline.";
@@ -17,7 +19,7 @@ export const generateExpertMathExplanation = async (concept: string, dataPoints:
 
   try {
     const response = await ai.models.generateContent({
-      model: 'gemini-3-flash-preview',
+      model: 'gemini-3.1-flash-image-preview',
       contents: prompt,
       config: {
         systemInstruction: "You are the Lead Data Scientist for ShelfLogic. You translate complex linear algebra and statistics into high-value retail strategy."
@@ -35,7 +37,7 @@ export const generatePlanogramImage = async (prompt: string, fallbackPath: strin
 
   try {
     const response = await ai.models.generateContent({
-      model: 'gemini-2.5-flash-image',
+      model: 'gemini-3.1-flash-image-preview',
       contents: {
         parts: [
           {
@@ -68,7 +70,7 @@ export const generateLiveStoreFeed = async (prompt: string, fallbackPath: string
 
   try {
     const response = await ai.models.generateContent({
-      model: 'gemini-2.5-flash-image',
+      model: 'gemini-3.1-flash-image-preview',
       contents: {
         parts: [
           {
@@ -99,14 +101,43 @@ export const generateLiveStoreFeed = async (prompt: string, fallbackPath: string
 export const chatWithData = async (userMessage: string, contextData: any): Promise<string> => {
   if (!process.env.API_KEY) return "AI Copilot unavailable (Check API Key).";
 
+  const { opportunity, targetStore, lookalikeStore } = contextData || {};
+
+  const contextBlock = opportunity ? `
+## Active Opportunity
+- Type: ${opportunity.type?.replace(/_/g, ' ')}
+- ID: ${opportunity.opportunity_id}
+- AI Confidence: ${((opportunity.match_score || 0) * 100).toFixed(0)}%
+- Projected Revenue Lift: $${opportunity.projected_lift?.toLocaleString() ?? 'N/A'}
+- Delist Product: ${opportunity.delist_candidate?.name ?? 'N/A'} (Price: $${opportunity.delist_candidate?.price ?? 'N/A'}, Category: ${opportunity.delist_candidate?.category ?? 'N/A'})
+- Add Product: ${opportunity.add_candidate?.name ?? 'N/A'} (Price: $${opportunity.add_candidate?.price ?? 'N/A'}, Category: ${opportunity.add_candidate?.category ?? 'N/A'})
+- Single Product: ${opportunity.product?.name ?? 'N/A'} (Price: $${opportunity.product?.price ?? 'N/A'})
+- AI Match Reasons: ${(opportunity.match_reasons || []).join(' | ')}
+- Status: ${opportunity.status}
+
+## Target Store: ${targetStore?.name ?? 'Unknown'}
+- Location: ${targetStore?.location ?? 'N/A'}
+- Cluster: ${targetStore?.cluster ?? 'N/A'}
+- Monthly Revenue: $${targetStore?.metrics?.monthly_revenue?.toLocaleString() ?? 'N/A'}
+- Foot Traffic: ${targetStore?.metrics?.foot_traffic?.toLocaleString() ?? 'N/A'}/mo
+- Avg Basket Size: $${targetStore?.metrics?.avg_basket_size ?? 'N/A'}
+- Compliance Score: ${targetStore?.compliance_score ?? 'N/A'}%
+- Demographics: ${targetStore?.demographics?.primary ?? 'N/A'} | Income: ${targetStore?.demographics?.income_index ?? 'N/A'}
+
+## Digital Twin / Lookalike Store: ${lookalikeStore?.name ?? 'N/A'}
+- Location: ${lookalikeStore?.location ?? 'N/A'}
+- Monthly Revenue: $${lookalikeStore?.metrics?.monthly_revenue?.toLocaleString() ?? 'N/A'}
+- Foot Traffic: ${lookalikeStore?.metrics?.foot_traffic?.toLocaleString() ?? 'N/A'}/mo
+- Compliance Score: ${lookalikeStore?.compliance_score ?? 'N/A'}%
+` : JSON.stringify(contextData);
+
   const prompt = `
-    Context Data (Opportunity Details): ${JSON.stringify(contextData)}
-    
-    User Question: "${userMessage}"
-    
-    Answer as "ShelfLogic AI Advisor". Be concise, analytical, and professional. 
-    Focus on financial impact (ROI, Margin, Revenue Lift) and operational efficiency.
-    If the user asks "Why", explain the reasoning based on the 'match_reasons' or data provided.
+${contextBlock}
+
+## User Question
+"${userMessage}"
+
+Answer as "ShelfLogic AI Advisor". Ground your answer specifically in the data above — reference product names, dollar figures, store names, and metrics. Be concise (2-4 sentences) unless the user asks for detail.
   `;
 
   try {
@@ -114,7 +145,9 @@ export const chatWithData = async (userMessage: string, contextData: any): Promi
       model: 'gemini-3-flash-preview',
       contents: prompt,
       config: {
-        systemInstruction: "You are an intelligent Retail Operations Agent. Keep answers short (under 50 words) unless asked for detail."
+        systemInstruction: `You are ShelfLogic AI — an expert Retail Operations Advisor with deep knowledge of assortment planning, inventory management, price elasticity, and shelf compliance. 
+You have access to live store data and should give specific, data-driven answers referencing actual product names, prices, store metrics, and dollar figures from the context. 
+Be professional but conversational. Avoid generic answers — always tie your response directly to the specific data provided. Keep answers under 60 words unless the user requests detail.`
       }
     });
     return response.text || "I processed that request but have no specific output.";
@@ -134,7 +167,7 @@ export const generateOpportunityInsight = async (
 
   let prompt = "";
   let tools: any[] = [];
-  const model = "gemini-3-flash-preview";
+  const model = "gemini-3.1-flash-image-preview";
 
   switch (opportunity.type) {
     case 'ASSORTMENT_SWAP':
@@ -236,7 +269,7 @@ export const generateDetailedProductComparison = async (
 
   try {
     const response = await ai.models.generateContent({
-      model: 'gemini-3-pro-preview',
+      model: DEFAULT_MODEL,
       contents: prompt,
       config: {
         systemInstruction: "You are a senior Retail Merchandising Consultant. Provide professional, data-backed qualitative reasoning."
