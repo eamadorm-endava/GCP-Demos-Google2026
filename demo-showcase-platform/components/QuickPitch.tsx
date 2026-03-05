@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { useStore } from '../store/useStore';
-import { X, Play, ScrollText, Lightbulb, CheckCircle, ChevronRight, FileText } from 'lucide-react';
+import { X, Play, Lightbulb, CheckCircle, FileText } from 'lucide-react';
 
 const QuickPitch: React.FC = () => {
   const pitchVerticalId = useStore((state) => state.pitchVerticalId);
@@ -15,11 +15,8 @@ const QuickPitch: React.FC = () => {
   if (!vertical) return null;
 
   const handleLaunch = () => {
-    // Navigate to the demo
     setVertical(vertical.id);
-    // Close the pitch modal
     toggleQuickPitch(false);
-    // Clear the pitch vertical state
     setPitchVertical(null);
   };
 
@@ -29,96 +26,89 @@ const QuickPitch: React.FC = () => {
   };
 
   return (
-    <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 md:p-6 bg-black/95 backdrop-blur-xl animate-in fade-in duration-300">
-      <div className="w-full max-w-5xl bg-endava-dark rounded-3xl border border-white/10 overflow-hidden shadow-[0_0_100px_rgba(0,0,0,0.5)] flex flex-col max-h-[95vh] relative">
+    <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 md:p-8 bg-black/70 backdrop-blur-xl animate-in fade-in duration-300">
+      <div className="w-full max-w-5xl bg-endava-dark/95 border border-white/10 rounded-2xl overflow-hidden flex flex-col max-h-[88vh] relative shadow-[0_40px_120px_-20px_rgba(0,0,0,0.7)]">
+
         {/* Header */}
-        <div className="flex items-center justify-between p-6 md:p-10 border-b border-white/5 flex-shrink-0">
-          <div className="flex items-center gap-6">
-            <div className={`p-4 md:p-5 rounded-2xl bg-endava-orange shadow-lg shadow-endava-orange/20`}>
-              <ScrollText className="w-6 h-6 md:w-8 md:h-8 text-white" />
+        <div className="flex items-center justify-between px-6 md:px-8 py-5 md:py-6 border-b border-white/[0.06] flex-shrink-0">
+          <div className="flex items-center gap-4 md:gap-5">
+            <div className="p-3 rounded-xl bg-endava-orange/10 border border-endava-orange/20">
+              <FileText className="w-5 h-5 md:w-6 md:h-6 text-endava-orange" />
             </div>
             <div>
-              <h2 className="text-3xl md:text-4xl font-black tracking-tight uppercase">{vertical.title} <span className="text-endava-orange">Overview</span></h2>
-              <p className="text-gray-500 text-sm md:text-lg font-bold tracking-widest uppercase opacity-60">Strategic Solution Brief</p>
+              <h2 className="text-xl md:text-2xl font-semibold tracking-tight">{vertical.title} <span className="text-endava-orange">Overview</span></h2>
+              <p className="text-endava-blue-60 text-[11px] md:text-xs font-semibold tracking-[0.2em] uppercase mt-0.5">Strategic Solution Brief</p>
             </div>
           </div>
           <button
             onClick={handleClose}
-            className="p-3 hover:bg-white/5 rounded-full transition-colors text-gray-500 hover:text-white"
+            className="p-2.5 hover:bg-white/5 rounded-xl transition-colors text-endava-blue-50 hover:text-white"
           >
-            <X className="w-8 h-8 md:w-10 md:h-10" />
+            <X className="w-6 h-6 md:w-7 md:h-7" />
           </button>
         </div>
 
         {/* Content */}
-        <div className="flex-grow overflow-y-auto custom-scrollbar p-6 md:p-10">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16">
-            <div className="space-y-10">
-              <section className="bg-white/5 p-8 rounded-3xl border border-white/5 shadow-inner">
-                <div className="flex items-center gap-2 mb-4 text-endava-orange font-black uppercase tracking-[0.2em] text-xs md:text-sm">
-                  <FileText className="w-5 h-5" /> Executive Summary
+        <div className="flex-grow overflow-y-auto custom-scrollbar px-6 md:px-8 py-6 md:py-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8">
+            {/* Left Column */}
+            <div className="space-y-6">
+              {/* Executive Summary */}
+              <section className="border-l-2 border-endava-orange/40 pl-5 md:pl-6">
+                <div className="flex items-center gap-2 mb-2.5 text-endava-orange font-bold uppercase tracking-[0.15em] text-[10px] md:text-xs">
+                  <FileText className="w-3.5 h-3.5" /> Executive Summary
                 </div>
-                <p className="text-lg md:text-2xl text-gray-200 leading-relaxed font-light italic">
-                  "{vertical.pitch.problem}"
+                <p className="text-sm md:text-base text-endava-blue-20 leading-relaxed">
+                  {vertical.pitch.problem}
                 </p>
               </section>
 
-              <section className="p-8 border-l-2 border-endava-orange/30">
-                <div className="flex items-center gap-2 mb-4 text-white font-black uppercase tracking-[0.2em] text-xs md:text-sm">
-                  <Lightbulb className="w-5 h-5 text-endava-orange" /> Endava Solution
+              {/* Endava Solution */}
+              <section className="bg-white/[0.03] rounded-xl p-5 md:p-6 border border-white/[0.04]">
+                <div className="flex items-center gap-2 mb-2.5 text-white font-bold uppercase tracking-[0.15em] text-[10px] md:text-xs">
+                  <Lightbulb className="w-3.5 h-3.5 text-endava-orange" /> Endava Solution
                 </div>
-                <p className="text-lg md:text-xl text-gray-400 leading-relaxed font-light">
+                <p className="text-sm md:text-base text-endava-blue-30 leading-relaxed">
                   {vertical.pitch.solution}
                 </p>
               </section>
             </div>
 
-            <div className="bg-endava-blue-90 p-8 md:p-10 rounded-3xl border border-white/5 shadow-inner flex flex-col">
-              <div className="flex items-center gap-2 mb-8 text-endava-orange font-black uppercase tracking-[0.2em] text-xs md:text-sm">
-                <CheckCircle className="w-5 h-5" /> Success Metrics
+            {/* Right Column — Success Metrics */}
+            <div className="bg-white/[0.02] rounded-xl p-5 md:p-6 border border-white/[0.04]">
+              <div className="flex items-center gap-2 mb-5 text-endava-orange font-bold uppercase tracking-[0.15em] text-[10px] md:text-xs">
+                <CheckCircle className="w-3.5 h-3.5" /> Success Metrics
               </div>
-              <ul className="space-y-6 md:space-y-10 mb-12">
+              <ul className="space-y-4">
                 {vertical.pitch.talkingPoints.map((point, idx) => (
-                  <li key={idx} className="flex gap-6">
-                    <div className="flex-shrink-0 w-10 h-10 rounded-xl bg-endava-orange/10 text-endava-orange flex items-center justify-center font-black text-lg border border-endava-orange/20">
+                  <li key={idx} className="flex gap-3.5 items-start">
+                    <div className="flex-shrink-0 w-6 h-6 rounded-lg bg-endava-orange/10 text-endava-orange flex items-center justify-center font-bold text-xs border border-endava-orange/15 mt-0.5">
                       {idx + 1}
                     </div>
-                    <p className="text-lg md:text-xl text-gray-300 font-light leading-relaxed">{point}</p>
+                    <p className="text-sm md:text-base text-endava-blue-30 leading-relaxed">{point}</p>
                   </li>
                 ))}
               </ul>
-
-              {/* Contextual Launch Button */}
-              <button
-                onClick={handleLaunch}
-                className="mt-auto group flex items-center justify-between bg-white/5 hover:bg-endava-orange/10 text-white p-6 rounded-2xl transition-all border border-white/10 hover:border-endava-orange/50"
-              >
-                <div className="flex flex-col items-start">
-                  <span className="text-xs font-black text-endava-orange uppercase tracking-widest mb-1">Ready to explore?</span>
-                  <span className="text-lg font-bold">Launch {vertical.title}</span>
-                </div>
-                <ChevronRight className="w-8 h-8 text-endava-orange group-hover:translate-x-2 transition-transform" />
-              </button>
             </div>
           </div>
         </div>
 
-        {/* Footer with Master Launch Action */}
-        <div className="p-8 md:p-10 bg-endava-dark flex flex-col md:flex-row items-center justify-center gap-6 flex-shrink-0 border-t border-white/5">
+        {/* Footer */}
+        <div className="px-6 md:px-8 py-4 md:py-5 flex items-center justify-between gap-4 flex-shrink-0 border-t border-white/[0.06] bg-endava-dark">
           <button
-            onClick={handleLaunch}
-            className="w-full md:w-auto flex items-center justify-center gap-4 bg-endava-orange text-white px-10 md:px-20 py-5 md:py-6 rounded-2xl font-black text-xl md:text-2xl hover:opacity-90 transition-all active:scale-95 shadow-[0_20px_50px_rgba(255,86,64,0.4)] relative overflow-hidden group"
+            onClick={handleClose}
+            className="text-endava-blue-50 hover:text-white font-medium text-sm md:text-base transition-colors uppercase tracking-[0.15em]"
           >
-            <div className="absolute inset-0 bg-white/10 translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
-            <Play className="w-6 h-6 md:w-8 md:h-8 fill-current relative z-10" />
-            <span className="relative z-10 uppercase tracking-widest">LAUNCH {vertical.title.toUpperCase()} DEMO</span>
+            Close
           </button>
 
           <button
-            onClick={handleClose}
-            className="text-gray-500 hover:text-white font-bold text-lg md:text-xl transition-colors uppercase tracking-widest"
+            onClick={handleLaunch}
+            className="flex items-center gap-3 bg-endava-orange text-white px-6 md:px-10 py-3 md:py-4 rounded-xl font-medium text-sm md:text-base hover:bg-[#e84a35] transition-all active:scale-[0.97] shadow-[0_12px_40px_rgba(255,86,64,0.35)] relative overflow-hidden group"
           >
-            Close Overview
+            <div className="absolute inset-0 bg-white/10 translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
+            <Play className="w-4 h-4 md:w-5 md:h-5 fill-current relative z-10" />
+            <span className="relative z-10 uppercase tracking-[0.12em]">Launch Demo</span>
           </button>
         </div>
       </div>

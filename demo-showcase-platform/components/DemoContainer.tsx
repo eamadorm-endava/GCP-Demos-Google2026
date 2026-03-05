@@ -74,7 +74,7 @@ const DemoContainer: React.FC = () => {
             </div>
           </div>
 
-          <div className="text-center space-y-4 w-full">
+          <div className="text-center space-y-8 w-full">
             <h2 className="text-3xl md:text-5xl font-medium tracking-tighter uppercase italic flex items-center justify-center gap-4">
               {verticalConfig?.title.split(' ')[0]} <span className="text-endava-orange">{verticalConfig?.title.split(' ').slice(1).join(' ') || 'Demo'}</span>
             </h2>
@@ -92,11 +92,11 @@ const DemoContainer: React.FC = () => {
     );
   }
 
-  if (verticalConfig?.externalUrl) {
-    return (
-      <div className="h-full w-full flex flex-col animate-in fade-in duration-700 relative">
-        {/* Fullscreen Iframe */}
-        <div className="flex-grow w-full h-full bg-white">
+  const renderContent = () => {
+    // 1. External IFrame Demo
+    if (verticalConfig?.externalUrl) {
+      return (
+        <div className="flex-grow w-full h-full bg-white relative">
           <iframe
             src={verticalConfig.externalUrl}
             className="w-full h-full border-none"
@@ -105,20 +105,21 @@ const DemoContainer: React.FC = () => {
             allowFullScreen
           />
         </div>
-      </div>
-    );
-  }
+      );
+    }
 
-  if (verticalConfig?.isAiGenerated) {
-    return <DynamicAIDemo config={verticalConfig} />;
-  }
+    // 2. AI Generated Dynamic Demo
+    if (verticalConfig?.isAiGenerated) {
+      return <DynamicAIDemo config={verticalConfig} />;
+    }
 
-  const renderDemo = () => {
+    // 3. Registered Manual Demo (Plug-and-Play)
     switch (currentVerticalId) {
-      case 'retail': return <RetailDemo />;
-      case 'healthcare': return <HealthcareDemo />;
-      case 'fintech': return <FinTechDemo />;
+      case 'retail': return <div className="h-full w-full"><RetailDemo /></div>;
+      case 'healthcare': return <div className="h-full w-full"><HealthcareDemo /></div>;
+      case 'fintech': return <div className="h-full w-full"><FinTechDemo /></div>;
       default: return (
+        // 4. Default Fallback
         <div className="p-12 h-full flex flex-col items-center justify-center text-center">
           <div className="bg-white/5 p-12 rounded-full mb-8">
             <ExternalLink className="w-20 h-20 text-endava-blue-50" strokeWidth={1} />
@@ -130,7 +131,13 @@ const DemoContainer: React.FC = () => {
     }
   };
 
-  return <div className="h-full w-full animate-in fade-in slide-in-from-bottom-4 duration-500">{renderDemo()}</div>;
+  return (
+    <div className="h-full w-full p-8 flex animate-in fade-in duration-700">
+      <div className="flex-grow bg-[#0f172a] rounded-2xl overflow-hidden border border-white/5 relative">
+        {renderContent()}
+      </div>
+    </div>
+  );
 };
 
 export default DemoContainer;

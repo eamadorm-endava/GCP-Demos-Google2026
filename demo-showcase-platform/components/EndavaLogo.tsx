@@ -1,5 +1,6 @@
-
 import React from 'react';
+import { useStore } from '../store/useStore';
+
 
 interface Props {
   className?: string;
@@ -8,6 +9,19 @@ interface Props {
 }
 
 const EndavaLogo: React.FC<Props> = ({ className = '', height = 32, variant = 'white' }) => {
+  const customLogo = useStore((state) => state.customLogo);
+
+  if (customLogo) {
+    return (
+      <img
+        src={customLogo}
+        alt="Custom Brand Logo"
+        style={{ height: `${height}px`, width: 'auto' }}
+        className={`select-none object-contain ${className}`}
+      />
+    );
+  }
+
 
   const colors = {
     white: '#FFFFFF',

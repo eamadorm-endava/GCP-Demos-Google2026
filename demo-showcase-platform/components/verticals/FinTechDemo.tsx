@@ -1,6 +1,7 @@
 
 import React from 'react';
 import { useStore } from '../../store/useStore';
+import KioskCard from '../shared/KioskCard';
 import { Shield, ShieldAlert, ShieldCheck, Landmark, Search, ArrowUpRight } from 'lucide-react';
 
 const FinTechDemo: React.FC = () => {
@@ -10,8 +11,8 @@ const FinTechDemo: React.FC = () => {
     <div className="p-4 md:p-8 h-full flex flex-col gap-6 md:gap-8 custom-scrollbar overflow-y-auto pb-40">
       <header className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
         <div>
-          <h2 className="text-2xl md:text-4xl font-black">Fraud <span className="text-endava-orange">Defense</span></h2>
-          <p className="text-base md:text-xl text-gray-500 font-light">BigQuery ML Real-Time Scoring</p>
+          <h2 className="text-2xl md:text-4xl font-medium">Fraud <span className="text-endava-orange">Defense</span></h2>
+          <p className="text-base md:text-xl text-endava-blue-40 font-light">BigQuery ML Real-Time Scoring</p>
         </div>
         <div className="bg-endava-orange/10 text-endava-orange px-4 py-2 rounded-full font-black flex items-center gap-2 border border-endava-orange/20 text-xs md:text-base tracking-widest uppercase">
           <Shield className="w-4 h-4 md:w-6 md:h-6" strokeWidth={2.5} /> NETWORK ACTIVE
@@ -20,7 +21,7 @@ const FinTechDemo: React.FC = () => {
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 md:gap-10">
         <div className="lg:col-span-1 space-y-6 md:space-y-10">
-          <div className="bg-gradient-to-br from-endava-orange to-[#7a1f0a] rounded-[2.5rem] p-8 md:p-10 shadow-2xl shadow-endava-orange/20 relative overflow-hidden group">
+          <div className="bg-gradient-to-br from-endava-orange to-[#b83525] rounded-[2.5rem] p-8 md:p-10 shadow-2xl shadow-endava-orange/20 relative overflow-hidden group">
             <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full translate-x-10 -translate-y-10 group-hover:scale-110 transition-transform" />
             <h3 className="text-white/60 text-xs font-black uppercase tracking-[0.3em] mb-3">Safety Index</h3>
             <div className="text-6xl md:text-7xl font-black text-white mb-6">99.8%</div>
@@ -33,37 +34,37 @@ const FinTechDemo: React.FC = () => {
             </div>
           </div>
 
-          <div className="bg-endava-blue-90 rounded-[2.5rem] p-8 md:p-10 border border-white/5 shadow-xl">
+          <KioskCard className="p-8 md:p-10 shadow-xl">
             <div className="flex items-center gap-5 mb-8">
               <div className="bg-endava-orange/10 p-4 rounded-2xl border border-endava-orange/20">
                 <ShieldAlert className="text-endava-orange w-6 h-6" strokeWidth={2.5} />
               </div>
-              <h4 className="text-xl md:text-2xl font-black tracking-tight">AI Firewall</h4>
+              <h4 className="text-xl md:text-2xl font-medium tracking-tight">AI Firewall</h4>
             </div>
             <div className="space-y-4">
               <div className="flex items-center justify-between p-5 bg-white/5 rounded-3xl text-sm md:text-base border border-transparent hover:border-white/10 transition-all">
-                <span className="text-gray-500 font-bold uppercase tracking-wider text-xs">Risk Cutoff</span>
+                <span className="text-endava-blue-40 font-bold uppercase tracking-wider text-xs">Risk Cutoff</span>
                 <span className="font-black text-endava-orange">0.85 ML</span>
               </div>
               <div className="flex items-center justify-between p-5 bg-white/5 rounded-3xl text-sm md:text-base border border-transparent hover:border-white/10 transition-all">
-                <span className="text-gray-500 font-bold uppercase tracking-wider text-xs">Geo-Fencing</span>
+                <span className="text-endava-blue-40 font-bold uppercase tracking-wider text-xs">Geo-Fencing</span>
                 <span className="text-green-500 font-black uppercase tracking-widest text-[10px] bg-green-500/10 px-3 py-1 rounded-full border border-green-500/20">Active</span>
               </div>
             </div>
-          </div>
+          </KioskCard>
         </div>
 
-        <div className="lg:col-span-2 bg-endava-blue-90 rounded-[2.5rem] p-8 md:p-12 border border-white/5 flex flex-col shadow-2xl">
+        <KioskCard className="lg:col-span-2 p-8 md:p-12 flex flex-col shadow-2xl">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-10 gap-6">
-            <h3 className="text-2xl md:text-3xl font-black flex items-center gap-4">
+            <h3 className="text-2xl md:text-3xl font-medium flex items-center gap-4">
               <Landmark className="text-endava-orange w-8 h-8" /> Stream Logs
             </h3>
             <div className="relative group">
-              <Search className="absolute left-5 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400 group-focus-within:text-endava-orange transition-colors" />
+              <Search className="absolute left-5 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-500 group-focus-within:text-endava-orange transition-colors" />
               <input
                 type="text"
                 placeholder="Search Transaction ID..."
-                className="bg-white/5 border border-white/10 rounded-2xl pl-14 pr-6 py-4 text-sm w-full sm:w-80 outline-none focus:border-endava-orange/50 focus:bg-white/10 transition-all font-bold"
+                className="bg-endava-dark border border-white/10 rounded-2xl pl-14 pr-6 py-4 text-sm w-full sm:w-80 outline-none focus:border-endava-orange/50 focus:bg-endava-dark transition-all font-bold text-white placeholder-gray-600"
               />
             </div>
           </div>
@@ -73,8 +74,8 @@ const FinTechDemo: React.FC = () => {
               <div key={tx.id} className="group flex flex-col sm:flex-row sm:items-center justify-between p-5 md:p-8 bg-white/5 rounded-3xl border border-transparent hover:border-endava-orange/20 hover:bg-endava-orange/5 transition-all gap-6">
                 <div className="flex items-center gap-6 md:gap-8">
                   <div className={`p-4 md:p-5 rounded-full flex-shrink-0 border ${tx.risk === 'High'
-                      ? 'bg-red-500/10 border-red-500/30'
-                      : 'bg-green-500/10 border-green-500/30'
+                    ? 'bg-red-500/10 border-red-500/30'
+                    : 'bg-green-500/10 border-green-500/30'
                     }`}>
                     {tx.risk === 'High'
                       ? <ShieldAlert className="text-red-500 w-6 h-6 md:w-8 md:h-8" />
@@ -83,14 +84,14 @@ const FinTechDemo: React.FC = () => {
                   </div>
                   <div className="truncate">
                     <div className="font-black text-xl md:text-2xl truncate tracking-tight">{tx.id}</div>
-                    <div className="text-gray-600 text-xs md:text-sm font-bold uppercase tracking-widest mt-1">Cross-Border • Settlement Pending</div>
+                    <div className="text-endava-blue-50 text-xs md:text-sm font-bold uppercase tracking-widest mt-1">Cross-Border • Settlement Pending</div>
                   </div>
                 </div>
                 <div className="flex sm:flex-col items-center sm:items-end justify-between sm:justify-center">
                   <div className="text-2xl md:text-3xl font-black sm:mb-2">${tx.amount.toLocaleString()}</div>
                   <div className={`text-[10px] md:text-xs font-black uppercase tracking-[0.2em] px-4 py-1 rounded-full border ${tx.status === 'Flagged'
-                      ? 'text-red-500 bg-red-500/10 border-red-500/20'
-                      : 'text-green-500 bg-green-500/10 border-green-500/20'
+                    ? 'text-red-500 bg-red-500/10 border-red-500/20'
+                    : 'text-green-500 bg-green-500/10 border-green-500/20'
                     }`}>
                     {tx.status}
                   </div>
@@ -99,10 +100,10 @@ const FinTechDemo: React.FC = () => {
             ))}
           </div>
 
-          <button className="mt-10 w-full p-6 rounded-3xl border-2 border-dashed border-white/5 text-gray-400 font-black tracking-widest uppercase hover:bg-white/5 hover:text-endava-orange hover:border-endava-orange/30 active:scale-95 transition-all text-sm">
+          <button className="mt-10 w-full p-6 rounded-3xl border-2 border-dashed border-white/5 text-endava-blue-50 font-medium tracking-widest uppercase hover:bg-white/5 hover:text-endava-orange hover:border-endava-orange/30 active:scale-95 transition-all text-sm">
             Load Historical Dataset
           </button>
-        </div>
+        </KioskCard>
       </div>
     </div>
   );

@@ -38,4 +38,6 @@ export interface DemoState {
   isAdminOpen: boolean;
   isIdle: boolean;
   lastActivity: number;
+  customLogo: string | null;
 }
+
