@@ -1,14 +1,14 @@
 import { GoogleGenAI, Type } from "@google/genai";
 import type { Message, RiskAnalysisResponse, Shipment, ShipmentSummary } from "../types";
 
-// Assume process.env.API_KEY is configured in the environment
-const API_KEY = process.env.API_KEY;
+// Access API key from environment (Vite exposes API_KEY or GEMINI_KEY via process.env.API_KEY define)
+const API_KEY = process.env.API_KEY || import.meta.env.VITE_API_KEY;
 
 if (!API_KEY) {
   console.warn("Gemini API key not found. AI features will be disabled.");
 }
 
-const ai = new GoogleGenAI({ apiKey: API_KEY! });
+const ai = API_KEY ? new GoogleGenAI({ apiKey: API_KEY }) : null as any;
 
 // FIX: Update fallback documents to use 'es-LA' and add 'pt-BR' to align with LanguageContext types.
 const fallbackDocuments: Record<string, Record<string, string[]>> = {
@@ -23,9 +23,9 @@ const fallbackDocuments: Record<string, Record<string, string[]>> = {
     'default': ['Factura Comercial', 'Guía Aérea (AWB)']
   },
   'pt-BR': {
-      'Colombia': ['Fatura Comercial', 'Conhecimento de Embarque Aéreo (AWB)', 'Certificado Fitossanitário', 'Certificado de Origem'],
-      'Ecuador': ['Fatura Comercial', 'Conhecimento de Embarque Aéreo (AWB)', 'DAE (Documento Aduaneiro de Exportação)', 'Certificado Fitossanitário'],
-      'default': ['Fatura Comercial', 'Conhecimento de Embarque Aéreo (AWB)']
+    'Colombia': ['Fatura Comercial', 'Conhecimento de Embarque Aéreo (AWB)', 'Certificado Fitossanitário', 'Certificado de Origem'],
+    'Ecuador': ['Fatura Comercial', 'Conhecimento de Embarque Aéreo (AWB)', 'DAE (Documento Aduaneiro de Exportação)', 'Certificado Fitossanitário'],
+    'default': ['Fatura Comercial', 'Conhecimento de Embarque Aéreo (AWB)']
   }
 };
 
@@ -44,7 +44,7 @@ export async function getSuggestedDocuments(originCountry: string, destinationCo
 
   try {
     const response = await ai.models.generateContent({
-      model: "gemini-2.5-flash",
+      model: "gemini-3.1-flash-image-preview",
       contents: prompt,
       config: {
         responseMimeType: "application/json",
@@ -65,11 +65,11 @@ export async function getSuggestedDocuments(originCountry: string, destinationCo
 
     const jsonString = response.text.trim();
     const result = JSON.parse(jsonString);
-    
+
     if (result && Array.isArray(result.documents)) {
-        return result.documents;
+      return result.documents;
     }
-    
+
     return [];
 
   } catch (error) {
@@ -84,7 +84,7 @@ export async function getRiskAnalysis(shipment: Shipment, language: 'en' | 'es-L
   if (!API_KEY) {
     return { riskLevel: 'Low', analysisPoints: ['API key not configured. This is a default low-risk assessment.'] };
   }
-  
+
   const lang = language || 'en';
   // FIX: Use a map for prompt languages to support all defined types.
   const promptLanguageMap = { 'en': 'English', 'es-LA': 'Latin American Spanish', 'pt-BR': 'Brazilian Portuguese' };
@@ -104,8 +104,8 @@ Shipment Data:
 ${shipmentData}`;
 
   try {
-     const response = await ai.models.generateContent({
-      model: "gemini-2.5-flash",
+    const response = await ai.models.generateContent({
+      model: "gemini-3.1-flash-image-preview",
       contents: prompt,
       config: {
         responseMimeType: "application/json",
@@ -134,7 +134,7 @@ ${shipmentData}`;
     if (result && result.riskLevel && Array.isArray(result.analysisPoints)) {
       return result as RiskAnalysisResponse;
     }
-    
+
     throw new Error('Invalid JSON response format from API.');
 
   } catch (error) {
@@ -145,44 +145,44 @@ ${shipmentData}`;
 
 // FIX: Update function signature to accept languages from LanguageContext.
 export async function summarizeChat(messages: Message[], language: 'en' | 'es-LA' | 'pt-BR'): Promise<string> {
-    if (!API_KEY) {
-        // FIX: Handle all possible languages for the fallback message.
-        if (language === 'es-LA') return 'La función de resumen no está disponible sin una clave de API.';
-        if (language === 'pt-BR') return 'O recurso de resumo não está disponível sem uma chave de API.';
-        return 'Summary feature is unavailable without an API key.';
-    }
-    if (messages.length === 0) {
-        if (language === 'es-LA') return 'No hay mensajes para resumir.';
-        if (language === 'pt-BR') return 'Não há mensagens para resumir.';
-        return 'No messages to summarize.';
-    }
+  if (!API_KEY) {
+    // FIX: Handle all possible languages for the fallback message.
+    if (language === 'es-LA') return 'La función de resumen no está disponible sin una clave de API.';
+    if (language === 'pt-BR') return 'O recurso de resumo não está disponível sem uma chave de API.';
+    return 'Summary feature is unavailable without an API key.';
+  }
+  if (messages.length === 0) {
+    if (language === 'es-LA') return 'No hay mensajes para resumir.';
+    if (language === 'pt-BR') return 'Não há mensagens para resumir.';
+    return 'No messages to summarize.';
+  }
 
-    const lang = language || 'en';
-    // FIX: Use a map for prompt languages to support all defined types.
-    const promptLanguageMap = { 'en': 'English', 'es-LA': 'Latin American Spanish', 'pt-BR': 'Brazilian Portuguese' };
-    const promptLanguage = promptLanguageMap[lang];
+  const lang = language || 'en';
+  // FIX: Use a map for prompt languages to support all defined types.
+  const promptLanguageMap = { 'en': 'English', 'es-LA': 'Latin American Spanish', 'pt-BR': 'Brazilian Portuguese' };
+  const promptLanguage = promptLanguageMap[lang];
 
-    const formattedChat = messages
-        .map(msg => `${msg.sender.name} (${msg.sender.role}): ${msg.text}`)
-        .join('\n');
+  const formattedChat = messages
+    .map(msg => `${msg.sender.name} (${msg.sender.role}): ${msg.text}`)
+    .join('\n');
 
-    const prompt = `Summarize the following supply chain conversation into a few key bullet points. Highlight any action items, important decisions, or unresolved issues. The summary should be concise and easy to understand. Respond in ${promptLanguage}.
+  const prompt = `Summarize the following supply chain conversation into a few key bullet points. Highlight any action items, important decisions, or unresolved issues. The summary should be concise and easy to understand. Respond in ${promptLanguage}.
 
 Conversation:
 ${formattedChat}`;
 
-    try {
-        const response = await ai.models.generateContent({
-            model: "gemini-2.5-flash",
-            contents: prompt,
-        });
+  try {
+    const response = await ai.models.generateContent({
+      model: "gemini-3.1-flash-image-preview",
+      contents: prompt,
+    });
 
-        return response.text.trim();
+    return response.text.trim();
 
-    } catch (error) {
-        console.error("Error fetching chat summary from Gemini API:", error);
-        throw new Error('Failed to generate chat summary.');
-    }
+  } catch (error) {
+    console.error("Error fetching chat summary from Gemini API:", error);
+    throw new Error('Failed to generate chat summary.');
+  }
 }
 
 // FIX: Update function signature to accept languages from LanguageContext.
@@ -195,7 +195,7 @@ export async function getShipmentSummary(shipment: Shipment, language: 'en' | 'e
   // FIX: Use a map for prompt languages to support all defined types.
   const promptLanguageMap = { 'en': 'English', 'es-LA': 'Latin American Spanish', 'pt-BR': 'Brazilian Portuguese' };
   const promptLanguage = promptLanguageMap[lang];
-  
+
   const shipmentContext = {
     id: shipment.id,
     status: shipment.status,
@@ -213,7 +213,7 @@ ${JSON.stringify(shipmentContext, null, 2)}`;
 
   try {
     const response = await ai.models.generateContent({
-      model: "gemini-2.5-flash",
+      model: "gemini-3.1-flash-image-preview",
       contents: prompt,
       config: {
         responseMimeType: "application/json",
