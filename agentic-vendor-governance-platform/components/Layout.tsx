@@ -15,13 +15,6 @@ import {
 } from 'lucide-react';
 import { VENDORS } from '../constants';
 
-const EndavaLogo = () => (
-  <svg width="36" height="36" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <path d="M45 55C25 45 5 40 10 20C15 0 45 0 50 20C55 35 50 45 45 55Z" fill="#FF5640" />
-    <path d="M45 65C25 75 5 80 10 100C15 120 45 120 50 100C55 85 50 75 45 65Z" fill="#FF5640" />
-    <path d="M65 60C75 40 100 35 110 50C120 65 115 95 95 95C75 95 70 75 65 60Z" fill="#FF5640" />
-  </svg>
-);
 
 const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -53,7 +46,7 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
       `}>
         <div className="p-6 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <EndavaLogo />
+            <img src="/endava-logo.svg" alt="Endava Logo" className="w-9 h-9" />
             <span className="font-semibold text-white text-lg leading-tight tracking-tight">Agentic Governance</span>
           </div>
           <button onClick={() => setIsMobileMenuOpen(false)} className="lg:hidden p-2 text-endava-blue-40 hover:bg-endava-blue-90/5 rounded-lg">
