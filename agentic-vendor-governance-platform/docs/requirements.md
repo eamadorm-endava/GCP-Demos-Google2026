@@ -2,7 +2,7 @@
 # Product Requirements: Agentic Vendor Governance Platform
 
 ## 1. Executive Summary
-The Agentic Vendor Governance Platform is a neutral, AI-driven governance layer built on Google Cloud. It replaces expensive, manual self-governance models with an automated "Agentic" solution that monitors multi-vendor ecosystems (e.g., Development, Security, Marketing) using comparable metrics and automated financial auditing.
+The Agentic Vendor Governance Platform is a browser-based, AI-driven governance layer that replaces manual vendor management overhead with an automated, neutral solution. Built on React and Google's Gemini API, it monitors multi-vendor ecosystems across development, security, marketing, and infrastructure domains using standardized metrics, automated financial auditing, and AI-powered meeting intelligence.
 
 ## 2. Target Audience
 - **Procurement Operations:** Managing multi-vendor risk and contract compliance.
@@ -11,37 +11,52 @@ The Agentic Vendor Governance Platform is a neutral, AI-driven governance layer 
 
 ## 3. Core Functional Requirements (Implemented)
 
-### 3.1 Multi-Vendor Command Center
-- **Head-to-Head Dashboard:** Side-by-side visualization of vendors on key metrics: Spend, SLA Adherence, and Innovation.
-- **Agent Feed:** Real-time sidebar notifications alerting users to critical flags, SLA breaches, and strategic insights.
-- **Diverse Ecosystem Support:** Capable of tracking Engineering (Nexus), CloudOps (Aether), AI (Synthetix), Design (Orbit 9), Security (IronClad), and Marketing (FlowState) vendors.
-- **Comparison Analytics:** Dynamic chart filtering to compare specific vendors against baseline targets using `recharts`.
+### 3.1 Multi-Vendor Command Center (`Dashboard.tsx`)
+- **Head-to-Head Dashboard:** Side-by-side visualization of up to 6 vendors on key metrics (Velocity, Bug Count, SLA, Response Time) using Recharts ComposedCharts with dynamic filtering via toggleable vendor chips.
+- **Agent Feed (`AgentFeed.tsx`):** Real-time sidebar displaying `AgentNotification` alerts (alert/check/calendar types) with a "Strategic Insight" card for proactive AI observations.
+- **Stat Cards:** Top-level KPIs including total vendors, flagged invoices, active alerts, and upcoming events with trend badges and navigation links.
+- **Diverse Ecosystem Support:** Tracks 6 vendor types — Enterprise Development (Nexus), CloudOps (Aether), AI/ML (Synthetix), Design (Orbit 9), Security (IronClad), and Marketing/CRM (FlowState).
 
-### 3.2 Agentic Financial Governance
-- **Invoice Ingestion:** Support for PDF/Image uploads of vendor invoices via drag-and-drop.
-- **Auditor Agent:** AI-driven analysis using `gemini-3-pro-preview` to parse line items and detect anomalies.
-- **Rate Card Validation:** Automated cross-referencing of billed roles/hours against Master Services Agreement (MSA) rate cards.
-- **Rate Comparison Matrix:** A dedicated view comparing role rates across all active vendors to identify cost arbitrage opportunities.
-- **Smart Forecaster:** AI-powered budget burn rate analysis to predict overspend before it happens.
-- **Discrepancy Flagging:** Instant alerts for:
-    - Rate Violations (Billed rate > MSA rate).
-    - Role Mismatches (Role not in MSA).
-    - Capacity Breaches (Hours > 45/week).
+### 3.2 Vendor Profile Detail (`VendorDetail.tsx`)
+- **Dedicated Vendor Page:** Dynamic routing `/vendor/:id` with vendor-specific color coding, MSA details, contact info, and renewal dates.
+- **Performance Analytics:** Historical velocity trend charts, SLA adherence, bug counts, and response time visualizations.
+- **Invoice History:** Vendor-filtered invoice list with audit status indicators and line item details.
+- **Rate Card Display:** Contracted roles and rates pulled from `RATE_CARDS` data.
+- **QBR Generation:** AI-powered report generation integrated via `useQBRGenerator` hook (see §3.4).
 
-### 3.3 Automated Meeting & Cadence Hub
-- **Agentic Scribe:** Real-time audio processing using `gemini-2.5-flash-native-audio-preview-12-2025` to transcribe and summarize governance meetings without intermediate STT steps.
-- **Action Item Extraction:** Automated extraction of tasks from meeting audio.
-- **QBR Generator:** One-click generation of Quarterly Business Review content using `gemini-3-pro-preview`.
-- **Slide Deck Generation:** Automated creation of presentation decks with AI-selected visualizations (Spend Charts, Velocity Graphs, Scorecards).
+### 3.3 Agentic Financial Governance (`FinanceHub.tsx`)
+- **Tabbed Interface:** Three views — Invoice Ledger, Rate Comparison Matrix, and Spend Analytics.
+- **Invoice Ingestion:** Drag-and-drop PDF/Image upload with AI extraction via `parseInvoiceAndAudit` using `gemini-3-pro-preview` multimodal input.
+- **Automated Rate Card Validation:** Cross-references extracted line items against per-vendor `RATE_CARDS` data, flagging rate violations, role mismatches, and capacity breaches (>45 hours/week).
+- **Rate Comparison Matrix:** Tabular view comparing equivalent role rates across all 6 vendors for cost arbitrage analysis.
+- **Smart Spend Forecaster:** Area chart overlay showing actual vs. projected budget burn rate.
+- **Bulk Actions:** Multi-select invoices with bulk approve/reject capabilities.
+- **Paginated Invoice List:** 8 items per page with vendor/status filtering.
+- **Discrepancy Flagging:** Instant visual alerts for rate violations, role mismatches, and excessive hours.
 
-### 3.4 Platform Administration & Configuration
-- **Vendor Onboarding:** Workflows to provision new vendor profiles with MSA details and color themes.
-- **Agent Tuning:** Configurable thresholds for the Auditor Agent (e.g., set Discrepancy Tolerance amounts) and Tone settings for the Scribe.
-- **Integration Management:** Toggles for connecting external systems (Jira, Slack, ServiceNow, SAP Ariba).
-- **Notification Preferences:** User controls for specific alert types (SLA breaches, Invoice flags).
+### 3.4 Automated Meeting & Cadence Hub (`MeetingHub.tsx`)
+- **Governance Timeline:** Chronological display of all governance events (QBRs, Monthly Syncs, Weekly Standups) with vendor attribution and action item lists.
+- **Agentic Scribe (`useScribe` hook):** Real-time audio recording via `MediaRecorder` API with live audio level visualization using Web Audio API's `AnalyserNode`. Supports WebM, MP4, and WAV formats. Max recording: 1 hour. Pause/resume capability.
+- **AI Transcription:** Audio processed via `transcribeAndSummarizeMeeting` Gemini function, returning structured summary + action items.
+- **Event Scheduling:** Modal form to manually create new governance events with vendor selection and event type.
+- **Audio File Upload:** Alternative to live recording for processing pre-recorded meeting audio.
+
+### 3.5 Strategic Reporting — QBR Generator (`useQBRGenerator` hook)
+- **One-Click QBR Generation:** Aggregates vendor metrics and governance events, sends to `generateQBRContent` Gemini function, returns executive summary, key successes, risks, and recommendations.
+- **Intelligent Slide Generation:** Second AI pass via `generateSlidesJSON` creates 5-6 slide structures with AI-selected `visualType` hints (`CHART_SPEND`, `CHART_VELOCITY`, `CHART_SLA`, `SCORECARD`, `NONE`).
+- **Slide Preview Modal:** Live preview in `VendorDetail.tsx` rendering actual Recharts visualizations inside each slide card. Previous/next navigation.
+- **Export Simulation:** Generates mock Google Slides URL (not yet connected to real API).
+
+### 3.6 Platform Administration & Configuration (`Settings.tsx`)
+- **Agent Personality Tuning:** Configurable audit tolerance threshold (slider), auto-approve toggle, and model selection for the Scribe agent.
+- **Report Tone Setting:** Professional / Concise / Detailed options for AI-generated content.
+- **Integration Management:** Connection toggles for Jira, Slack, ServiceNow, and SAP Ariba (UI-only, not functional).
+- **Notification Preferences:** Individual toggles for SLA breaches, invoice flags, vendor status changes, weekly digests, QBR reminders, and budget alerts.
+- **Save Confirmation:** Visual save feedback with toast-style confirmation.
 
 ## 4. Non-Functional Requirements
-- **Security:** SOC2 compliant auditing simulation; Data processing happens in memory or via secure API calls.
-- **Performance:** Real-time dashboard updates with optimistic UI; <3s response time for text generation, <10s for audio processing.
-- **Scalability:** Built on client-side React with serverless AI integration via Google GenAI SDK.
-- **Responsive Design:** Functional on Desktop, Tablet, and Mobile.
+- **Security:** API key managed via environment variable (`.env.local`); no server-side storage. Microphone access requires browser permission grant.
+- **Performance:** Optimistic UI patterns; skeleton loaders during AI generation; 2–3 second simulated delays for UX polish.
+- **Responsive Design:** Full mobile support with hamburger menu sidebar, bottom navigation bar, and adaptive grid layouts. Desktop optimized with xl breakpoint (≥1280px) for AgentFeed sidebar.
+- **Accessibility:** Modal has `aria-modal`, `aria-labelledby`, and ESC-to-close. Nav links use semantic `NavLink` with active state.
+- **Browser Compatibility:** HashRouter for static hosting compatibility. MediaRecorder API required for audio features.
