@@ -1,0 +1,7 @@
+{
+  "name": "Agentic Vendor Governance Platform",
+  "description": "An AI-driven vendor management system for automated financial auditing, performance scorecards, and agentic reporting to replace manual governance models.",
+  "requestFramePermissions": [
+    "microphone"
+  ]
+}
