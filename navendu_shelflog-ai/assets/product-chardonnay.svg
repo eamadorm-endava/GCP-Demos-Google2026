@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" fill="none">
+  <defs>
+    <linearGradient id="wineGlass" x1="100" y1="20" x2="100" y2="180" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#4d7c0f"/>
+      <stop offset="1" stop-color="#1a2e05"/>
+    </linearGradient>
+  </defs>
+  <rect width="200" height="200" fill="#1e293b"/>
+  <path d="M92 20 H108 V70 C108 70 130 90 130 160 C130 165 125 170 120 170 H80 C75 170 70 165 70 160 C70 90 92 70 92 70 V20 Z" fill="url(#wineGlass)" stroke="#365314" stroke-width="1"/>
+  <rect x="90" y="15" width="20" height="30" rx="1" fill="#fcd34d"/>
+  <rect x="80" y="110" width="40" height="40" rx="2" fill="#fefce8"/>
+  <text x="100" y="130" font-family="serif" font-size="8" font-weight="bold" fill="#1e293b" text-anchor="middle">Chardonnay</text>
+  <text x="100" y="140" font-family="serif" font-size="6" fill="#1e293b" text-anchor="middle">Estate</text>
+</svg>

@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="450" viewBox="0 0 800 450" fill="none">
+  <rect width="800" height="450" fill="#1e293b"/>
+  <rect x="50" y="50" width="700" height="350" fill="#0f172a" rx="10"/>
+  <path d="M50 175 H 750 M50 300 H 750" stroke="#334155" stroke-width="2"/>
+  <g opacity="0.8">
+    <path d="M200 160 L 195 80 H 225 L 220 160 Z" fill="#475569"/>
+    <path d="M240 160 L 235 80 H 265 L 260 160 Z" fill="#475569"/>
+    <path d="M280 160 L 275 80 H 305 L 300 160 Z" fill="#475569" transform="rotate(-10 290 120)"/>
+  </g>
+  <text x="270" y="120" fill="#f43f5e" font-family="monospace" font-size="14">WRONG_VINTAGE</text>
+</svg>

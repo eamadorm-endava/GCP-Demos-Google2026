@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" fill="none">
+  <defs>
+    <linearGradient id="bourbonGlass" x1="100" y1="40" x2="100" y2="180" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#92400e"/>
+      <stop offset="1" stop-color="#451a03"/>
+    </linearGradient>
+    <linearGradient id="labelGrad" x1="100" y1="90" x2="100" y2="140" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#fef3c7"/>
+      <stop offset="1" stop-color="#fde68a"/>
+    </linearGradient>
+  </defs>
+  <rect width="200" height="200" fill="#1e293b"/>
+  <!-- Bottle Shape -->
+  <path d="M85 20 H115 V50 C115 50 135 55 135 70 V170 C135 175.5 130.5 180 125 180 H75 C69.5 180 65 175.5 65 170 V70 C65 55 85 50 85 50 V20 Z" fill="#78350f" stroke="#000" stroke-width="1"/>
+  
+  <!-- Liquid -->
+  <path d="M70 170 V80 C70 70 85 65 85 65 H115 C115 65 130 70 130 80 V170 H70 Z" fill="url(#bourbonGlass)" opacity="0.9"/>
+  
+  <!-- Cap -->
+  <rect x="83" y="15" width="34" height="25" rx="2" fill="#1f2937"/>
+  <rect x="83" y="40" width="34" height="5" fill="#b91c1c"/>
+
+  <!-- Label -->
+  <rect x="75" y="90" width="50" height="50" rx="2" fill="url(#labelGrad)" stroke="#d97706" stroke-width="1"/>
+  <text x="100" y="110" font-family="serif" font-size="10" font-weight="bold" fill="#451a03" text-anchor="middle">OLD OAK</text>
+  <text x="100" y="125" font-family="sans-serif" font-size="6" fill="#78350f" text-anchor="middle">KENTUCKY BOURBON</text>
+  <path d="M85 130 H115" stroke="#78350f" stroke-width="0.5"/>
+</svg>
