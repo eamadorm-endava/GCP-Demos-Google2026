@@ -34,15 +34,15 @@ export const ShipmentSummary: React.FC<ShipmentSummaryProps> = ({ shipment }) =>
     }, [shipment, language, t]);
 
     return (
-        <div className="bg-rose-50 border-l-4 border-rose-500 p-4 rounded-r-lg">
-            <h3 className="text-sm font-bold uppercase tracking-wider text-rose-800 flex items-center gap-2">
+        <div className="bg-endava-dark/40 border border-white/5 p-4 rounded-xl shadow-inner mb-6">
+            <h3 className="text-sm font-bold uppercase tracking-wider text-endava-orange flex items-center gap-2">
                 <DocumentTextIcon className="w-5 h-5" />
                 {t('aiSummary')}
             </h3>
-            <div className="mt-3 text-sm text-rose-900">
+            <div className="mt-3 text-sm text-white/90">
                 {isLoading && (
                     <div className="flex items-center gap-2">
-                        <SpinnerIcon className="w-5 h-5 animate-spin"/>
+                        <SpinnerIcon className="w-5 h-5 animate-spin" />
                         <span>{t('summaryLoading')}</span>
                     </div>
                 )}
@@ -52,7 +52,7 @@ export const ShipmentSummary: React.FC<ShipmentSummaryProps> = ({ shipment }) =>
                         <p className="italic">{summary.summary}</p>
                         {summary.highlights && summary.highlights.length > 0 && (
                             <div className="mt-3">
-                                <h4 className="font-semibold text-xs text-rose-800">{t('keyHighlights')}:</h4>
+                                <h4 className="font-semibold text-xs text-endava-orange">{t('keyHighlights')}:</h4>
                                 <ul className="mt-1 space-y-1">
                                     {summary.highlights.map((item, index) => (
                                         <li key={index} className="flex items-start gap-2">

@@ -10,10 +10,10 @@ interface MilestoneMapProps {
 const statusColorMap: Record<MilestoneStatus, string> = {
     'Completed': 'rgb(34 197 94)',      // text-green-500
     'In Progress': 'rgb(59 130 246)',   // text-blue-500
-    'Pending': 'rgb(156 163 175)',      // text-slate-400
+    'Pending': 'rgb(156 163 175)',      // text-endava-blue-40
     'Delayed': 'rgb(239 68 68)',        // text-red-500
     'Requires Action': 'rgb(245 158 11)', // text-amber-500
-    'Cancelled': 'rgb(100 116 139)',    // text-slate-500
+    'Cancelled': 'rgb(100 116 139)',    // text-endava-blue-40
 };
 
 const statusTranslationKeys: Record<MilestoneStatus, string> = {
@@ -82,9 +82,9 @@ export const MilestoneMap: React.FC<MilestoneMapProps> = ({ shipment }) => {
     const pathD = "M 60 80 Q 400 20 740 80";
 
     return (
-        <div className="bg-brand-sb-shade-90 border border-brand-sb-shade-80 rounded-lg p-6">
-            <h3 className="text-lg font-bold text-brand-primary-300 flex items-center gap-2 mb-4">
-                <MapIcon className="w-6 h-6 text-brand-primary-300" />
+        <div className="bg-endava-dark/80 border border-white/10 rounded-2xl p-6">
+            <h3 className="text-lg font-bold text-white flex items-center gap-2 mb-4">
+                <MapIcon className="w-6 h-6 text-endava-blue-40" />
                 {t('shipmentJourney')}
             </h3>
             <div className="relative w-full">
@@ -156,11 +156,11 @@ export const MilestoneMap: React.FC<MilestoneMapProps> = ({ shipment }) => {
                                 {/* Tooltip using foreignObject for rich HTML content */}
                                 <foreignObject x={x - 125} y={y - 100} width="250" height="100" className="opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none duration-300">
                                    <div className="w-full flex justify-center">
-                                        <div className="bg-slate-800 text-white text-xs rounded py-1.5 px-3 shadow-lg text-center max-w-xs">
+                                        <div className="bg-endava-blue-80 text-white text-xs rounded py-1.5 px-3 shadow-lg text-center max-w-xs">
                                             <p className="font-bold">{t(milestone.name)}</p>
                                             <p className="capitalize" style={{ color }}>{t(statusTranslationKeys[milestone.status])}</p>
-                                            {milestone.date && <p className="text-slate-300">{milestone.date}</p>}
-                                            {milestone.details && <p className="mt-1 text-slate-400 italic">"{milestone.details}"</p>}
+                                            {milestone.date && <p className="text-endava-blue-30">{milestone.date}</p>}
+                                            {milestone.details && <p className="mt-1 text-endava-blue-40 italic">"{milestone.details}"</p>}
                                         </div>
                                     </div>
                                 </foreignObject>
@@ -170,12 +170,12 @@ export const MilestoneMap: React.FC<MilestoneMapProps> = ({ shipment }) => {
                 </svg>
 
                 <div className="absolute -bottom-4 left-0 text-center w-28">
-                    <p className="text-sm font-bold text-brand-primary-300 truncate">{shipment.origin.city}</p>
-                    <p className="text-xs text-brand-sb-shade-50 truncate">{shipment.origin.country}</p>
+                    <p className="text-sm font-bold text-endava-blue-20 truncate">{shipment.origin.city}</p>
+                    <p className="text-xs text-endava-blue-40 truncate">{shipment.origin.country}</p>
                 </div>
                 <div className="absolute -bottom-4 right-0 text-center w-28">
-                    <p className="text-sm font-bold text-brand-primary-300 truncate">{shipment.destination.city}</p>
-                    <p className="text-xs text-brand-sb-shade-50 truncate">{shipment.destination.country}</p>
+                    <p className="text-sm font-bold text-endava-blue-20 truncate">{shipment.destination.city}</p>
+                    <p className="text-xs text-endava-blue-40 truncate">{shipment.destination.country}</p>
                 </div>
             </div>
         </div>
