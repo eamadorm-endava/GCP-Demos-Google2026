@@ -1,57 +1,88 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
 
 @theme {
-  /* Define the exact scale steps you will use in classes */
-  --color-brand-50:  #FFF1EE;
-  --color-brand-200: #FFD6CF;
-  --color-brand-600: #D93A28;
-  --color-brand-100: #FFE4E0;
-  --color-brand-300: #FFB3A8;
-  --color-brand-500: #FF5640;
-  --color-brand-700: #B52D1D;
-  --color-brand-400: #FF8775;
-  --color-brand-800: #912418;
-  --color-brand-900: #731D14;
+  --font-sans: 'Poppins', 'sans-serif';
 
-  --color-brand-connect-50:#cfe0ff;
-  --color-brand-connect-200:#192B37;
-  --color-brand-connect-300:#b6d0ff;
+  /* Endava Brand Colors */
+  --color-endava-orange: #FF5640;
+  --color-endava-dark: #192B37;
 
-  /* Primary Colours */
-  --color-brand-primary-25:#FF6D5A;
-  --color-brand-primary-50:#FF5640;
-  --color-brand-primary-100:#FF3F27;
-  --color-brand-primary-200:#192B37;
-  --color-brand-primary-250:#111D25;
-  --color-brand-primary-300:#FFFFFF;
+  --color-endava-blue-90: #30404B;
+  --color-endava-blue-80: #47555F;
+  --color-endava-blue-70: #5E6A73;
+  --color-endava-blue-60: #758087;
+  --color-endava-blue-50: #8C959B;
+  --color-endava-blue-40: #A3AAAF;
+  --color-endava-blue-30: #BABFC3;
+  --color-endava-blue-20: #D1D5D7;
+  --color-endava-blue-10: #E8EAEB;
 
-  /* Solid Blue Shades */
-  --color-brand-sb-shade-10:#E8EAEB;
-  --color-brand-sb-shade-20:#D1D5D7;
-  --color-brand-sb-shade-30:#BABFC3;
-  --color-brand-sb-shade-40:#A3AAAF;
-  --color-brand-sb-shade-50:#8C959B;
-  --color-brand-sb-shade-60:#758087;
-  --color-brand-sb-shade-70:#5E6A73;
-  --color-brand-sb-shade-80:#47555F;
-  --color-brand-sb-shade-90:#30404B;
+  --color-primary-red: #FF5640;
+  --color-primary-dark: #192B37;
 
-  /* Signal Colours */
-  --color-brand-sc-positive:#3DD17B;
-  --color-brand-sc-warning:#F99C11;
-  --color-brand-sc-negative:#E84641;
+  /* Rose scale for buttons/highlights */
+  --color-rose-50: #fff0ee;
+  --color-rose-100: #ffe4e0;
+  --color-rose-200: #ffcac2;
+  --color-rose-300: #ffaba0;
+  --color-rose-400: #ff8676;
+  --color-rose-500: #ff6854;
+  --color-rose-600: #FF5640;
+  --color-rose-700: #e64d39;
+  --color-rose-800: #cc4533;
+  --color-rose-900: #802b20;
 
-  /* Data Visualisation */
-  --color-brand-dv-blue:#5899C4;
-  --color-brand-dv-orange:#FF5641;
-  --color-brand-dv-yellow:#CF820E;
-  --color-brand-dv-green:#30A661;
-  --color-brand-dv-violet:#8684BF;
-  --color-brand-dv-grass-green:#7B9922;
-  --color-brand-dv-avocado:#998F63;
-  --color-brand-dv-jeans:#7C94A6;
-  --color-brand-dv-teal:#3E9C8F;
+  /* Legacy brand colors for compatibility during transition */
+  --color-brand-primary-25: #FF6D5A;
+  --color-brand-primary-50: #FF5640;
+  --color-brand-primary-200: #192B37;
+  --color-brand-primary-250: #111D25;
+}
 
+@layer base {
+
+  input,
+  select,
+  textarea {
+    @apply bg-[#30404B]/50 text-white outline-none border-transparent focus:border-endava-orange;
+    color-scheme: dark;
+  }
+}
+
+/* Custom scrollbar */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: #4A5D73;
+  border-radius: 10px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #FF5640;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Global modal backdrop fix */
+.modal-backdrop {
+  @apply fixed inset-0 bg-[#0A1116]/70 backdrop-blur-md flex justify-center items-center z-50 p-4;
+}
+
+/* AI Suggestion box highlight */
+.ai-suggestion-box {
+  @apply bg-amber-900/10 border-l-4 border-amber-500 p-4 rounded-r-lg;
 }

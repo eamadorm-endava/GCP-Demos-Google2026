@@ -9,12 +9,12 @@ interface MilestoneTrackerProps {
 }
 
 const statusConfig: { [key in MilestoneStatus]: { icon: React.ReactNode; color: string; text: string; translationKey: string; } } = {
-    'Completed': { icon: <CheckCircleIcon className="w-6 h-6" />, color: 'bg-green-500', text: 'text-green-600', translationKey: 'statusCompleted' },
-    'In Progress': { icon: <PlayCircleIcon className="w-6 h-6" />, color: 'bg-blue-500', text: 'text-blue-600', translationKey: 'statusInProgress' },
-    'Pending': { icon: <ClockIcon className="w-6 h-6" />, color: 'bg-slate-400', text: 'text-slate-500', translationKey: 'statusPending' },
-    'Delayed': { icon: <ExclamationCircleIcon className="w-6 h-6" />, color: 'bg-red-500', text: 'text-red-600', translationKey: 'statusDelayed' },
-    'Requires Action': { icon: <ExclamationTriangleIcon className="w-6 h-6" />, color: 'bg-amber-500', text: 'text-amber-600', translationKey: 'statusRequiresAction' },
-    'Cancelled': { icon: <BanIcon className="w-6 h-6" />, color: 'bg-slate-300', text: 'text-slate-400 line-through', translationKey: 'statusCancelled' },
+    'Completed': { icon: <CheckCircleIcon className="w-6 h-6" />, color: 'bg-green-900/200', text: 'text-green-400', translationKey: 'statusCompleted' },
+    'In Progress': { icon: <PlayCircleIcon className="w-6 h-6" />, color: 'bg-blue-900/200', text: 'text-blue-400', translationKey: 'statusInProgress' },
+    'Pending': { icon: <ClockIcon className="w-6 h-6" />, color: 'bg-slate-400', text: 'text-endava-blue-40', translationKey: 'statusPending' },
+    'Delayed': { icon: <ExclamationCircleIcon className="w-6 h-6" />, color: 'bg-red-900/200', text: 'text-red-400', translationKey: 'statusDelayed' },
+    'Requires Action': { icon: <ExclamationTriangleIcon className="w-6 h-6" />, color: 'bg-amber-900/200', text: 'text-amber-400', translationKey: 'statusRequiresAction' },
+    'Cancelled': { icon: <BanIcon className="w-6 h-6" />, color: 'bg-slate-300', text: 'text-endava-blue-40 line-through', translationKey: 'statusCancelled' },
 };
 
 export const MilestoneTracker: React.FC<MilestoneTrackerProps> = ({ shipment, onUpdateMilestone }) => {
@@ -36,7 +36,7 @@ export const MilestoneTracker: React.FC<MilestoneTrackerProps> = ({ shipment, on
           <li key={milestone.name}>
             <div className="relative pb-8">
               {milestoneIdx !== shipment.milestones.length - 1 ? (
-                <span className="absolute left-4 top-4 -ml-px h-full w-0.5 bg-slate-200" aria-hidden="true" />
+                <span className="absolute left-4 top-4 -ml-px h-full w-0.5 bg-endava-blue-70" aria-hidden="true" />
               ) : null}
               <div className="relative flex items-start space-x-4">
                 <div>
@@ -50,13 +50,13 @@ export const MilestoneTracker: React.FC<MilestoneTrackerProps> = ({ shipment, on
                             <p className={`text-sm font-semibold ${statusConfig[milestone.status].text}`}>
                                 {t(milestone.name)}
                             </p>
-                            <p className="text-xs text-slate-500">
+                            <p className="text-xs text-endava-blue-40">
                                 {milestone.date 
                                     ? t('completedOn', { date: milestone.date }) 
                                     : t(statusConfig[milestone.status].translationKey)}
                             </p>
                             {milestone.details && (
-                                <div className="mt-2 p-3 text-xs text-slate-700 bg-slate-100 rounded-md border border-slate-200">
+                                <div className="mt-2 p-3 text-xs text-endava-blue-20 bg-endava-blue-80 rounded-md border border-white/10">
                                     <p><strong>{t('details')}:</strong> {milestone.details}</p>
                                 </div>
                             )}
@@ -65,7 +65,7 @@ export const MilestoneTracker: React.FC<MilestoneTrackerProps> = ({ shipment, on
                             {milestone.status === 'Pending' && !isShipmentCancelled && (
                                 <button
                                 onClick={() => onUpdateMilestone(shipment.id, milestone.name, 'In Progress')}
-                                className="px-3 py-1 text-xs font-semibold text-white bg-blue-500 rounded-md hover:bg-blue-600 transition"
+                                className="px-3 py-1 text-xs font-semibold text-white bg-blue-900/200 rounded-md hover:bg-blue-600 transition"
                                 >
                                 {t('start')}
                                 </button>
@@ -74,13 +74,13 @@ export const MilestoneTracker: React.FC<MilestoneTrackerProps> = ({ shipment, on
                                <>
                                     <button
                                     onClick={() => onUpdateMilestone(shipment.id, milestone.name, 'Completed')}
-                                    className="px-3 py-1 text-xs font-semibold text-white bg-green-500 rounded-md hover:bg-green-600 transition"
+                                    className="px-3 py-1 text-xs font-semibold text-white bg-green-900/200 rounded-md hover:bg-green-600 transition"
                                     >
                                     {t('complete')}
                                     </button>
                                      <button
                                     onClick={() => handleDelay(milestone.name)}
-                                    className="px-3 py-1 text-xs font-semibold text-white bg-red-500 rounded-md hover:bg-red-600 transition"
+                                    className="px-3 py-1 text-xs font-semibold text-white bg-red-900/200 rounded-md hover:bg-red-600 transition"
                                     >
                                     {t('delay')}
                                     </button>
@@ -89,7 +89,7 @@ export const MilestoneTracker: React.FC<MilestoneTrackerProps> = ({ shipment, on
                              {milestone.status === 'Requires Action' && !isShipmentCancelled && (
                                 <button
                                 onClick={() => onUpdateMilestone(shipment.id, milestone.name, 'In Progress')}
-                                className="px-3 py-1 text-xs font-semibold text-white bg-green-500 rounded-md hover:bg-green-600 transition"
+                                className="px-3 py-1 text-xs font-semibold text-white bg-green-900/200 rounded-md hover:bg-green-600 transition"
                                 >
                                 {t('resolveIssue')}
                                 </button>

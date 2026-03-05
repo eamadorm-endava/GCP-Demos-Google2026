@@ -29,7 +29,7 @@ export const FarmManagement: React.FC<FarmManagementProps> = ({ user, farms, onU
                 farm.id.toLowerCase().includes(query)
             );
         }), [farms, statusFilter, searchQuery]);
-        
+
     useEffect(() => {
         if (!selectedFarmId && filteredFarms.length > 0) {
             setSelectedFarmId(filteredFarms[0].id);
@@ -43,29 +43,29 @@ export const FarmManagement: React.FC<FarmManagementProps> = ({ user, farms, onU
 
     return (
         <div className="w-full h-full flex overflow-hidden">
-            <div className={`w-full lg:w-1/3 xl:w-1/4 border-r border-brand-sb-shade-80 overflow-y-auto bg-brand-sb-shade-90 ${selectedFarm ? 'hidden lg:block' : 'block'}`}>
-               <FarmList 
-                 farms={filteredFarms}
-                 selectedFarmId={selectedFarmId}
-                 onSelectFarm={setSelectedFarmId}
-                 searchQuery={searchQuery}
-                 onSearchChange={setSearchQuery}
-                 statusFilter={statusFilter}
-                 onFilterChange={setStatusFilter}
-               />
+            <div className={`w-full lg:w-1/3 xl:w-1/4 border-r border-white/10 overflow-y-auto custom-scrollbar bg-endava-dark/80 ${selectedFarm ? 'hidden lg:block' : 'block'}`}>
+                <FarmList
+                    farms={filteredFarms}
+                    selectedFarmId={selectedFarmId}
+                    onSelectFarm={setSelectedFarmId}
+                    searchQuery={searchQuery}
+                    onSearchChange={setSearchQuery}
+                    statusFilter={statusFilter}
+                    onFilterChange={setStatusFilter}
+                />
             </div>
-            <div className={`flex-1 overflow-y-auto bg-brand-primary-200 ${selectedFarm ? 'block' : 'hidden lg:block'}`}>
+            <div className={`flex-1 overflow-y-auto custom-scrollbar bg-endava-blue-90/50 backdrop-blur-sm ${selectedFarm ? 'block' : 'hidden lg:block'}`}>
                 {selectedFarm ? (
-                    <FarmDetail 
-                        farm={selectedFarm} 
+                    <FarmDetail
+                        farm={selectedFarm}
                         user={user}
                         onUpdateStatus={onUpdateFarmStatus}
                         onUpdateDocumentStatus={onUpdateFarmDocumentStatus}
                         onBack={() => setSelectedFarmId(null)}
                     />
                 ) : (
-                    <div className="flex-col items-center justify-center h-full w-full text-slate-500 hidden lg:flex">
-                        <FlowerIcon className="w-16 h-16 mb-4 text-slate-400" />
+                    <div className="flex-col items-center justify-center h-full w-full text-endava-blue-40 hidden lg:flex">
+                        <FlowerIcon className="w-16 h-16 mb-4 text-endava-blue-40" />
                         <h2 className="text-xl font-semibold">{t('selectFarmToView')}</h2>
                     </div>
                 )}

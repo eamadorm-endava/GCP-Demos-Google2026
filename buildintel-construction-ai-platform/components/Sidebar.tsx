@@ -1,6 +1,10 @@
 import React from 'react';
-import { LayoutDashboard, MessageSquareText, HardHat, FileText, Settings, BarChart3, AlertTriangle, LogOut, ChevronDown, Building2, LayoutGrid } from 'lucide-react';
+import { LayoutDashboard, MessageSquareText, FileText, Settings, BarChart3, AlertTriangle, LogOut, ChevronDown, Building2, LayoutGrid } from 'lucide-react';
 import { PROJECTS } from '../services/mockData';
+
+const EndavaLogo = () => (
+  <img src="/assets/endava-logo.svg" alt="Endava Logo" className="w-7 h-7" />
+);
 
 interface SidebarProps {
   activeTab: string;
@@ -38,68 +42,62 @@ const Sidebar: React.FC<SidebarProps> = ({ activeTab, setActiveTab, currentProje
   };
 
   return (
-    <div className="w-20 lg:w-72 bg-slate-950 border-r border-slate-800 flex flex-col h-full flex-shrink-0 transition-all duration-300 relative z-20">
+    <div className="w-20 lg:w-72 bg-endava-blue-90 border-r border-white/10 flex flex-col h-full flex-shrink-0 transition-all duration-300 relative z-20">
       {/* Brand Header */}
-      <div 
-        className="p-6 flex items-center justify-center lg:justify-start space-x-3 border-b border-slate-900/50 bg-slate-950 cursor-pointer"
+      <div
+        className="p-6 flex items-center justify-center lg:justify-start space-x-3 border-b border-white/10 bg-endava-blue-90 cursor-pointer hover:bg-white/5 transition-colors"
         onClick={handlePortfolioSelect}
       >
-        <div className="w-10 h-10 rounded-xl overflow-hidden">
-              <img
-                src="https://cdn.brandfetch.io/id4YZ7PWEj/w/200/h/200/theme/dark/icon.jpeg?c=1bxid64Mup7aczewSAYMX&t=1761617484712"
-                alt="Agentic Vendor Governance"
-                className="w-full h-full object-cover"
-              />
-        </div>
+        <EndavaLogo />
         <h1 className="text-xl font-bold text-white tracking-tight hidden lg:block font-sans">BuildIntel</h1>
       </div>
 
       {/* Context Selector */}
       <div className="px-4 py-6 hidden lg:block">
-        <p className="text-xs font-semibold text-slate-500 mb-2 uppercase tracking-wider">
-            {viewMode === 'portfolio' ? 'Portfolio View' : 'Active Project'}
+        <p className="text-xs font-semibold text-endava-blue-40 mb-2 uppercase tracking-wider">
+          {viewMode === 'portfolio' ? 'Portfolio View' : 'Active Project'}
         </p>
         <div className="relative">
-          <button 
+          <button
             onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-            className={`w-full border rounded-xl p-3 flex items-center justify-between transition-all ${viewMode === 'portfolio' ? 'bg-indigo-500/10 border-indigo-500/30' : 'bg-slate-900 border-slate-800 hover:border-slate-700'}`}
+            className={`w-full border rounded-xl p-3 flex items-center justify-between transition-all ${viewMode === 'portfolio' ? 'bg-endava-blue-80 border-white/10' : 'bg-endava-blue-90 border-white/10 hover:border-endava-blue-50'}`}
           >
             <div className="flex items-center space-x-3 overflow-hidden">
-                <div className={`p-1.5 rounded-lg ${viewMode === 'portfolio' ? 'bg-indigo-500 text-white' : 'bg-slate-800'}`}>
-                    {viewMode === 'portfolio' ? <LayoutGrid className="w-4 h-4" /> : <Building2 className="w-4 h-4 text-primary-400" />}
-                </div>
-                <div className="text-left overflow-hidden">
-                    <p className="text-sm font-medium text-white truncate w-32">
-                        {viewMode === 'portfolio' ? 'Global Portfolio' : currentProject.projectName}
-                    </p>
-                    <p className="text-[10px] text-slate-400 truncate w-32">
-                        {viewMode === 'portfolio' ? `${PROJECTS.length} Active Projects` : currentProject.location}
-                    </p>
-                </div>
+              <div className={`p-1.5 rounded-lg ${viewMode === 'portfolio' ? 'bg-endava-orange text-white' : 'bg-endava-blue-80'}`}>
+                {viewMode === 'portfolio' ? <LayoutGrid className="w-4 h-4" /> : <Building2 className="w-4 h-4 text-endava-orange" />}
+              </div>
+              <div className="text-left overflow-hidden">
+                <p className="text-sm font-medium text-white truncate w-32">
+                  {viewMode === 'portfolio' ? 'Global Portfolio' : currentProject.projectName}
+                </p>
+                <p className="text-[10px] text-endava-blue-30 truncate w-32">
+                  {viewMode === 'portfolio' ? `${PROJECTS.length} Active Projects` : currentProject.location}
+                </p>
+              </div>
             </div>
-            <ChevronDown className={`w-4 h-4 text-slate-500 transition-transform ${isDropdownOpen ? 'rotate-180' : ''}`} />
+            <ChevronDown className={`w-4 h-4 text-endava-blue-40 transition-transform ${isDropdownOpen ? 'rotate-180' : ''}`} />
           </button>
 
           {isDropdownOpen && (
-            <div className="absolute top-full left-0 w-full mt-2 bg-slate-900 border border-slate-800 rounded-xl shadow-xl overflow-hidden z-50">
+            <div className="absolute top-full left-0 w-full mt-2 bg-endava-blue-90 border border-white/10 rounded-xl shadow-xl overflow-hidden z-50">
+              <button
+                onClick={handlePortfolioSelect}
+                className={`w-full text-left px-4 py-3 text-sm flex items-center space-x-3 hover:bg-endava-blue-80 transition-colors ${viewMode === 'portfolio' ? 'bg-white/5 text-endava-orange' : 'text-endava-blue-30'}`}
+              >
+                <LayoutGrid className="w-4 h-4" />
+                <span>Global Portfolio</span>
+              </button>
+              <div className="h-px bg-white/10 my-1"></div>
+              {PROJECTS.map(p => (
                 <button
-                    onClick={handlePortfolioSelect}
-                    className={`w-full text-left px-4 py-3 text-sm flex items-center space-x-3 hover:bg-slate-800 transition-colors ${viewMode === 'portfolio' ? 'bg-slate-800/50 text-indigo-400' : 'text-slate-400'}`}
+                  key={p.id}
+                  onClick={() => handleProjectSelect(p.id)}
+                  className={`w-full text-left px-4 py-3 text-sm flex items-center justify-between hover:bg-endava-blue-80 transition-colors ${currentProjectId === p.id && viewMode === 'project' ? 'bg-white/5 text-white' : 'text-endava-blue-30'}`}
                 >
-                    <LayoutGrid className="w-4 h-4" />
-                    <span>Global Portfolio</span>
+                  <span className="truncate">{p.projectName}</span>
+                  {currentProjectId === p.id && viewMode === 'project' && <div className="w-1.5 h-1.5 rounded-full bg-endava-orange"></div>}
                 </button>
-                <div className="h-px bg-slate-800 my-1"></div>
-                {PROJECTS.map(p => (
-                    <button
-                        key={p.id}
-                        onClick={() => handleProjectSelect(p.id)}
-                        className={`w-full text-left px-4 py-3 text-sm flex items-center justify-between hover:bg-slate-800 transition-colors ${currentProjectId === p.id && viewMode === 'project' ? 'bg-slate-800/50 text-white' : 'text-slate-400'}`}
-                    >
-                        <span className="truncate">{p.projectName}</span>
-                        {currentProjectId === p.id && viewMode === 'project' && <div className="w-1.5 h-1.5 rounded-full bg-primary-500"></div>}
-                    </button>
-                ))}
+              ))}
             </div>
           )}
         </div>
@@ -107,49 +105,47 @@ const Sidebar: React.FC<SidebarProps> = ({ activeTab, setActiveTab, currentProje
 
       {/* Navigation - Only show active tabs if in project mode, otherwise just simplified list */}
       {viewMode === 'project' ? (
-        <nav className="flex-1 px-4 space-y-2 overflow-y-auto">
-            {menuItems.map((item) => {
+        <nav className="flex-1 px-4 space-y-2 overflow-y-auto custom-scrollbar">
+          {menuItems.map((item) => {
             const Icon = item.icon;
             const isActive = activeTab === item.id;
             return (
-                <button
+              <button
                 key={item.id}
                 onClick={() => setActiveTab(item.id)}
-                className={`w-full flex items-center space-x-3 px-3 py-3 rounded-xl transition-all duration-200 group relative ${
-                    isActive 
-                    ? 'bg-[color:var(--color-brand-600)] text-white border border-slate-800 shadow-inner' 
-                    : 'text-slate-400 hover:bg-slate-900/50 hover:text-slate-200'
-                }`}
-                >
-                <div className={`absolute left-0 top-1/2 -translate-y-1/2 w-1 h-8 rounded-r-full bg-primary-500 transition-all duration-200 ${isActive ? 'opacity-100' : 'opacity-0'}`} />
-                <Icon className={`w-5 h-5 flex-shrink-0 ${isActive ? 'text-white-400' : 'text-slate-500 group-hover:text-slate-300'}`} />
-                <span className="font-medium text-sm hidden lg:block">{item.label}</span>
-                </button>
+                className={`w-full flex items-center space-x-3 px-4 py-3 rounded-xl transition-all duration-200 group relative ${isActive
+                  ? 'bg-endava-orange text-white shadow-lg'
+                  : 'text-endava-blue-30 hover:bg-white/5 hover:text-white'
+                  }`}
+              >
+                <Icon className={`w-5 h-5 flex-shrink-0 transition-transform group-hover:scale-110 ${isActive ? 'text-white' : 'text-endava-blue-40 group-hover:text-white'}`} />
+                <span className="font-medium text-sm hidden lg:block tracking-tight">{item.label}</span>
+              </button>
             );
-            })}
+          })}
         </nav>
       ) : (
-          <div className="flex-1 px-4 py-4">
-              <p className="text-xs text-slate-500 mb-4 px-2">Select a project to view details, alerts, and AI insights.</p>
-          </div>
+        <div className="flex-1 px-4 py-4">
+          <p className="text-xs text-endava-blue-40 mb-4 px-2">Select a project to view details, alerts, and AI insights.</p>
+        </div>
       )}
 
       {/* User Footer */}
-      <div className="p-4 border-t border-slate-900 bg-slate-950">
-        <div className="bg-slate-900/50 border border-slate-800 rounded-xl p-3 flex items-center justify-between group hover:border-slate-700 transition-colors cursor-pointer">
+      <div className="p-4 border-t border-white/10 bg-endava-blue-90">
+        <div className="bg-endava-blue-80/50 border border-white/10 rounded-xl p-3 flex items-center justify-between group hover:border-endava-blue-60 hover:bg-white/5 transition-all cursor-pointer">
           <div className="flex items-center space-x-3 overflow-hidden">
-            <div className="w-9 h-9 rounded-full bg-gradient-to-tr from-accent-orange to-red-500 flex items-center justify-center font-bold text-xs text-white shadow-lg flex-shrink-0">
+            <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-endava-orange to-red-400 flex items-center justify-center font-bold text-xs text-white shadow-lg flex-shrink-0">
               CTO
             </div>
             <div className="hidden lg:block overflow-hidden">
-              <p className="text-sm font-semibold text-white truncate">James Chen</p>
-              <div className="flex items-center text-[10px] text-emerald-500">
+              <p className="text-sm font-semibold text-white truncate leading-none">James Chen</p>
+              <div className="flex items-center text-[10px] text-emerald-400 mt-1 uppercase tracking-wider">
                 <span className="w-1.5 h-1.5 bg-emerald-500 rounded-full mr-1.5 animate-pulse"></span>
                 Online
               </div>
             </div>
           </div>
-          <LogOut className="w-4 h-4 text-slate-500 hidden lg:block hover:text-white transition-colors" />
+          <span title="Sign out (disabled in demo)"><LogOut className="w-4 h-4 text-endava-blue-40 hidden lg:block group-hover:text-endava-orange transition-colors" /></span>
         </div>
       </div>
     </div>

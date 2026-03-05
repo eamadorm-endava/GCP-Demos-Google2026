@@ -16,21 +16,21 @@ const RiskLevelIndicator: React.FC<{ level: 'Low' | 'Medium' | 'High' }> = ({ le
             case 'High':
                 return {
                     text: t('riskHigh'),
-                    icon: <ExclamationTriangleIcon className="w-5 h-5 text-red-700" />,
-                    className: 'bg-red-100 text-red-800 border-red-200',
+                    icon: <ExclamationTriangleIcon className="w-5 h-5 text-red-400" />,
+                    className: 'bg-red-900/30 text-red-400 border-red-800/50',
                 };
             case 'Medium':
                 return {
                     text: t('riskMedium'),
-                    icon: <ShieldExclamationIcon className="w-5 h-5 text-amber-700" />,
-                    className: 'bg-amber-100 text-amber-800 border-amber-200',
+                    icon: <ShieldExclamationIcon className="w-5 h-5 text-amber-400" />,
+                    className: 'bg-amber-900/30 text-amber-400 border-amber-800/50',
                 };
             case 'Low':
             default:
                 return {
                     text: t('riskLow'),
-                    icon: <ShieldCheckIcon className="w-5 h-5 text-green-700" />,
-                    className: 'bg-green-100 text-green-800 border-green-200',
+                    icon: <ShieldCheckIcon className="w-5 h-5 text-green-400" />,
+                    className: 'bg-green-900/30 text-green-400 border-green-800/50',
                 };
         }
     }, [level, t]);
@@ -70,16 +70,16 @@ export const RiskAnalysis: React.FC<RiskAnalysisProps> = ({ shipment }) => {
 
     if (isLoading) {
         return (
-            <div className="flex flex-col items-center justify-center p-10 bg-slate-50 rounded-lg border-2 border-dashed border-slate-200">
-                <SpinnerIcon className="w-8 h-8 text-slate-500 animate-spin" />
-                <p className="mt-4 text-sm font-semibold text-slate-600">{t('riskAnalysisLoading')}</p>
+            <div className="flex flex-col items-center justify-center p-10 bg-endava-dark/80 rounded-2xl border-2 border-dashed border-white/10">
+                <SpinnerIcon className="w-8 h-8 text-endava-blue-40 animate-spin" />
+                <p className="mt-4 text-sm font-semibold text-endava-blue-30">{t('riskAnalysisLoading')}</p>
             </div>
         );
     }
 
     if (error) {
         return (
-            <div className="p-10 text-center bg-red-50 text-red-700 rounded-lg border border-red-200">
+            <div className="p-10 text-center bg-red-900/20 text-red-400 rounded-2xl border border-red-800/50">
                 {error}
             </div>
         );
@@ -92,23 +92,23 @@ export const RiskAnalysis: React.FC<RiskAnalysisProps> = ({ shipment }) => {
     return (
         <div className="space-y-6">
             <div>
-                <h3 className="text-sm font-bold uppercase tracking-wider text-slate-500 mb-2">{t('riskLevel')}</h3>
+                <h3 className="text-sm font-bold uppercase tracking-wider text-endava-blue-40 mb-2">{t('riskLevel')}</h3>
                 <RiskLevelIndicator level={analysis.riskLevel} />
             </div>
 
             <div>
-                 <h3 className="text-sm font-bold uppercase tracking-wider text-slate-500 mb-3">{t('potentialRisks')}</h3>
+                 <h3 className="text-sm font-bold uppercase tracking-wider text-endava-blue-40 mb-3">{t('potentialRisks')}</h3>
                  {analysis.analysisPoints.length > 0 ? (
                     <ul className="space-y-3">
                         {analysis.analysisPoints.map((point, index) => (
                             <li key={index} className="flex items-start gap-3">
                                 <LightBulbIcon className="w-5 h-5 text-yellow-500 shrink-0 mt-0.5" />
-                                <p className="text-sm text-slate-700">{point}</p>
+                                <p className="text-sm text-endava-blue-20">{point}</p>
                             </li>
                         ))}
                     </ul>
                  ) : (
-                    <p className="text-sm text-slate-500">{t('noRisksDetected')}</p>
+                    <p className="text-sm text-endava-blue-40">{t('noRisksDetected')}</p>
                  )}
             </div>
         </div>
