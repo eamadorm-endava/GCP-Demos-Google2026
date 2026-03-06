@@ -178,16 +178,14 @@ export default function App() {
 
   if (loading) {
     return (
-      <div className="h-screen w-screen bg-brand-dark flex flex-col items-center justify-center text-slate-400 space-y-4">
+      <div className="h-screen w-screen bg-endava-dark flex flex-col items-center justify-center text-endava-blue-40 space-y-4">
         <div className="relative">
-           {/* Spinner externo en Naranja Brand */}
-           <div className="w-16 h-16 border-4 border-brand-primary/30 border-t-brand-primary rounded-full animate-spin"></div>
+           <div className="w-16 h-16 border-4 border-endava-orange/30 border-t-endava-orange rounded-full animate-spin"></div>
            <div className="absolute inset-0 flex items-center justify-center">
-             {/* Punto central pulsante */}
-             <div className="w-8 h-8 bg-brand-primary/20 rounded-full animate-pulse"></div>
+             <div className="w-8 h-8 bg-endava-orange/20 rounded-full animate-pulse"></div>
            </div>
         </div>
-        <div className="font-mono text-sm tracking-widest uppercase animate-pulse text-brand-primary">Initializing Sentinel AI...</div>
+        <div className="font-mono text-sm tracking-widest uppercase animate-pulse">Initializing Sentinel AI...</div>
       </div>
     );
   }

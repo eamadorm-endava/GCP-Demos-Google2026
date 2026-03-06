@@ -14,44 +14,42 @@ const ReportModal: React.FC<ReportModalProps> = ({ isOpen, onClose, result, risk
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-[100] flex items-center justify-center bg-slate-950/90 backdrop-blur-md p-4 animate-in fade-in duration-300">
-      <div className="bg-white text-slate-900 rounded-lg max-w-4xl w-full shadow-2xl overflow-hidden flex flex-col max-h-[90vh]">
-        
+    <div className="fixed inset-0 z-[100] flex items-center justify-center bg-endava-dark/90 backdrop-blur-md p-4 animate-in fade-in duration-300">
+      <div className="bg-white text-endava-dark rounded-lg max-w-4xl w-full shadow-2xl overflow-hidden flex flex-col max-h-[90vh]">
+
         {/* Header - Looks like a formal document */}
-        <div className="bg-slate-50 border-b border-slate-200 p-6 flex items-start justify-between">
+        <div className="bg-endava-blue-90 border-b border-white/10 p-6 flex items-start justify-between">
           <div>
             <div className="flex items-center space-x-2 text-slate-900 mb-2">
-              {/* Changed from text-blue-700 to text-brand-primary */}
-              <ShieldCheck className="w-6 h-6 text-brand-primary" />
-              <span className="font-serif font-bold text-xl tracking-tight">SENTINEL ASSURANCE</span>
+              <img src="./endava_symbol_RGB.svg" alt="Endava Logo" className="w-6 h-6 object-contain" />
+              <span className="font-serif font-bold text-xl tracking-tight text-endava-orange">SENTINEL ASSURANCE</span>
             </div>
-            <h2 className="text-sm font-semibold text-slate-500 uppercase tracking-widest">Internal Audit Memorandum</h2>
+            <h2 className="text-sm font-semibold text-endava-blue-60 uppercase tracking-widest">Internal Audit Memorandum</h2>
           </div>
-          <button onClick={onClose} className="text-slate-400 hover:text-slate-600">
+          <button onClick={onClose} className="text-endava-blue-40 hover:text-endava-blue-60">
             <X className="w-6 h-6" />
           </button>
         </div>
 
         {/* Scrollable Content */}
         <div className="overflow-y-auto p-8 font-serif leading-relaxed">
-          
+
           {/* Meta Data Table */}
           <div className="grid grid-cols-2 gap-4 mb-8 text-sm font-sans">
-            <div className="p-3 bg-slate-50 rounded border border-slate-100">
-              <div className="text-slate-500 text-xs uppercase mb-1">Target Control</div>
-              <div className="font-semibold text-slate-800">{control.name}</div>
+            <div className="p-3 bg-endava-blue-90 rounded border border-white/5">
+              <div className="text-endava-blue-50 text-xs uppercase mb-1">Target Control</div>
+              <div className="font-semibold text-white">{control.name}</div>
             </div>
-            <div className="p-3 bg-slate-50 rounded border border-slate-100">
-              <div className="text-slate-500 text-xs uppercase mb-1">Risk Category</div>
-              <div className="font-semibold text-slate-800">{risk.category}</div>
+            <div className="p-3 bg-endava-blue-90 rounded border border-white/5">
+              <div className="text-endava-blue-50 text-xs uppercase mb-1">Risk Category</div>
+              <div className="font-semibold text-white">{risk.category}</div>
             </div>
-            <div className="p-3 bg-slate-50 rounded border border-slate-100">
-              <div className="text-slate-500 text-xs uppercase mb-1">Audit Date</div>
-              <div className="font-semibold text-slate-800">{new Date().toLocaleDateString()}</div>
+            <div className="p-3 bg-endava-blue-90 rounded border border-white/5">
+              <div className="text-endava-blue-50 text-xs uppercase mb-1">Audit Date</div>
+              <div className="font-semibold text-white">{new Date().toLocaleDateString()}</div>
             </div>
-            <div className="p-3 bg-slate-50 rounded border border-slate-100">
-              <div className="text-slate-500 text-xs uppercase mb-1">Verification Status</div>
-              {/* Status colors (Red/Green) are kept as functional colors */}
+            <div className="p-3 bg-endava-blue-90 rounded border border-white/5">
+              <div className="text-endava-blue-50 text-xs uppercase mb-1">Verification Status</div>
               <div className={`font-bold ${result.effective ? 'text-emerald-700' : 'text-red-700'}`}>
                 {result.effective ? 'EFFECTIVE' : 'INEFFECTIVE / DEFICIENCY'}
               </div>
@@ -60,7 +58,7 @@ const ReportModal: React.FC<ReportModalProps> = ({ isOpen, onClose, result, risk
 
           <div className="space-y-6">
             <section>
-              <h3 className="text-lg font-bold text-slate-900 mb-2 border-b border-slate-200 pb-1">Executive Summary</h3>
+              <h3 className="text-lg font-bold text-slate-900 mb-2 border-b border-white/10 pb-1">Executive Summary</h3>
               <p className="text-slate-700">{result.summary}</p>
             </section>
 
@@ -79,79 +77,77 @@ const ReportModal: React.FC<ReportModalProps> = ({ isOpen, onClose, result, risk
             )}
 
             <section>
-               <h3 className="text-lg font-bold text-slate-900 mb-2 border-b border-slate-200 pb-1">Recommendations</h3>
-               <ul className="list-decimal list-inside space-y-2 text-slate-700">
-                  {result.recommendations.map((rec, i) => (
-                    <li key={i}>{rec}</li>
-                  ))}
-               </ul>
+              <h3 className="text-lg font-bold text-slate-900 mb-2 border-b border-white/10 pb-1">Recommendations</h3>
+              <ul className="list-decimal list-inside space-y-2 text-slate-700">
+                {result.recommendations.map((rec, i) => (
+                  <li key={i}>{rec}</li>
+                ))}
+              </ul>
             </section>
 
             <section>
-              <h3 className="text-lg font-bold text-slate-900 mb-2 border-b border-slate-200 pb-1">Testing Methodology</h3>
-              <p className="text-slate-600 text-sm">
-                This verification was conducted using Autonomous AI Agents performing 100% population testing against the target dataset. 
-                Scenario executed: <span className="font-mono text-slate-800 bg-slate-100 px-1 rounded">{result.scenario || 'STANDARD_PROTOCOL'}</span>.
+              <h3 className="text-lg font-bold text-slate-900 mb-2 border-b border-white/10 pb-1">Testing Methodology</h3>
+              <p className="text-endava-blue-60 text-sm">
+                This verification was conducted using Autonomous AI Agents performing 100% population testing against the target dataset.
+                Scenario executed: <span className="font-mono text-white bg-endava-dark px-1 rounded">{result.scenario || 'STANDARD_PROTOCOL'}</span>.
                 Evidence has been cryptographically hashed and stored in the immutable audit ledger.
               </p>
             </section>
 
             {/* Detailed Execution Logs / Audit Trail */}
-            <section className="mt-8 pt-4 border-t-2 border-slate-100">
-               <h3 className="text-lg font-bold text-slate-900 mb-4 flex items-center">
-                 <Terminal className="w-5 h-5 mr-2 text-slate-500" />
-                 Detailed Execution Audit Trail
-               </h3>
-               <div className="bg-slate-900 rounded-lg p-4 font-mono text-xs overflow-x-auto">
-                  {result.executionLogs && result.executionLogs.length > 0 ? (
-                    <div className="space-y-2">
-                       {result.executionLogs.map((log, index) => (
-                         <div key={index} className="flex space-x-3 border-b border-slate-800 pb-2 last:border-0">
-                           <div className="text-slate-500 shrink-0 w-20">{log.timestamp}</div>
-                           <div className="flex-1">
-                              <div className="flex items-center space-x-2">
-                                <span className={`font-bold ${
-                                  log.status === 'error' ? 'text-red-400' : 
-                                  log.status === 'warning' ? 'text-yellow-400' : 
-                                  'text-emerald-400'
-                                }`}>
-                                  {log.action}
-                                </span>
-                              </div>
-                              <div className="text-slate-400 mt-0.5">{log.detail}</div>
-                           </div>
-                         </div>
-                       ))}
-                    </div>
-                  ) : (
-                    <div className="text-slate-500 italic">No execution logs available for this audit run.</div>
-                  )}
-               </div>
+            <section className="mt-8 pt-4 border-t-2 border-white/5">
+              <h3 className="text-lg font-bold text-slate-900 mb-4 flex items-center">
+                <Terminal className="w-5 h-5 mr-2 text-endava-blue-50" />
+                Detailed Execution Audit Trail
+              </h3>
+              <div className="bg-endava-blue-90 rounded-lg p-4 font-mono text-xs overflow-x-auto">
+                {result.executionLogs && result.executionLogs.length > 0 ? (
+                  <div className="space-y-2">
+                    {result.executionLogs.map((log, index) => (
+                      <div key={index} className="flex space-x-3 border-b border-white/5 pb-2 last:border-0">
+                        <div className="text-endava-blue-50 shrink-0 w-20">{log.timestamp}</div>
+                        <div className="flex-1">
+                          <div className="flex items-center space-x-2">
+                            <span className={`font-bold ${log.status === 'error' ? 'text-endava-orange' :
+                              log.status === 'warning' ? 'text-yellow-500' :
+                                'text-emerald-500'
+                              }`}>
+                              {log.action}
+                            </span>
+                          </div>
+                          <div className="text-endava-blue-40 mt-0.5">{log.detail}</div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                ) : (
+                  <div className="text-endava-blue-50 italic">No execution logs available for this audit run.</div>
+                )}
+              </div>
             </section>
 
           </div>
 
-          <div className="mt-12 pt-8 border-t border-slate-200 flex flex-col items-center justify-center">
-            <div className="font-script text-3xl text-slate-400 mb-2">Sentinel AI</div>
-            <div className="text-xs text-slate-400 uppercase tracking-widest">Digitally Signed by Autonomous Agent</div>
+          <div className="mt-12 pt-8 border-t border-white/10 flex flex-col items-center justify-center">
+            <div className="font-script text-3xl text-endava-blue-40 mb-2">Sentinel AI</div>
+            <div className="text-xs text-endava-blue-40 uppercase tracking-widest">Digitally Signed by Autonomous Agent</div>
           </div>
 
         </div>
 
         {/* Footer Actions */}
-        <div className="bg-slate-50 border-t border-slate-200 p-4 flex justify-between items-center">
-           <div className="text-xs text-slate-400">Ref: {result.scenario}-{Date.now()}</div>
-           <div className="flex space-x-3">
-             <button className="flex items-center space-x-2 px-4 py-2 text-slate-600 hover:bg-slate-200 rounded-lg transition-colors text-sm font-medium">
-                <Printer className="w-4 h-4" />
-                <span>Print</span>
-             </button>
-             {/* Changed from bg-blue-900 to bg-brand-primary */}
-             <button className="flex items-center space-x-2 px-4 py-2 bg-brand-primary hover:bg-orange-700 text-white rounded-lg transition-colors text-sm font-medium shadow-lg">
-                <Download className="w-4 h-4" />
-                <span>Export PDF</span>
-             </button>
-           </div>
+        <div className="bg-endava-blue-90 border-t border-white/10 p-4 flex justify-between items-center">
+          <div className="text-xs text-endava-blue-40">Ref: {result.scenario}-{Date.now()}</div>
+          <div className="flex space-x-3">
+            <button className="flex items-center space-x-2 px-4 py-2 text-endava-blue-60 hover:bg-white/10 rounded-lg transition-colors text-sm font-medium border border-transparent">
+              <Printer className="w-4 h-4" />
+              <span>Print</span>
+            </button>
+            <button className="flex items-center space-x-2 px-4 py-2 bg-endava-dark hover:bg-endava-orange text-white rounded-lg transition-colors text-sm font-medium shadow-lg">
+              <Download className="w-4 h-4" />
+              <span>Export PDF</span>
+            </button>
+          </div>
         </div>
       </div>
     </div>
