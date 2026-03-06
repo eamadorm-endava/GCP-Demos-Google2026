@@ -3,8 +3,11 @@ import { Risk, RiskSeverity, AgentCapability } from '../types';
 import { getAgentSystemInstruction } from './prompts';
 
 const getAiClient = () => {
-  const apiKey = process.env.API_KEY || process.env.GEMINI_API_KEY;
+  // Use Vite's import.meta.env to access environment variables. 
+  // The CI/CD pipeline and Dockerfile inject VITE_GEMINI_API_KEY.
+  const apiKey = import.meta.env.VITE_GEMINI_API_KEY || import.meta.env.VITE_API_KEY;
   if (!apiKey) {
+    console.error("API Key not found in environment variables. Please set VITE_GEMINI_API_KEY.");
     throw new Error("API Key not found");
   }
   return new GoogleGenAI({ apiKey });
