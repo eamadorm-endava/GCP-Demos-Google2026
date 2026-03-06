@@ -141,4 +141,3 @@ vite.config.ts.timestamp-*
 
 # Devcontainer
 .devcontainer/
-navendu-manufacturing-contract-ai/package-lock.json
