@@ -50,7 +50,7 @@ export const ShelfComplianceDetails: React.FC<ShelfComplianceDetailsProps> = ({ 
                         Real-time Camera Feed (Actual)
                     </h4>
                     <div className="bg-slate-950 rounded-xl p-4 border border-slate-800 flex justify-center items-center h-64 relative overflow-hidden">
-                        <div className="absolute inset-0 bg-[url('./assets/vision-shelf-background.svg')] bg-cover opacity-20 grayscale"></div>
+                        <div className="absolute inset-0 bg-[url('./vision-shelf-background.svg')] bg-cover opacity-20 grayscale"></div>
                         <div className="relative z-10 p-6 border-2 border-rose-500 border-dashed rounded-lg bg-rose-950/30 backdrop-blur-sm flex flex-col items-center justify-center">
                             <AlertTriangle className="w-8 h-8 text-rose-500 mb-2" />
                             <span className="text-rose-400 font-bold text-sm uppercase">Item Missing</span>

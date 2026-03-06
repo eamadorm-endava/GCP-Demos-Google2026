@@ -16,8 +16,8 @@ const NODES: ShelfNode[] = [
         complianceScore: 62,
         violationDetail: "SKU-400 (Apple Liqueur) Missing from Slot 4B.",
         sku: "AL-400",
-        imageRef: './assets/vision-ref-liqueur.svg',
-        imageLive: './assets/vision-live-liqueur-violation.svg',
+        imageRef: './vision-ref-liqueur.svg',
+        imageLive: './vision-live-liqueur-violation.svg',
     },
     {
         id: "CAM-104-B2",
@@ -26,8 +26,8 @@ const NODES: ShelfNode[] = [
         category: "IPA & Imports",
         status: 'COMPLIANT',
         complianceScore: 98,
-        imageRef: './assets/vision-ref-beer.svg',
-        imageLive: './assets/vision-live-beer-compliant.svg',
+        imageRef: './vision-ref-beer.svg',
+        imageLive: './vision-live-beer-compliant.svg',
     },
     {
         id: "CAM-104-C3",
@@ -38,8 +38,8 @@ const NODES: ShelfNode[] = [
         complianceScore: 45,
         violationDetail: "Facing Mismatch: Tonic Water occupies Syrup slots.",
         sku: "MX-202",
-        imageRef: './assets/vision-ref-mixers.svg',
-        imageLive: './assets/vision-live-mixers-violation.svg',
+        imageRef: './vision-ref-mixers.svg',
+        imageLive: './vision-live-mixers-violation.svg',
     },
 
     // --- DAVENPORT (Store 202) ---
@@ -50,8 +50,8 @@ const NODES: ShelfNode[] = [
         category: "Summer Coolers",
         status: 'COMPLIANT',
         complianceScore: 94,
-        imageRef: './assets/vision-ref-endcap.svg',
-        imageLive: './assets/vision-live-endcap-compliant.svg',
+        imageRef: './vision-ref-endcap.svg',
+        imageLive: './vision-live-endcap-compliant.svg',
     },
     {
         id: "CAM-202-A4",
@@ -61,8 +61,8 @@ const NODES: ShelfNode[] = [
         status: 'VIOLATION',
         complianceScore: 78,
         violationDetail: "Planogram outdated. Old vintage displayed.",
-        imageRef: './assets/vision-ref-wine.svg',
-        imageLive: './assets/vision-live-wine-violation.svg',
+        imageRef: './vision-ref-wine.svg',
+        imageLive: './vision-live-wine-violation.svg',
     },
 
     // --- DES MOINES (Store 401) ---
@@ -73,8 +73,8 @@ const NODES: ShelfNode[] = [
         category: "Impulse / Miniatures",
         status: 'COMPLIANT',
         complianceScore: 99,
-        imageRef: './assets/vision-ref-checkout.svg',
-        imageLive: './assets/vision-live-checkout-compliant.svg',
+        imageRef: './vision-ref-checkout.svg',
+        imageLive: './vision-live-checkout-compliant.svg',
     }
 ];
 
