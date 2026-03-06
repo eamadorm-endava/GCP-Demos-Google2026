@@ -1,55 +1,57 @@
-
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Agentic Vendor Governance Platform</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-    <link rel="icon" type="image/svg+xml" href="/endava-logo.svg" />
-    <script>
-      tailwind.config = {
-        theme: {
-          extend: {
-            colors: {
-              endava: {
-                orange: '#FF5640',
-                dark: '#192B37',
-                blue: {
-                  90: '#30404B',
-                  80: '#47555F',
-                  70: '#5E6A73',
-                  60: '#758087',
-                  50: '#8C959B',
-                  40: '#A3AAAF',
-                  30: '#BABFC3',
-                  20: '#D1D5D7',
-                  10: '#E8EAEB',
-                }
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Agentic Vendor Governance Platform</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap"
+    rel="stylesheet">
+  <link rel="icon" type="image/svg+xml" href="./endava-logo.svg" />
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            endava: {
+              orange: '#FF5640',
+              dark: '#192B37',
+              blue: {
+                90: '#30404B',
+                80: '#47555F',
+                70: '#5E6A73',
+                60: '#758087',
+                50: '#8C959B',
+                40: '#A3AAAF',
+                30: '#BABFC3',
+                20: '#D1D5D7',
+                10: '#E8EAEB',
               }
-            },
-            fontFamily: {
-              sans: ['Poppins', 'sans-serif'],
             }
+          },
+          fontFamily: {
+            sans: ['Poppins', 'sans-serif'],
           }
         }
       }
-    </script>
-    <style>
-      body {
-        font-family: 'Poppins', sans-serif;
-        background-color: #192B37;
-        color: white;
-        overflow: hidden;
-      }
-      #root {
-        height: 100vh;
-        overflow: hidden;
-      }
-    </style>
+    }
+  </script>
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #192B37;
+      color: white;
+      overflow: hidden;
+    }
+
+    #root {
+      height: 100vh;
+      overflow: hidden;
+    }
+  </style>
   <script type="importmap">
 {
   "imports": {
@@ -63,10 +65,12 @@
   }
 }
 </script>
-<link rel="stylesheet" href="/index.css">
+  <link rel="stylesheet" href="/index.css">
 </head>
-  <body class="bg-endava-dark text-white">
-    <div id="root"></div>
+
+<body class="bg-endava-dark text-white">
+  <div id="root"></div>
   <script type="module" src="/index.tsx"></script>
 </body>
+
 </html>

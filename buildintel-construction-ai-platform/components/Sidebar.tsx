@@ -3,7 +3,7 @@ import { LayoutDashboard, MessageSquareText, FileText, Settings, BarChart3, Aler
 import { PROJECTS } from '../services/mockData';
 
 const EndavaLogo = () => (
-  <img src="/assets/endava-logo.svg" alt="Endava Logo" className="w-7 h-7" />
+  <img src="./assets/endava-logo.svg" alt="Endava Logo" className="w-7 h-7" />
 );
 
 interface SidebarProps {
