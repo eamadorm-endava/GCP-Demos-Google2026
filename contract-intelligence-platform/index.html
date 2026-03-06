@@ -1,79 +1,135 @@
-
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/endava-logo.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>SupplyLens | Contract Intelligence</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="/index.css">
-    <style>
-        body { font-family: 'Inter', sans-serif; }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(5px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        @keyframes slideUp {
-            from { transform: translateY(20px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
-        }
-        @keyframes shimmer {
-            0% { background-position: -200% center; }
-            100% { background-position: 200% center; }
-        }
-        .animate-fade-in { animation: fadeIn 0.4s ease-out forwards; }
-        .animate-slide-up { animation: slideUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="./endava-logo.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SupplyLens | Contract Intelligence</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="./index.css">
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+    }
 
-        .animate-shimmer {
-            background: linear-gradient(90deg, transparent 25%, rgba(255,86,64,0.15) 50%, transparent 75%);
-            background-size: 200% auto;
-            animation: shimmer 2s linear infinite;
-        }
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(5px);
+      }
 
-        /* Custom Scrollbar Styling */
-        ::-webkit-scrollbar { width: 6px; height: 6px; }
-        ::-webkit-scrollbar-track { background: #192B37; border-radius: 4px; }
-        ::-webkit-scrollbar-thumb { background: #47555F; border-radius: 4px; border: 1px solid #192B37; }
-        ::-webkit-scrollbar-thumb:hover { background: #FF5640; }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
 
-        /* Firefox */
-        * { scrollbar-width: thin; scrollbar-color: #47555F #192B37; }
+    @keyframes slideUp {
+      from {
+        transform: translateY(20px);
+        opacity: 0;
+      }
 
-        .custom-scrollbar::-webkit-scrollbar-thumb { background: #FF5640; }
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
 
-        /* Coral glow utility */
-        .coral-glow { box-shadow: 0 0 20px rgba(255, 86, 64, 0.15); }
-        .coral-glow-sm { box-shadow: 0 0 8px rgba(255, 86, 64, 0.25); }
-    </style>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-      tailwind.config = {
-        theme: {
-          extend: {
-            fontFamily: {
-              sans: ['Inter', 'system-ui', 'sans-serif'],
-            },
-            colors: {
-              'brand-primary':   '#192B37',
-              'brand-secondary': '#30404B',
-              'brand-accent':    '#47555F',
-              'brand-muted':     '#5E6A73',
-              'brand-light':     '#8C959B',
-              'brand-text':      '#FFFFFF',
-              'brand-highlight': '#FF5640',
-              'brand-highlight-dark': '#CC3E2C',
-            },
+    @keyframes shimmer {
+      0% {
+        background-position: -200% center;
+      }
+
+      100% {
+        background-position: 200% center;
+      }
+    }
+
+    .animate-fade-in {
+      animation: fadeIn 0.4s ease-out forwards;
+    }
+
+    .animate-slide-up {
+      animation: slideUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    .animate-shimmer {
+      background: linear-gradient(90deg, transparent 25%, rgba(255, 86, 64, 0.15) 50%, transparent 75%);
+      background-size: 200% auto;
+      animation: shimmer 2s linear infinite;
+    }
+
+    /* Custom Scrollbar Styling */
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: #192B37;
+      border-radius: 4px;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: #47555F;
+      border-radius: 4px;
+      border: 1px solid #192B37;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: #FF5640;
+    }
+
+    /* Firefox */
+    * {
+      scrollbar-width: thin;
+      scrollbar-color: #47555F #192B37;
+    }
+
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+      background: #FF5640;
+    }
+
+    /* Coral glow utility */
+    .coral-glow {
+      box-shadow: 0 0 20px rgba(255, 86, 64, 0.15);
+    }
+
+    .coral-glow-sm {
+      box-shadow: 0 0 8px rgba(255, 86, 64, 0.25);
+    }
+  </style>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'system-ui', 'sans-serif'],
+          },
+          colors: {
+            'brand-primary': '#192B37',
+            'brand-secondary': '#30404B',
+            'brand-accent': '#47555F',
+            'brand-muted': '#5E6A73',
+            'brand-light': '#8C959B',
+            'brand-text': '#FFFFFF',
+            'brand-highlight': '#FF5640',
+            'brand-highlight-dark': '#CC3E2C',
           },
         },
-      }
-    </script>
-  </head>
-  <body class="bg-brand-primary text-brand-text scroll-smooth antialiased">
-    <div id="root"></div>
-    <script type="module" src="/index.tsx"></script>
-  </body>
+      },
+    }
+  </script>
+</head>
+
+<body class="bg-brand-primary text-brand-text scroll-smooth antialiased">
+  <div id="root"></div>
+  <script type="module" src="./index.tsx"></script>
+</body>
+
 </html>

@@ -10,7 +10,7 @@ export const Header: React.FC = () => {
                     <div className="flex items-center gap-3">
                         <div className="relative flex-shrink-0">
                             <div className="w-9 h-9 rounded-xl bg-brand-highlight/10 border border-brand-highlight/30 flex items-center justify-center coral-glow-sm p-1.5">
-                                <img src="/endava-logo.svg" alt="SupplyLens" className="w-full h-full" />
+                                <img src="./endava-logo.svg" alt="SupplyLens" className="w-full h-full" />
                             </div>
                         </div>
                         <div className="flex flex-col leading-none">
