@@ -1,23 +1,111 @@
-@import "tailwindcss";
-
-@theme {
-  /* Identidad Visual Endava */
-  --color-brand-primary: #FF5540; /* Naranja Endava (Sunset Orange) */
-  --color-brand-dark: #0f172a;    /* Fondo principal profundo */
-  --color-brand-charcoal: #232323; /* Gris oscuro corporativo */
-  --color-brand-gray: #B0B0B0;    /* Textos secundarios */
-  
-  /* Gradiente moderno alineado a la marca (Naranja -> Rojo) */
-  --background-image-brand-gradient: linear-gradient(to right, #FF5540, #E04030);
-
-  /* Animaciones */
-  --animate-pulse-fast: pulse 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+@layer base {
+  html {
+    font-size: 16px;
+  }
 }
 
-@layer base {
-  body {
-    background-color: var(--color-brand-dark);
-    color: #f8fafc;
-    font-family: 'Inter', system-ui, sans-serif;
+@layer components {
+  .kiosk-card {
+    background-color: var(--endava-blue-90);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 2rem;
+    transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
   }
+
+  .kiosk-card-glass {
+    background: rgba(48, 64, 75, 0.7);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 2rem;
+    box-shadow: 0 40px 100px -20px rgba(0, 0, 0, 0.5);
+  }
+}
+
+/* Global Scrollbar Utilities */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 86, 64, 0.2);
+  /* endava-orange */
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 86, 64, 0.5);
+  /* endava-orange */
+}
+
+* {
+  scrollbar-color: rgba(255, 86, 64, 0.3) transparent;
+  scrollbar-width: thin;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+@keyframes pulse-glow {
+
+  0%,
+  100% {
+    box-shadow: 0 0 20px rgba(255, 86, 64, 0.2);
+    transform: scale(1);
+  }
+
+  50% {
+    box-shadow: 0 0 40px rgba(255, 86, 64, 0.4);
+    transform: scale(1.02);
+  }
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 3s infinite ease-in-out;
+}
+
+.endava-gradient {
+  background: linear-gradient(135deg, var(--endava-orange) 0%, #d13f2d 100%);
+}
+
+.endava-text-gradient {
+  background: linear-gradient(135deg, var(--endava-orange) 0%, #ff8c7a 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+:root {
+  --endava-orange: #FF5640;
+  --endava-dark: #192B37;
+  --endava-blue-90: #30404B;
+  --endava-blue-80: #47555F;
+  --endava-blue-70: #5E6A73;
+  --endava-blue-60: #758087;
+  --endava-blue-50: #8C959B;
+  --endava-blue-40: #A3AAAF;
+  --endava-blue-30: #BABFC3;
+  --endava-blue-20: #D1D5D7;
+  --endava-blue-10: #E8EAEB;
+}
+
+body {
+  background-color: var(--endava-dark);
+  color: var(--endava-blue-10);
+}
+
+.terminal-text {
+  text-shadow: 0 0 5px rgba(255, 86, 64, 0.5);
+  /* updated to endava-orange */
 }

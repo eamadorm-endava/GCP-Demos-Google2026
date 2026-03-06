@@ -10,7 +10,7 @@ export default function App() {
   const [completedAudits, setCompletedAudits] = useState<Record<string, AuditResult>>({});
   const [loading, setLoading] = useState(true);
   const [showWelcome, setShowWelcome] = useState(true);
-  
+
   // Ref to track which sessions have been requested to stop
   const stopSignalRef = useRef<Set<string>>(new Set());
 
@@ -40,10 +40,10 @@ export default function App() {
   const handleDeployAgent = async (risk: Risk, control: Control) => {
     // 1. Initialize Session
     const sessionId = control.id;
-    
+
     // Clear any previous stop signal for this session
     if (stopSignalRef.current.has(sessionId)) {
-        stopSignalRef.current.delete(sessionId);
+      stopSignalRef.current.delete(sessionId);
     }
 
     setActiveSessions(prev => ({
@@ -61,48 +61,48 @@ export default function App() {
     try {
       // Pass the agentCapability to the stream simulation
       const stream = streamAuditSimulation(risk, control.name, control.agentCapability);
-      
+
       for await (const chunk of stream) {
         // Check for stop signal
         if (stopSignalRef.current.has(sessionId)) {
-            break; // Stop processing stream
+          break; // Stop processing stream
         }
 
         const lines = chunk.split('\n');
-        
-        for (const line of lines) {
-           const trimmed = line.trim();
-           if (!trimmed) continue;
 
-           try {
-             // Attempt to parse line as JSON
-             if (trimmed.startsWith('{') && trimmed.endsWith('}')) {
-               const data = JSON.parse(trimmed);
-               
-               if (data.type === 'log') {
-                 addLog(sessionId, {
-                   timestamp: new Date().toLocaleTimeString(),
-                   action: data.action,
-                   detail: data.detail,
-                   status: data.status
-                 });
-               } else if (data.type === 'result') {
-                 completeAudit(sessionId, data.data);
-               }
-             } else {
-               // If not JSON, treat as raw log (fallback)
-               if (trimmed.length > 5 && !trimmed.includes('```')) {
-                  addLog(sessionId, {
-                    timestamp: new Date().toLocaleTimeString(),
-                    action: "Processing",
-                    detail: trimmed,
-                    status: 'info'
-                  });
-               }
-             }
-           } catch (e) {
-             // Ignore partial chunks
-           }
+        for (const line of lines) {
+          const trimmed = line.trim();
+          if (!trimmed) continue;
+
+          try {
+            // Attempt to parse line as JSON
+            if (trimmed.startsWith('{') && trimmed.endsWith('}')) {
+              const data = JSON.parse(trimmed);
+
+              if (data.type === 'log') {
+                addLog(sessionId, {
+                  timestamp: new Date().toLocaleTimeString(),
+                  action: data.action,
+                  detail: data.detail,
+                  status: data.status
+                });
+              } else if (data.type === 'result') {
+                completeAudit(sessionId, data.data);
+              }
+            } else {
+              // If not JSON, treat as raw log (fallback)
+              if (trimmed.length > 5 && !trimmed.includes('```')) {
+                addLog(sessionId, {
+                  timestamp: new Date().toLocaleTimeString(),
+                  action: "Processing",
+                  detail: trimmed,
+                  status: 'info'
+                });
+              }
+            }
+          } catch (e) {
+            // Ignore partial chunks
+          }
         }
       }
     } catch (error) {
@@ -124,7 +124,7 @@ export default function App() {
     setActiveSessions(prev => {
       const session = prev[sessionId];
       if (!session) return prev;
-      
+
       // Do not add logs if cancelled
       if (stopSignalRef.current.has(sessionId)) return prev;
 
@@ -147,11 +147,11 @@ export default function App() {
       // Capture logs for audit trail
       const finalLogs = session.logs;
       const durationMs = session.startTime ? Date.now() - session.startTime : 0;
-      
+
       const enrichedResult = {
-          ...result,
-          durationMs,
-          executionLogs: finalLogs // Persist logs
+        ...result,
+        durationMs,
+        executionLogs: finalLogs // Persist logs
       };
 
       setCompletedAudits(prevAudits => ({
@@ -178,16 +178,14 @@ export default function App() {
 
   if (loading) {
     return (
-      <div className="h-screen w-screen bg-brand-dark flex flex-col items-center justify-center text-slate-400 space-y-4">
+      <div className="h-screen w-screen bg-endava-dark flex flex-col items-center justify-center text-endava-blue-40 space-y-4">
         <div className="relative">
-           {/* Spinner externo en Naranja Brand */}
-           <div className="w-16 h-16 border-4 border-brand-primary/30 border-t-brand-primary rounded-full animate-spin"></div>
-           <div className="absolute inset-0 flex items-center justify-center">
-             {/* Punto central pulsante */}
-             <div className="w-8 h-8 bg-brand-primary/20 rounded-full animate-pulse"></div>
-           </div>
+          <div className="w-16 h-16 border-4 border-endava-orange/30 border-t-endava-orange rounded-full animate-spin"></div>
+          <div className="absolute inset-0 flex items-center justify-center">
+            <div className="w-8 h-8 bg-endava-orange/20 rounded-full animate-pulse"></div>
+          </div>
         </div>
-        <div className="font-mono text-sm tracking-widest uppercase animate-pulse text-brand-primary">Initializing Sentinel AI...</div>
+        <div className="font-mono text-sm tracking-widest uppercase animate-pulse">Initializing Sentinel AI...</div>
       </div>
     );
   }
@@ -195,7 +193,7 @@ export default function App() {
   return (
     <>
       {showWelcome && <WelcomeModal onStart={() => setShowWelcome(false)} />}
-      <RiskDashboard 
+      <RiskDashboard
         risks={risks}
         activeSessions={activeSessions}
         onDeployAgent={handleDeployAgent}
