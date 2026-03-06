@@ -21,7 +21,7 @@ const ReportModal: React.FC<ReportModalProps> = ({ isOpen, onClose, result, risk
         <div className="bg-endava-blue-90 border-b border-white/10 p-6 flex items-start justify-between">
           <div>
             <div className="flex items-center space-x-2 text-slate-900 mb-2">
-              <img src="/endava_symbol_RGB.svg" alt="Endava Logo" className="w-6 h-6 object-contain" />
+              <img src="./endava_symbol_RGB.svg" alt="Endava Logo" className="w-6 h-6 object-contain" />
               <span className="font-serif font-bold text-xl tracking-tight text-endava-orange">SENTINEL ASSURANCE</span>
             </div>
             <h2 className="text-sm font-semibold text-endava-blue-60 uppercase tracking-widest">Internal Audit Memorandum</h2>

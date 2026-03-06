@@ -57,7 +57,7 @@ const AddRiskModal: React.FC<AddRiskModalProps> = ({ isOpen, onClose, onAdd, exi
         <div className="p-6 border-b border-white/5 flex items-center justify-between bg-endava-dark/50">
           <div className="flex items-center space-x-3">
             <div className="p-2 bg-endava-orange/10 rounded-lg border border-endava-orange/20 text-endava-orange">
-              <img src="/endava_symbol_RGB.svg" alt="Endava Logo" className="w-5 h-5 object-contain" />
+              <img src="./endava_symbol_RGB.svg" alt="Endava Logo" className="w-5 h-5 object-contain" />
             </div>
             <h2 className="text-xl font-bold text-white">Define New Risk</h2>
           </div>

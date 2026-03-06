@@ -33,7 +33,7 @@ const WelcomeModal: React.FC<WelcomeModalProps> = ({ onStart }) => {
                <div className="flex-1 overflow-y-auto p-8 relative z-10">
                   <div className="flex items-center space-x-2 text-sky-400 mb-6">
                      <div className="p-2 bg-sky-500/10 rounded-lg border border-sky-500/20">
-                        <img src="/endava_symbol_RGB.svg" alt="Endava Logo" className="w-5 h-5 object-contain" />
+                        <img src="./endava_symbol_RGB.svg" alt="Endava Logo" className="w-5 h-5 object-contain" />
                      </div>
                      <span className="font-mono font-bold tracking-widest text-sm">SENTINEL AI</span>
                   </div>

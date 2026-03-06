@@ -36,7 +36,7 @@ const Sidebar: React.FC<SidebarProps> = ({ viewMode, setViewMode, onReset }) => 
       {/* Brand Header */}
       <div className="p-6 border-b border-white/10 flex items-center space-x-3 bg-endava-dark/30">
         <div className="bg-endava-dark p-2 rounded-lg shadow-lg">
-          <img src="/endava_symbol_RGB.svg" alt="Endava Logo" className="w-5 h-5 object-contain" />
+          <img src="./endava_symbol_RGB.svg" alt="Endava Logo" className="w-5 h-5 object-contain" />
         </div>
         <div>
           <h1 className="font-bold text-white tracking-wide text-lg">SENTINEL</h1>
