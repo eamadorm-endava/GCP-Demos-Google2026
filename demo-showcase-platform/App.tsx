@@ -7,7 +7,8 @@ import Dashboard from './components/Dashboard';
 import QuickPitch from './components/QuickPitch';
 import DemoContainer from './components/DemoContainer';
 import AdminView from './components/AdminView';
-import { Home, RefreshCw, LayoutGrid, Settings, ChevronRight, ShieldCheck, Terminal } from 'lucide-react';
+import EndavaLogo from './components/EndavaLogo';
+import { RefreshCw, Settings, ChevronRight, ShieldCheck, Terminal, Maximize, Minimize, Sparkles, X } from 'lucide-react';
 
 
 const App: React.FC = () => {
@@ -24,6 +25,27 @@ const App: React.FC = () => {
   const setPitchVertical = useStore((state) => state.setPitchVertical);
   const toggleQuickPitch = useStore((state) => state.toggleQuickPitch);
   const setAdminOpen = useStore((state) => state.setAdminOpen);
+  const [isFullscreen, setIsFullscreen] = React.useState(false);
+
+  const toggleFullscreen = () => {
+    if (!document.fullscreenElement) {
+      document.documentElement.requestFullscreen().catch((err) => {
+        console.error(`Error attempting to enable full-screen mode: ${err.message}`);
+      });
+      setIsFullscreen(true);
+    } else {
+      document.exitFullscreen();
+      setIsFullscreen(false);
+    }
+  };
+
+  useEffect(() => {
+    const handleFullscreenChange = () => {
+      setIsFullscreen(!!document.fullscreenElement);
+    };
+    document.addEventListener('fullscreenchange', handleFullscreenChange);
+    return () => document.removeEventListener('fullscreenchange', handleFullscreenChange);
+  }, []);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -55,16 +77,23 @@ const App: React.FC = () => {
   if (isIdle) return <AttractMode />;
 
   return (
-    <div className="h-screen w-screen flex flex-col bg-[#0b0c0d] text-white relative overflow-hidden select-none">
+    <div className="h-screen w-screen flex flex-col bg-endava-dark text-white relative overflow-hidden select-none">
+      {/* Animated Background */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
+        <div className="absolute -top-[20%] -left-[10%] w-[60%] h-[60%] rounded-full bg-endava-orange/10 filter blur-[120px] opacity-50 animate-blob"></div>
+        <div className="absolute top-[10%] -right-[10%] w-[50%] h-[70%] rounded-full bg-blue-500/10 filter blur-[120px] opacity-40 animate-blob animation-delay-2000"></div>
+        <div className="absolute -bottom-[20%] left-[15%] w-[60%] h-[60%] rounded-full bg-purple-500/10 filter blur-[120px] opacity-40 animate-blob animation-delay-4000"></div>
+      </div>
+
       {/* Resetting Overlay */}
       {isResetting && (
-        <div className="fixed inset-0 z-[200] bg-[#DE411B] flex flex-col items-center justify-center animate-in fade-in duration-300">
-          <RefreshCw className="w-24 h-24 text-white animate-spin mb-8" strokeWidth={3} />
-          <h2 className="text-4xl md:text-6xl font-black tracking-tighter text-white uppercase italic">
+        <div className="fixed inset-0 z-[200] bg-endava-orange flex flex-col items-center justify-center animate-in fade-in duration-300">
+          <RefreshCw className="w-16 h-16 md:w-24 md:h-24 text-white animate-spin mb-6" strokeWidth={3} />
+          <h2 className="text-3xl md:text-5xl font-medium tracking-tighter text-white uppercase italic">
             Restoring Gold Master
           </h2>
-          <div className="mt-8 flex items-center gap-3 text-white/60 font-black uppercase tracking-[0.4em] text-sm">
-            <ShieldCheck className="w-5 h-5" /> All Session Data Wiped
+          <div className="mt-6 flex items-center gap-3 text-white/60 font-black uppercase tracking-[0.4em] text-xs md:text-sm">
+            <ShieldCheck className="w-4 h-4 md:w-5 md:h-5" /> All Session Data Wiped
           </div>
           <div className="absolute inset-0 pointer-events-none overflow-hidden">
             <div className="w-full h-[2px] bg-white/30 absolute top-0 animate-[scan_2s_linear_infinite]" />
@@ -72,84 +101,61 @@ const App: React.FC = () => {
         </div>
       )}
 
-      {/* Header */}
-      <header className="h-16 md:h-20 lg:h-24 bg-[#121417] border-b border-white/5 flex items-center justify-between px-4 md:px-10 flex-shrink-0 z-30 pt-[env(safe-area-inset-top)]">
-        <div className="flex items-center gap-3 md:gap-6">
-          <div className="w-9 h-9 md:w-12 md:h-12 bg-white flex items-center justify-center flex-shrink-0 rounded-lg shadow-lg">
-             <div className="w-10 h-10 rounded-xl overflow-hidden">
-              <img
-                src="https://cdn.brandfetch.io/id4YZ7PWEj/w/200/h/200/theme/dark/icon.jpeg?c=1bxid64Mup7aczewSAYMX&t=1761617484712"
-                alt="Agentic Vendor Governance"
-                className="w-full h-full object-cover"
-              />
-            </div>
+      {/* Header - Only visible on Dashboard */}
+      {!currentVertical && (
+        <header className="h-20 md:h-24 lg:h-32 bg-endava-dark/60 backdrop-blur-3xl border-b border-white/[0.05] flex items-center justify-between px-6 md:px-12 flex-shrink-0 z-30 pt-[env(safe-area-inset-top)] shadow-2xl shadow-[0_4px_30px_rgba(0,0,0,0.5)]">
+          <div className="flex items-center gap-4 md:gap-8">
+            <button
+              onClick={handleSwitch}
+              className="flex flex-col justify-center py-4 hover:opacity-80 transition-opacity active:scale-95"
+            >
+              <EndavaLogo height={48} className="md:h-12 lg:h-16 w-auto" />
+            </button>
           </div>
-          <div className="flex flex-col">
-            <span className="text-lg md:text-2xl lg:text-3xl font-black tracking-tighter text-white leading-tight">Endava</span>
-          </div>
-        </div>
 
-        {currentVertical && (
-          <div className="hidden sm:flex items-center gap-2 md:gap-3 animate-in slide-in-from-left-4">
-            <ChevronRight className="text-gray-700 w-4 h-4 md:w-5 md:h-5" />
-            <span className="text-sm md:text-lg font-medium text-gray-400 capitalize truncate max-w-[120px] lg:max-w-none">{currentVertical}</span>
-          </div>
-        )}
+          <div className="flex items-center gap-4 md:gap-8">
+            <button
+              onClick={() => setIdle(true)}
+              className="p-3 md:p-5 hover:bg-white/10 active:bg-endava-orange/10 rounded-full transition-all text-endava-blue-50 hover:text-white"
+              title="Start Attract Mode"
+            >
+              <Sparkles className="w-6 h-6 md:w-8 md:h-8" />
+            </button>
 
-        <div className="flex items-center gap-3 md:gap-10">
-          <div className="hidden md:flex flex-col text-right">
-            <span className="text-[10px] font-black text-[#DE411B] tracking-[0.2em] uppercase">Control Center Options</span>
+            <button
+              onClick={toggleFullscreen}
+              className="p-3 md:p-5 hover:bg-white/10 active:bg-endava-orange/10 rounded-full transition-all text-endava-blue-50 hover:text-white"
+              title="Toggle Fullscreen"
+            >
+              {isFullscreen ? <Minimize className="w-6 h-6 md:w-8 md:h-8" /> : <Maximize className="w-6 h-6 md:w-8 md:h-8" />}
+            </button>
+
+            <button
+              onClick={() => setAdminOpen(true)}
+              className="p-3 md:p-5 hover:bg-white/10 active:bg-endava-orange/10 rounded-full transition-all text-endava-blue-50 hover:text-white"
+            >
+              <Terminal className="w-6 h-6 md:w-8 md:h-8" />
+            </button>
           </div>
-          <button 
-            onClick={() => setAdminOpen(true)}
-            className="p-2 md:p-3 hover:bg-white/10 active:bg-[#DE411B]/10 rounded-full transition-all text-gray-600 hover:text-[#DE411B]"
-          >
-            <Terminal className="w-5 h-5 md:w-6 md:h-6" />
-          </button>
-        </div>
-      </header>
+        </header>
+      )}
 
       {/* Main Content Area */}
-      <main className="flex-grow relative overflow-hidden">
+      <main className="flex-grow relative overflow-hidden z-10">
         {currentVertical ? <DemoContainer /> : <Dashboard />}
         {isQuickPitchOpen && <QuickPitch />}
         {isAdminOpen && <AdminView />}
+
+        {currentVertical && (
+          <button
+            onClick={handleSwitch}
+            className="absolute top-6 right-6 z-50 p-3 rounded-xl bg-white/5 backdrop-blur-xl border border-white/10 shadow-[0_8px_32px_rgba(0,0,0,0.5)] hover:bg-white/10 hover:border-white/20 hover:scale-105 transition-all text-white/50 hover:text-white group flex items-center justify-center"
+            title="Back to Gallery"
+          >
+            <X className="w-5 h-5 group-hover:rotate-90 transition-transform duration-300" strokeWidth={2} />
+          </button>
+        )}
       </main>
-
-      {/* Persistent Global Navigation Dock */}
-      <nav className="fixed bottom-4 md:bottom-10 left-4 right-4 md:left-1/2 md:-translate-x-1/2 md:right-auto bg-[#121417]/95 backdrop-blur-2xl border border-white/10 rounded-2xl md:rounded-full px-2 md:px-4 py-2 md:py-3 shadow-2xl flex items-center justify-around md:justify-start md:gap-2 z-[60] mb-[env(safe-area-inset-bottom)]">
-        <button 
-          onClick={handleSwitch}
-          className={`flex items-center gap-2 md:gap-3 px-4 md:px-10 py-3 md:py-4 rounded-xl md:rounded-full font-black text-[10px] md:text-lg transition-all active:scale-95 ${
-            !currentVertical ? 'bg-[#DE411B] text-white shadow-lg shadow-[#DE411B]/20' : 'text-gray-500 hover:text-white'
-          }`}
-        >
-          <Home className="w-4 h-4 md:w-6 md:h-6" />
-          <span>HOME</span>
-        </button>
-
-        <div className="hidden md:block w-px h-10 bg-white/5 mx-2" />
-
-        <button 
-          onClick={resetDemo}
-          className="flex items-center gap-2 md:gap-3 px-4 md:px-10 py-3 md:py-4 rounded-xl md:rounded-full font-black text-[10px] md:text-lg text-red-500/80 hover:text-red-400 hover:bg-red-500/5 transition-all active:scale-95"
-        >
-          <RefreshCw className={`w-4 h-4 md:w-6 md:h-6 ${isResetting ? 'animate-spin' : ''}`} />
-          <span>RESET</span>
-        </button>
-
-        <div className="hidden md:block w-px h-10 bg-white/5 mx-2" />
-
-        <button 
-          onClick={handleSwitch}
-          className={`flex items-center gap-2 md:gap-3 px-4 md:px-10 py-3 md:py-4 rounded-xl md:rounded-full font-black text-[10px] md:text-lg transition-all active:scale-95 ${
-            currentVertical ? 'bg-[#DE411B]/10 text-[#DE411B]' : 'text-gray-500 hover:text-white'
-          }`}
-        >
-          <LayoutGrid className="w-4 h-4 md:w-6 md:h-6" />
-          <span>SWITCH</span>
-        </button>
-      </nav>
 
       <style>{`
         @keyframes scan {

@@ -25,6 +25,7 @@ export interface VerticalConfig {
   icon: string;
   color: string;
   pitch: QuickPitchData;
+  imageUrl?: string;
   externalUrl?: string;
   isAiGenerated?: boolean;
   dynamicData?: DynamicDemoData;
@@ -37,4 +38,6 @@ export interface DemoState {
   isAdminOpen: boolean;
   isIdle: boolean;
   lastActivity: number;
+  customLogo: string | null;
 }
+

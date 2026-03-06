@@ -16,6 +16,7 @@ interface StoreState extends DemoState {
   updateActivity: () => void;
   resetDemo: () => void;
   updateDemoData: (vertical: string, newData: any) => void;
+  setCustomLogo: (logo: string | null) => void;
 }
 
 export const useStore = create<StoreState>((set) => ({
@@ -26,6 +27,7 @@ export const useStore = create<StoreState>((set) => ({
   isIdle: false,
   isResetting: false,
   lastActivity: Date.now(),
+  customLogo: null,
   availableVerticals: [...VERTICALS],
   demoData: JSON.parse(JSON.stringify(MOCK_DATA)),
 
@@ -33,8 +35,8 @@ export const useStore = create<StoreState>((set) => ({
   setPitchVertical: (verticalId) => set({ pitchVerticalId: verticalId }),
   toggleQuickPitch: (isOpen) => set({ isQuickPitchOpen: isOpen }),
   setAdminOpen: (isOpen) => set({ isAdminOpen: isOpen }),
-  addVertical: (vertical) => set((state) => ({ 
-    availableVerticals: [...state.availableVerticals, vertical] 
+  addVertical: (vertical) => set((state) => ({
+    availableVerticals: [...state.availableVerticals, vertical]
   })),
   setIdle: (isIdle) => set({ isIdle }),
   updateActivity: () => set({ lastActivity: Date.now(), isIdle: false }),
@@ -54,5 +56,7 @@ export const useStore = create<StoreState>((set) => ({
   },
   updateDemoData: (vertical, newData) => set((state) => ({
     demoData: { ...state.demoData, [vertical]: newData }
-  }))
+  })),
+  setCustomLogo: (logo) => set({ customLogo: logo })
 }));
+
