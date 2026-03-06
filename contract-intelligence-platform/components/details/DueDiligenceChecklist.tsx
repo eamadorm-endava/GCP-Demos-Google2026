@@ -26,15 +26,19 @@ export const DueDiligenceChecklist: React.FC<DueDiligenceChecklistProps> = ({ co
       ];
 
       const typeSpecific: Record<string, string[]> = {
-        'MSA': ['Review IP ownership clauses', 'Confirm liability cap alignment', 'Check non-solicitation scope'],
-        'NDA': ['Verify survival period length', 'Check definition of confidential info', 'Ensure exclusion clauses are standard'],
-        'BAA': ['Verify 48h breach notification', 'Confirm subcontractor compliance terms', 'Check audit rights'],
-        'ISDA': ['Review LIBOR fallback language', 'Verify netting provisions', 'Check default triggers'],
-        'Supply Agreement': ['Confirm lead time requirements', 'Review quality SLA thresholds', 'Verify force majeure scope'],
+        'Master Supply Agreement': ['Review volume commitment clauses', 'Confirm liability cap alignment with supply value', 'Check single-source dependency risks'],
+        'NDA': ['Verify survival period length', 'Check definition of proprietary manufacturing processes', 'Ensure trade secret exclusion clauses are standard'],
+        'Raw Material Framework': ['Validate commodity price indexation mechanism', 'Confirm min/max order quantities', 'Review raw material quality specification tolerances'],
+        'Equipment Lease': ['Verify maintenance SLA and uptime guarantees', 'Confirm end-of-lease buyout or return terms', 'Check insurance and liability allocation'],
+        'VMI Agreement': ['Confirm inventory ownership transfer points', 'Review replenishment lead time commitments', 'Check safety stock level obligations'],
+        '3PL Logistics': ['Review carrier liability and cargo insurance terms', 'Confirm on-time delivery SLA penalties', 'Check cross-border customs compliance clauses'],
+        'Quality Assurance (QAA)': ['Verify defect rate tolerance thresholds', 'Confirm audit rights and inspection schedules', 'Review corrective action response time commitments'],
+        'Joint Development': ['Confirm IP ownership split for co-developed parts', 'Review exclusivity and non-compete scope', 'Check milestone payment and deliverable schedule'],
+        'Licensing': ['Verify royalty calculation and payment terms', 'Confirm geographic and field-of-use restrictions', 'Review patent indemnification clauses'],
       };
 
-      const suggested = typeSpecific[contract.contractType] || ['Review termination triggers', 'Confirm governing law jurisdiction'];
-      
+      const suggested = typeSpecific[contract.contractType] || ['Review force majeure and supply disruption triggers', 'Confirm governing law jurisdiction', 'Check termination for convenience notice period'];
+
       return [
         ...baseItems,
         ...suggested.map((text, idx) => ({ id: `s-${idx}`, text, completed: false }))
@@ -45,7 +49,7 @@ export const DueDiligenceChecklist: React.FC<DueDiligenceChecklistProps> = ({ co
   }, [contract.id, contract.contractType]);
 
   const toggleItem = (id: string) => {
-    setItems(prev => prev.map(item => 
+    setItems(prev => prev.map(item =>
       item.id === id ? { ...item, completed: !item.completed } : item
     ));
   };
@@ -53,13 +57,13 @@ export const DueDiligenceChecklist: React.FC<DueDiligenceChecklistProps> = ({ co
   const addItem = (e: React.FormEvent) => {
     e.preventDefault();
     if (!newItemText.trim()) return;
-    
+
     const newItem: ChecklistItem = {
       id: Date.now().toString(),
       text: newItemText,
       completed: false,
     };
-    
+
     setItems(prev => [...prev, newItem]);
     setNewItemText('');
   };
@@ -76,13 +80,13 @@ export const DueDiligenceChecklist: React.FC<DueDiligenceChecklistProps> = ({ co
       <div className="flex justify-between items-center mb-4">
         <div>
           <h3 className="text-lg font-semibold text-brand-text">Due Diligence Checklist</h3>
-          <p className="text-xs text-brand-light">Track critical review items for this agreement</p>
+          <p className="text-xs text-brand-light">Track critical review items for this supplier agreement</p>
         </div>
         <div className="text-right">
           <span className="text-sm font-bold text-brand-highlight">{progressPercent}%</span>
           <div className="w-24 h-1.5 bg-brand-primary rounded-full mt-1 overflow-hidden">
-            <div 
-              className="h-full bg-brand-highlight transition-all duration-500" 
+            <div
+              className="h-full bg-brand-highlight transition-all duration-500"
               style={{ width: `${progressPercent}%` }}
             />
           </div>
@@ -91,21 +95,19 @@ export const DueDiligenceChecklist: React.FC<DueDiligenceChecklistProps> = ({ co
 
       <div className="flex-grow space-y-2 mb-6 max-h-[400px] overflow-y-auto pr-2 custom-scrollbar">
         {items.map(item => (
-          <div 
-            key={item.id} 
-            className={`flex items-center gap-3 p-3 rounded-lg border transition-all duration-200 group ${
-              item.completed 
-                ? 'bg-brand-primary/30 border-brand-accent/10 opacity-60' 
+          <div
+            key={item.id}
+            className={`flex items-center gap-3 p-3 rounded-lg border transition-all duration-200 group ${item.completed
+                ? 'bg-brand-primary/30 border-brand-accent/10 opacity-60'
                 : 'bg-brand-accent/10 border-brand-accent/20 hover:border-brand-highlight/30'
-            }`}
-          >
-            <button 
-              onClick={() => toggleItem(item.id)}
-              className={`flex-shrink-0 w-5 h-5 rounded border flex items-center justify-center transition-colors ${
-                item.completed 
-                  ? 'bg-brand-highlight border-brand-highlight text-brand-primary' 
-                  : 'border-brand-light group-hover:border-brand-highlight'
               }`}
+          >
+            <button
+              onClick={() => toggleItem(item.id)}
+              className={`flex-shrink-0 w-5 h-5 rounded border flex items-center justify-center transition-colors ${item.completed
+                  ? 'bg-brand-highlight border-brand-highlight text-brand-primary'
+                  : 'border-brand-light group-hover:border-brand-highlight'
+                }`}
             >
               {item.completed && (
                 <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={4}>
@@ -116,7 +118,7 @@ export const DueDiligenceChecklist: React.FC<DueDiligenceChecklistProps> = ({ co
             <span className={`text-sm flex-grow transition-all ${item.completed ? 'line-through text-brand-light' : 'text-brand-text'}`}>
               {item.text}
             </span>
-            <button 
+            <button
               onClick={() => deleteItem(item.id)}
               className="text-brand-light hover:text-red-400 opacity-0 group-hover:opacity-100 transition-opacity"
               title="Remove item"
@@ -140,10 +142,10 @@ export const DueDiligenceChecklist: React.FC<DueDiligenceChecklistProps> = ({ co
             type="text"
             value={newItemText}
             onChange={(e) => setNewItemText(e.target.value)}
-            placeholder="Add new review item..."
+            placeholder="Add supplier review item..."
             className="flex-grow bg-brand-primary border border-brand-accent/30 rounded-md px-3 py-2 text-sm text-brand-text focus:outline-none focus:ring-2 focus:ring-brand-highlight"
           />
-          <button 
+          <button
             type="submit"
             disabled={!newItemText.trim()}
             className="bg-brand-accent hover:bg-brand-light text-brand-text px-4 py-2 rounded-md text-sm font-bold transition-colors disabled:opacity-50 disabled:cursor-not-allowed"

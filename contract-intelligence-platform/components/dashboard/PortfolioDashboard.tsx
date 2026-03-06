@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Contract, IndustryTrack } from '../../types.ts';
 import { useCalculatedMetrics } from '../../hooks/useCalculatedMetrics.ts';
@@ -18,8 +17,8 @@ import { ContractPreviewDrawer } from './ContractPreviewDrawer.tsx';
 interface PortfolioDashboardProps {
   contracts: Contract[];
   onSelectContract: (id: string) => void;
-  industry: IndustryTrack;
-  setIndustry: (industry: IndustryTrack) => void;
+  industry: IndustryTrack | 'All';
+  setIndustry: (industry: IndustryTrack | 'All') => void;
   contractType: string;
   setContractType: (type: string) => void;
   availableTypes: string[];
@@ -30,6 +29,7 @@ interface PortfolioDashboardProps {
   aiResponse: SmartFilterResponse | null;
   onClearAi: () => void;
   globalInsights: PortfolioInsight[];
+  isInsightsLoading?: boolean;
   onAddTag: (id: string, tag: string) => void;
   onRemoveTag: (id: string, tag: string) => void;
 }
@@ -78,6 +78,7 @@ export const PortfolioDashboard: React.FC<PortfolioDashboardProps> = ({
   aiResponse,
   onClearAi,
   globalInsights,
+  isInsightsLoading,
   onAddTag,
   onRemoveTag
 }) => {
@@ -97,92 +98,120 @@ export const PortfolioDashboard: React.FC<PortfolioDashboardProps> = ({
   return (
     <div className="space-y-6 relative overflow-hidden pb-12">
       {/* AI Portfolio Insights Section */}
-      {globalInsights.length > 0 && !aiResponse && (
+      {(isInsightsLoading || globalInsights.length > 0) && !aiResponse && !isAiLoading && (
         <div className="space-y-3">
           <div className="flex items-center justify-between px-1">
-             <div className="flex items-center gap-2">
-                <span className="relative flex h-2 w-2">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-highlight opacity-75"></span>
-                  <span className="relative inline-flex rounded-full h-2 w-2 bg-brand-highlight"></span>
-                </span>
-                <h4 className="text-[10px] font-black text-brand-highlight uppercase tracking-[0.2em]">Strategic Intelligence Center</h4>
-             </div>
-             <div className="text-[9px] font-mono text-brand-light/60 px-2 py-0.5 rounded-full border border-brand-light/20 bg-brand-secondary/40 backdrop-blur-md">GEMINI 3 PRO PREVIEW</div>
+            <div className="flex items-center gap-2">
+              <span className="relative flex h-2 w-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-highlight opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-brand-highlight"></span>
+              </span>
+              <h4 className="text-[10px] font-black text-brand-highlight uppercase tracking-[0.2em]">Supply Chain Intelligence</h4>
+            </div>
+            <div className="text-[9px] font-mono text-brand-highlight/70 px-2 py-0.5 rounded-full border border-brand-highlight/20 bg-brand-highlight/5 backdrop-blur-md">GEMINI 3.1 FLASH IMAGE PREVIEW</div>
           </div>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            {globalInsights.map((insight, idx) => (
-              <div 
-                key={idx} 
-                className="group relative bg-brand-secondary/30 backdrop-blur-xl border border-brand-highlight/10 hover:border-brand-highlight/30 p-4 rounded-xl shadow-xl transition-all duration-300 hover:-translate-y-1 animate-fade-in"
-                style={{ animationDelay: `${idx * 150}ms` }}
-              >
-                {/* Glow effect on hover */}
-                <div className="absolute inset-0 bg-gradient-to-br from-brand-highlight/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity rounded-xl pointer-events-none"></div>
-                
-                <div className="flex items-start gap-3 relative z-10">
-                  <div className="flex-shrink-0 p-2 bg-brand-primary/50 rounded-lg border border-brand-accent/20 group-hover:border-brand-highlight/30 transition-colors">
-                    <InsightIcon category={insight.category} />
+            {isInsightsLoading ? (
+              <div className="col-span-1 md:col-span-3 flex justify-center py-10 bg-brand-secondary/40 border border-brand-accent/20 rounded-xl">
+                <div className="flex flex-col items-center gap-4">
+                  <div className="relative w-12 h-12">
+                    <div className="absolute inset-0 rounded-full border-[3px] border-brand-highlight/20" />
+                    <div className="absolute inset-0 rounded-full border-[3px] border-t-brand-highlight animate-spin" />
                   </div>
-                  <div>
-                    <div className="flex items-center gap-2 mb-1">
-                      <h5 className="text-sm font-bold text-brand-text group-hover:text-brand-highlight transition-colors leading-tight">
-                        {insight.title}
-                      </h5>
-                      {insight.priority === 'High' && (
-                        <span className="text-[8px] bg-red-500/20 text-red-400 px-1 rounded border border-red-500/30 font-bold uppercase">Critical</span>
-                      )}
-                    </div>
-                    <p className="text-xs text-brand-light leading-relaxed font-medium">
-                      {insight.description}
-                    </p>
-                  </div>
+                  <div className="text-brand-highlight text-xs font-bold uppercase tracking-widest animate-pulse">Loading AI Badges...</div>
                 </div>
               </div>
-            ))}
+            ) : (
+              globalInsights.map((insight, idx) => (
+                <div
+                  key={idx}
+                  className="group relative bg-brand-secondary border border-brand-accent/30 hover:border-brand-highlight/30 p-4 rounded-xl shadow-xl transition-all duration-300 hover:-translate-y-1 animate-fade-in coral-glow"
+                  style={{ animationDelay: `${idx * 150}ms` }}
+                >
+                  {/* Glow effect on hover */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-brand-highlight/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity rounded-xl pointer-events-none"></div>
+
+                  <div className="flex items-start gap-3 relative z-10">
+                    <div className="flex-shrink-0 p-2 bg-brand-primary/50 rounded-lg border border-brand-accent/20 group-hover:border-brand-highlight/30 transition-colors">
+                      <InsightIcon category={insight.category} />
+                    </div>
+                    <div>
+                      <div className="flex items-center gap-2 mb-1">
+                        <h5 className="text-sm font-bold text-brand-text group-hover:text-brand-highlight transition-colors leading-tight">
+                          {insight.title}
+                        </h5>
+                        {insight.priority === 'High' && (
+                          <span className="text-[8px] bg-red-500/20 text-red-400 px-1 rounded border border-red-500/30 font-bold uppercase">Critical</span>
+                        )}
+                      </div>
+                      <p className="text-xs text-brand-light leading-relaxed font-medium">
+                        {insight.description}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              ))
+            )}
           </div>
         </div>
       )}
 
       {/* AI Filter Result Message */}
-      {aiResponse && (
-        <Card className="border-2 border-brand-highlight/40 bg-brand-secondary/80 animate-slide-up relative overflow-hidden">
-           <div className="absolute top-0 right-0 p-1 opacity-10">
-              <svg className="w-24 h-24" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clipRule="evenodd"></path></svg>
-           </div>
-           <div className="flex justify-between items-start mb-3">
-              <h4 className="font-bold text-brand-highlight flex items-center gap-2 text-xs uppercase tracking-widest">
-                <span className="flex h-2 w-2 rounded-full bg-brand-highlight animate-pulse shadow-[0_0_8px_rgba(56,189,248,0.6)]"></span>
-                AI Agent Report
-              </h4>
-              <button onClick={onClearAi} className="text-brand-light hover:text-brand-highlight text-[10px] font-bold uppercase tracking-tighter border border-brand-accent/30 rounded px-2 py-1 transition-all">Reset Filter</button>
-           </div>
-           <p className="text-brand-text mb-4 text-base font-medium leading-snug">
-             {aiResponse.answer}
-           </p>
-           <div className="text-[10px] text-brand-light bg-brand-primary/40 p-3 rounded-lg border border-brand-accent/20 shadow-inner">
-              <span className="font-bold text-brand-highlight/60 mr-1 uppercase">Reasoning:</span> {aiResponse.filterReasoning}
-           </div>
+      {isAiLoading && !aiResponse && (
+        <Card className="border border-brand-highlight/30 bg-brand-secondary/70 flex flex-col items-center justify-center py-10 relative overflow-hidden coral-glow">
+          <div className="relative w-16 h-16 mb-4">
+            <div className="absolute inset-0 rounded-full border-[3px] border-brand-highlight/20" />
+            <div className="absolute inset-0 rounded-full border-[3px] border-t-brand-highlight animate-spin" />
+            <div className="absolute inset-0 flex items-center justify-center">
+              <svg className="w-6 h-6 text-brand-highlight" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" />
+              </svg>
+            </div>
+          </div>
+          <h4 className="font-bold text-brand-highlight text-sm uppercase tracking-widest mb-2 animate-pulse">Running Semantic Search</h4>
+          <p className="text-brand-light/60 text-xs">Querying Gemini across all contracts and clauses...</p>
+        </Card>
+      )}
+
+      {aiResponse && !isAiLoading && (
+        <Card className="border border-brand-highlight/50 bg-brand-secondary animate-slide-up relative overflow-hidden coral-glow">
+          <div className="absolute top-0 right-0 p-1 opacity-10">
+            <svg className="w-24 h-24" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clipRule="evenodd"></path></svg>
+          </div>
+          <div className="flex justify-between items-start mb-3">
+            <h4 className="font-bold text-brand-highlight flex items-center gap-2 text-xs uppercase tracking-widest">
+              <span className="flex h-2 w-2 rounded-full bg-brand-highlight animate-pulse shadow-[0_0_8px_rgba(56,189,248,0.6)]"></span>
+              AI Agent Report
+            </h4>
+            <button onClick={onClearAi} className="text-brand-light hover:text-brand-highlight text-[10px] font-bold uppercase tracking-tighter border border-brand-accent/30 rounded px-2 py-1 transition-all">Reset Filter</button>
+          </div>
+          <p className="text-brand-text mb-4 text-base font-medium leading-snug">
+            {aiResponse.answer}
+          </p>
+          <div className="text-[10px] text-brand-light bg-brand-primary/40 p-3 rounded-lg border border-brand-accent/20 shadow-inner">
+            <span className="font-bold text-brand-highlight/60 mr-1 uppercase">Reasoning:</span> {aiResponse.filterReasoning}
+          </div>
         </Card>
       )}
 
       {/* Header Controls */}
       <div className="flex flex-col gap-4">
         <div className="w-full">
-            <NLQ_Search query={searchQuery} setQuery={setSearchQuery} onAskAI={onAskAI} isAiLoading={isAiLoading} />
+          <NLQ_Search query={searchQuery} setQuery={setSearchQuery} onAskAI={onAskAI} isAiLoading={isAiLoading} />
         </div>
         <div className="flex flex-col md:flex-row gap-4">
-            <IndustrySelector selectedIndustry={industry} onChange={setIndustry} />
-            <ContractTypeSelector selectedType={contractType} onChange={setContractType} availableTypes={availableTypes} />
+          <IndustrySelector selectedIndustry={industry} onChange={setIndustry} />
+          <ContractTypeSelector selectedType={contractType} onChange={setContractType} availableTypes={availableTypes} />
         </div>
       </div>
 
       {/* KPI Widgets */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-        <KPIWidget title="Filtered Contracts" value={totalContracts} icon={<DocumentIcon className="h-8 w-8 text-brand-highlight" />} />
-        <KPIWidget title="Avg Group Risk" value={avgRiskScore} icon={<RiskIcon className="h-8 w-8 text-brand-highlight" />} />
-        <KPIWidget title="Expiring (90 Days)" value={expiringSoon} icon={<CalendarIcon className="h-8 w-8 text-brand-highlight" />} />
-        <KPIWidget title="Total Exposure" value="$1.2B" icon={<ValueIcon className="h-8 w-8 text-brand-highlight" />} note="(Estimated)" />
+        <KPIWidget title="Active Suppliers" value={totalContracts} icon={<DocumentIcon className="h-8 w-8 text-brand-highlight" />} />
+        <KPIWidget title="Avg Supplier Risk" value={avgRiskScore} icon={<RiskIcon className="h-8 w-8 text-brand-highlight" />} />
+        <KPIWidget title="Renewals (90d)" value={expiringSoon} icon={<CalendarIcon className="h-8 w-8 text-brand-highlight" />} />
+        <KPIWidget title="Annual Spend Volume" value="$245M" icon={<ValueIcon className="h-8 w-8 text-brand-highlight" />} note="(Committed)" />
       </div>
 
       {/* Charts */}
@@ -194,21 +223,21 @@ export const PortfolioDashboard: React.FC<PortfolioDashboardProps> = ({
 
       {/* Contract Library Table */}
       <div>
-        <ContractLibrary 
-          contracts={contracts} 
-          onSelectContract={setPreviewId} 
+        <ContractLibrary
+          contracts={contracts}
+          onSelectContract={setPreviewId}
           onAddTag={onAddTag}
           onRemoveTag={onRemoveTag}
         />
       </div>
 
       {/* Preview Side Drawer */}
-      <ContractPreviewDrawer 
-        contract={previewContract} 
-        onClose={() => setPreviewId(null)} 
+      <ContractPreviewDrawer
+        contract={previewContract}
+        onClose={() => setPreviewId(null)}
         onViewDetails={(id) => {
-            setPreviewId(null);
-            onSelectContract(id);
+          setPreviewId(null);
+          onSelectContract(id);
         }}
       />
     </div>

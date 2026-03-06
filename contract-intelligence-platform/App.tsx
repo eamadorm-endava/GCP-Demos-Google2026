@@ -10,12 +10,13 @@ import { queryContracts, SmartFilterResponse, getContractInsights, PortfolioInsi
 const App: React.FC = () => {
   const [contracts, setContracts] = useState<Contract[]>(mockContracts);
   const [selectedContractId, setSelectedContractId] = useState<string | null>(null);
-  const [industry, setIndustry] = useState<IndustryTrack>('All');
+  const [industry, setIndustry] = useState<IndustryTrack | 'All'>('All');
   const [contractType, setContractType] = useState<string>('All');
   const [searchQuery, setSearchQuery] = useState('');
-  
+
   // AI States
   const [aiLoading, setAiLoading] = useState(false);
+  const [isInsightsLoading, setIsInsightsLoading] = useState(true);
   const [aiResponse, setAiResponse] = useState<SmartFilterResponse | null>(null);
   const [globalInsights, setGlobalInsights] = useState<PortfolioInsight[]>([]);
 
@@ -52,8 +53,8 @@ const App: React.FC = () => {
   const finalContracts = useMemo(() => {
     if (aiResponse && aiResponse.filteredIds.length > 0) {
       // If AI returned specific IDs, use those (but respect the current filters)
-      return contracts.filter(c => 
-        aiResponse.filteredIds.includes(c.id) && 
+      return contracts.filter(c =>
+        aiResponse.filteredIds.includes(c.id) &&
         (industry === 'All' || c.industryTrack === industry) &&
         (contractType === 'All' || c.contractType === contractType)
       );
@@ -75,20 +76,24 @@ const App: React.FC = () => {
 
   const handleAddTag = (contractId: string, tag: string) => {
     setContracts(prev => prev.map(c => {
-        if (c.id === contractId && !c.tags.includes(tag)) {
-            return { ...c, tags: [...c.tags, tag] };
-        }
-        return c;
+      if (c.id === contractId && !c.tags.includes(tag)) {
+        return { ...c, tags: [...c.tags, tag] };
+      }
+      return c;
     }));
   };
 
   const handleRemoveTag = (contractId: string, tag: string) => {
     setContracts(prev => prev.map(c => {
-        if (c.id === contractId) {
-            return { ...c, tags: c.tags.filter(t => t !== tag) };
-        }
-        return c;
+      if (c.id === contractId) {
+        return { ...c, tags: c.tags.filter(t => t !== tag) };
+      }
+      return c;
     }));
+  };
+
+  const handleUpdateContract = (updatedContract: Contract) => {
+    setContracts(prev => prev.map(c => c.id === updatedContract.id ? updatedContract : c));
   };
 
   const handleAskAI = async (query: string) => {
@@ -112,11 +117,14 @@ const App: React.FC = () => {
   // Load initial insights
   useEffect(() => {
     const fetchInsights = async () => {
+      setIsInsightsLoading(true);
       try {
         const insights = await getContractInsights(contracts);
         setGlobalInsights(insights);
       } catch (e) {
         setGlobalInsights([]);
+      } finally {
+        setIsInsightsLoading(false);
       }
     };
     fetchInsights();
@@ -127,7 +135,11 @@ const App: React.FC = () => {
       <Header />
       <main className="p-4 sm:p-6 lg:p-8 max-w-7xl mx-auto">
         {selectedContract ? (
-          <ContractDetails contract={selectedContract} onBack={handleBackToDashboard} />
+          <ContractDetails
+            contract={selectedContract}
+            onBack={handleBackToDashboard}
+            onUpdateContract={handleUpdateContract}
+          />
         ) : (
           <PortfolioDashboard
             contracts={finalContracts}
@@ -142,6 +154,7 @@ const App: React.FC = () => {
             onAskAI={handleAskAI}
             isAiLoading={aiLoading}
             aiResponse={aiResponse}
+            isInsightsLoading={isInsightsLoading}
             onClearAi={clearAiResults}
             globalInsights={globalInsights}
             onAddTag={handleAddTag}

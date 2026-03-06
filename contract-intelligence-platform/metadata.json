@@ -1,5 +1,5 @@
 {
-  "name": "Contract Intelligence Platform",
-  "description": "A demo application showcasing the transformation of unstructured contracts into structured, queryable, and actionable intelligence using Generative AI. It features a portfolio dashboard, contract deep-dive analysis, and natural language query capabilities.",
+  "name": "Supply Lens: Contract Intelligence",
+  "description": "A specialized knowledge management platform for manufacturing and logistics. It transforms supplier agreements into actionable intelligence, monitoring critical path risks, lead-time obligations, and regulatory compliance using Generative AI.",
   "requestFramePermissions": []
 }

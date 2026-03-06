@@ -1,70 +1,86 @@
 @import "tailwindcss";
 
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 
 @theme {
-  /* --- Semantic endava mapping --- */
-  --color-brand-primary: var(--endava-dark-blue);
-  --color-brand-dark: var(--endava-dark-blue); 
-  
-  --color-brand-secondary: var(--solid-blue-90);
-  --color-brand-accent: var(--solid-blue-60);
-  --color-brand-light: var(--solid-blue-40);
-  --color-brand-text: var(--endava-white);
-  --color-brand-highlight: var(--endava-orange);
+  /* --- Semantic brand mapping --- */
+  --color-brand-primary: #192B37;
+  --color-brand-dark: #192B37;
 
-  /* Overwrite color palletes */
-  --color-green-400: var(--signal-positive);
-  --color-green-500: var(--signal-positive);
-  --color-green-600: var(--signal-positive);
+  --color-brand-secondary: #30404B;
+  --color-brand-accent: #47555F;
+  --color-brand-muted: #5E6A73;
+  --color-brand-light: #8C959B;
+  --color-brand-text: #FFFFFF;
+  --color-brand-highlight: #FF5640;
+  --color-brand-highlight-dark: #CC3E2C;
 
-  --color-yellow-400: var(--signal-warning);
-  --color-yellow-500: var(--signal-warning);
-  --color-yellow-600: var(--signal-warning);
-  --color-amber-400: var(--signal-warning);
+  /* Signal colours */
+  --color-green-400: #10B981;
+  --color-green-500: #10B981;
+  --color-green-600: #10B981;
 
-  --color-red-400: var(--signal-negative);
-  --color-red-500: var(--signal-negative);
-  --color-red-600: var(--signal-negative);
-}
+  --color-yellow-400: #F59E0B;
+  --color-yellow-500: #F59E0B;
+  --color-yellow-600: #F59E0B;
+  --color-amber-400: #F59E0B;
 
-:root {
-  /* --- Primary Colours --- */
-  --endava-orange: #FF5640;
-  --endava-dark-blue: #192B37;
-  --endava-white: #FFFFFF;
+  --color-red-400: #EF4444;
+  --color-red-500: #EF4444;
+  --color-red-600: #EF4444;
 
-  /* --- Solid Blue Shades --- */
-  --solid-blue-90: #30404B; 
-  --solid-blue-80: #47555F;
-  --solid-blue-60: #758087; 
-  --solid-blue-40: #A3AAAF; 
-  --solid-blue-10: #E8EAEB; 
-
-  /* --- Signal Colours (Dark Background) --- */
-  --signal-positive: #3DD17B;
-  --signal-warning: #F99C11;
-  --signal-negative: #E84641;
+  --font-sans: 'Inter', system-ui, sans-serif;
 }
 
 body {
-  font-family: 'Roboto', sans-serif;
-  background-color: var(--endava-dark-blue);
-  color: var(--endava-white);
+  font-family: 'Inter', system-ui, sans-serif;
+  background-color: #192B37;
+  color: #FFFFFF;
 }
 
-/* Scrollbar */
+/* Custom Scrollbar */
 ::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
+  width: 6px;
+  height: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: var(--endava-dark-blue); 
-}
-::-webkit-scrollbar-thumb {
-  background: var(--solid-blue-60); 
+  background: #192B37;
   border-radius: 4px;
 }
+::-webkit-scrollbar-thumb {
+  background: #47555F;
+  border-radius: 4px;
+  border: 1px solid #192B37;
+}
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--endava-orange); 
+  background: #FF5640;
+}
+
+/* Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #47555F #192B37;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: #FF5640;
+}
+
+/* Coral glow utilities */
+.coral-glow {
+  box-shadow: 0 0 20px rgba(255, 86, 64, 0.15);
+}
+.coral-glow-sm {
+  box-shadow: 0 0 8px rgba(255, 86, 64, 0.25);
+}
+
+/* Shimmer animation */
+@keyframes shimmer {
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+.animate-shimmer {
+  background: linear-gradient(90deg, transparent 25%, rgba(255,86,64,0.15) 50%, transparent 75%);
+  background-size: 200% auto;
+  animation: shimmer 2s linear infinite;
 }

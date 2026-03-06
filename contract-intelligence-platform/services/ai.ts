@@ -2,7 +2,25 @@
 import { GoogleGenAI, Type } from "@google/genai";
 import { Contract } from "../types.ts";
 
-const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
+const apiKey = process.env.API_KEY || process.env.GEMINI_API_KEY || '';
+const isKeyAvailable = !!apiKey;
+
+if (!isKeyAvailable) {
+  console.warn('[SupplyLens] ⚠️ Gemini API key is missing. AI features will be disabled. Set API_KEY or GEMINI_API_KEY in your .env file.');
+}
+
+let ai: GoogleGenAI | null = null;
+try {
+  if (isKeyAvailable) {
+    ai = new GoogleGenAI({ apiKey });
+  }
+} catch (e) {
+  console.warn('[SupplyLens] Failed to initialize GoogleGenAI client:', e);
+}
+
+// ─── Models ──────────────────────────────────────────────
+const TEXT_MODEL = 'gemini-3.1-flash-image-preview';
+const IMAGE_MODEL = 'gemini-3.1-flash-image-preview';
 
 export interface SmartFilterResponse {
   filterReasoning: string;
@@ -24,30 +42,238 @@ export interface PortfolioInsight {
   priority: 'High' | 'Medium' | 'Low';
 }
 
+// ─── Document Image Analysis (gemini-3.1-flash-image-preview) ───────────────
+
+export interface DocumentPageAnalysis {
+  pageNumber: number;
+  pageType: 'cover' | 'terms' | 'schedule' | 'signature' | 'exhibit' | 'amendment';
+  summary: string;
+  keyPoints: string[];
+  riskFlags: string[];
+  confidence: number;
+}
+
+export interface DocumentAnalysisResult {
+  documentTitle: string;
+  documentType: string;
+  parties: string[];
+  effectiveDate: string;
+  totalValue: string;
+  governingLaw: string;
+  overallRisk: 'Low' | 'Medium' | 'High' | 'Critical';
+  pages: DocumentPageAnalysis[];
+  executiveSummary: string;
+  redFlags: string[];
+  recommendations: string[];
+}
+
+/**
+ * Analyzes a document image using gemini-3.1-flash-image-preview.
+ * @param imageBase64 - Base64-encoded image data (without the data: prefix)
+ * @param mimeType - MIME type of the image (e.g. 'image/png', 'image/jpeg', 'image/pdf')
+ */
+export const analyzeDocumentImage = async (
+  imageBase64: string,
+  mimeType: string = 'image/png'
+): Promise<DocumentAnalysisResult> => {
+  if (!ai) {
+    console.warn('[SupplyLens] AI unavailable — returning placeholder document analysis.');
+    return {
+      documentTitle: 'AI Unavailable', documentType: 'N/A', parties: [], effectiveDate: '', totalValue: '',
+      governingLaw: '', overallRisk: 'Low', pages: [], executiveSummary: 'Gemini API key is not configured. Please set API_KEY or GEMINI_API_KEY to enable document analysis.', redFlags: [], recommendations: ['Configure a valid API key to enable AI-powered analysis.']
+    };
+  }
+
+  const response = await ai.models.generateContent({
+    model: IMAGE_MODEL,
+    contents: [
+      {
+        role: 'user',
+        parts: [
+          {
+            inlineData: {
+              data: imageBase64,
+              mimeType
+            }
+          },
+          {
+            text: `You are a senior contract analyst reviewing a supply chain/manufacturing contract document image.
+
+Analyze this document image and extract all visible contract information. If the image is not a contract, simulate a realistic supply chain contract analysis based on any visible text or structure.
+
+Return a comprehensive JSON analysis with:
+- documentTitle, documentType, parties (array), effectiveDate, totalValue, governingLaw
+- overallRisk: 'Low' | 'Medium' | 'High' | 'Critical'
+- pages: array of { pageNumber, pageType, summary, keyPoints (array), riskFlags (array), confidence (0-1) }
+- executiveSummary: 2-3 sentence analysis
+- redFlags: array of critical issues found
+- recommendations: array of action items
+
+Be specific about supply chain risks (single source dependencies, force majeure, SLA penalties, IP rights).`
+          }
+        ]
+      }
+    ],
+    config: {
+      responseMimeType: 'application/json',
+      responseSchema: {
+        type: Type.OBJECT,
+        properties: {
+          documentTitle: { type: Type.STRING },
+          documentType: { type: Type.STRING },
+          parties: { type: Type.ARRAY, items: { type: Type.STRING } },
+          effectiveDate: { type: Type.STRING },
+          totalValue: { type: Type.STRING },
+          governingLaw: { type: Type.STRING },
+          overallRisk: { type: Type.STRING },
+          pages: {
+            type: Type.ARRAY,
+            items: {
+              type: Type.OBJECT,
+              properties: {
+                pageNumber: { type: Type.INTEGER },
+                pageType: { type: Type.STRING },
+                summary: { type: Type.STRING },
+                keyPoints: { type: Type.ARRAY, items: { type: Type.STRING } },
+                riskFlags: { type: Type.ARRAY, items: { type: Type.STRING } },
+                confidence: { type: Type.NUMBER }
+              },
+              required: ['pageNumber', 'pageType', 'summary', 'keyPoints', 'riskFlags', 'confidence']
+            }
+          },
+          executiveSummary: { type: Type.STRING },
+          redFlags: { type: Type.ARRAY, items: { type: Type.STRING } },
+          recommendations: { type: Type.ARRAY, items: { type: Type.STRING } }
+        },
+        required: ['documentTitle', 'documentType', 'parties', 'effectiveDate', 'totalValue', 'governingLaw', 'overallRisk', 'pages', 'executiveSummary', 'redFlags', 'recommendations']
+      }
+    }
+  });
+
+  try {
+    return JSON.parse(response.text || '{}') as DocumentAnalysisResult;
+  } catch (e) {
+    console.error('[SupplyLens] Failed to parse document analysis', e);
+    throw new Error('Failed to analyze document image');
+  }
+};
+
+/**
+ * Generates a simulated multi-page document preview using gemini-3.1-flash-image-preview
+ * when no image is uploaded (demo mode).
+ */
+export const generateDocumentPreview = async (contract: Contract): Promise<DocumentAnalysisResult> => {
+  if (!ai) {
+    console.warn('[SupplyLens] AI unavailable — returning placeholder document preview.');
+    return {
+      documentTitle: contract.contractTitle, documentType: contract.contractType, parties: contract.parties,
+      effectiveDate: contract.effectiveDate, totalValue: '', governingLaw: contract.governingLaw, overallRisk: 'Low',
+      pages: [{ pageNumber: 1, pageType: 'cover', summary: 'AI preview unavailable — API key not configured.', keyPoints: [], riskFlags: [], confidence: 0 }],
+      executiveSummary: 'Gemini API key is not configured. Please set API_KEY or GEMINI_API_KEY to enable document preview generation.', redFlags: [], recommendations: ['Configure a valid API key.']
+    };
+  }
+
+  const response = await ai.models.generateContent({
+    model: IMAGE_MODEL,
+    contents: `
+You are a supply chain legal expert. Generate a realistic, detailed simulated contract analysis for:
+
+Contract Title: ${contract.contractTitle}
+Type: ${contract.contractType}
+Parties: ${contract.parties.join(', ')}
+Value: ${contract.industrySpecific?.contractValue ? `$${Number(contract.industrySpecific.contractValue).toLocaleString()}` : 'Undisclosed'}
+Risk Score: ${contract.riskScore}/10
+Criticality: ${contract.criticality}
+Governing Law: ${contract.governingLaw}
+Expiry: ${contract.expirationDate}
+Summary: ${contract.executiveSummary}
+
+Simulate a 4-page contract document analysis with realistic clause text, realistic risk flags.
+Return a full DocumentAnalysisResult JSON.
+    `,
+    config: {
+      responseMimeType: 'application/json',
+      responseSchema: {
+        type: Type.OBJECT,
+        properties: {
+          documentTitle: { type: Type.STRING },
+          documentType: { type: Type.STRING },
+          parties: { type: Type.ARRAY, items: { type: Type.STRING } },
+          effectiveDate: { type: Type.STRING },
+          totalValue: { type: Type.STRING },
+          governingLaw: { type: Type.STRING },
+          overallRisk: { type: Type.STRING },
+          pages: {
+            type: Type.ARRAY,
+            items: {
+              type: Type.OBJECT,
+              properties: {
+                pageNumber: { type: Type.INTEGER },
+                pageType: { type: Type.STRING },
+                summary: { type: Type.STRING },
+                keyPoints: { type: Type.ARRAY, items: { type: Type.STRING } },
+                riskFlags: { type: Type.ARRAY, items: { type: Type.STRING } },
+                confidence: { type: Type.NUMBER }
+              },
+              required: ['pageNumber', 'pageType', 'summary', 'keyPoints', 'riskFlags', 'confidence']
+            }
+          },
+          executiveSummary: { type: Type.STRING },
+          redFlags: { type: Type.ARRAY, items: { type: Type.STRING } },
+          recommendations: { type: Type.ARRAY, items: { type: Type.STRING } }
+        },
+        required: ['documentTitle', 'documentType', 'parties', 'effectiveDate', 'totalValue', 'governingLaw', 'overallRisk', 'pages', 'executiveSummary', 'redFlags', 'recommendations']
+      }
+    }
+  });
+
+  try {
+    return JSON.parse(response.text || '{}') as DocumentAnalysisResult;
+  } catch (e) {
+    console.error('[SupplyLens] Failed to generate document preview', e);
+    throw new Error('Failed to generate document preview');
+  }
+};
+
 export const queryContracts = async (query: string, contracts: Contract[]): Promise<SmartFilterResponse> => {
+  if (!ai) {
+    console.warn('[SupplyLens] AI unavailable — returning empty query result.');
+    return { filterReasoning: 'AI features are disabled (no API key configured).', filteredIds: [], answer: 'AI is currently unavailable. Please configure a Gemini API key to enable natural language queries.' };
+  }
+
   const context = contracts.map(c => ({
     id: c.id,
     title: c.contractTitle,
     type: c.contractType,
+    industry: c.industryTrack,
     parties: c.parties,
-    risk: c.riskScore,
-    law: c.governingLaw,
+    tier: c.supplierTier,
+    criticality: c.criticality,
+    riskScore: c.riskScore,
+    riskAnalysis: c.riskAnalysis,
     summary: c.executiveSummary,
-    expires: c.expirationDate
+    governingLaw: c.governingLaw,
+    expirationDate: c.expirationDate,
+    tags: c.tags,
+    liabilityTerms: c.liabilityTerms,
+    renewalTerms: c.renewalTerms,
+    contractValue: c.industrySpecific?.contractValue ? `$${Number(c.industrySpecific.contractValue).toLocaleString()}` : 'Undisclosed',
+    industryDetails: c.industrySpecific
   }));
 
   const response = await ai.models.generateContent({
-    model: "gemini-3-flash-preview",
+    model: TEXT_MODEL,
     contents: `
+      Role: You are a Supply Chain Contract Intelligence Agent.
       User Query: "${query}"
       
       Contract Data: ${JSON.stringify(context)}
       
       Task:
-      1. Analyze the user query against the contract data.
-      2. If the user is looking for specific contracts (e.g., "high risk", "NY law", "expiring soon"), identify their IDs.
-      3. Provide a concise narrative answer to the user's question.
-      4. Explain your reasoning for the filter.
+      1. Analyze the user query against the supply chain contract data.
+      2. Identify relevant contracts based on Contract Type (e.g., JDAs, NDAs, Licensing), Supplier Tier, Criticality, Risk, or Lead Times.
+      3. Provide a concise operational answer (e.g., impact on production, inventory risk, IP exposure).
+      4. Explain your reasoning.
       
       Return the result strictly in JSON format.
     `,
@@ -72,11 +298,28 @@ export const queryContracts = async (query: string, contracts: Contract[]): Prom
 };
 
 export const getContractInsights = async (contracts: Contract[]): Promise<PortfolioInsight[]> => {
-  const summary = contracts.map(c => `${c.contractTitle} (${c.contractType}): Risk ${c.riskScore}`).join(', ');
-  
+  if (!ai) {
+    console.warn('[SupplyLens] AI unavailable — returning empty insights.');
+    return [];
+  }
+
+  const summary = contracts.map(c =>
+    `${c.contractTitle} [${c.contractType}, ${c.supplierTier}, ${c.criticality}]: Risk ${c.riskScore}`
+  ).join(', ');
+
   const response = await ai.models.generateContent({
-    model: "gemini-3-flash-preview",
-    contents: `Provide 3 strategic insights for a legal team based on this contract portfolio: ${summary}. Each insight should have a short punchy title and a one-sentence description. Use categories: risk, milestone, compliance, or optimization.`,
+    model: TEXT_MODEL,
+    contents: `
+    Act as a Global Supply Chain Director. Provide 3 strategic insights based on this supplier contract portfolio: ${summary}. 
+    
+    Focus on:
+    1. Supply Continuity & Disruption Risk (Single source, geopolitics).
+    2. Operational Efficiency (VMI, Logistics, Lead times).
+    3. Innovation & IP (Joint Development, Licensing).
+    4. Compliance & Tier Management.
+
+    Each insight should have a short punchy title and a one-sentence description. Use categories: risk, milestone, compliance, or optimization.
+    `,
     config: {
       responseMimeType: "application/json",
       responseSchema: {
@@ -104,21 +347,27 @@ export const getContractInsights = async (contracts: Contract[]): Promise<Portfo
 };
 
 export const extractKeyClauses = async (contract: Contract): Promise<KeyClause[]> => {
+  if (!ai) {
+    console.warn('[SupplyLens] AI unavailable — returning empty clauses.');
+    return [];
+  }
+
   const response = await ai.models.generateContent({
-    model: "gemini-3-flash-preview",
+    model: TEXT_MODEL,
     contents: `
-      Analyze this contract metadata and extract realistic simulated clauses for:
-      1. Limitation of Liability
-      2. Termination
-      3. Force Majeure
+      Analyze this supply chain contract and extract realistic simulated clauses for:
+      1. Force Majeure (Specific to supply chain disruption, pandemics, war)
+      2. Service Level Agreement (SLA) / KPI Penalties
+      3. Price Adjustment / Indexation Mechanisms
+      4. IP Rights / Exclusivity (if applicable for JDAs or Licensing)
       
       Contract Details:
       Title: ${contract.contractTitle}
       Type: ${contract.contractType}
       Industry: ${contract.industryTrack}
-      Risk Score: ${contract.riskScore}
+      Criticality: ${contract.criticality}
       
-      Return a JSON array of objects with 'type', 'originalText' (the verbatim legal-sounding text), 'summary' (plain english explanation), and 'riskLevel' (Low, Medium, or High).
+      Return a JSON array of objects with 'type', 'originalText' (legal text), 'summary' (plain english), and 'riskLevel'.
     `,
     config: {
       responseMimeType: "application/json",
@@ -139,9 +388,9 @@ export const extractKeyClauses = async (contract: Contract): Promise<KeyClause[]
   });
 
   try {
-      return JSON.parse(response.text || '[]');
+    return JSON.parse(response.text || '[]');
   } catch (e) {
-      console.error("Failed to parse clauses", e);
-      return [];
+    console.error("Failed to parse clauses", e);
+    return [];
   }
 };
