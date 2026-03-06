@@ -29,6 +29,7 @@ interface PortfolioDashboardProps {
   aiResponse: SmartFilterResponse | null;
   onClearAi: () => void;
   globalInsights: PortfolioInsight[];
+  isInsightsLoading?: boolean;
   onAddTag: (id: string, tag: string) => void;
   onRemoveTag: (id: string, tag: string) => void;
 }
@@ -77,6 +78,7 @@ export const PortfolioDashboard: React.FC<PortfolioDashboardProps> = ({
   aiResponse,
   onClearAi,
   globalInsights,
+  isInsightsLoading,
   onAddTag,
   onRemoveTag
 }) => {
@@ -96,7 +98,7 @@ export const PortfolioDashboard: React.FC<PortfolioDashboardProps> = ({
   return (
     <div className="space-y-6 relative overflow-hidden pb-12">
       {/* AI Portfolio Insights Section */}
-      {globalInsights.length > 0 && !aiResponse && (
+      {(isInsightsLoading || globalInsights.length > 0) && !aiResponse && !isAiLoading && (
         <div className="space-y-3">
           <div className="flex items-center justify-between px-1">
             <div className="flex items-center gap-2">
@@ -110,41 +112,69 @@ export const PortfolioDashboard: React.FC<PortfolioDashboardProps> = ({
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            {globalInsights.map((insight, idx) => (
-              <div
-                key={idx}
-                className="group relative bg-brand-secondary border border-brand-accent/30 hover:border-brand-highlight/30 p-4 rounded-xl shadow-xl transition-all duration-300 hover:-translate-y-1 animate-fade-in coral-glow"
-                style={{ animationDelay: `${idx * 150}ms` }}
-              >
-                {/* Glow effect on hover */}
-                <div className="absolute inset-0 bg-gradient-to-br from-brand-highlight/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity rounded-xl pointer-events-none"></div>
-
-                <div className="flex items-start gap-3 relative z-10">
-                  <div className="flex-shrink-0 p-2 bg-brand-primary/50 rounded-lg border border-brand-accent/20 group-hover:border-brand-highlight/30 transition-colors">
-                    <InsightIcon category={insight.category} />
+            {isInsightsLoading ? (
+              <div className="col-span-1 md:col-span-3 flex justify-center py-10 bg-brand-secondary/40 border border-brand-accent/20 rounded-xl">
+                <div className="flex flex-col items-center gap-4">
+                  <div className="relative w-12 h-12">
+                    <div className="absolute inset-0 rounded-full border-[3px] border-brand-highlight/20" />
+                    <div className="absolute inset-0 rounded-full border-[3px] border-t-brand-highlight animate-spin" />
                   </div>
-                  <div>
-                    <div className="flex items-center gap-2 mb-1">
-                      <h5 className="text-sm font-bold text-brand-text group-hover:text-brand-highlight transition-colors leading-tight">
-                        {insight.title}
-                      </h5>
-                      {insight.priority === 'High' && (
-                        <span className="text-[8px] bg-red-500/20 text-red-400 px-1 rounded border border-red-500/30 font-bold uppercase">Critical</span>
-                      )}
-                    </div>
-                    <p className="text-xs text-brand-light leading-relaxed font-medium">
-                      {insight.description}
-                    </p>
-                  </div>
+                  <div className="text-brand-highlight text-xs font-bold uppercase tracking-widest animate-pulse">Loading AI Badges...</div>
                 </div>
               </div>
-            ))}
+            ) : (
+              globalInsights.map((insight, idx) => (
+                <div
+                  key={idx}
+                  className="group relative bg-brand-secondary border border-brand-accent/30 hover:border-brand-highlight/30 p-4 rounded-xl shadow-xl transition-all duration-300 hover:-translate-y-1 animate-fade-in coral-glow"
+                  style={{ animationDelay: `${idx * 150}ms` }}
+                >
+                  {/* Glow effect on hover */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-brand-highlight/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity rounded-xl pointer-events-none"></div>
+
+                  <div className="flex items-start gap-3 relative z-10">
+                    <div className="flex-shrink-0 p-2 bg-brand-primary/50 rounded-lg border border-brand-accent/20 group-hover:border-brand-highlight/30 transition-colors">
+                      <InsightIcon category={insight.category} />
+                    </div>
+                    <div>
+                      <div className="flex items-center gap-2 mb-1">
+                        <h5 className="text-sm font-bold text-brand-text group-hover:text-brand-highlight transition-colors leading-tight">
+                          {insight.title}
+                        </h5>
+                        {insight.priority === 'High' && (
+                          <span className="text-[8px] bg-red-500/20 text-red-400 px-1 rounded border border-red-500/30 font-bold uppercase">Critical</span>
+                        )}
+                      </div>
+                      <p className="text-xs text-brand-light leading-relaxed font-medium">
+                        {insight.description}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              ))
+            )}
           </div>
         </div>
       )}
 
       {/* AI Filter Result Message */}
-      {aiResponse && (
+      {isAiLoading && !aiResponse && (
+        <Card className="border border-brand-highlight/30 bg-brand-secondary/70 flex flex-col items-center justify-center py-10 relative overflow-hidden coral-glow">
+          <div className="relative w-16 h-16 mb-4">
+            <div className="absolute inset-0 rounded-full border-[3px] border-brand-highlight/20" />
+            <div className="absolute inset-0 rounded-full border-[3px] border-t-brand-highlight animate-spin" />
+            <div className="absolute inset-0 flex items-center justify-center">
+              <svg className="w-6 h-6 text-brand-highlight" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" />
+              </svg>
+            </div>
+          </div>
+          <h4 className="font-bold text-brand-highlight text-sm uppercase tracking-widest mb-2 animate-pulse">Running Semantic Search</h4>
+          <p className="text-brand-light/60 text-xs">Querying Gemini across all contracts and clauses...</p>
+        </Card>
+      )}
+
+      {aiResponse && !isAiLoading && (
         <Card className="border border-brand-highlight/50 bg-brand-secondary animate-slide-up relative overflow-hidden coral-glow">
           <div className="absolute top-0 right-0 p-1 opacity-10">
             <svg className="w-24 h-24" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clipRule="evenodd"></path></svg>
