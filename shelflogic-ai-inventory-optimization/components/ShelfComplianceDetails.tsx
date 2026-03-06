@@ -5,7 +5,7 @@ import { AlertTriangle, FileText, Camera, Activity, Truck } from './Icons';
 import { theme } from '../theme';
 
 interface ShelfComplianceDetailsProps {
-  opportunity: Opportunity;
+    opportunity: Opportunity;
 }
 
 export const ShelfComplianceDetails: React.FC<ShelfComplianceDetailsProps> = ({ opportunity }) => {
@@ -36,7 +36,7 @@ export const ShelfComplianceDetails: React.FC<ShelfComplianceDetailsProps> = ({ 
                         <FileText className="w-4 h-4 mr-2 text-emerald-400" />
                         Master Planogram (Expected)
                     </h4>
-                    <div className="bg-slate-950 rounded-xl p-4 border border-slate-800 flex justify-center items-center h-64 bg-cover bg-center" style={{backgroundImage: `url(${opportunity.product?.image})`}}>
+                    <div className="bg-slate-950 rounded-xl p-4 border border-slate-800 flex justify-center items-center h-64 bg-cover bg-center" style={{ backgroundImage: `url(${opportunity.product?.image})` }}>
                         <div className="absolute -bottom-3 left-1/2 transform -translate-x-1/2 bg-emerald-600 text-white text-[9px] font-bold px-2 py-0.5 rounded shadow-lg whitespace-nowrap">
                             SKU: {opportunity.product?.sku_id}
                         </div>
@@ -50,7 +50,7 @@ export const ShelfComplianceDetails: React.FC<ShelfComplianceDetailsProps> = ({ 
                         Real-time Camera Feed (Actual)
                     </h4>
                     <div className="bg-slate-950 rounded-xl p-4 border border-slate-800 flex justify-center items-center h-64 relative overflow-hidden">
-                        <div className="absolute inset-0 bg-[url('assets/vision-shelf-background.svg')] bg-cover opacity-20 grayscale"></div>
+                        <div className="absolute inset-0 bg-[url('./vision-shelf-background.svg')] bg-cover opacity-20 grayscale"></div>
                         <div className="relative z-10 p-6 border-2 border-rose-500 border-dashed rounded-lg bg-rose-950/30 backdrop-blur-sm flex flex-col items-center justify-center">
                             <AlertTriangle className="w-8 h-8 text-rose-500 mb-2" />
                             <span className="text-rose-400 font-bold text-sm uppercase">Item Missing</span>
@@ -58,7 +58,7 @@ export const ShelfComplianceDetails: React.FC<ShelfComplianceDetailsProps> = ({ 
                     </div>
                 </div>
             </div>
-            
+
             <div className={`${theme.components.card} p-6`}>
                 <h3 className={`font-bold ${theme.colors.text.primary} mb-4 flex items-center`}>
                     <Activity className="w-5 h-5 mr-2 text-indigo-400" />

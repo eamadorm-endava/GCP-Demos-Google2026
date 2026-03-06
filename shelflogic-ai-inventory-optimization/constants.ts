@@ -7,9 +7,9 @@ export const PRODUCT_CHERRY: Product = {
   name: "Brand X Cherry Schnapps",
   category: "Liqueurs",
   price: 18.50,
-  image: "/assets/product-cherry-schnapps.svg", 
-  velocity_target_store: 0.3, 
-  velocity_lookalike_store: 0, 
+  image: "./product-cherry-schnapps.svg",
+  velocity_target_store: 0.3,
+  velocity_lookalike_store: 0,
 };
 
 export const PRODUCT_APPLE: Product = {
@@ -17,9 +17,9 @@ export const PRODUCT_APPLE: Product = {
   name: "Brand Y Apple Liqueur",
   category: "Liqueurs",
   price: 22.00,
-  image: "/assets/product-apple-liqueur.svg", 
+  image: "./product-apple-liqueur.svg",
   velocity_target_store: 0,
-  velocity_lookalike_store: 42, 
+  velocity_lookalike_store: 42,
 };
 
 export const PRODUCT_VODKA: Product = {
@@ -27,7 +27,7 @@ export const PRODUCT_VODKA: Product = {
   name: "Crystal Peak Vodka 750ml",
   category: "Spirits",
   price: 29.99,
-  image: "/assets/product-vodka.svg",
+  image: "./product-vodka.svg",
   velocity_target_store: 12,
   velocity_lookalike_store: 25,
 };
@@ -37,9 +37,9 @@ export const PRODUCT_BEER: Product = {
   name: "River City IPA 6pk",
   category: "Beer",
   price: 11.49,
-  image: "/assets/product-ipa-beer.svg", 
-  velocity_target_store: 0, 
-  velocity_lookalike_store: 45, 
+  image: "./product-ipa-beer.svg",
+  velocity_target_store: 0,
+  velocity_lookalike_store: 45,
 };
 
 export const PRODUCT_TEQUILA: Product = {
@@ -47,7 +47,7 @@ export const PRODUCT_TEQUILA: Product = {
   name: "Gato Negro Tequila Reposado",
   category: "Spirits",
   price: 45.99,
-  image: "/assets/product-tequila-reposado.svg",
+  image: "./product-tequila-reposado.svg",
   velocity_target_store: 5,
   velocity_lookalike_store: 8,
 };
@@ -57,7 +57,7 @@ export const PRODUCT_PREMIUM_TEQUILA: Product = {
   name: "Don Oro Extra Añejo",
   category: "Spirits",
   price: 159.99,
-  image: "./assets/product-tequila-anejo.svg",
+  image: "./product-tequila-anejo.svg",
   velocity_target_store: 1,
   velocity_lookalike_store: 12,
 };
@@ -67,7 +67,7 @@ export const PRODUCT_WHISKEY: Product = {
   name: "Old Oak Bourbon 750ml",
   category: "Spirits",
   price: 42.00,
-  image: "./assets/product-bourbon.svg",
+  image: "./product-bourbon.svg",
   velocity_target_store: 15,
   velocity_lookalike_store: 18,
 };
@@ -77,7 +77,7 @@ export const PRODUCT_CHARDONNAY: Product = {
   name: "Golden Vine Chardonnay",
   category: "Wine",
   price: 14.99,
-  image: "/assets/product-chardonnay.svg",
+  image: "./product-chardonnay.svg",
   velocity_target_store: 8,
   velocity_lookalike_store: 30,
 };
@@ -87,7 +87,7 @@ export const PRODUCT_COOLER: Product = {
   name: "Frostbite Hard Seltzer 12pk",
   category: "Beer",
   price: 19.99,
-  image: "/assets/product-seltzer.svg",
+  image: "./product-seltzer.svg",
   velocity_target_store: 2,
   velocity_lookalike_store: 15,
 };
@@ -97,7 +97,7 @@ export const PRODUCT_SNACK_BOX: Product = {
   name: "Artisan Meat & Cheese Board",
   category: "Fresh",
   price: 24.99,
-  image: "/assets/product-snack-box.svg",
+  image: "./product-snack-box.svg",
   velocity_target_store: 5,
   velocity_lookalike_store: 60,
 };
@@ -146,24 +146,24 @@ export const STORE_DAVENPORT: Store = {
 };
 
 export const STORE_AMES: Store = {
-    store_id: "305",
-    name: "Ames (Hy-Vee #305)",
-    location: "Ames, IA",
-    coordinates: { x: 80, y: 180 },
-    cluster: "University-Town-A",
-    metrics: {
-        monthly_revenue: 980000,
-        foot_traffic: 38000,
-        alcohol_sales_mix: 0.22,
-        avg_basket_size: 45.00
-    },
-    demographics: {
-        median_income: 42000,
-        median_age: 24,
-        urbanicity_score: 75
-    },
-    weather: { condition: 'SUNNY', temp: 78, forecast_impact: 'Local Event Boost Predicted' },
-    compliance_score: 72,
+  store_id: "305",
+  name: "Ames (Hy-Vee #305)",
+  location: "Ames, IA",
+  coordinates: { x: 80, y: 180 },
+  cluster: "University-Town-A",
+  metrics: {
+    monthly_revenue: 980000,
+    foot_traffic: 38000,
+    alcohol_sales_mix: 0.22,
+    avg_basket_size: 45.00
+  },
+  demographics: {
+    median_income: 42000,
+    median_age: 24,
+    urbanicity_score: 75
+  },
+  weather: { condition: 'SUNNY', temp: 78, forecast_impact: 'Local Event Boost Predicted' },
+  compliance_score: 72,
 };
 
 export const STORE_DES_MOINES: Store = {
@@ -339,23 +339,23 @@ export const OPP_MARGIN_OPPORTUNITY: Opportunity = {
 };
 
 export const OPP_TRANSFER_DUBUQUE: Opportunity = {
-    id: "OPP-TRF-104",
-    type: "INVENTORY_REBALANCE",
-    status: "NEW",
-    target_store_id: STORE_DUBUQUE.store_id,
-    lookalike_store_id: STORE_DAVENPORT.store_id,
-    product: PRODUCT_BEER,
-    projected_lift: 1500,
-    match_score: 0.92,
-    match_reasons: ["Predicted Stockout in 2 days", "High velocity weekend approaching"],
-    created_at: new Date().toISOString(),
+  id: "OPP-TRF-104",
+  type: "INVENTORY_REBALANCE",
+  status: "NEW",
+  target_store_id: STORE_DUBUQUE.store_id,
+  lookalike_store_id: STORE_DAVENPORT.store_id,
+  product: PRODUCT_BEER,
+  projected_lift: 1500,
+  match_score: 0.92,
+  match_reasons: ["Predicted Stockout in 2 days", "High velocity weekend approaching"],
+  created_at: new Date().toISOString(),
 };
 
 export const ALL_OPPORTUNITIES = [
-  OPP_SPIRITS_SWAP, 
-  OPP_WEATHER_BOOST, 
-  OPP_COMPLIANCE_DUBUQUE, 
-  OPP_PREMIUM_SWAP_DM, 
+  OPP_SPIRITS_SWAP,
+  OPP_WEATHER_BOOST,
+  OPP_COMPLIANCE_DUBUQUE,
+  OPP_PREMIUM_SWAP_DM,
   OPP_STOCK_OUT_CR,
   OPP_MUSIC_FESTIVAL_DM,
   OPP_COMPETITOR_PRICE_CUT,
