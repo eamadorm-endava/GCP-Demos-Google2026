@@ -48,7 +48,7 @@ const Dashboard: React.FC = () => {
           return (
             <div
               key={v.id}
-              className="group relative overflow-hidden flex flex-col sm:min-h-[400px] lg:min-h-[480px] rounded-[1.25rem] bg-white/[0.02] border border-white/[0.05] hover:bg-white/[0.04] hover:border-white/[0.1] backdrop-blur-xl transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_30px_60px_-15px_rgba(0,0,0,0.6)] shadow-[0_10px_40px_-10px_rgba(0,0,0,0.4)]"
+              className="group relative overflow-hidden flex flex-col sm:min-h-[400px] lg:min-h-[480px] rounded-[1.25rem] bg-white/[0.02] border border-white/[0.05] hover:bg-white/[0.04] hover:border-white/[0.1] backdrop-blur-xl transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_30px_60px_-15px_rgba(0,0,0,0.6)] shadow-[0_10px_40px_-10px_rgba(0,0,0,0.4)] kiosk-card-glass hover:border-endava-orange/40"
             >
               {v.isAiGenerated && (
                 <div className="absolute top-3 right-3 z-20 bg-endava-orange text-white px-2 py-1 rounded-full text-[7px] md:text-[9px] font-black uppercase tracking-widest flex items-center gap-1.5 shadow-xl animate-pulse-glow">
