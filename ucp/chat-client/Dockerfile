@@ -1,5 +1,5 @@
 # Stage 1: Build
-FROM node:20-slim AS builder
+FROM node:24-bookworm-slim AS builder
 WORKDIR /app
 
 # Copy the folders to the container
@@ -26,7 +26,7 @@ ENV VITE_FRONT_URL=$VITE_FRONT_URL
 RUN npm run build
 
 # Stage 2: Runtime (Node gateway + static files)
-FROM node:20-slim
+FROM node:24-bookworm-slim
 
 WORKDIR /app
 
