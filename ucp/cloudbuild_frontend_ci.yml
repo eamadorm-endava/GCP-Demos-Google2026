@@ -44,7 +44,7 @@ steps:
           --port=8080 \
           --no-iap \
           --min-instances 0 \
-          --service-account=${_GALLERY_SA}
+          --service-account=${_GALLERY_SA} 
   
 images:
   - '${_REGION}-docker.pkg.dev/${_PROJECT_ID}/${_AR_REPO}/${_SERVICE}:${SHORT_SHA}' 

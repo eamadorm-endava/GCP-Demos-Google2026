@@ -49,7 +49,7 @@ steps:
           --set-env-vars="GOOGLE_API_KEY=$$GEMINI_API_KEY,API_BASE_URL=https://test-ucp-business-backend-956266717219.us-west4.run.app" \
           --min-instances 0 \
           --no-iap \
-          --service-account=${_GALLERY_SA}
+          --service-account=${_GALLERY_SA} 
 
     secretEnv: ['GEMINI_API_KEY']
   
