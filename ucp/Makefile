@@ -28,7 +28,7 @@ deploy-backend:
 		--region ${REGION} \
 		--platform managed \
 		--allow-unauthenticated \
-		--min-instances 1 \
+		--min-instances 0 \
 		--port 10999 \
 		--set-env-vars "GOOGLE_API_KEY=mock-api-key,API_BASE_URL=mock-backend-url"
 
@@ -54,7 +54,7 @@ deploy-frontend:
 		--region ${REGION} \
 		--platform managed \
 		--allow-unauthenticated \
-		--min-instances 1 \
+		--min-instances 0 \
 		--port 8080 \
 		--no-iap
 
