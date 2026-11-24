@@ -50,7 +50,7 @@ steps:
           --no-allow-unauthenticated \
           --no-iap \
           --port=80 \
-          --min-instances 1
+          --min-instances 0
 
   # 4. Delete the test instance
   - name: 'gcr.io/cloud-builders/gcloud'

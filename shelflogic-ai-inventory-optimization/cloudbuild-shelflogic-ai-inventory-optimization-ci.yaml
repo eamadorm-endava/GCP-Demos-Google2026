@@ -46,7 +46,7 @@ steps:
           --platform=managed \
           --allow-unauthenticated \
           --port=80 \
-          --min-instances 1 \
+          --min-instances 0 \
           --no-iap
 
 # Define la imagen aquí para que Cloud Build la rastree automáticamente
